@@ -12,7 +12,7 @@
         <!--Login View Controller-->
         <scene sceneID="Eo6-86-qIw">
             <objects>
-                <viewController id="VL4-OP-pfq" customClass="LoginViewController" customModule="SportBuddy" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" id="VL4-OP-pfq" customClass="LoginViewController" customModule="SportBuddy" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="aQE-ds-01q"/>
                         <viewControllerLayoutGuide type="bottom" id="WVB-2r-gkL"/>
@@ -21,7 +21,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sport Buddy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XeL-hv-PLg">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="App Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XeL-hv-PLg">
                                 <rect key="frame" x="90" y="80" width="195" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="tly-mC-JKp"/>
@@ -122,6 +122,9 @@
                             <constraint firstItem="RST-79-8wF" firstAttribute="top" secondItem="d9U-s8-4kk" secondAttribute="bottom" constant="38" id="yyH-3z-dWk"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="appNameLabel" destination="XeL-hv-PLg" id="ESW-jM-mU0"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GdL-D9-5d4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

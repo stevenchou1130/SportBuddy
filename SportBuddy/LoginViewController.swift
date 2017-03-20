@@ -10,15 +10,16 @@ import UIKit
 
 class LoginViewController: UIViewController {
 
+    @IBOutlet weak var appNameLabel: UILabel!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        setView()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func setView() {
+        appNameLabel.text = Constant.appName
     }
 
     @IBAction func login(_ sender: Any) {
@@ -26,7 +27,7 @@ class LoginViewController: UIViewController {
     }
 
     @IBAction func signUp(_ sender: Any) {
-        print("Sign up")
+        print("Sign Up")
     }
 
 }

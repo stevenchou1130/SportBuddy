@@ -7,3 +7,9 @@
 //
 
 import Foundation
+
+struct Constant {
+
+    static let appName = NSLocalizedString("SportBuddy", comment: "")
+
+}
