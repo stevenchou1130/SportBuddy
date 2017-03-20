@@ -28,6 +28,11 @@ class LoginViewController: UIViewController {
 
     @IBAction func signUp(_ sender: Any) {
         print("Sign Up")
+
+        let signUpStorybard = UIStoryboard(name: "SignUp", bundle: nil)
+        let signUpViewController = signUpStorybard.instantiateViewController(withIdentifier: "SingUpViewController")
+
+        self.navigationController?.pushViewController(signUpViewController, animated: true)
     }
 
 }

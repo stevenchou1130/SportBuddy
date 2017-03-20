@@ -15,6 +15,8 @@
 		B084BD291E7FCCD200DC48B2 /* SingUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B084BD281E7FCCD200DC48B2 /* SingUpViewController.swift */; };
 		B084BD2E1E7FCE7900DC48B2 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = B084BD2D1E7FCE7900DC48B2 /* Constant.swift */; };
 		B084BD301E7FCF8200DC48B2 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B084BD2F1E7FCF8200DC48B2 /* Login.storyboard */; };
+		B084BD321E7FD29F00DC48B2 /* SignUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B084BD311E7FD29F00DC48B2 /* SignUp.storyboard */; };
+		B084BD341E7FDD3900DC48B2 /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = B084BD331E7FDD3900DC48B2 /* Palette.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		B084BD281E7FCCD200DC48B2 /* SingUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingUpViewController.swift; sourceTree = "<group>"; };
 		B084BD2D1E7FCE7900DC48B2 /* Constant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		B084BD2F1E7FCF8200DC48B2 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		B084BD311E7FD29F00DC48B2 /* SignUp.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SignUp.storyboard; sourceTree = "<group>"; };
+		B084BD331E7FDD3900DC48B2 /* Palette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +110,7 @@
 			children = (
 				B06DB2B81E7FB28000DCF016 /* LaunchScreen.storyboard */,
 				B084BD2F1E7FCF8200DC48B2 /* Login.storyboard */,
+				B084BD311E7FD29F00DC48B2 /* SignUp.storyboard */,
 			);
 			name = Storyboard;
 			sourceTree = "<group>";
@@ -114,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				B084BD2D1E7FCE7900DC48B2 /* Constant.swift */,
+				B084BD331E7FDD3900DC48B2 /* Palette.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -183,6 +189,7 @@
 			files = (
 				B06DB2BA1E7FB28000DCF016 /* LaunchScreen.storyboard in Resources */,
 				B084BD301E7FCF8200DC48B2 /* Login.storyboard in Resources */,
+				B084BD321E7FD29F00DC48B2 /* SignUp.storyboard in Resources */,
 				B06DB2B71E7FB28000DCF016 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -258,6 +265,7 @@
 			files = (
 				B06DB2C21E7FB36700DCF016 /* LoginViewController.swift in Sources */,
 				B084BD291E7FCCD200DC48B2 /* SingUpViewController.swift in Sources */,
+				B084BD341E7FDD3900DC48B2 /* Palette.swift in Sources */,
 				B06DB2B01E7FB28000DCF016 /* AppDelegate.swift in Sources */,
 				B084BD2E1E7FCE7900DC48B2 /* Constant.swift in Sources */,
 			);
