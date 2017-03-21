@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: BaseViewController {
 
     @IBOutlet weak var appNameLabel: UILabel!
 
@@ -29,10 +29,19 @@ class LoginViewController: UIViewController {
     @IBAction func signUp(_ sender: Any) {
         print("Sign Up")
 
-        let signUpStorybard = UIStoryboard(name: "SignUp", bundle: nil)
-        let signUpViewController = signUpStorybard.instantiateViewController(withIdentifier: "SingUpViewController")
-
-        self.navigationController?.pushViewController(signUpViewController, animated: true)
+        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+            appDelegate.window?.rootViewController = UIStoryboard(name: "SignUp", bundle: nil).instantiateViewController(withIdentifier: "SignUpViewController") as? SignUpViewController
+        }
+        
+        
+        //        let signUpStorybard = UIStoryboard(name: "SignUp", bundle: nil)
+        //        let signUpViewController = signUpStorybard.instantiateViewController(withIdentifier: "SignUpViewController")
+        //
+        //        present(signUpViewController, animated: true)
     }
 
+    @IBAction func backToMain(_ segue: UIStoryboardSegue) {
+
+        print("back to main")
+    }
 }

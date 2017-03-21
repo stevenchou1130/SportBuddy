@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Sing Up View Controller-->
+        <!--Sign Up View Controller-->
         <scene sceneID="LHa-Im-gwz">
             <objects>
-                <viewController storyboardIdentifier="SingUpViewController" id="DnD-KE-Clc" customClass="SingUpViewController" customModule="SportBuddy" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignUpViewController" id="DnD-KE-Clc" customClass="SignUpViewController" customModule="SportBuddy" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="3aC-6Z-oQN"/>
                         <viewControllerLayoutGuide type="bottom" id="7rJ-gQ-l67"/>
@@ -23,6 +23,7 @@
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FHS-G9-rxW">
                                 <rect key="frame" x="87" y="80" width="200" height="200"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="jhb-z0-M71"/>
                                     <constraint firstAttribute="height" constant="200" id="p91-Ja-R2Y"/>
@@ -104,7 +105,15 @@
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
                                 <connections>
-                                    <action selector="signUp:" destination="DnD-KE-Clc" eventType="touchUpInside" id="btU-MM-gWa"/>
+                                    <action selector="signUp:" destination="DnD-KE-Clc" eventType="touchUpInside" id="5jo-e9-ztZ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v7Q-V0-596">
+                                <rect key="frame" x="30" y="597" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Back"/>
+                                <connections>
+                                    <action selector="toLogin:" destination="DnD-KE-Clc" eventType="touchUpInside" id="fZp-Sy-KdY"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -134,10 +143,10 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="accountTextField" destination="wzp-b1-Pa9" id="wFx-hS-rPL"/>
-                        <outlet property="nameTextField" destination="3kw-WH-ruN" id="Iie-pd-iy9"/>
-                        <outlet property="passwordTextField" destination="kwB-pl-OxZ" id="0La-qY-icA"/>
-                        <outlet property="userImage" destination="FHS-G9-rxW" id="jcs-mR-Pxj"/>
+                        <outlet property="accountTextField" destination="wzp-b1-Pa9" id="mHe-OY-rc9"/>
+                        <outlet property="nameTextField" destination="3kw-WH-ruN" id="MFZ-j0-Bh0"/>
+                        <outlet property="passwordTextField" destination="kwB-pl-OxZ" id="RsA-Xv-oBT"/>
+                        <outlet property="userImage" destination="FHS-G9-rxW" id="L6g-ab-WIb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Ng-ql-B4W" userLabel="First Responder" sceneMemberID="firstResponder"/>
