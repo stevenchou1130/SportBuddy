@@ -27,7 +27,13 @@ class SignUpViewController: BaseViewController {
     }
 
     @IBAction func signUp(_ sender: Any) {
-        print("Sign up in SignUp page")
+        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+
+            let sportItemsStorybard = UIStoryboard(name: Constant.Storyboard.sportItems, bundle: nil)
+            let sportItemsViewController = sportItemsStorybard.instantiateViewController(withIdentifier: Constant.Controller.sportItems) as? SportItemsViewController
+
+            appDelegate.window?.rootViewController = sportItemsViewController
+        }
     }
 
     @IBAction func toLogin(_ sender: Any) {
@@ -37,7 +43,6 @@ class SignUpViewController: BaseViewController {
             let loginViewController = loginStorybard.instantiateViewController(withIdentifier: Constant.Controller.login) as? LoginViewController
 
             appDelegate.window?.rootViewController = loginViewController
-//            present(loginViewController, animated: true)
         }
     }
 }

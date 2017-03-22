@@ -19,11 +19,13 @@ struct Constant {
     struct Storyboard {
         static let login = "Login"
         static let signUp = "SignUp"
+        static let sportItems = "SportItems"
     }
 
     struct Controller {
         static let login = "LoginViewController"
         static let signUp = "SignUpViewController"
+        static let sportItems = "SportItemsViewController"
     }
 
 }
