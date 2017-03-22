@@ -19,7 +19,7 @@ class LoginViewController: BaseViewController {
     }
 
     func setView() {
-        appNameLabel.text = Constant.appName
+        appNameLabel.text = Constant.AppName.appName
     }
 
     @IBAction func login(_ sender: Any) {
@@ -30,14 +30,13 @@ class LoginViewController: BaseViewController {
         print("Sign Up")
 
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
-            appDelegate.window?.rootViewController = UIStoryboard(name: "SignUp", bundle: nil).instantiateViewController(withIdentifier: "SignUpViewController") as? SignUpViewController
+
+            let signUpStorybard = UIStoryboard(name: Constant.Storyboard.signUp, bundle: nil)
+            let signUpViewController = signUpStorybard.instantiateViewController(withIdentifier: Constant.Controller.signUp) as? SignUpViewController
+
+            appDelegate.window?.rootViewController = signUpViewController
+//            present(signUpViewController, animated: true)
         }
-        
-        
-        //        let signUpStorybard = UIStoryboard(name: "SignUp", bundle: nil)
-        //        let signUpViewController = signUpStorybard.instantiateViewController(withIdentifier: "SignUpViewController")
-        //
-        //        present(signUpViewController, animated: true)
     }
 
     @IBAction func backToMain(_ segue: UIStoryboardSegue) {

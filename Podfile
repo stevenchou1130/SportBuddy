@@ -8,5 +8,6 @@ target 'SportBuddy' do
   # Pods for SportBuddy
 	
 	pod 'SwiftLint'
+	pod 'Alamofire'
 	
 end

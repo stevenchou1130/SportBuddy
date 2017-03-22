@@ -32,7 +32,12 @@ class SignUpViewController: BaseViewController {
 
     @IBAction func toLogin(_ sender: Any) {
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
-            appDelegate.window?.rootViewController = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController
+
+            let loginStorybard = UIStoryboard(name: Constant.Storyboard.login, bundle: nil)
+            let loginViewController = loginStorybard.instantiateViewController(withIdentifier: Constant.Controller.login) as? LoginViewController
+
+            appDelegate.window?.rootViewController = loginViewController
+//            present(loginViewController, animated: true)
         }
     }
 }
