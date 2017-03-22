@@ -9,5 +9,6 @@ target 'SportBuddy' do
 	
 	pod 'SwiftLint'
 	pod 'Alamofire'
+	pod 'Firebase/Core'
 	
 end
