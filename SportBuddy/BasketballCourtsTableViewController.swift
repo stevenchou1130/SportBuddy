@@ -1,5 +1,5 @@
 //
-//  BasketballTabbarViewController.swift
+//  BasketballCourtsTableViewController.swift
 //  SportBuddy
 //
 //  Created by steven.chou on 2017/3/23.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BasketballTabbarViewController: UITabBarController {
+class BasketballCourtsTableViewController: BaseTableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
