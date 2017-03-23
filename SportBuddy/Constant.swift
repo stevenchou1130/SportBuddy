@@ -20,12 +20,16 @@ struct Constant {
         static let login = "Login"
         static let signUp = "SignUp"
         static let sportItems = "SportItems"
+        static let chooseLevel = "ChooseLevel"
+        static let basketball = "Basketball"
     }
 
     struct Controller {
         static let login = "LoginViewController"
         static let signUp = "SignUpViewController"
         static let sportItems = "SportItemsViewController"
+        static let chooseLevel = "ChooseLevelViewController"
+        static let basketballTabbar = "BasketballGamesTableViewController"
     }
 
 }
