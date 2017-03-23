@@ -22,6 +22,9 @@
 		B0754D6F1E83A2C3006A5754 /* BasketballTabbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0754D6E1E83A2C3006A5754 /* BasketballTabbarViewController.swift */; };
 		B0754D731E83AEEA006A5754 /* BasketballCourtsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0754D721E83AEEA006A5754 /* BasketballCourtsTableViewController.swift */; };
 		B0754D751E83AF55006A5754 /* BasketballProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0754D741E83AF55006A5754 /* BasketballProfileViewController.swift */; };
+		B0754D781E83C4F1006A5754 /* GamesNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0754D771E83C4F1006A5754 /* GamesNavigationController.swift */; };
+		B0754D7A1E83C5AF006A5754 /* CourtsNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0754D791E83C5AF006A5754 /* CourtsNavigationController.swift */; };
+		B0754D7C1E83C5C6006A5754 /* ProfileNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0754D7B1E83C5C6006A5754 /* ProfileNavigationController.swift */; };
 		B07CF4A31E82D7C600E91F7E /* SportItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07CF4A21E82D7C600E91F7E /* SportItemsViewController.swift */; };
 		B07D71241E82257E009B3AFF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B07D71231E82257E009B3AFF /* GoogleService-Info.plist */; };
 		B084BD2E1E7FCE7900DC48B2 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = B084BD2D1E7FCE7900DC48B2 /* Constant.swift */; };
@@ -52,6 +55,9 @@
 		B0754D6E1E83A2C3006A5754 /* BasketballTabbarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasketballTabbarViewController.swift; sourceTree = "<group>"; };
 		B0754D721E83AEEA006A5754 /* BasketballCourtsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasketballCourtsTableViewController.swift; sourceTree = "<group>"; };
 		B0754D741E83AF55006A5754 /* BasketballProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasketballProfileViewController.swift; sourceTree = "<group>"; };
+		B0754D771E83C4F1006A5754 /* GamesNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GamesNavigationController.swift; sourceTree = "<group>"; };
+		B0754D791E83C5AF006A5754 /* CourtsNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourtsNavigationController.swift; sourceTree = "<group>"; };
+		B0754D7B1E83C5C6006A5754 /* ProfileNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileNavigationController.swift; sourceTree = "<group>"; };
 		B07CF4A21E82D7C600E91F7E /* SportItemsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SportItemsViewController.swift; sourceTree = "<group>"; };
 		B07D71231E82257E009B3AFF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B084BD2D1E7FCE7900DC48B2 /* Constant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
@@ -114,6 +120,7 @@
 			children = (
 				B0A8F4321E8115A3006CBA96 /* Base */,
 				B0754D6D1E83A255006A5754 /* Tabbar */,
+				B0754D761E83C489006A5754 /* Navigation */,
 				B0754D641E839977006A5754 /* Basketball */,
 				B07CF4A11E82D7A200E91F7E /* SportItems */,
 				B084BD2A1E7FCCE200DC48B2 /* User */,
@@ -152,6 +159,16 @@
 				B0754D6E1E83A2C3006A5754 /* BasketballTabbarViewController.swift */,
 			);
 			name = Tabbar;
+			sourceTree = "<group>";
+		};
+		B0754D761E83C489006A5754 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				B0754D771E83C4F1006A5754 /* GamesNavigationController.swift */,
+				B0754D791E83C5AF006A5754 /* CourtsNavigationController.swift */,
+				B0754D7B1E83C5C6006A5754 /* ProfileNavigationController.swift */,
+			);
+			name = Navigation;
 			sourceTree = "<group>";
 		};
 		B07CF4A11E82D7A200E91F7E /* SportItems */ = {
@@ -347,6 +364,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B06DB2C21E7FB36700DCF016 /* LoginViewController.swift in Sources */,
+				B0754D781E83C4F1006A5754 /* GamesNavigationController.swift in Sources */,
 				B0754D731E83AEEA006A5754 /* BasketballCourtsTableViewController.swift in Sources */,
 				B084BD341E7FDD3900DC48B2 /* Palette.swift in Sources */,
 				B0754D5F1E83927A006A5754 /* ChooseLevelViewController.swift in Sources */,
@@ -359,7 +377,9 @@
 				B0754D681E8399FB006A5754 /* BaseTableViewController.swift in Sources */,
 				B0754D751E83AF55006A5754 /* BasketballProfileViewController.swift in Sources */,
 				B07CF4A31E82D7C600E91F7E /* SportItemsViewController.swift in Sources */,
+				B0754D7A1E83C5AF006A5754 /* CourtsNavigationController.swift in Sources */,
 				B0754D6F1E83A2C3006A5754 /* BasketballTabbarViewController.swift in Sources */,
+				B0754D7C1E83C5C6006A5754 /* ProfileNavigationController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

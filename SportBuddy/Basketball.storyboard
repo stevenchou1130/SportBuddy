@@ -86,11 +86,11 @@
             </objects>
             <point key="canvasLocation" x="1777" y="1667"/>
         </scene>
-        <!--Item-->
+        <!--Games-->
         <scene sceneID="d2d-Tb-JDW">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bac-0g-vsq" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="kH5-om-PXZ"/>
+                <navigationController storyboardIdentifier="GamesNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="bac-0g-vsq" customClass="GamesNavigationController" customModule="SportBuddy" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Games" id="kH5-om-PXZ"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="hgR-KB-MH3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -124,11 +124,11 @@
             </objects>
             <point key="canvasLocation" x="222" y="901"/>
         </scene>
-        <!--Item-->
+        <!--Courts-->
         <scene sceneID="II3-JX-q7t">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5A1-MR-FIG" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="6dV-Yz-5JM"/>
+                <navigationController storyboardIdentifier="CourtsNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="5A1-MR-FIG" customClass="CourtsNavigationController" customModule="SportBuddy" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Courts" id="6dV-Yz-5JM"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="7v8-WV-ZXn">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -143,11 +143,11 @@
             </objects>
             <point key="canvasLocation" x="988" y="901"/>
         </scene>
-        <!--Item-->
+        <!--Profile-->
         <scene sceneID="6bv-vQ-T3G">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4X6-Uf-Tr6" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="12F-1V-thI"/>
+                <navigationController storyboardIdentifier="ProfileNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="4X6-Uf-Tr6" customClass="ProfileNavigationController" customModule="SportBuddy" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Profile" id="12F-1V-thI"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ge4-YZ-4fa">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>

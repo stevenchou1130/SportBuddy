@@ -13,17 +13,36 @@ class BasketballGamesTableViewController: BaseTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-   }
+        setBackButton()
 
-    // MARK: - Table view data source
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
     }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
     }
 
+    func setBackButton() {
+
+        let button = UIBarButtonItem(title: "Back",
+                                     style: .done,
+                                     target: self,
+                                     action: #selector(self.onClcikBack))
+
+        button.tintColor = UIColor.black
+        self.navigationItem.leftBarButtonItem = button
+
+    }
+
+    func onClcikBack() {
+        print("=== Go back ===")
+
+        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+
+            let sportItemsStorybard = UIStoryboard(name: Constant.Storyboard.sportItems, bundle: nil)
+            let sportItemsViewController = sportItemsStorybard.instantiateViewController(withIdentifier: Constant.Controller.sportItems) as? SportItemsViewController
+
+            appDelegate.window?.rootViewController = sportItemsViewController
+        }
+    }
 }

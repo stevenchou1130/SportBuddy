@@ -1,5 +1,5 @@
 //
-//  BasketballTabbarViewController.swift
+//  GamesNavigationController.swift
 //  SportBuddy
 //
 //  Created by steven.chou on 2017/3/23.
@@ -8,12 +8,11 @@
 
 import UIKit
 
-class BasketballTabbarViewController: UITabBarController {
+class GamesNavigationController: UINavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tabBar.tintColor = UIColor.cyan
-        self.tabBar.barTintColor = UIColor.lightText
+
     }
 
 }
