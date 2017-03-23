@@ -13,6 +13,7 @@
 		B06DB2B71E7FB28000DCF016 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B06DB2B61E7FB28000DCF016 /* Assets.xcassets */; };
 		B06DB2BA1E7FB28000DCF016 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B06DB2B81E7FB28000DCF016 /* LaunchScreen.storyboard */; };
 		B06DB2C21E7FB36700DCF016 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06DB2C11E7FB36700DCF016 /* LoginViewController.swift */; };
+		B0754D581E837284006A5754 /* LTHRadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0754D571E837284006A5754 /* LTHRadioButton.swift */; };
 		B07CF4A31E82D7C600E91F7E /* SportItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07CF4A21E82D7C600E91F7E /* SportItemsViewController.swift */; };
 		B07D71241E82257E009B3AFF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B07D71231E82257E009B3AFF /* GoogleService-Info.plist */; };
 		B084BD2E1E7FCE7900DC48B2 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = B084BD2D1E7FCE7900DC48B2 /* Constant.swift */; };
@@ -34,6 +35,7 @@
 		B06DB2B91E7FB28000DCF016 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B06DB2BB1E7FB28000DCF016 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B06DB2C11E7FB36700DCF016 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		B0754D571E837284006A5754 /* LTHRadioButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LTHRadioButton.swift; sourceTree = "<group>"; };
 		B07CF4A21E82D7C600E91F7E /* SportItemsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SportItemsViewController.swift; sourceTree = "<group>"; };
 		B07D71231E82257E009B3AFF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B084BD2D1E7FCE7900DC48B2 /* Constant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 				B07CF4A11E82D7A200E91F7E /* SportItems */,
 				B084BD2A1E7FCCE200DC48B2 /* User */,
 				B084BD2B1E7FCD3900DC48B2 /* Storyboard */,
+				B0754D521E836196006A5754 /* Component */,
 				B084BD2C1E7FCE4600DC48B2 /* Utilities */,
 				B06DB2AF1E7FB28000DCF016 /* AppDelegate.swift */,
 				B06DB2B61E7FB28000DCF016 /* Assets.xcassets */,
@@ -105,6 +108,14 @@
 				B07D71231E82257E009B3AFF /* GoogleService-Info.plist */,
 			);
 			path = SportBuddy;
+			sourceTree = "<group>";
+		};
+		B0754D521E836196006A5754 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				B0754D571E837284006A5754 /* LTHRadioButton.swift */,
+			);
+			name = Component;
 			sourceTree = "<group>";
 		};
 		B07CF4A11E82D7A200E91F7E /* SportItems */ = {
@@ -296,6 +307,7 @@
 				B06DB2C21E7FB36700DCF016 /* LoginViewController.swift in Sources */,
 				B084BD341E7FDD3900DC48B2 /* Palette.swift in Sources */,
 				B06DB2B01E7FB28000DCF016 /* AppDelegate.swift in Sources */,
+				B0754D581E837284006A5754 /* LTHRadioButton.swift in Sources */,
 				B084BD2E1E7FCE7900DC48B2 /* Constant.swift in Sources */,
 				B0A8F4311E80B9C4006CBA96 /* SignUpViewController.swift in Sources */,
 				B0A8F4341E8115D9006CBA96 /* BaseViewController.swift in Sources */,
