@@ -13,24 +13,12 @@ class BasketballGamesTableViewController: BaseTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setBackButton()
+        navigationItem.leftBarButtonItem = self.createBackButton(action: #selector(self.onClcikBack))
 
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
-    }
-
-    func setBackButton() {
-
-        let button = UIBarButtonItem(title: "Back",
-                                     style: .done,
-                                     target: self,
-                                     action: #selector(self.onClcikBack))
-
-        button.tintColor = UIColor.black
-        self.navigationItem.leftBarButtonItem = button
 
     }
 
@@ -44,5 +32,20 @@ class BasketballGamesTableViewController: BaseTableViewController {
 
             appDelegate.window?.rootViewController = sportItemsViewController
         }
+    }
+}
+
+extension UIViewController {
+
+    func createBackButton(action: Selector) -> UIBarButtonItem {
+
+        let button = UIBarButtonItem(title: "Back",
+                                     style: .done,
+                                     target: self,
+                                     action: action)
+
+        button.tintColor = UIColor.black
+
+        return button
     }
 }

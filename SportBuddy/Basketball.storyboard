@@ -46,22 +46,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="courtCell" id="sak-cN-FOb">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sak-cN-FOb" id="xE8-9Z-Y8m">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="PIf-dK-xhO" id="NN8-K1-1Zd"/>
                             <outlet property="delegate" destination="PIf-dK-xhO" id="Rah-lO-KRx"/>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="isz-XT-KJH"/>
+                    <connections>
+                        <outlet property="courtsTableView" destination="xw9-gJ-Rnj" id="Swi-ud-viM"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8nP-4u-TsZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -89,7 +82,7 @@
         <!--Games-->
         <scene sceneID="d2d-Tb-JDW">
             <objects>
-                <navigationController storyboardIdentifier="GamesNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="bac-0g-vsq" customClass="GamesNavigationController" customModule="SportBuddy" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="GamesNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="bac-0g-vsq" customClass="BasketballGamesNavigationController" customModule="SportBuddy" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Games" id="kH5-om-PXZ"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="hgR-KB-MH3">
@@ -111,6 +104,7 @@
                 <tabBarController storyboardIdentifier="BasketballTabbarViewController" automaticallyAdjustsScrollViewInsets="NO" id="Qq2-c1-FEU" customClass="BasketballTabbarViewController" customModule="SportBuddy" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="CYs-Ks-IR6">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
@@ -127,7 +121,7 @@
         <!--Courts-->
         <scene sceneID="II3-JX-q7t">
             <objects>
-                <navigationController storyboardIdentifier="CourtsNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="5A1-MR-FIG" customClass="CourtsNavigationController" customModule="SportBuddy" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="BasketballCourtsNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="5A1-MR-FIG" customClass="BasketballCourtsNavigationController" customModule="SportBuddy" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Courts" id="6dV-Yz-5JM"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="7v8-WV-ZXn">
@@ -146,7 +140,7 @@
         <!--Profile-->
         <scene sceneID="6bv-vQ-T3G">
             <objects>
-                <navigationController storyboardIdentifier="ProfileNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="4X6-Uf-Tr6" customClass="ProfileNavigationController" customModule="SportBuddy" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="BasketballProfileNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="4X6-Uf-Tr6" customClass="BasketballProfileNavigationController" customModule="SportBuddy" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Profile" id="12F-1V-thI"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ge4-YZ-4fa">

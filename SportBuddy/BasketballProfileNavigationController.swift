@@ -1,5 +1,5 @@
 //
-//  CourtsNavigationController.swift
+//  BasketballProfileNavigationController.swift
 //  SportBuddy
 //
 //  Created by steven.chou on 2017/3/23.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CourtsNavigationController: UINavigationController {
+class BasketballProfileNavigationController: UINavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

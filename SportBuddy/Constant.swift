@@ -47,4 +47,9 @@ struct Constant {
         static let basketballProfile = "BasketballProfileViewController"
     }
 
+    struct Cell {
+
+        static let basketballCourt = "BasketballCourtsTableViewCell"
+    }
+
 }
