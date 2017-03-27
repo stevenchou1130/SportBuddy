@@ -33,6 +33,8 @@
 		B084BD341E7FDD3900DC48B2 /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = B084BD331E7FDD3900DC48B2 /* Palette.swift */; };
 		B0971BC51E850EB10037E26D /* BasketballCourtsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0971BC31E850EB10037E26D /* BasketballCourtsTableViewCell.swift */; };
 		B0971BC61E850EB10037E26D /* BasketballCourtsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0971BC41E850EB10037E26D /* BasketballCourtsTableViewCell.xib */; };
+		B099C6A71E89634000C0B142 /* NewBasketballGame.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B099C6A61E89634000C0B142 /* NewBasketballGame.storyboard */; };
+		B099C6A91E89634D00C0B142 /* NewBasketballGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B099C6A81E89634D00C0B142 /* NewBasketballGameViewController.swift */; };
 		B0A8F4311E80B9C4006CBA96 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A8F4301E80B9C4006CBA96 /* SignUpViewController.swift */; };
 		B0A8F4341E8115D9006CBA96 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A8F4331E8115D9006CBA96 /* BaseViewController.swift */; };
 		B0AB6FF71E88C4590060D80E /* BasketballCourtsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AB6FF61E88C4590060D80E /* BasketballCourtsManager.swift */; };
@@ -73,6 +75,8 @@
 		B084BD331E7FDD3900DC48B2 /* Palette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
 		B0971BC31E850EB10037E26D /* BasketballCourtsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasketballCourtsTableViewCell.swift; sourceTree = "<group>"; };
 		B0971BC41E850EB10037E26D /* BasketballCourtsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BasketballCourtsTableViewCell.xib; sourceTree = "<group>"; };
+		B099C6A61E89634000C0B142 /* NewBasketballGame.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = NewBasketballGame.storyboard; sourceTree = "<group>"; };
+		B099C6A81E89634D00C0B142 /* NewBasketballGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewBasketballGameViewController.swift; sourceTree = "<group>"; };
 		B0A8F4301E80B9C4006CBA96 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		B0A8F4331E8115D9006CBA96 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		B0AB6FF61E88C4590060D80E /* BasketballCourtsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasketballCourtsManager.swift; sourceTree = "<group>"; };
@@ -220,6 +224,8 @@
 			children = (
 				B0754D771E83C4F1006A5754 /* BasketballGamesNavigationController.swift */,
 				B0754D6B1E839C20006A5754 /* BasketballGamesTableViewController.swift */,
+				B099C6A81E89634D00C0B142 /* NewBasketballGameViewController.swift */,
+				B099C6A61E89634000C0B142 /* NewBasketballGame.storyboard */,
 			);
 			name = Games;
 			sourceTree = "<group>";
@@ -337,6 +343,7 @@
 				B0CCD17A1E8909FB0046009B /* BasketballCourtDetail.storyboard in Resources */,
 				B037B2921E826905007FD483 /* SportItems.storyboard in Resources */,
 				B06DB2B71E7FB28000DCF016 /* Assets.xcassets in Resources */,
+				B099C6A71E89634000C0B142 /* NewBasketballGame.storyboard in Resources */,
 				B0971BC61E850EB10037E26D /* BasketballCourtsTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -413,6 +420,7 @@
 				B06DB2C21E7FB36700DCF016 /* LoginViewController.swift in Sources */,
 				B0754D781E83C4F1006A5754 /* BasketballGamesNavigationController.swift in Sources */,
 				B0754D731E83AEEA006A5754 /* BasketballCourtsTableViewController.swift in Sources */,
+				B099C6A91E89634D00C0B142 /* NewBasketballGameViewController.swift in Sources */,
 				B084BD341E7FDD3900DC48B2 /* Palette.swift in Sources */,
 				B0971BC51E850EB10037E26D /* BasketballCourtsTableViewCell.swift in Sources */,
 				B0754D5F1E83927A006A5754 /* ChooseLevelViewController.swift in Sources */,

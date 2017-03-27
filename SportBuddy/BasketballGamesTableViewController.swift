@@ -13,12 +13,23 @@ class BasketballGamesTableViewController: BaseTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setNavigationBar()
+
+    }
+
+    func setNavigationBar() {
+
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "新增球賽", style: .done, target: self, action: #selector(createNewBasketballGameGame))
+
         navigationItem.leftBarButtonItem = createBackButton(action: #selector(backToSportItemsView))
-
+        setNavigationDropdownMenu()
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    func createNewBasketballGameGame() {
+        let storyBoard = UIStoryboard(name: Constant.Storyboard.newBasketballGame, bundle: nil)
+        guard let newBasketballGameViewController = storyBoard.instantiateViewController(withIdentifier: Constant.Controller.newBasketballGame) as? NewBasketballGameViewController else { return }
 
+        self.navigationController?.pushViewController(newBasketballGameViewController, animated: true)
     }
+
 }

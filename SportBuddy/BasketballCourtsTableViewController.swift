@@ -17,7 +17,7 @@ class BasketballCourtsTableViewController: BaseTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        navigationItem.leftBarButtonItem = createBackButton(action: #selector(backToSportItemsView))
+        setNavigationBar()
 
         let nib = UINib(nibName: Constant.Cell.basketballCourt, bundle: nil)
         courtsTableView.register(nib, forCellReuseIdentifier: Constant.Cell.basketballCourt)
@@ -41,6 +41,12 @@ class BasketballCourtsTableViewController: BaseTableViewController {
         }
 
         self.basketballCourts = fakeFakeCourts
+    }
+
+    func setNavigationBar() {
+
+        navigationItem.leftBarButtonItem = createBackButton(action: #selector(backToSportItemsView))
+        setNavigationDropdownMenu()
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -69,8 +75,8 @@ class BasketballCourtsTableViewController: BaseTableViewController {
 
         // todo: set data to BasketballCourtDetail page
 
-        let storyBoard = UIStoryboard(name: "BasketballCourtDetail", bundle: nil)
-        guard let basketballCourtDetailViewController = storyBoard.instantiateViewController(withIdentifier: "BasketballCourtDetailViewController") as? BasketballCourtDetailViewController else { return }
+        let storyBoard = UIStoryboard(name: Constant.Storyboard.basketballCourtDetail, bundle: nil)
+        guard let basketballCourtDetailViewController = storyBoard.instantiateViewController(withIdentifier: Constant.Controller.basketballCourtDetail) as? BasketballCourtDetailViewController else { return }
 
         guard let cell = tableView.cellForRow(at: indexPath) as? BasketballCourtsTableViewCell else { return }
 

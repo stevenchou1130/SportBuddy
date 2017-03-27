@@ -22,7 +22,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aJW-Jw-bzs" id="cIB-gi-0LF">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -71,13 +71,88 @@
                     <view key="view" contentMode="scaleToFill" id="ORF-Bs-lKf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="參與賽事次數" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2YE-ro-7xt">
+                                <rect key="frame" x="97" y="124" width="180" height="70"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="70" id="byV-E9-g8k"/>
+                                    <constraint firstAttribute="width" constant="180" id="wxg-l4-nf1"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2017-03-27" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lH9-yg-6jS">
+                                <rect key="frame" x="97" y="368" width="180" height="70"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="70" id="2LD-n1-eh6"/>
+                                    <constraint firstAttribute="width" constant="180" id="WJq-Yv-nR5"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="次" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DPq-mC-bYj">
+                                <rect key="frame" x="227" y="204" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="cx4-IU-CJp"/>
+                                    <constraint firstAttribute="height" constant="50" id="ueN-nE-15g"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="87" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NGu-5Q-tZB">
+                                <rect key="frame" x="147" y="204" width="80" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="04M-tx-zkn"/>
+                                    <constraint firstAttribute="height" constant="50" id="TBN-pQ-Is2"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VVf-fY-mXm">
+                                <rect key="frame" x="137" y="528" width="100" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Ca3-dE-VCO"/>
+                                    <constraint firstAttribute="width" constant="100" id="ZFt-P5-WBF"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <state key="normal" title="Level up"/>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="上次打球時間" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A0r-Da-1T4">
+                                <rect key="frame" x="97" y="298" width="180" height="70"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="180" id="CTE-uY-h4x"/>
+                                    <constraint firstAttribute="height" constant="70" id="r8A-cU-0yO"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="lH9-yg-6jS" firstAttribute="top" secondItem="A0r-Da-1T4" secondAttribute="bottom" id="1RI-5X-Liw"/>
+                            <constraint firstItem="DPq-mC-bYj" firstAttribute="top" secondItem="2YE-ro-7xt" secondAttribute="bottom" constant="10" id="BWl-R1-IQJ"/>
+                            <constraint firstItem="DPq-mC-bYj" firstAttribute="trailing" secondItem="2YE-ro-7xt" secondAttribute="trailing" id="D5Y-ZT-AD7"/>
+                            <constraint firstItem="2YE-ro-7xt" firstAttribute="top" secondItem="GeE-aE-1X5" secondAttribute="bottom" constant="60" id="Fe9-tr-Xb6"/>
+                            <constraint firstItem="2YE-ro-7xt" firstAttribute="centerX" secondItem="ORF-Bs-lKf" secondAttribute="centerX" id="K7x-Eg-swQ"/>
+                            <constraint firstItem="i5o-pJ-TBT" firstAttribute="top" secondItem="VVf-fY-mXm" secondAttribute="bottom" constant="40" id="Nay-i9-gPI"/>
+                            <constraint firstItem="A0r-Da-1T4" firstAttribute="centerX" secondItem="ORF-Bs-lKf" secondAttribute="centerX" id="QXz-Va-MFu"/>
+                            <constraint firstItem="NGu-5Q-tZB" firstAttribute="centerY" secondItem="DPq-mC-bYj" secondAttribute="centerY" id="RYL-Tr-1Nr"/>
+                            <constraint firstItem="NGu-5Q-tZB" firstAttribute="centerX" secondItem="2YE-ro-7xt" secondAttribute="centerX" id="U8B-Ft-ihl"/>
+                            <constraint firstItem="A0r-Da-1T4" firstAttribute="centerY" secondItem="ORF-Bs-lKf" secondAttribute="centerY" id="eAL-j3-Sx4"/>
+                            <constraint firstItem="lH9-yg-6jS" firstAttribute="centerX" secondItem="A0r-Da-1T4" secondAttribute="centerX" id="hJP-6A-hWC"/>
+                            <constraint firstItem="VVf-fY-mXm" firstAttribute="centerX" secondItem="ORF-Bs-lKf" secondAttribute="centerX" id="xkf-hw-pr0"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="c4C-aX-Fdy"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ct6-vb-kry" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1777" y="1667"/>
+            <point key="canvasLocation" x="1776.8" y="1666.4167916041981"/>
         </scene>
         <!--Games-->
         <scene sceneID="d2d-Tb-JDW">
