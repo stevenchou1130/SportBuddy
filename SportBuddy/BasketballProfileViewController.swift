@@ -13,6 +13,7 @@ class BasketballProfileViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        navigationItem.leftBarButtonItem = createBackButton(action: #selector(backToSportItemsView))
     }
 
 }

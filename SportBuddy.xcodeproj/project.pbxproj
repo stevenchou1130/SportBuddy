@@ -33,9 +33,11 @@
 		B084BD341E7FDD3900DC48B2 /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = B084BD331E7FDD3900DC48B2 /* Palette.swift */; };
 		B0971BC51E850EB10037E26D /* BasketballCourtsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0971BC31E850EB10037E26D /* BasketballCourtsTableViewCell.swift */; };
 		B0971BC61E850EB10037E26D /* BasketballCourtsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0971BC41E850EB10037E26D /* BasketballCourtsTableViewCell.xib */; };
-		B0971BCA1E8526500037E26D /* CustomBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0971BC91E8526500037E26D /* CustomBarButtonItem.swift */; };
 		B0A8F4311E80B9C4006CBA96 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A8F4301E80B9C4006CBA96 /* SignUpViewController.swift */; };
 		B0A8F4341E8115D9006CBA96 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A8F4331E8115D9006CBA96 /* BaseViewController.swift */; };
+		B0AB6FF71E88C4590060D80E /* BasketballCourtsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AB6FF61E88C4590060D80E /* BasketballCourtsManager.swift */; };
+		B0AB6FFB1E88C5210060D80E /* BasketballCourt.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AB6FFA1E88C5210060D80E /* BasketballCourt.swift */; };
+		B0AB6FFD1E88C5900060D80E /* BasketballCourtModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AB6FFC1E88C5900060D80E /* BasketballCourtModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,9 +71,11 @@
 		B084BD331E7FDD3900DC48B2 /* Palette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
 		B0971BC31E850EB10037E26D /* BasketballCourtsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasketballCourtsTableViewCell.swift; sourceTree = "<group>"; };
 		B0971BC41E850EB10037E26D /* BasketballCourtsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BasketballCourtsTableViewCell.xib; sourceTree = "<group>"; };
-		B0971BC91E8526500037E26D /* CustomBarButtonItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomBarButtonItem.swift; sourceTree = "<group>"; };
 		B0A8F4301E80B9C4006CBA96 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		B0A8F4331E8115D9006CBA96 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		B0AB6FF61E88C4590060D80E /* BasketballCourtsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasketballCourtsManager.swift; sourceTree = "<group>"; };
+		B0AB6FFA1E88C5210060D80E /* BasketballCourt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasketballCourt.swift; sourceTree = "<group>"; };
+		B0AB6FFC1E88C5900060D80E /* BasketballCourtModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasketballCourtModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,7 +150,6 @@
 			isa = PBXGroup;
 			children = (
 				B0754D571E837284006A5754 /* LTHRadioButton.swift */,
-				B0971BC91E8526500037E26D /* CustomBarButtonItem.swift */,
 			);
 			name = Component;
 			sourceTree = "<group>";
@@ -224,6 +227,9 @@
 				B0754D721E83AEEA006A5754 /* BasketballCourtsTableViewController.swift */,
 				B0971BC31E850EB10037E26D /* BasketballCourtsTableViewCell.swift */,
 				B0971BC41E850EB10037E26D /* BasketballCourtsTableViewCell.xib */,
+				B0AB6FF61E88C4590060D80E /* BasketballCourtsManager.swift */,
+				B0AB6FFC1E88C5900060D80E /* BasketballCourtModel.swift */,
+				B0AB6FFA1E88C5210060D80E /* BasketballCourt.swift */,
 			);
 			name = Courts;
 			sourceTree = "<group>";
@@ -389,6 +395,8 @@
 				B0754D5F1E83927A006A5754 /* ChooseLevelViewController.swift in Sources */,
 				B06DB2B01E7FB28000DCF016 /* AppDelegate.swift in Sources */,
 				B0754D581E837284006A5754 /* LTHRadioButton.swift in Sources */,
+				B0AB6FFB1E88C5210060D80E /* BasketballCourt.swift in Sources */,
+				B0AB6FF71E88C4590060D80E /* BasketballCourtsManager.swift in Sources */,
 				B084BD2E1E7FCE7900DC48B2 /* Constant.swift in Sources */,
 				B0754D6C1E839C20006A5754 /* BasketballGamesTableViewController.swift in Sources */,
 				B0A8F4311E80B9C4006CBA96 /* SignUpViewController.swift in Sources */,
@@ -399,7 +407,7 @@
 				B0754D7A1E83C5AF006A5754 /* BasketballCourtsNavigationController.swift in Sources */,
 				B0754D6F1E83A2C3006A5754 /* BasketballTabbarViewController.swift in Sources */,
 				B0754D7C1E83C5C6006A5754 /* BasketballProfileNavigationController.swift in Sources */,
-				B0971BCA1E8526500037E26D /* CustomBarButtonItem.swift in Sources */,
+				B0AB6FFD1E88C5900060D80E /* BasketballCourtModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
