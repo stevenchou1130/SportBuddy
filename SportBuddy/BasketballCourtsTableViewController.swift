@@ -27,36 +27,6 @@ class BasketballCourtsTableViewController: BaseTableViewController {
         createFakeCourts()
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-
-        courtsTableView.reloadData()
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
-        if basketballCourts.count == 0 {
-            return 20
-        } else {
-            return basketballCourts.count
-        }
-    }
-
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
-        guard
-            let cell = tableView.dequeueReusableCell(withIdentifier: Constant.Cell.basketballCourt,
-                                                     for: indexPath) as? BasketballCourtsTableViewCell,
-            basketballCourts[indexPath.row].name != ""
-        else {
-            return UITableViewCell()
-        }
-
-        cell.courtName.text = basketballCourts[indexPath.row].name
-
-        return cell
-    }
-
     func createFakeCourts() {
 
         var fakeFakeCourts: [BasketballCourt] = []
@@ -71,6 +41,42 @@ class BasketballCourtsTableViewController: BaseTableViewController {
         }
 
         self.basketballCourts = fakeFakeCourts
+    }
+
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+
+        guard basketballCourts.count != 0 else { return 0 }
+        return basketballCourts.count
+    }
+
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+        guard
+            let cell = tableView.dequeueReusableCell(withIdentifier: Constant.Cell.basketballCourt,
+                                                     for: indexPath) as? BasketballCourtsTableViewCell,
+            basketballCourts[indexPath.row].name != ""
+        else {
+            return UITableViewCell()
+        }
+
+        cell.courtName.text = basketballCourts[indexPath.row].name
+        cell.courtName.adjustsFontSizeToFitWidth = true
+
+        return cell
+    }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+        // todo: set data to BasketballCourtDetail page
+
+        let storyBoard = UIStoryboard(name: "BasketballCourtDetail", bundle: nil)
+        guard let basketballCourtDetailViewController = storyBoard.instantiateViewController(withIdentifier: "BasketballCourtDetailViewController") as? BasketballCourtDetailViewController else { return }
+
+        guard let cell = tableView.cellForRow(at: indexPath) as? BasketballCourtsTableViewCell else { return }
+
+        basketballCourtDetailViewController.navigationTitle = cell.courtName.text!
+
+        self.navigationController?.pushViewController(basketballCourtDetailViewController, animated: true)
     }
 
 }

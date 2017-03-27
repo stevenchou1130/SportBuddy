@@ -38,6 +38,8 @@
 		B0AB6FF71E88C4590060D80E /* BasketballCourtsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AB6FF61E88C4590060D80E /* BasketballCourtsManager.swift */; };
 		B0AB6FFB1E88C5210060D80E /* BasketballCourt.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AB6FFA1E88C5210060D80E /* BasketballCourt.swift */; };
 		B0AB6FFD1E88C5900060D80E /* BasketballCourtModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AB6FFC1E88C5900060D80E /* BasketballCourtModel.swift */; };
+		B0CCD1761E89079C0046009B /* BasketballCourtDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CCD1751E89079C0046009B /* BasketballCourtDetailViewController.swift */; };
+		B0CCD17A1E8909FB0046009B /* BasketballCourtDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0CCD1791E8909FB0046009B /* BasketballCourtDetail.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +78,8 @@
 		B0AB6FF61E88C4590060D80E /* BasketballCourtsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasketballCourtsManager.swift; sourceTree = "<group>"; };
 		B0AB6FFA1E88C5210060D80E /* BasketballCourt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasketballCourt.swift; sourceTree = "<group>"; };
 		B0AB6FFC1E88C5900060D80E /* BasketballCourtModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasketballCourtModel.swift; sourceTree = "<group>"; };
+		B0CCD1751E89079C0046009B /* BasketballCourtDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasketballCourtDetailViewController.swift; sourceTree = "<group>"; };
+		B0CCD1791E8909FB0046009B /* BasketballCourtDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = BasketballCourtDetail.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -223,10 +227,10 @@
 		B0971BC21E850D110037E26D /* Courts */ = {
 			isa = PBXGroup;
 			children = (
+				B0CCD1771E89096F0046009B /* Cell */,
+				B0CCD1781E8909BF0046009B /* BasketballCourtDetail */,
 				B0754D791E83C5AF006A5754 /* BasketballCourtsNavigationController.swift */,
 				B0754D721E83AEEA006A5754 /* BasketballCourtsTableViewController.swift */,
-				B0971BC31E850EB10037E26D /* BasketballCourtsTableViewCell.swift */,
-				B0971BC41E850EB10037E26D /* BasketballCourtsTableViewCell.xib */,
 				B0AB6FF61E88C4590060D80E /* BasketballCourtsManager.swift */,
 				B0AB6FFC1E88C5900060D80E /* BasketballCourtModel.swift */,
 				B0AB6FFA1E88C5210060D80E /* BasketballCourt.swift */,
@@ -241,6 +245,24 @@
 				B0754D671E8399FB006A5754 /* BaseTableViewController.swift */,
 			);
 			name = Base;
+			sourceTree = "<group>";
+		};
+		B0CCD1771E89096F0046009B /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				B0971BC31E850EB10037E26D /* BasketballCourtsTableViewCell.swift */,
+				B0971BC41E850EB10037E26D /* BasketballCourtsTableViewCell.xib */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
+		B0CCD1781E8909BF0046009B /* BasketballCourtDetail */ = {
+			isa = PBXGroup;
+			children = (
+				B0CCD1751E89079C0046009B /* BasketballCourtDetailViewController.swift */,
+				B0CCD1791E8909FB0046009B /* BasketballCourtDetail.storyboard */,
+			);
+			name = BasketballCourtDetail;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -312,6 +334,7 @@
 				B0754D611E839284006A5754 /* ChooseLevel.storyboard in Resources */,
 				B07D71241E82257E009B3AFF /* GoogleService-Info.plist in Resources */,
 				B084BD321E7FD29F00DC48B2 /* SignUp.storyboard in Resources */,
+				B0CCD17A1E8909FB0046009B /* BasketballCourtDetail.storyboard in Resources */,
 				B037B2921E826905007FD483 /* SportItems.storyboard in Resources */,
 				B06DB2B71E7FB28000DCF016 /* Assets.xcassets in Resources */,
 				B0971BC61E850EB10037E26D /* BasketballCourtsTableViewCell.xib in Resources */,
@@ -395,6 +418,7 @@
 				B0754D5F1E83927A006A5754 /* ChooseLevelViewController.swift in Sources */,
 				B06DB2B01E7FB28000DCF016 /* AppDelegate.swift in Sources */,
 				B0754D581E837284006A5754 /* LTHRadioButton.swift in Sources */,
+				B0CCD1761E89079C0046009B /* BasketballCourtDetailViewController.swift in Sources */,
 				B0AB6FFB1E88C5210060D80E /* BasketballCourt.swift in Sources */,
 				B0AB6FF71E88C4590060D80E /* BasketballCourtsManager.swift in Sources */,
 				B084BD2E1E7FCE7900DC48B2 /* Constant.swift in Sources */,
