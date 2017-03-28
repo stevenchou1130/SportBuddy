@@ -23,16 +23,6 @@ class BaseTableViewController: UITableViewController {
             appDelegate.window?.rootViewController = sportItemsViewController
         }
     }
-
-    func setNavigationDropdownMenu() {
-        let menuView = BTNavigationDropdownMenu(title: items[0], items: items as [AnyObject])
-        self.navigationItem.titleView = menuView
-
-        menuView.didSelectItemAtIndexHandler = { [weak self] (indexPath: Int) -> Void in
-            print("Did select item at index: \(indexPath)")
-            print("select item: \(self?.items[indexPath])")
-        }
-    }
 }
 
 extension BaseTableViewController {

@@ -61,4 +61,15 @@ struct Constant {
 
         static let NavigationBarBackItemTitle = "Sport Items"
     }
+
+    struct CurrentCity {
+
+        static var cityIndex = 0
+        static var cityName = "台北市"
+    }
+
+    struct GymType {
+
+        static let basketball = "籃球場"
+    }
 }

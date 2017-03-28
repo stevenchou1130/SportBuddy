@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import BTNavigationDropdownMenu
 
 class BasketballCourtsTableViewController: BaseTableViewController {
 
@@ -24,9 +25,29 @@ class BasketballCourtsTableViewController: BaseTableViewController {
         courtsTableView.delegate = self
         courtsTableView.dataSource = self
 
-        createFakeCourts()
+        setCourts()
     }
 
+    func setCourts() {
+
+        BasketballCourtsManager.shared.getApiData(city: "新北市", gymType: Constant.GymType.basketball) { (basketballCourts, error) in
+
+            if error == nil {
+
+                // todo: 沒資料的縣市，要自己設假資料
+
+                self.basketballCourts = basketballCourts!
+                self.tableView.reloadData()
+
+            } else {
+
+                // todo: error handling
+
+            }
+        }
+    }
+
+    // For testing
     func createFakeCourts() {
 
         var fakeFakeCourts: [BasketballCourt] = []
@@ -47,6 +68,19 @@ class BasketballCourtsTableViewController: BaseTableViewController {
 
         navigationItem.leftBarButtonItem = createBackButton(action: #selector(backToSportItemsView))
         setNavigationDropdownMenu()
+    }
+
+    func setNavigationDropdownMenu() {
+        let menuView = BTNavigationDropdownMenu(title: items[Constant.CurrentCity.cityIndex], items: items as [AnyObject])
+        self.navigationItem.titleView = menuView
+
+        menuView.didSelectItemAtIndexHandler = { [weak self] (indexPath: Int) -> Void in
+
+            if let city = self?.items[indexPath] {
+                Constant.CurrentCity.cityIndex = indexPath
+                Constant.CurrentCity.cityName = city
+            }
+        }
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

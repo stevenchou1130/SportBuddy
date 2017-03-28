@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import BTNavigationDropdownMenu
 
 class BasketballGamesTableViewController: BaseTableViewController {
 
@@ -22,7 +23,21 @@ class BasketballGamesTableViewController: BaseTableViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "新增球賽", style: .done, target: self, action: #selector(createNewBasketballGameGame))
 
         navigationItem.leftBarButtonItem = createBackButton(action: #selector(backToSportItemsView))
+
         setNavigationDropdownMenu()
+    }
+
+    func setNavigationDropdownMenu() {
+        let menuView = BTNavigationDropdownMenu(title: items[Constant.CurrentCity.cityIndex], items: items as [AnyObject])
+        self.navigationItem.titleView = menuView
+
+        menuView.didSelectItemAtIndexHandler = { [weak self] (indexPath: Int) -> Void in
+
+            if let city = self?.items[indexPath] {
+                Constant.CurrentCity.cityIndex = indexPath
+                Constant.CurrentCity.cityName = city
+            }
+        }
     }
 
     func createNewBasketballGameGame() {

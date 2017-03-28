@@ -1,51 +1,63 @@
 //
 //  BasketballCourtsManager.swift
-//  SportBuddy
+//  Alamofire01
 //
-//  Created by steven.chou on 2017/3/27.
+//  Created by steven.chou on 2017/3/28.
 //  Copyright © 2017年 stevenchou. All rights reserved.
 //
 
+import Foundation
 import Alamofire
-import CoreData
 
-protocol BasketballCourtsManagerDelegate: class {
+enum GetCourtError: Error {
 
-    func manager(_ manager: BasketballCourtsManager, didGet courts: [String])
-    func manager(_ manager: BasketballCourtsManager, didFailWith error: Error)
-
+    case responseError
+    case invalidResponseData
 }
 
 class BasketballCourtsManager {
 
     static let shared = BasketballCourtsManager()
 
-    weak var delegate: BasketballCourtsManagerDelegate?
+    typealias GetCourtCompletion = ([BasketballCourt]?, Error?) -> Void
 
-    func getCourts() {
-
+    func getApiData(city: String, gymType: String, completion: @escaping GetCourtCompletion) {
         let urlString = "http://iplay.sa.gov.tw/api/GymSearchAllList?"
-        let parameters: Parameters = ["City": "新北市", "GymType": "籃球場"]
+        let parameters: Parameters = ["City": city, "GymType": gymType]
 
-        Alamofire.request(urlString, parameters: parameters).responseJSON { response in
+        var basketballCourts = [BasketballCourt]()
+
+        Alamofire.request(urlString, parameters: parameters).validate().responseJSON { response in
 
             if response.result.isSuccess {
-
-                print(" === Get data is success === ")
-
                 if let results = response.value as? [[String: AnyObject]] {
-                    for result in results {
-                        if let gymID = result["GymID"] {
-                            print(gymID)
-                        }
-                    }
-                } else {
-                    print("Error: cover data")
-                }
 
-            } else {
-                print("Error: \(response.error)")
-            }
+                    for result in results {
+                        guard
+                            let gymID = result["GymID"] as? Int,
+                            let name = result["Name"] as? String,
+                            let operationTel = result["OperationTel"] as? String,
+                            let address = result["Address"] as? String,
+                            let rate = result["Rate"] as? Int,
+                            let rateCount = result["RateCount"] as? Int,
+                            let gymFuncList = result["GymFuncList"] as? String,
+                            let latLng = result["LatLng"] as? String
+                            else {
+                                return
+                        }
+
+                        let basketballCourt = BasketballCourt(courtID: gymID, name: name, tel: operationTel, address: address, rate: rate, rateCount: rateCount, gymFuncList: gymFuncList, latlng: latLng)
+
+                        basketballCourts.append(basketballCourt)
+                    }
+
+                    // todo: 過濾球場
+                    
+                    completion(basketballCourts, nil)
+
+                } else { completion(nil, GetCourtError.invalidResponseData) }
+
+            } else { completion(nil, GetCourtError.responseError) }
         }
     }
 }
