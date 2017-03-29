@@ -7,10 +7,17 @@
 //
 
 import UIKit
+import MapKit
 
 class MapTableViewCell: UITableViewCell, Identifiable {
 
+    // MARK: Property
+
     class var identifier: String { return String(describing: self) }
+
+    static let aspectRatio: CGFloat = 3.0 / 2.0
+
+    @IBOutlet weak var mapView: MKMapView!
 
     override func awakeFromNib() {
         super.awakeFromNib()

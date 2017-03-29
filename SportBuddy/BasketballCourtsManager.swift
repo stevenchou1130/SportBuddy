@@ -48,12 +48,10 @@ class BasketballCourtsManager {
                         var latitude = ""
                         var longitude = ""
 
+                        // MARK: Get latitude and longitude
                         if latitudeAndLongitude.count == 2 {
                             latitude = latitudeAndLongitude[0]
                             longitude = latitudeAndLongitude[1]
-                            print("name: \(name)")
-                            print("latitude: \(latitude)")
-                            print("longitude: \(longitude)")
                         } else {
                             print("The Latitude and Longitude are wrong -> Court: \(name)")
                         }

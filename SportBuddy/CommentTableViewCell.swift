@@ -10,7 +10,14 @@ import UIKit
 
 class CommentTableViewCell: UITableViewCell, Identifiable {
 
+    // MARK: Property
+
     class var identifier: String { return String(describing: self) }
+
+    static let height: CGFloat = 200.0
+
+    @IBOutlet weak var courtAddress: UILabel!
+    @IBOutlet weak var courtTel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()

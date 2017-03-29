@@ -98,8 +98,6 @@ extension BasketballCourtsTableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        // todo: set data to BasketballCourtDetail page
-
         let storyBoard = UIStoryboard(name: Constant.Storyboard.basketballCourtDetail, bundle: nil)
 
         guard
@@ -110,6 +108,7 @@ extension BasketballCourtsTableViewController {
             let cell = tableView.cellForRow(at: indexPath) as? CourtTableViewCell
             else { return }
 
+        basketballCourtDetailTableViewController.basketballCourt = basketballCourts[indexPath.row]
         basketballCourtDetailTableViewController.navigationItem.title = cell.courtName.text!
         self.navigationController?.pushViewController(basketballCourtDetailTableViewController, animated: true)
     }

@@ -29,6 +29,9 @@
                     <constraint firstItem="Jfe-Lg-8JI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="pa7-pj-ovv"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="mapView" destination="Jfe-Lg-8JI" id="SS2-Ta-LIF"/>
+            </connections>
             <point key="canvasLocation" x="8" y="157"/>
         </tableViewCell>
     </objects>
