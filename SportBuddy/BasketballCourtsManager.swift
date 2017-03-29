@@ -42,17 +42,29 @@ class BasketballCourtsManager {
                             let rateCount = result["RateCount"] as? Int,
                             let gymFuncList = result["GymFuncList"] as? String,
                             let latLng = result["LatLng"] as? String
-                            else {
-                                return
+                            else { return }
+
+                        var latitudeAndLongitude = latLng.components(separatedBy: ",")
+                        var latitude = ""
+                        var longitude = ""
+
+                        if latitudeAndLongitude.count == 2 {
+                            latitude = latitudeAndLongitude[0]
+                            longitude = latitudeAndLongitude[1]
+                            print("name: \(name)")
+                            print("latitude: \(latitude)")
+                            print("longitude: \(longitude)")
+                        } else {
+                            print("The Latitude and Longitude are wrong -> Court: \(name)")
                         }
 
-                        let basketballCourt = BasketballCourt(courtID: gymID, name: name, tel: operationTel, address: address, rate: rate, rateCount: rateCount, gymFuncList: gymFuncList, latlng: latLng)
+                        let basketballCourt = BasketballCourt(courtID: gymID, name: name, tel: operationTel, address: address, rate: rate, rateCount: rateCount, gymFuncList: gymFuncList, latitude: latitude, longitude: longitude)
 
                         basketballCourts.append(basketballCourt)
                     }
 
                     // todo: 過濾球場
-                    
+
                     completion(basketballCourts, nil)
 
                 } else { completion(nil, GetCourtError.invalidResponseData) }

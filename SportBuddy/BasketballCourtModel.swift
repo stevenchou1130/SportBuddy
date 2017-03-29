@@ -1,5 +1,5 @@
 //
-//  BasketballCourtsModel.swift
+//  BasketballCourtModel.swift
 //  SportBuddy
 //
 //  Created by steven.chou on 2017/3/27.
@@ -24,5 +24,7 @@ protocol BasketballCourtModel {
 
     var gymFuncList: String { get }
 
-    var latlng: String { get }
+    var latitude: String { get }
+
+    var longitude: String { get }
 }

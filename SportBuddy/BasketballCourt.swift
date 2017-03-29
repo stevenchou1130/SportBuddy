@@ -1,5 +1,5 @@
 //
-//  BasketballCourts.swift
+//  BasketballCourt.swift
 //  SportBuddy
 //
 //  Created by steven.chou on 2017/3/27.
@@ -17,10 +17,12 @@ struct BasketballCourt: BasketballCourtModel {
     var rate: Int
     var rateCount: Int
     var gymFuncList: String
-    var latlng: String
+    var latitude: String
+    var longitude: String
 
-    init(courtID: Int, name: String, tel: String?, address: String,
-         rate: Int, rateCount: Int, gymFuncList: String, latlng: String) {
+    init(courtID: Int, name: String, tel: String?,
+         address: String, rate: Int, rateCount: Int,
+         gymFuncList: String, latitude: String, longitude: String) {
 
         self.courtID = courtID
         self.name = name
@@ -29,6 +31,7 @@ struct BasketballCourt: BasketballCourtModel {
         self.rate = rate
         self.rateCount = rateCount
         self.gymFuncList = gymFuncList
-        self.latlng = latlng
+        self.latitude = latitude
+        self.longitude = longitude
     }
 }

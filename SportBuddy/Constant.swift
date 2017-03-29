@@ -42,7 +42,7 @@ struct Constant {
 
     struct Cell {
 
-        static let basketballCourt = "BasketballCourtsTableViewCell"
+        static let court = "CourtTableViewCell"
     }
 
     struct CourtAPIKey {
@@ -65,7 +65,7 @@ struct Constant {
     struct CurrentCity {
 
         static var cityIndex = 0
-        static var cityName = "台北市"
+        static var cityName = "臺北市"
     }
 
     struct GymType {

@@ -10,6 +10,16 @@ import UIKit
 
 class BasketballCourtDetailViewController: UIViewController {
 
+    enum Component {
+
+        case weather, map, comment
+
+    }
+
+    // MARK: Property
+
+    var components: [Component] = [ .weather, .map, .comment ]
+
     var navigationTitle: String = ""
 
     override func viewDidLoad() {

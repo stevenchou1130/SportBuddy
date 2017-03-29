@@ -1,5 +1,5 @@
 //
-//  BasketballCourtsTableViewCell.swift
+//  CourtTableViewCell.swift
 //  SportBuddy
 //
 //  Created by steven.chou on 2017/3/24.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BasketballCourtsTableViewCell: UITableViewCell {
+class CourtTableViewCell: UITableViewCell {
 
     @IBOutlet weak var courtName: UILabel!
 
