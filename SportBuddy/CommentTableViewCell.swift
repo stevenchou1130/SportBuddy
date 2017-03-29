@@ -8,7 +8,9 @@
 
 import UIKit
 
-class CommentTableViewCell: UITableViewCell {
+class CommentTableViewCell: UITableViewCell, Identifiable {
+
+    class var identifier: String { return String(describing: self) }
 
     override func awakeFromNib() {
         super.awakeFromNib()

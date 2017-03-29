@@ -103,15 +103,14 @@ extension BasketballCourtsTableViewController {
         let storyBoard = UIStoryboard(name: Constant.Storyboard.basketballCourtDetail, bundle: nil)
 
         guard
-            let basketballCourtDetailViewController = storyBoard.instantiateViewController(withIdentifier: Constant.Controller.basketballCourtDetail) as? BasketballCourtDetailViewController
+            let basketballCourtDetailTableViewController = storyBoard.instantiateViewController(withIdentifier: Constant.Controller.basketballCourtDetail) as? BasketballCourtDetailTableViewController
             else { return }
 
         guard
             let cell = tableView.cellForRow(at: indexPath) as? CourtTableViewCell
             else { return }
 
-        basketballCourtDetailViewController.navigationTitle = cell.courtName.text!
-
-        self.navigationController?.pushViewController(basketballCourtDetailViewController, animated: true)
+        basketballCourtDetailTableViewController.navigationItem.title = cell.courtName.text!
+        self.navigationController?.pushViewController(basketballCourtDetailTableViewController, animated: true)
     }
 }
