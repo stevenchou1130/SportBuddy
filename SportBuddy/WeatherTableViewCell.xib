@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -25,14 +25,46 @@
                             <constraint firstAttribute="width" constant="150" id="EXZ-qK-NjI"/>
                         </constraints>
                     </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weather" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qWS-uC-YJ7">
+                        <rect key="frame" x="160" y="10" width="150" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Temperature" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hKh-lC-K9k">
+                        <rect key="frame" x="160" y="41" width="150" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Update time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9IX-rj-Gvh">
+                        <rect key="frame" x="160" y="72" width="150" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                 <constraints>
+                    <constraint firstItem="9IX-rj-Gvh" firstAttribute="leading" secondItem="hKh-lC-K9k" secondAttribute="leading" id="4ic-cr-quq"/>
+                    <constraint firstItem="9IX-rj-Gvh" firstAttribute="top" secondItem="hKh-lC-K9k" secondAttribute="bottom" constant="10" id="8Ou-Dm-T3r"/>
+                    <constraint firstItem="hKh-lC-K9k" firstAttribute="leading" secondItem="qWS-uC-YJ7" secondAttribute="leading" id="Dzr-wh-QXA"/>
                     <constraint firstItem="ADd-87-VAq" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Hg2-gu-XuU"/>
+                    <constraint firstAttribute="trailing" secondItem="qWS-uC-YJ7" secondAttribute="trailing" constant="10" id="TsU-eD-IwM"/>
+                    <constraint firstItem="qWS-uC-YJ7" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="guA-40-cxg"/>
+                    <constraint firstItem="9IX-rj-Gvh" firstAttribute="trailing" secondItem="hKh-lC-K9k" secondAttribute="trailing" id="md7-Wn-uEv"/>
                     <constraint firstAttribute="bottom" secondItem="ADd-87-VAq" secondAttribute="bottom" id="nqA-jf-HoE"/>
                     <constraint firstItem="ADd-87-VAq" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="phE-dL-tbM"/>
+                    <constraint firstItem="hKh-lC-K9k" firstAttribute="top" secondItem="qWS-uC-YJ7" secondAttribute="bottom" constant="10" id="qHW-Ze-nov"/>
+                    <constraint firstItem="hKh-lC-K9k" firstAttribute="trailing" secondItem="qWS-uC-YJ7" secondAttribute="trailing" id="wIi-oK-YDS"/>
+                    <constraint firstItem="qWS-uC-YJ7" firstAttribute="leading" secondItem="ADd-87-VAq" secondAttribute="trailing" constant="10" id="yRt-VF-sZ4"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="temperatureLabel" destination="hKh-lC-K9k" id="xW6-6q-iTi"/>
+                <outlet property="updateTimeLabel" destination="9IX-rj-Gvh" id="cmK-FH-5e6"/>
+                <outlet property="weatherLabel" destination="qWS-uC-YJ7" id="r5I-NO-MOi"/>
+            </connections>
             <point key="canvasLocation" x="36" y="83"/>
         </tableViewCell>
     </objects>

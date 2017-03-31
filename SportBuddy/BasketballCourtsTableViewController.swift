@@ -32,7 +32,7 @@ class BasketballCourtsTableViewController: BaseTableViewController {
 
         // todo: 新增loding圖
 
-        BasketballCourtsManager.shared.getApiData(city: Constant.CurrentCity.cityName, gymType: Constant.GymType.basketball) { (basketballCourts, error) in
+        BasketballCourtsProvider.shared.getApiData(city: Constant.CurrentCity.cityName, gymType: Constant.GymType.basketball) { (basketballCourts, error) in
 
             if error == nil {
 

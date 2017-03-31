@@ -14,7 +14,7 @@ PODS:
   - GoogleToolboxForMac/Defines (2.1.1)
   - GoogleToolboxForMac/NSData+zlib (2.1.1):
     - GoogleToolboxForMac/Defines (= 2.1.1)
-  - SwiftLint (0.16.1)
+  - SwiftLint (0.17.0)
 
 DEPENDENCIES:
   - Alamofire
@@ -40,7 +40,7 @@ SPEC CHECKSUMS:
   FirebaseCore: a024587e43778508700af8c6b1209f7c4516ba02
   FirebaseInstanceID: 2d0518b1378fe9d685ef40cbdd63d2fdc1125339
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
-  SwiftLint: b8b683208cc09640898f16318a7a452274e91f61
+  SwiftLint: 9fb1dd71d5952d130f8c2fb60ae2e1475cf5d575
 
 PODFILE CHECKSUM: 0f3ce0f49d0f30c2fc5e7ee3712e182f6d2577c5
 

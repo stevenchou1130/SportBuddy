@@ -23,11 +23,34 @@ class BasketballCourtDetailTableViewController: BaseTableViewController {
     var components: [Component] = [ .weather, .map, .comment ]
 
     var basketballCourt: BasketballCourt?
+    var weather: Weather?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setUp()
+        getWeather()
+    }
+
+    func getWeather() {
+
+        if basketballCourt != nil {
+            let courtAddress = basketballCourt!.address
+            let index = courtAddress.index(courtAddress.startIndex, offsetBy: 5)
+            let town = courtAddress.substring(to: index)
+
+            WeatherProvider.shared.getWeather(town: town, completion: { (weather, error) in
+
+                if error == nil {
+                    self.weather = weather
+                    self.tableView.reloadData()
+                } else {
+                    print("Error in BasketballCourtDetailTableViewController - Get weather")
+                }
+            })
+        } else {
+            print("Error in BasketballCourtDetailTableViewController getWeather()")
+        }
     }
 
     func setUp() {
@@ -84,6 +107,7 @@ class BasketballCourtDetailTableViewController: BaseTableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // swiftlint:disable force_cast
 
         let component = components[indexPath.section]
 
@@ -92,68 +116,100 @@ class BasketballCourtDetailTableViewController: BaseTableViewController {
 
             let identifier = WeatherTableViewCell.identifier
 
-            // swiftlint:disable force_cast
             let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! WeatherTableViewCell
-            // swiftlint:enable force_cast
 
-            cell.selectionStyle = .none
-
-            return cell
+            return setWeatherCell(cell: cell)
 
         case .map:
 
             let identifier = MapTableViewCell.identifier
 
-            // swiftlint:disable force_cast
             let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! MapTableViewCell
-            // swiftlint:enable force_cast
 
-            cell.selectionStyle = .none
-
-            if let latitudeString = basketballCourt?.latitude,
-                let longitudeString = basketballCourt?.longitude {
-
-                let latitude = (latitudeString as NSString).doubleValue
-                let longitude = (longitudeString as NSString).doubleValue
-
-                let coordinate: CLLocationCoordinate2D = CLLocationCoordinate2DMake(latitude, longitude)
-                let annotation = MKPointAnnotation()
-                annotation.coordinate = coordinate
-                cell.mapView.addAnnotation(annotation)
-
-                let latDelta: CLLocationDegrees = 0.01
-                let lonDelta: CLLocationDegrees = 0.01
-                let span: MKCoordinateSpan = MKCoordinateSpanMake(latDelta, lonDelta)
-                let region: MKCoordinateRegion = MKCoordinateRegionMake(coordinate, span)
-
-                cell.mapView.setRegion(region, animated: true)
-                cell.mapView.mapType = .standard
-            }
-
-            return cell
+            return setMapCell(cell: cell)
 
         case .comment:
 
             let identifier = CommentTableViewCell.identifier
 
-            // swiftlint:disable force_cast
             let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! CommentTableViewCell
-            // swiftlint:enable force_cast
 
-            cell.selectionStyle = .none
+            return setCommentCell(cell: cell)
+        }
+        // swiftlint:enable force_cast
+    }
 
-            if let address = basketballCourt?.address,
-                let tel = basketballCourt?.tel {
+    func setWeatherCell(cell: WeatherTableViewCell) -> WeatherTableViewCell {
 
-                cell.courtAddress.text = "地址 : \(address)"
-                cell.courtTel.text = "電話 : \(tel)"
+        cell.selectionStyle = .none
 
-                cell.courtAddress.adjustsFontSizeToFitWidth = true
-                cell.courtTel.adjustsFontSizeToFitWidth = true
-            }
+        if let desc = weather?.desc,
+            let temperature = weather?.temperature,
+            let time = weather?.time {
 
-            return cell
+            cell.weatherLabel.text = "天氣 : \(desc)"
+            cell.temperatureLabel.text = "氣溫 : \(temperature) 度"
+            cell.updateTimeLabel.text = "更新時間 : \(time)"
+
+        } else {
+            cell.weatherLabel.text = ""
+            cell.temperatureLabel.text = "天氣即時資訊更新維護中..."
+            cell.updateTimeLabel.text = ""
         }
 
+        cell.weatherLabel.adjustsFontSizeToFitWidth = true
+        cell.temperatureLabel.adjustsFontSizeToFitWidth = true
+        cell.updateTimeLabel.adjustsFontSizeToFitWidth = true
+
+        return cell
     }
+
+    func setMapCell(cell: MapTableViewCell) -> MapTableViewCell {
+
+        cell.selectionStyle = .none
+
+        if let latitudeString = basketballCourt?.latitude,
+            let longitudeString = basketballCourt?.longitude {
+
+            let latitude = (latitudeString as NSString).doubleValue
+            let longitude = (longitudeString as NSString).doubleValue
+
+            let coordinate: CLLocationCoordinate2D = CLLocationCoordinate2DMake(latitude, longitude)
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = coordinate
+            cell.mapView.addAnnotation(annotation)
+
+            let latDelta: CLLocationDegrees = 0.01
+            let lonDelta: CLLocationDegrees = 0.01
+            let span: MKCoordinateSpan = MKCoordinateSpanMake(latDelta, lonDelta)
+            let region: MKCoordinateRegion = MKCoordinateRegionMake(coordinate, span)
+
+            cell.mapView.setRegion(region, animated: true)
+            cell.mapView.mapType = .standard
+        }
+
+        return cell
+    }
+
+    func setCommentCell(cell: CommentTableViewCell) -> CommentTableViewCell {
+
+        cell.selectionStyle = .none
+
+        if let address = basketballCourt?.address,
+            let tel = basketballCourt?.tel {
+
+            cell.courtAddress.text = "地址 : \(address)"
+            cell.courtTel.text = "電話 : \(tel)"
+
+        } else {
+            cell.courtAddress.text = "場地資料更新維護中..."
+            cell.courtTel.text = ""
+        }
+
+        cell.courtAddress.adjustsFontSizeToFitWidth = true
+        cell.courtTel.adjustsFontSizeToFitWidth = true
+
+        return cell
+    }
+
 }

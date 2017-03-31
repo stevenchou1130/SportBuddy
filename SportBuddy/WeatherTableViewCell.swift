@@ -12,6 +12,10 @@ class WeatherTableViewCell: UITableViewCell, Identifiable {
 
     // MARK: Property
 
+    @IBOutlet weak var weatherLabel: UILabel!
+    @IBOutlet weak var temperatureLabel: UILabel!
+    @IBOutlet weak var updateTimeLabel: UILabel!
+
     class var identifier: String { return String(describing: self) }
 
     static let height: CGFloat = 100.0
