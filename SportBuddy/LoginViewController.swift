@@ -23,24 +23,22 @@ class LoginViewController: BaseViewController {
     }
 
     @IBAction func login(_ sender: Any) {
-        print("Login")
+        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+
+            let sportItemsStorybard = UIStoryboard(name: Constant.Storyboard.sportItems, bundle: nil)
+            let sportItemsViewController = sportItemsStorybard.instantiateViewController(withIdentifier: Constant.Controller.sportItems) as? SportItemsViewController
+
+            appDelegate.window?.rootViewController = sportItemsViewController
+        }
     }
 
     @IBAction func signUp(_ sender: Any) {
-        print("Sign Up")
-
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
 
             let signUpStorybard = UIStoryboard(name: Constant.Storyboard.signUp, bundle: nil)
             let signUpViewController = signUpStorybard.instantiateViewController(withIdentifier: Constant.Controller.signUp) as? SignUpViewController
 
             appDelegate.window?.rootViewController = signUpViewController
-//            present(signUpViewController, animated: true)
         }
-    }
-
-    @IBAction func backToMain(_ segue: UIStoryboardSegue) {
-
-        print("back to main")
     }
 }

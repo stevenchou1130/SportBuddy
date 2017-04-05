@@ -10,5 +10,6 @@ target 'SportBuddy' do
 	pod 'SwiftLint'
 	pod 'Alamofire'
 	pod 'Firebase/Core'
-	
+	pod 'BTNavigationDropdownMenu', :git => 'https://github.com/PhamBaTho/BTNavigationDropdownMenu.git', :branch => 'swift-3.0'
+
 end
