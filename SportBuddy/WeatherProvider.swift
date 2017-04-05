@@ -42,10 +42,6 @@ class WeatherProvider {
                             let time = result["at"] as? String
                             else { return }
 
-                        print("desc: \(desc)")
-                        print("temperature: \(temperature)")
-                        print("time: \(time)")
-
                         let weatherInfo = Weather(desc: desc, temperature: temperature, time: time)
                         completion(weatherInfo, nil)
 
