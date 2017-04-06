@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class BaseViewController: UIViewController {
 
@@ -22,6 +23,7 @@ class BaseViewController: UIViewController {
     }
 }
 
+// MARK: - Navigation Bar Back Button
 extension BaseViewController {
 
     func createBackButton(action: Selector) -> UIBarButtonItem {
@@ -34,5 +36,18 @@ extension BaseViewController {
         button.tintColor = UIColor.black
 
         return button
+    }
+}
+
+// MARK: - Hide Keyboard When Tapped Around
+extension BaseViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(BaseViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+
+    func dismissKeyboard() {
+        view.endEditing(true)
     }
 }

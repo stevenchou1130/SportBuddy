@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class SignUpViewController: BaseViewController {
 
@@ -19,23 +20,39 @@ class SignUpViewController: BaseViewController {
     @IBOutlet weak var maleButton: UIButton!
     @IBOutlet weak var femaleButton: UIButton!
 
-    var maleRadioButton = LTHRadioButton()
-    var femaleRadioButton = LTHRadioButton()
+    private var maleRadioButton = LTHRadioButton()
+    private var femaleRadioButton = LTHRadioButton()
+
+    private var userGender = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        maleRadioButton = LTHRadioButton(selectedColor: .blue)
-        femaleRadioButton = LTHRadioButton(selectedColor: .blue)
+        self.hideKeyboardWhenTappedAround()
 
         setView()
     }
 
     func setView() {
+
+        accountTextField.placeholder = "Emall address"
+        accountTextField.clearButtonMode = .whileEditing
+        accountTextField.keyboardType = .emailAddress
+        accountTextField.delegate = self
+
+        passwordTextField.placeholder = "Password"
+        passwordTextField.clearButtonMode = .whileEditing
+        passwordTextField.delegate = self
+
+        nameTextField.placeholder = "It will be displaied in app"
+        nameTextField.clearButtonMode = .whileEditing
+        nameTextField.delegate = self
+
         userImage.layer.cornerRadius = userImage.bounds.size.width / 2.0
         userImage.layer.borderWidth = 1.0
 
         // Male Radio Button
+        maleRadioButton = LTHRadioButton(selectedColor: .blue)
         view.addSubview(maleRadioButton)
         maleRadioButton.translatesAutoresizingMaskIntoConstraints = false
 
@@ -46,6 +63,7 @@ class SignUpViewController: BaseViewController {
             maleRadioButton.widthAnchor.constraint(equalToConstant: maleRadioButton.frame.width)])
 
         // Female Radio Button
+        femaleRadioButton = LTHRadioButton(selectedColor: .blue)
         view.addSubview(femaleRadioButton)
         femaleRadioButton.translatesAutoresizingMaskIntoConstraints = false
 
@@ -56,26 +74,88 @@ class SignUpViewController: BaseViewController {
             femaleRadioButton.widthAnchor.constraint(equalToConstant: femaleRadioButton.frame.width)])
     }
 
-    @IBAction func cleckMaleButton(_ sender: Any) {
-        maleRadioButton.select()
-        femaleRadioButton.deselect(animated: false)
+    // MARK: - Select Gender
+    @IBAction func clickMaleButton(_ sender: Any) {
+
+        selectGender(select: maleRadioButton,
+                     deselect: femaleRadioButton,
+                     isMale: true)
     }
 
-    @IBAction func cleckFemaleButton(_ sender: Any) {
-        femaleRadioButton.select()
-        maleRadioButton.deselect(animated: false)
+    @IBAction func clickFemaleButton(_ sender: Any) {
+
+        selectGender(select: femaleRadioButton,
+                     deselect: maleRadioButton,
+                     isMale: false)
     }
 
-    @IBAction func signUp(_ sender: Any) {
-        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+    func selectGender(select selectGenderButton: LTHRadioButton,
+                      deselect deselectGenderButton: LTHRadioButton,
+                      isMale: Bool) {
 
-            let sportItemsStorybard = UIStoryboard(name: Constant.Storyboard.sportItems, bundle: nil)
-            let sportItemsViewController = sportItemsStorybard.instantiateViewController(withIdentifier: Constant.Controller.sportItems) as? SportItemsViewController
+        selectGenderButton.select()
+        deselectGenderButton.deselect(animated: false)
 
-            appDelegate.window?.rootViewController = sportItemsViewController
+        if isMale {
+            print("select male")
+            userGender = Constant.Gender.male
+
+        } else {
+            print("select female")
+            userGender = Constant.Gender.female
         }
     }
 
+    // MARK: - Sign up
+    @IBAction func signUp(_ sender: Any) {
+
+        let account = self.accountTextField.text!
+        let password = self.passwordTextField.text!
+        let name = self.nameTextField.text!
+        let gender = self.userGender
+
+        if account != "" && password != "" && name != "" && userGender != "" {
+            FIRAuth.auth()?.createUser(withEmail: account, password: password) { (user, error) in
+
+                if error != nil {
+                    self.showErrorAlert(error: error, myErrorMsg: nil)
+                    return
+                }
+
+                print("signUp")
+
+                guard let uid = user?.uid else { return }
+
+                let dbUrl = Constant.Firebase.dbUrl
+                let ref = FIRDatabase.database().reference(fromURL: dbUrl)
+
+                let usersReference = ref.child("users").child(uid)
+                let value = ["account": account, "name": name, "gender": gender]
+
+                usersReference.updateChildValues(value, withCompletionBlock: { (err, _) in
+
+                    if err != nil {
+                        self.showErrorAlert(error: err, myErrorMsg: nil)
+                        return
+                    }
+
+                    print("Saved user successfully into Firebase db")
+
+                    if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+                        let sportItemsStorybard = UIStoryboard(name: Constant.Storyboard.sportItems, bundle: nil)
+                        let sportItemsViewController = sportItemsStorybard.instantiateViewController(withIdentifier: Constant.Controller.sportItems) as? SportItemsViewController
+
+                        appDelegate.window?.rootViewController = sportItemsViewController
+                    }
+                })
+            }
+        } else {
+            self.showErrorAlert(error: nil, myErrorMsg: "Please fill out all information about you.")
+        }
+
+    }
+
+    // MARK: - Back to Login
     @IBAction func toLogin(_ sender: Any) {
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
 
@@ -84,5 +164,35 @@ class SignUpViewController: BaseViewController {
 
             appDelegate.window?.rootViewController = loginViewController
         }
+    }
+
+    // MARK: - Show error alert
+    func showErrorAlert(error: Error?, myErrorMsg: String?) {
+
+        var errorMsg: String = ""
+
+        if error != nil {
+            errorMsg = (error?.localizedDescription)!
+        } else if myErrorMsg != nil {
+            errorMsg = myErrorMsg!
+        }
+
+        let alertController = UIAlertController(title: "Error Message", message: errorMsg, preferredStyle: .alert)
+
+        let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        alertController.addAction(defaultAction)
+
+        self.present(alertController, animated: true, completion: nil)
+    }
+
+}
+
+// MARK: - Hide keyboard when user clicks the return on keyboard
+extension SignUpViewController: UITextFieldDelegate {
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+
+        self.view.endEditing(true)
+        return true
     }
 }

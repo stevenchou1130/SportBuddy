@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -117,7 +117,7 @@
                                 </constraints>
                                 <state key="normal" title="female"/>
                                 <connections>
-                                    <action selector="cleckFemaleButton:" destination="DnD-KE-Clc" eventType="touchUpInside" id="xWe-ed-im4"/>
+                                    <action selector="clickFemaleButton:" destination="DnD-KE-Clc" eventType="touchUpInside" id="e1K-cy-gMQ"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WZx-hS-qkM">
@@ -129,7 +129,7 @@
                                 </constraints>
                                 <state key="normal" title="male"/>
                                 <connections>
-                                    <action selector="cleckMaleButton:" destination="DnD-KE-Clc" eventType="touchUpInside" id="emT-4l-cZx"/>
+                                    <action selector="clickMaleButton:" destination="DnD-KE-Clc" eventType="touchUpInside" id="U49-82-n5e"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v7Q-V0-596">

@@ -48,9 +48,6 @@
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <state key="normal" title="Running"/>
-                                <connections>
-                                    <action selector="backLogin:" destination="uSd-Qx-17U" eventType="touchUpInside" id="TfR-44-7AV"/>
-                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gzf-YV-mfV">
                                 <rect key="frame" x="152" y="28" width="70" height="34"/>
@@ -69,8 +66,24 @@
                                     <action selector="toGameList:" destination="uSd-Qx-17U" eventType="touchUpInside" id="h6Z-Wq-aYP"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tZx-RS-rCK">
+                                <rect key="frame" x="147" y="592" width="80" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="FfV-f3-SDS"/>
+                                    <constraint firstAttribute="height" constant="40" id="ZoJ-iw-kJD"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Logout"/>
+                                <connections>
+                                    <action selector="logout:" destination="uSd-Qx-17U" eventType="touchUpInside" id="hvB-yA-Nlj"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="cJj-dc-5Jw" firstAttribute="top" secondItem="tZx-RS-rCK" secondAttribute="bottom" constant="35" id="Yp7-yz-2T3"/>
+                            <constraint firstItem="tZx-RS-rCK" firstAttribute="centerX" secondItem="fDH-Mx-lLD" secondAttribute="centerX" id="j4J-Qb-UG1"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="userImage" destination="nDv-tt-dH8" id="v5R-bH-ycM"/>
