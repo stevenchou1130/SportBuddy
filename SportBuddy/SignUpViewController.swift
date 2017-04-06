@@ -124,8 +124,6 @@ class SignUpViewController: BaseViewController {
                     return
                 }
 
-                print("signUp")
-
                 guard let uid = user?.uid else { return }
 
                 let dbUrl = Constant.Firebase.dbUrl
@@ -157,7 +155,9 @@ class SignUpViewController: BaseViewController {
 
     }
 
-    // MARK: - Back to Login
+    /*
+     *  For testing
+     */
     @IBAction func toLogin(_ sender: Any) {
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
 

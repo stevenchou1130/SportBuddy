@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FirebaseAuth
+import FirebaseDatabase
 
 class SportItemsViewController: BaseViewController {
 
@@ -20,11 +21,14 @@ class SportItemsViewController: BaseViewController {
         super.viewDidLoad()
         print("== SportItemsViewController ==")
 
+        checkIfUserIsLoggedIn()
+        setView()
+    }
+
+    func checkIfUserIsLoggedIn() {
         if FIRAuth.auth()?.currentUser?.uid == nil {
             handleLogout()
         }
-
-        setView()
     }
 
     func handleLogout() {
@@ -45,6 +49,9 @@ class SportItemsViewController: BaseViewController {
     }
 
     func setView() {
+
+        // todo: 滑動選單
+
         userImage.layer.cornerRadius = userImage.bounds.size.width / 2.0
         userImage.layer.borderWidth = 1.0
     }
@@ -54,25 +61,44 @@ class SportItemsViewController: BaseViewController {
     }
 
     @IBAction func toGameList(_ sender: Any) {
-        // Need adjust - add the judgment of sport item
 
-        if isfirstTime {
-            if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+        // todo: add the judgment of sport item
 
-                let chooseLevelStorybard = UIStoryboard(name: Constant.Storyboard.chooseLevel, bundle: nil)
-                let chooseLevelViewController = chooseLevelStorybard.instantiateViewController(withIdentifier: Constant.Controller.chooseLevel) as? ChooseLevelViewController
+        let rootRef = FIRDatabase.database().reference()
+        rootRef.child("levels").queryOrdered(byChild: "host").queryEqual(toValue: FIRAuth.auth()?.currentUser?.uid).observeSingleEvent(of: .value, with: { (snapshot) in
 
-                appDelegate.window?.rootViewController = chooseLevelViewController
+            print("================")
+            print("snapshot.exists(): \(snapshot.exists())")
+            print("================")
+
+            // todo: 加上Loading圖示
+
+            if snapshot.exists() {
+                // todo: 跳到主頁面
+            } else {
+                // todo: 判斷所選的運動，有無等級存在
+
+                // todo: 跳到等級選單
             }
-        } else {
-            if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
 
-                let basketballStorybard = UIStoryboard(name: Constant.Storyboard.basketball, bundle: nil)
-                let basketballTabbarViewController = basketballStorybard.instantiateViewController(withIdentifier: Constant.Controller.basketballTabbar) as? BasketballTabbarViewController
+            if self.isfirstTime {
+                if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
 
-                appDelegate.window?.rootViewController = basketballTabbarViewController
+                    let chooseLevelStorybard = UIStoryboard(name: Constant.Storyboard.chooseLevel, bundle: nil)
+                    let chooseLevelViewController = chooseLevelStorybard.instantiateViewController(withIdentifier: Constant.Controller.chooseLevel) as? ChooseLevelViewController
+
+                    appDelegate.window?.rootViewController = chooseLevelViewController
+                }
+            } else {
+                if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+
+                    let basketballStorybard = UIStoryboard(name: Constant.Storyboard.basketball, bundle: nil)
+                    let basketballTabbarViewController = basketballStorybard.instantiateViewController(withIdentifier: Constant.Controller.basketballTabbar) as? BasketballTabbarViewController
+
+                    appDelegate.window?.rootViewController = basketballTabbarViewController
+                }
             }
-        }
+        })
     }
 
     /*

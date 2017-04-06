@@ -13,6 +13,7 @@ class ChooseLevelViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // todo: 選等級之後，塞值到Firebase（包含其他運動項目的Level，先做三個）
     }
 
     @IBAction func selectLevelA(_ sender: Any) {
