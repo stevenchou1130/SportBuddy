@@ -7,15 +7,38 @@
 //
 
 import UIKit
+import Firebase
 
 class LoginViewController: BaseViewController {
 
     @IBOutlet weak var appNameLabel: UILabel!
+    @IBOutlet weak var accountTextfield: UITextField!
+    @IBOutlet weak var passwordTextfield: UITextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setView()
+    }
+
+    // todo: confirm use it or not.
+    func isUsersignedin() {
+
+        FIRAuth.auth()?.addStateDidChangeListener { _, user in
+            if user != nil {
+                // User is signed in.
+                print("==== User is signed in ====")
+                if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+                    let sportItemsStorybard = UIStoryboard(name: Constant.Storyboard.sportItems, bundle: nil)
+                    let sportItemsViewController = sportItemsStorybard.instantiateViewController(withIdentifier: Constant.Controller.sportItems) as? SportItemsViewController
+
+                    appDelegate.window?.rootViewController = sportItemsViewController
+                }
+            } else {
+                // No user is signed in.
+                print("==== No user sign in ====")
+            }
+        }
     }
 
     func setView() {
@@ -25,10 +48,22 @@ class LoginViewController: BaseViewController {
     @IBAction func login(_ sender: Any) {
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
 
-            let sportItemsStorybard = UIStoryboard(name: Constant.Storyboard.sportItems, bundle: nil)
-            let sportItemsViewController = sportItemsStorybard.instantiateViewController(withIdentifier: Constant.Controller.sportItems) as? SportItemsViewController
+            let account = accountTextfield.text!
+            let password = passwordTextfield.text!
 
-            appDelegate.window?.rootViewController = sportItemsViewController
+            FIRAuth.auth()?.signIn(withEmail: account, password: password, completion: { (_, error) in
+
+                if error != nil {
+                    self.showErrorAlert(error: error, myErrorMsg: nil)
+                    return
+                }
+
+                // successfully login
+                let sportItemsStorybard = UIStoryboard(name: Constant.Storyboard.sportItems, bundle: nil)
+                let sportItemsViewController = sportItemsStorybard.instantiateViewController(withIdentifier: Constant.Controller.sportItems) as? SportItemsViewController
+
+                appDelegate.window?.rootViewController = sportItemsViewController
+            })
         }
     }
 
@@ -40,5 +75,24 @@ class LoginViewController: BaseViewController {
 
             appDelegate.window?.rootViewController = signUpViewController
         }
+    }
+
+    // MARK: - Show error alert
+    func showErrorAlert(error: Error?, myErrorMsg: String?) {
+
+        var errorMsg: String = ""
+
+        if error != nil {
+            errorMsg = (error?.localizedDescription)!
+        } else if myErrorMsg != nil {
+            errorMsg = myErrorMsg!
+        }
+
+        let alertController = UIAlertController(title: "Error Message", message: errorMsg, preferredStyle: .alert)
+
+        let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        alertController.addAction(defaultAction)
+
+        self.present(alertController, animated: true, completion: nil)
     }
 }

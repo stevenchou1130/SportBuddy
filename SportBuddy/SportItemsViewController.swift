@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class SportItemsViewController: BaseViewController {
 
@@ -18,7 +19,28 @@ class SportItemsViewController: BaseViewController {
         super.viewDidLoad()
         print("== SportItemsViewController ==")
 
+        if FIRAuth.auth()?.currentUser?.uid == nil {
+            handleLogout()
+        }
+
         setView()
+    }
+
+    func handleLogout() {
+
+        do {
+            try FIRAuth.auth()?.signOut()
+        } catch let logoutError {
+            print(logoutError)
+        }
+
+        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+
+            let loginStorybard = UIStoryboard(name: Constant.Storyboard.login, bundle: nil)
+            let loginViewController = loginStorybard.instantiateViewController(withIdentifier: Constant.Controller.login) as? LoginViewController
+
+            appDelegate.window?.rootViewController = loginViewController
+        }
     }
 
     func setView() {
@@ -26,6 +48,7 @@ class SportItemsViewController: BaseViewController {
         userImage.layer.borderWidth = 1.0
     }
 
+    // todo: toEditProfile
     @IBAction func toEditProfile(_ sender: Any) {
     }
 
@@ -49,19 +72,15 @@ class SportItemsViewController: BaseViewController {
                 appDelegate.window?.rootViewController = basketballTabbarViewController
             }
         }
-
     }
 
     /*
      *  For testing
      */
-    @IBAction func backLogin(_ sender: Any) {
-        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+    @IBAction func logout(_ sender: Any) {
 
-            let loginStorybard = UIStoryboard(name: Constant.Storyboard.login, bundle: nil)
-            let loginViewController = loginStorybard.instantiateViewController(withIdentifier: Constant.Controller.login) as? LoginViewController
-
-            appDelegate.window?.rootViewController = loginViewController
+        if FIRAuth.auth()?.currentUser?.uid != nil {
+            handleLogout()
         }
     }
 

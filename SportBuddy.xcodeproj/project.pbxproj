@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		86B393D6D3C6D9E1CDF02680 /* Pods_SportBuddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88D4B9B17EDC0172370C84CB /* Pods_SportBuddy.framework */; };
+		B00708D91E94CC37005CFD0F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B00708D81E94CC37005CFD0F /* GoogleService-Info.plist */; };
 		B037B2921E826905007FD483 /* SportItems.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B037B2911E826905007FD483 /* SportItems.storyboard */; };
 		B06DB2B01E7FB28000DCF016 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06DB2AF1E7FB28000DCF016 /* AppDelegate.swift */; };
 		B06DB2B71E7FB28000DCF016 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B06DB2B61E7FB28000DCF016 /* Assets.xcassets */; };
@@ -27,7 +28,6 @@
 		B0754D7C1E83C5C6006A5754 /* BasketballProfileNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0754D7B1E83C5C6006A5754 /* BasketballProfileNavigationController.swift */; };
 		B076C5601E89F5CF00F06390 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B076C55F1E89F5CF00F06390 /* User.swift */; };
 		B07CF4A31E82D7C600E91F7E /* SportItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07CF4A21E82D7C600E91F7E /* SportItemsViewController.swift */; };
-		B07D71241E82257E009B3AFF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B07D71231E82257E009B3AFF /* GoogleService-Info.plist */; };
 		B084BD2E1E7FCE7900DC48B2 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = B084BD2D1E7FCE7900DC48B2 /* Constant.swift */; };
 		B084BD301E7FCF8200DC48B2 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B084BD2F1E7FCF8200DC48B2 /* Login.storyboard */; };
 		B084BD321E7FD29F00DC48B2 /* SignUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B084BD311E7FD29F00DC48B2 /* SignUp.storyboard */; };
@@ -59,6 +59,7 @@
 		35A3321B5699FCB2C74FFCC5 /* Pods-SportBuddy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SportBuddy.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SportBuddy/Pods-SportBuddy.debug.xcconfig"; sourceTree = "<group>"; };
 		6A1C3E8AC94014525C4957ED /* Pods-SportBuddy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SportBuddy.release.xcconfig"; path = "Pods/Target Support Files/Pods-SportBuddy/Pods-SportBuddy.release.xcconfig"; sourceTree = "<group>"; };
 		88D4B9B17EDC0172370C84CB /* Pods_SportBuddy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SportBuddy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B00708D81E94CC37005CFD0F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B037B2911E826905007FD483 /* SportItems.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SportItems.storyboard; sourceTree = "<group>"; };
 		B06DB2AC1E7FB28000DCF016 /* SportBuddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SportBuddy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B06DB2AF1E7FB28000DCF016 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -80,7 +81,6 @@
 		B0754D7B1E83C5C6006A5754 /* BasketballProfileNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasketballProfileNavigationController.swift; sourceTree = "<group>"; };
 		B076C55F1E89F5CF00F06390 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		B07CF4A21E82D7C600E91F7E /* SportItemsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SportItemsViewController.swift; sourceTree = "<group>"; };
-		B07D71231E82257E009B3AFF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B084BD2D1E7FCE7900DC48B2 /* Constant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		B084BD2F1E7FCF8200DC48B2 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		B084BD311E7FD29F00DC48B2 /* SignUp.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SignUp.storyboard; sourceTree = "<group>"; };
@@ -172,7 +172,7 @@
 				B06DB2AF1E7FB28000DCF016 /* AppDelegate.swift */,
 				B06DB2B61E7FB28000DCF016 /* Assets.xcassets */,
 				B06DB2BB1E7FB28000DCF016 /* Info.plist */,
-				B07D71231E82257E009B3AFF /* GoogleService-Info.plist */,
+				B00708D81E94CC37005CFD0F /* GoogleService-Info.plist */,
 			);
 			path = SportBuddy;
 			sourceTree = "<group>";
@@ -413,7 +413,6 @@
 				B0754D611E839284006A5754 /* ChooseLevel.storyboard in Resources */,
 				B0CE8AF61E8B67EF003F0F12 /* BasketballCourtDetail.storyboard in Resources */,
 				B0CE8AE81E8B6330003F0F12 /* WeatherTableViewCell.xib in Resources */,
-				B07D71241E82257E009B3AFF /* GoogleService-Info.plist in Resources */,
 				B0CE8AED1E8B63BD003F0F12 /* MapTableViewCell.xib in Resources */,
 				B084BD321E7FD29F00DC48B2 /* SignUp.storyboard in Resources */,
 				B037B2921E826905007FD483 /* SportItems.storyboard in Resources */,
@@ -421,6 +420,7 @@
 				B0CE8AF21E8B640C003F0F12 /* CommentTableViewCell.xib in Resources */,
 				B099C6A71E89634000C0B142 /* NewBasketballGame.storyboard in Resources */,
 				B0971BC61E850EB10037E26D /* CourtTableViewCell.xib in Resources */,
+				B00708D91E94CC37005CFD0F /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -25,6 +25,7 @@ class BaseTableViewController: UITableViewController {
     }
 }
 
+// MARK: - Navigation Bar Back Button
 extension BaseTableViewController {
 
     func createBackButton(action: Selector) -> UIBarButtonItem {
@@ -37,5 +38,18 @@ extension BaseTableViewController {
         button.tintColor = UIColor.black
 
         return button
+    }
+}
+
+// MARK: - Hide Keyboard When Tapped Around
+extension BaseTableViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(BaseTableViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+
+    func dismissKeyboard() {
+        view.endEditing(true)
     }
 }

@@ -24,7 +24,6 @@ class WeatherTableViewCell: UITableViewCell, Identifiable {
         super.awakeFromNib()
         // Initialization code
 
-        // todo: Get weather API
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

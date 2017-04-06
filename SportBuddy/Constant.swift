@@ -40,6 +40,17 @@ struct Constant {
         static let newBasketballGame = "NewBasketballGameViewController"
     }
 
+    struct Gender {
+
+        static let male = "Male"
+        static let female = "Female"
+    }
+
+    struct Firebase {
+
+        static let dbUrl = "https://sportbuddy-710dd.firebaseio.com/"
+    }
+
     struct Cell {
 
         static let court = "CourtTableViewCell"
