@@ -50,10 +50,13 @@ class SportItemsViewController: BaseViewController {
 
     func setView() {
 
-        // todo: 滑動選單
+        setBackground(imageName: Constant.BackgroundName.basketball)
 
         userImage.layer.cornerRadius = userImage.bounds.size.width / 2.0
         userImage.layer.borderWidth = 1.0
+
+        // todo: 滑動選單
+
     }
 
     // todo: toEditProfile

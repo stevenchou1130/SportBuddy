@@ -35,19 +35,13 @@
                                     <action selector="toEditProfile:" destination="uSd-Qx-17U" eventType="touchUpInside" id="2Zj-ed-glw"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SNM-XS-8in">
-                                <rect key="frame" x="279" y="293" width="80" height="80"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <state key="normal" title="Volleyball"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1rI-NI-8PT">
-                                <rect key="frame" x="16" y="293" width="80" height="80"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <state key="normal" title="Running"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1rI-NI-8PT">
+                                <rect key="frame" x="-67.5" y="233.5" width="150" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="3gd-MU-KNP"/>
+                                    <constraint firstAttribute="height" constant="200" id="9I7-lj-Nqb"/>
+                                </constraints>
+                                <state key="normal" title="Jogging" image="Item_Jog"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gzf-YV-mfV">
                                 <rect key="frame" x="152" y="28" width="70" height="34"/>
@@ -56,18 +50,19 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7po-n1-wfi">
-                                <rect key="frame" x="147" y="293" width="80" height="80"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <state key="normal" title="Basketball"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7po-n1-wfi">
+                                <rect key="frame" x="112.5" y="233.5" width="150" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="PnB-0J-aOh"/>
+                                    <constraint firstAttribute="width" constant="150" id="SKV-hB-yO5"/>
+                                </constraints>
+                                <state key="normal" title="Basketball" image="Item_Basketball"/>
                                 <connections>
                                     <action selector="toGameList:" destination="uSd-Qx-17U" eventType="touchUpInside" id="h6Z-Wq-aYP"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tZx-RS-rCK">
-                                <rect key="frame" x="147" y="592" width="80" height="40"/>
+                                <rect key="frame" x="147.5" y="592" width="80" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="FfV-f3-SDS"/>
                                     <constraint firstAttribute="height" constant="40" id="ZoJ-iw-kJD"/>
@@ -78,11 +73,25 @@
                                     <action selector="logout:" destination="uSd-Qx-17U" eventType="touchUpInside" id="hvB-yA-Nlj"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SNM-XS-8in">
+                                <rect key="frame" x="292.5" y="233.5" width="150" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="A7r-xI-6qw"/>
+                                    <constraint firstAttribute="height" constant="200" id="WBf-5Y-p2T"/>
+                                </constraints>
+                                <state key="normal" title="Baseball" image="Item_Baseball"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="7po-n1-wfi" firstAttribute="centerY" secondItem="fDH-Mx-lLD" secondAttribute="centerY" id="Aac-2O-Zzu"/>
+                            <constraint firstItem="1rI-NI-8PT" firstAttribute="centerY" secondItem="7po-n1-wfi" secondAttribute="centerY" id="Niz-tQ-y2j"/>
+                            <constraint firstItem="7po-n1-wfi" firstAttribute="centerX" secondItem="fDH-Mx-lLD" secondAttribute="centerX" id="Qdb-03-pAj"/>
+                            <constraint firstItem="7po-n1-wfi" firstAttribute="leading" secondItem="1rI-NI-8PT" secondAttribute="trailing" constant="30" id="Sgc-or-mS0"/>
                             <constraint firstItem="cJj-dc-5Jw" firstAttribute="top" secondItem="tZx-RS-rCK" secondAttribute="bottom" constant="35" id="Yp7-yz-2T3"/>
                             <constraint firstItem="tZx-RS-rCK" firstAttribute="centerX" secondItem="fDH-Mx-lLD" secondAttribute="centerX" id="j4J-Qb-UG1"/>
+                            <constraint firstItem="SNM-XS-8in" firstAttribute="leading" secondItem="7po-n1-wfi" secondAttribute="trailing" constant="30" id="kUz-se-fnA"/>
+                            <constraint firstItem="SNM-XS-8in" firstAttribute="centerY" secondItem="7po-n1-wfi" secondAttribute="centerY" id="muN-Bq-1Yk"/>
                         </constraints>
                     </view>
                     <connections>
@@ -94,4 +103,9 @@
             <point key="canvasLocation" x="-266.39999999999998" y="130.88455772113943"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Item_Baseball" width="300" height="400"/>
+        <image name="Item_Basketball" width="300" height="400"/>
+        <image name="Item_Jog" width="300" height="400"/>
+    </resources>
 </document>

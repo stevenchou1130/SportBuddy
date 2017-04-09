@@ -21,6 +21,13 @@ class BaseViewController: UIViewController {
             appDelegate.window?.rootViewController = sportItemsViewController
         }
     }
+    
+    func setBackground(imageName: String) {
+        
+        let backgroundImage = UIImageView(frame: self.view.bounds)
+        backgroundImage.image = UIImage(named: imageName)
+        self.view.insertSubview(backgroundImage, at: 0)
+    }
 }
 
 // MARK: - Navigation Bar Back Button

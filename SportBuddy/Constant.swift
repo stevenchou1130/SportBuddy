@@ -40,6 +40,11 @@ struct Constant {
         static let newBasketballGame = "NewBasketballGameViewController"
     }
 
+    struct BackgroundName {
+        
+        static let basketball = "BG_Basketball"
+    }
+    
     struct Gender {
 
         static let male = "Male"

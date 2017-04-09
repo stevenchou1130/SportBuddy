@@ -13,6 +13,8 @@ class ChooseLevelViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setView()
+
         // todo: 選等級之後，塞值到Firebase（包含其他運動項目的Level，先做三個）
     }
 
@@ -32,7 +34,10 @@ class ChooseLevelViewController: BaseViewController {
     @IBAction func selectLevelE(_ sender: Any) {
     }
 
-    @IBAction func selectLevelF(_ sender: Any) {
+    func setView() {
+
+        setBackground(imageName: Constant.BackgroundName.basketball)
+
     }
 
     func saveLevel() {}
