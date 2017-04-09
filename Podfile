@@ -7,7 +7,6 @@ target 'SportBuddy' do
 
   # Pods for SportBuddy
 	
-	pod 'SwiftLint'
 	pod 'Alamofire'
 	pod 'Firebase/Core'
 	pod 'Firebase/Auth'
