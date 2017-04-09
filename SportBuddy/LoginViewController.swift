@@ -43,6 +43,9 @@ class LoginViewController: BaseViewController {
     }
 
     func setView() {
+
+        setBackground(imageName: Constant.BackgroundName.basketball)
+
         appNameLabel.text = Constant.AppName.appName
     }
 

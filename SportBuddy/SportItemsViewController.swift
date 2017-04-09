@@ -25,6 +25,22 @@ class SportItemsViewController: BaseViewController {
         setView()
     }
 
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+
+        userImage.layer.cornerRadius = userImage.bounds.size.height / 2.0
+        userImage.layer.borderWidth = 1.0
+        userImage.layer.masksToBounds = true
+    }
+
+    func setView() {
+
+        setBackground(imageName: Constant.BackgroundName.basketball)
+
+        // todo: 滑動選單
+
+    }
+
     func checkIfUserIsLoggedIn() {
         if FIRAuth.auth()?.currentUser?.uid == nil {
             handleLogout()
@@ -46,17 +62,6 @@ class SportItemsViewController: BaseViewController {
 
             appDelegate.window?.rootViewController = loginViewController
         }
-    }
-
-    func setView() {
-
-        setBackground(imageName: Constant.BackgroundName.basketball)
-
-        userImage.layer.cornerRadius = userImage.bounds.size.width / 2.0
-        userImage.layer.borderWidth = 1.0
-
-        // todo: 滑動選單
-
     }
 
     // todo: toEditProfile

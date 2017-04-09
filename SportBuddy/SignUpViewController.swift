@@ -35,7 +35,17 @@ class SignUpViewController: BaseViewController {
         setView()
     }
 
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+
+        userImage.layer.cornerRadius = userImage.bounds.size.height / 2.0
+        userImage.layer.borderWidth = 1.0
+        userImage.layer.masksToBounds = true
+    }
+
     func setView() {
+
+        setBackground(imageName: Constant.BackgroundName.basketball)
 
         accountTextField.placeholder = "Emall address"
         accountTextField.clearButtonMode = .whileEditing
@@ -49,9 +59,6 @@ class SignUpViewController: BaseViewController {
         nameTextField.placeholder = "It will be displaied in app"
         nameTextField.clearButtonMode = .whileEditing
         nameTextField.delegate = self
-
-        userImage.layer.cornerRadius = userImage.bounds.size.width / 2.0
-        userImage.layer.borderWidth = 1.0
 
         // Male Radio Button
         maleRadioButton = LTHRadioButton(selectedColor: .blue)
