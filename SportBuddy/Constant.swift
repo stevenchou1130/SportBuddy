@@ -56,6 +56,23 @@ struct Constant {
         static let dbUrl = "https://sportbuddy-710dd.firebaseio.com/"
     }
 
+    struct FirebaseLevel {
+
+        static let nodeName = "levels"
+        static let host = "host"
+        static let basketball = "basketball"
+        static let baseball = "baseball"
+        static let jogging = "jogging"
+    }
+
+    struct FirebaseUser {
+
+        static let nodeName = "users"
+        static let account = "account"
+        static let name = "name"
+        static let gender = "gender"
+    }
+
     struct Cell {
 
         static let court = "CourtTableViewCell"

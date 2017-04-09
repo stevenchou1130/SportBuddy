@@ -134,10 +134,14 @@ class SignUpViewController: BaseViewController {
                 guard let uid = user?.uid else { return }
 
                 let dbUrl = Constant.Firebase.dbUrl
+
                 let ref = FIRDatabase.database().reference(fromURL: dbUrl)
 
-                let usersReference = ref.child("users").child(uid)
-                let value = ["account": account, "name": name, "gender": gender]
+                let usersReference = ref.child(Constant.FirebaseUser.nodeName).child(uid)
+
+                let value = [Constant.FirebaseUser.account: account,
+                             Constant.FirebaseUser.name: name,
+                             Constant.FirebaseUser.gender: gender]
 
                 usersReference.updateChildValues(value, withCompletionBlock: { (err, _) in
 
@@ -173,25 +177,6 @@ class SignUpViewController: BaseViewController {
 
             appDelegate.window?.rootViewController = loginViewController
         }
-    }
-
-    // MARK: - Show error alert
-    func showErrorAlert(error: Error?, myErrorMsg: String?) {
-
-        var errorMsg: String = ""
-
-        if error != nil {
-            errorMsg = (error?.localizedDescription)!
-        } else if myErrorMsg != nil {
-            errorMsg = myErrorMsg!
-        }
-
-        let alertController = UIAlertController(title: "Error Message", message: errorMsg, preferredStyle: .alert)
-
-        let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-        alertController.addAction(defaultAction)
-
-        self.present(alertController, animated: true, completion: nil)
     }
 
 }

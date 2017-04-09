@@ -68,36 +68,19 @@ class SportItemsViewController: BaseViewController {
     @IBAction func toEditProfile(_ sender: Any) {
     }
 
-    @IBAction func toGameList(_ sender: Any) {
+    // todo: add another item button action
+    @IBAction func toBasketballGameList(_ sender: Any) {
 
-        // todo: add the judgment of sport item
+        guard let uid = FIRAuth.auth()?.currentUser?.uid else { return }
 
         let rootRef = FIRDatabase.database().reference()
-        rootRef.child("levels").queryOrdered(byChild: "host").queryEqual(toValue: FIRAuth.auth()?.currentUser?.uid).observeSingleEvent(of: .value, with: { (snapshot) in
-
-            print("================")
-            print("snapshot.exists(): \(snapshot.exists())")
-            print("================")
+        rootRef.child(Constant.FirebaseLevel.nodeName).queryOrdered(byChild: uid).observeSingleEvent(of: .value, with: { (snapshot) in
 
             // todo: 加上Loading圖示
 
             if snapshot.exists() {
-                // todo: 跳到主頁面
-            } else {
-                // todo: 判斷所選的運動，有無等級存在
 
-                // todo: 跳到等級選單
-            }
-
-            if self.isfirstTime {
-                if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
-
-                    let chooseLevelStorybard = UIStoryboard(name: Constant.Storyboard.chooseLevel, bundle: nil)
-                    let chooseLevelViewController = chooseLevelStorybard.instantiateViewController(withIdentifier: Constant.Controller.chooseLevel) as? ChooseLevelViewController
-
-                    appDelegate.window?.rootViewController = chooseLevelViewController
-                }
-            } else {
+                print("=== level is exist ===")
                 if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
 
                     let basketballStorybard = UIStoryboard(name: Constant.Storyboard.basketball, bundle: nil)
@@ -105,6 +88,34 @@ class SportItemsViewController: BaseViewController {
 
                     appDelegate.window?.rootViewController = basketballTabbarViewController
                 }
+
+            } else {
+
+                let dbUrl = Constant.Firebase.dbUrl
+                let ref = FIRDatabase.database().reference(fromURL: dbUrl)
+
+                let levelsReference = ref.child(Constant.FirebaseLevel.nodeName).child(uid)
+
+                let value = [Constant.FirebaseLevel.basketball: "",
+                             Constant.FirebaseLevel.baseball: "",
+                             Constant.FirebaseLevel.jogging: ""]
+
+                levelsReference.updateChildValues(value, withCompletionBlock: { (err, _) in
+
+                    if err != nil {
+                        self.showErrorAlert(error: err, myErrorMsg: nil)
+                        return
+                    }
+
+                    print("=== Create user level list ===")
+                    if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+
+                        let chooseLevelStorybard = UIStoryboard(name: Constant.Storyboard.chooseLevel, bundle: nil)
+                        let chooseLevelViewController = chooseLevelStorybard.instantiateViewController(withIdentifier: Constant.Controller.chooseLevel) as? ChooseLevelViewController
+
+                        appDelegate.window?.rootViewController = chooseLevelViewController
+                    }
+                })
             }
         })
     }

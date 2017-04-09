@@ -58,3 +58,25 @@ extension BaseViewController {
         view.endEditing(true)
     }
 }
+
+// MARK: - Show error alert
+extension BaseViewController {
+
+    func showErrorAlert(error: Error?, myErrorMsg: String?) {
+
+        var errorMsg: String = ""
+
+        if error != nil {
+            errorMsg = (error?.localizedDescription)!
+        } else if myErrorMsg != nil {
+            errorMsg = myErrorMsg!
+        }
+
+        let alertController = UIAlertController(title: "Error Message", message: errorMsg, preferredStyle: .alert)
+
+        let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        alertController.addAction(defaultAction)
+
+        self.present(alertController, animated: true, completion: nil)
+    }
+}

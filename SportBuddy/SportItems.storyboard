@@ -55,7 +55,7 @@
                                 </constraints>
                                 <state key="normal" title="Basketball" image="Item_Basketball"/>
                                 <connections>
-                                    <action selector="toGameList:" destination="uSd-Qx-17U" eventType="touchUpInside" id="h6Z-Wq-aYP"/>
+                                    <action selector="toBasketballGameList:" destination="uSd-Qx-17U" eventType="touchUpInside" id="oRV-Zx-1Ly"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tZx-RS-rCK">

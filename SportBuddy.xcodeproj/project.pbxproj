@@ -380,6 +380,7 @@
 				TargetAttributes = {
 					B06DB2AB1E7FB28000DCF016 = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = NPUGMWPVA6;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -641,6 +642,7 @@
 			baseConfigurationReference = 35A3321B5699FCB2C74FFCC5 /* Pods-SportBuddy.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = NPUGMWPVA6;
 				INFOPLIST_FILE = SportBuddy/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -655,6 +657,7 @@
 			baseConfigurationReference = 6A1C3E8AC94014525C4957ED /* Pods-SportBuddy.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = NPUGMWPVA6;
 				INFOPLIST_FILE = SportBuddy/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
