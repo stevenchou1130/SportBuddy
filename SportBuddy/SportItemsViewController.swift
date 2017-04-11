@@ -76,7 +76,8 @@ class SportItemsViewController: BaseViewController {
         let rootRef = FIRDatabase.database().reference()
 
         rootRef.child(Constant.FirebaseLevel.nodeName).child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
-            // todo: 加上Loading圖示
+
+            // todo: Loding indicator
 
             if snapshot.exists() {
 
@@ -115,6 +116,7 @@ class SportItemsViewController: BaseViewController {
                     }
                 })
             }
+
         })
     }
 

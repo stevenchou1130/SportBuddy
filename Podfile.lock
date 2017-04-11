@@ -41,6 +41,7 @@ PODS:
   - GoogleToolboxForMac/NSString+URLArguments (2.1.1)
   - GTMSessionFetcher/Core (1.1.9)
   - IQKeyboardManagerSwift (4.0.9)
+  - NVActivityIndicatorView (3.6.0)
 
 DEPENDENCIES:
   - Alamofire
@@ -50,6 +51,7 @@ DEPENDENCIES:
   - Firebase/Database
   - Firebase/Storage
   - IQKeyboardManagerSwift
+  - NVActivityIndicatorView
 
 EXTERNAL SOURCES:
   BTNavigationDropdownMenu:
@@ -74,7 +76,8 @@ SPEC CHECKSUMS:
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   GTMSessionFetcher: 5c046c76a1f859bc9c187e918f18e4fc7bb57b5e
   IQKeyboardManagerSwift: 2eefe6c429b86aa08bfbc1b5c891164d754adf91
+  NVActivityIndicatorView: c7c1c4300b418bd9ed06459e78d4df859ddbe31f
 
-PODFILE CHECKSUM: 052058c47a24c92dadd7ae9e91d752d9fc52dc22
+PODFILE CHECKSUM: 2454b13ca484a5fed0600f859eb620548a9c2503
 
 COCOAPODS: 1.2.0

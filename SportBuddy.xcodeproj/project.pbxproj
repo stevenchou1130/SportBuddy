@@ -44,6 +44,8 @@
 		B0AD470C1E8E23F000876498 /* Towns.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AD470B1E8E23F000876498 /* Towns.swift */; };
 		B0AD470E1E8E241B00876498 /* WeatherProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AD470D1E8E241A00876498 /* WeatherProvider.swift */; };
 		B0AD47101E8E242E00876498 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AD470F1E8E242E00876498 /* Weather.swift */; };
+		B0C59FD21E9C925B00214A1F /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C59FD11E9C925B00214A1F /* ActivityIndicator.swift */; };
+		B0C59FD41E9CB91400214A1F /* Base.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C59FD31E9CB91400214A1F /* Base.swift */; };
 		B0CE8AE71E8B6330003F0F12 /* WeatherTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CE8AE51E8B6330003F0F12 /* WeatherTableViewCell.swift */; };
 		B0CE8AE81E8B6330003F0F12 /* WeatherTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0CE8AE61E8B6330003F0F12 /* WeatherTableViewCell.xib */; };
 		B0CE8AEC1E8B63BD003F0F12 /* MapTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CE8AEA1E8B63BD003F0F12 /* MapTableViewCell.swift */; };
@@ -97,6 +99,8 @@
 		B0AD470B1E8E23F000876498 /* Towns.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Towns.swift; sourceTree = "<group>"; };
 		B0AD470D1E8E241A00876498 /* WeatherProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherProvider.swift; sourceTree = "<group>"; };
 		B0AD470F1E8E242E00876498 /* Weather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
+		B0C59FD11E9C925B00214A1F /* ActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
+		B0C59FD31E9CB91400214A1F /* Base.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Base.swift; sourceTree = "<group>"; };
 		B0CE8AE51E8B6330003F0F12 /* WeatherTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherTableViewCell.swift; sourceTree = "<group>"; };
 		B0CE8AE61E8B6330003F0F12 /* WeatherTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WeatherTableViewCell.xib; sourceTree = "<group>"; };
 		B0CE8AEA1E8B63BD003F0F12 /* MapTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapTableViewCell.swift; sourceTree = "<group>"; };
@@ -183,6 +187,7 @@
 				B0CE8AE91E8B63AB003F0F12 /* Map */,
 				B0CE8AE21E8B6248003F0F12 /* Weather */,
 				B0754D571E837284006A5754 /* LTHRadioButton.swift */,
+				B0C59FD11E9C925B00214A1F /* ActivityIndicator.swift */,
 			);
 			name = Component;
 			sourceTree = "<group>";
@@ -274,6 +279,7 @@
 		B0A8F4321E8115A3006CBA96 /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				B0C59FD31E9CB91400214A1F /* Base.swift */,
 				B0A8F4331E8115D9006CBA96 /* BaseViewController.swift */,
 				B0754D671E8399FB006A5754 /* BaseTableViewController.swift */,
 			);
@@ -515,6 +521,7 @@
 				B0754D681E8399FB006A5754 /* BaseTableViewController.swift in Sources */,
 				B0754D751E83AF55006A5754 /* BasketballProfileViewController.swift in Sources */,
 				B0AD470E1E8E241B00876498 /* WeatherProvider.swift in Sources */,
+				B0C59FD41E9CB91400214A1F /* Base.swift in Sources */,
 				B07CF4A31E82D7C600E91F7E /* SportItemsViewController.swift in Sources */,
 				B0754D7A1E83C5AF006A5754 /* BasketballCourtsNavigationController.swift in Sources */,
 				B076C5601E89F5CF00F06390 /* User.swift in Sources */,
@@ -522,6 +529,7 @@
 				B0CE8AEC1E8B63BD003F0F12 /* MapTableViewCell.swift in Sources */,
 				B0AD470C1E8E23F000876498 /* Towns.swift in Sources */,
 				B0754D6F1E83A2C3006A5754 /* BasketballTabbarViewController.swift in Sources */,
+				B0C59FD21E9C925B00214A1F /* ActivityIndicator.swift in Sources */,
 				B0CE8AF91E8B69F2003F0F12 /* Identifiable.swift in Sources */,
 				B0754D7C1E83C5C6006A5754 /* BasketballProfileNavigationController.swift in Sources */,
 				B0AB6FFD1E88C5900060D80E /* BasketballCourtModel.swift in Sources */,

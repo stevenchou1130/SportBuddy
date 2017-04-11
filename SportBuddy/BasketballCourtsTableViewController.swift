@@ -8,6 +8,7 @@
 
 import UIKit
 import BTNavigationDropdownMenu
+import NVActivityIndicatorView
 
 class BasketballCourtsTableViewController: BaseTableViewController {
 
@@ -25,12 +26,15 @@ class BasketballCourtsTableViewController: BaseTableViewController {
         courtsTableView.delegate = self
         courtsTableView.dataSource = self
 
+        setNVActivityIndicatorView()
         setCourts()
     }
 
     func setCourts() {
 
-        // todo: 加上Loading圖示
+        // Loding indicator
+        let activityData = ActivityData()
+        NVActivityIndicatorPresenter.sharedInstance.startAnimating(activityData)
 
         BasketballCourtsProvider.shared.getApiData(city: Constant.CurrentCity.cityName, gymType: Constant.GymType.basketball) { (basketballCourts, error) in
 
@@ -44,7 +48,10 @@ class BasketballCourtsTableViewController: BaseTableViewController {
                 // todo: error handling
 
             }
+
+            NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
         }
+
     }
 }
 
