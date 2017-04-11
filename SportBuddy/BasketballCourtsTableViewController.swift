@@ -30,7 +30,7 @@ class BasketballCourtsTableViewController: BaseTableViewController {
 
     func setCourts() {
 
-        // todo: 新增loding圖
+        // todo: 加上Loading圖示
 
         BasketballCourtsProvider.shared.getApiData(city: Constant.CurrentCity.cityName, gymType: Constant.GymType.basketball) { (basketballCourts, error) in
 

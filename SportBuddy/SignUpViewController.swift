@@ -35,7 +35,17 @@ class SignUpViewController: BaseViewController {
         setView()
     }
 
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+
+        userImage.layer.cornerRadius = userImage.bounds.size.height / 2.0
+        userImage.layer.borderWidth = 1.0
+        userImage.layer.masksToBounds = true
+    }
+
     func setView() {
+
+        setBackground(imageName: Constant.BackgroundName.basketball)
 
         accountTextField.placeholder = "Emall address"
         accountTextField.clearButtonMode = .whileEditing
@@ -49,9 +59,6 @@ class SignUpViewController: BaseViewController {
         nameTextField.placeholder = "It will be displaied in app"
         nameTextField.clearButtonMode = .whileEditing
         nameTextField.delegate = self
-
-        userImage.layer.cornerRadius = userImage.bounds.size.width / 2.0
-        userImage.layer.borderWidth = 1.0
 
         // Male Radio Button
         maleRadioButton = LTHRadioButton(selectedColor: .blue)
@@ -124,15 +131,17 @@ class SignUpViewController: BaseViewController {
                     return
                 }
 
-                print("signUp")
-
                 guard let uid = user?.uid else { return }
 
                 let dbUrl = Constant.Firebase.dbUrl
+
                 let ref = FIRDatabase.database().reference(fromURL: dbUrl)
 
-                let usersReference = ref.child("users").child(uid)
-                let value = ["account": account, "name": name, "gender": gender]
+                let usersReference = ref.child(Constant.FirebaseUser.nodeName).child(uid)
+
+                let value = [Constant.FirebaseUser.account: account,
+                             Constant.FirebaseUser.name: name,
+                             Constant.FirebaseUser.gender: gender]
 
                 usersReference.updateChildValues(value, withCompletionBlock: { (err, _) in
 
@@ -157,7 +166,9 @@ class SignUpViewController: BaseViewController {
 
     }
 
-    // MARK: - Back to Login
+    /*
+     *  For testing
+     */
     @IBAction func toLogin(_ sender: Any) {
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
 
@@ -166,25 +177,6 @@ class SignUpViewController: BaseViewController {
 
             appDelegate.window?.rootViewController = loginViewController
         }
-    }
-
-    // MARK: - Show error alert
-    func showErrorAlert(error: Error?, myErrorMsg: String?) {
-
-        var errorMsg: String = ""
-
-        if error != nil {
-            errorMsg = (error?.localizedDescription)!
-        } else if myErrorMsg != nil {
-            errorMsg = myErrorMsg!
-        }
-
-        let alertController = UIAlertController(title: "Error Message", message: errorMsg, preferredStyle: .alert)
-
-        let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-        alertController.addAction(defaultAction)
-
-        self.present(alertController, animated: true, completion: nil)
     }
 
 }

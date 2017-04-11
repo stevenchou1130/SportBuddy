@@ -12,18 +12,20 @@ class WeatherTableViewCell: UITableViewCell, Identifiable {
 
     // MARK: Property
 
+    @IBOutlet weak var weatherImage: UIImageView!
     @IBOutlet weak var weatherLabel: UILabel!
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var updateTimeLabel: UILabel!
 
     class var identifier: String { return String(describing: self) }
 
-    static let height: CGFloat = 100.0
+    static let height: CGFloat = 135.0
 
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
 
+        weatherImage.image = UIImage(named: "clear")
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

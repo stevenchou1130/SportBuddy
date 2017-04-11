@@ -43,29 +43,33 @@ class LoginViewController: BaseViewController {
     }
 
     func setView() {
+
+        setBackground(imageName: Constant.BackgroundName.basketball)
+
         appNameLabel.text = Constant.AppName.appName
     }
 
     @IBAction func login(_ sender: Any) {
-        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
 
-            let account = accountTextfield.text!
-            let password = passwordTextfield.text!
+        let account = accountTextfield.text!
+        let password = passwordTextfield.text!
 
-            FIRAuth.auth()?.signIn(withEmail: account, password: password, completion: { (_, error) in
+        FIRAuth.auth()?.signIn(withEmail: account, password: password, completion: { (_, error) in
 
-                if error != nil {
-                    self.showErrorAlert(error: error, myErrorMsg: nil)
-                    return
-                }
+            if error != nil {
+                self.showErrorAlert(error: error, myErrorMsg: nil)
+                return
+            }
 
-                // successfully login
+            // successfully login
+            if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+
                 let sportItemsStorybard = UIStoryboard(name: Constant.Storyboard.sportItems, bundle: nil)
                 let sportItemsViewController = sportItemsStorybard.instantiateViewController(withIdentifier: Constant.Controller.sportItems) as? SportItemsViewController
 
                 appDelegate.window?.rootViewController = sportItemsViewController
-            })
-        }
+            }
+        })
     }
 
     @IBAction func signUp(_ sender: Any) {
@@ -78,22 +82,26 @@ class LoginViewController: BaseViewController {
         }
     }
 
-    // MARK: - Show error alert
-    func showErrorAlert(error: Error?, myErrorMsg: String?) {
+    /*
+     *  For testing
+     */
+    @IBAction func testLogin(_ sender: Any) {
+        FIRAuth.auth()?.signIn(withEmail: "aaa@gmail.com", password: "aaaaaa", completion: { (_, error) in
 
-        var errorMsg: String = ""
+            if error != nil {
+                self.showErrorAlert(error: error, myErrorMsg: nil)
+                return
+            }
 
-        if error != nil {
-            errorMsg = (error?.localizedDescription)!
-        } else if myErrorMsg != nil {
-            errorMsg = myErrorMsg!
-        }
+            // successfully login
+            if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
 
-        let alertController = UIAlertController(title: "Error Message", message: errorMsg, preferredStyle: .alert)
+                let sportItemsStorybard = UIStoryboard(name: Constant.Storyboard.sportItems, bundle: nil)
+                let sportItemsViewController = sportItemsStorybard.instantiateViewController(withIdentifier: Constant.Controller.sportItems) as? SportItemsViewController
 
-        let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-        alertController.addAction(defaultAction)
-
-        self.present(alertController, animated: true, completion: nil)
+                appDelegate.window?.rootViewController = sportItemsViewController
+            }
+        })
     }
+
 }
