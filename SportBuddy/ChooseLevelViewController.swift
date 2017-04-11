@@ -7,31 +7,41 @@
 //
 
 import UIKit
+import Firebase
 
 class ChooseLevelViewController: BaseViewController {
+
+    private var level = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setView()
-
-        // todo: 選等級之後，塞值到Firebase（包含其他運動項目的Level，先做三個）
     }
 
     @IBAction func selectLevelA(_ sender: Any) {
+        saveLevel(level: "A")
         toMainPage()
     }
 
     @IBAction func selectLevelB(_ sender: Any) {
+        saveLevel(level: "B")
+        toMainPage()
     }
 
     @IBAction func selectLevelC(_ sender: Any) {
+        saveLevel(level: "C")
+        toMainPage()
     }
 
     @IBAction func selectLevelD(_ sender: Any) {
+        saveLevel(level: "D")
+        toMainPage()
     }
 
     @IBAction func selectLevelE(_ sender: Any) {
+        saveLevel(level: "E")
+        toMainPage()
     }
 
     func setView() {
@@ -40,7 +50,22 @@ class ChooseLevelViewController: BaseViewController {
 
     }
 
-    func saveLevel() {}
+    func saveLevel(level: String) {
+
+        guard
+            let uid = FIRAuth.auth()?.currentUser?.uid
+            else { return }
+
+        let ref = FIRDatabase.database().reference()
+                    .child(Constant.FirebaseLevel.nodeName)
+                    .child(uid)
+
+        let values = [Constant.FirebaseLevel.basketball: level]
+
+        ref.updateChildValues(values) { (error, _) in
+            print("Error: \(String(describing: error))")
+        }
+    }
 
     func toMainPage() {
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {

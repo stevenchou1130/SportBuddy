@@ -52,7 +52,9 @@ class SportItemsViewController: BaseViewController {
         do {
             try FIRAuth.auth()?.signOut()
         } catch let logoutError {
+            print("=========")
             print(logoutError)
+            print("=========")
         }
 
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
@@ -72,10 +74,9 @@ class SportItemsViewController: BaseViewController {
     @IBAction func toBasketballGameList(_ sender: Any) {
 
         guard let uid = FIRAuth.auth()?.currentUser?.uid else { return }
-
         let rootRef = FIRDatabase.database().reference()
-        rootRef.child(Constant.FirebaseLevel.nodeName).queryOrdered(byChild: uid).observeSingleEvent(of: .value, with: { (snapshot) in
 
+        rootRef.child(Constant.FirebaseLevel.nodeName).child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
             // todo: 加上Loading圖示
 
             if snapshot.exists() {
