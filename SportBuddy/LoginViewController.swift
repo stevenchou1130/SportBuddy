@@ -28,7 +28,7 @@ class LoginViewController: BaseViewController {
         FIRAuth.auth()?.addStateDidChangeListener { _, user in
             if user != nil {
                 // User is signed in.
-                print("==== User is signed in ====")
+                print("=== User is signed in ===")
                 if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
                     let sportItemsStorybard = UIStoryboard(name: Constant.Storyboard.sportItems, bundle: nil)
                     let sportItemsViewController = sportItemsStorybard.instantiateViewController(withIdentifier: Constant.Controller.sportItems) as? SportItemsViewController
@@ -37,7 +37,7 @@ class LoginViewController: BaseViewController {
                 }
             } else {
                 // No user is signed in.
-                print("==== No user sign in ====")
+                print("=== No user sign in ===")
             }
         }
     }

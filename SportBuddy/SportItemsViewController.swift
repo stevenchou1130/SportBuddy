@@ -19,7 +19,6 @@ class SportItemsViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("== SportItemsViewController ==")
 
         checkIfUserIsLoggedIn()
         setView()
@@ -81,7 +80,6 @@ class SportItemsViewController: BaseViewController {
 
             if snapshot.exists() {
 
-                print("=== level is exist ===")
                 if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
 
                     let basketballStorybard = UIStoryboard(name: Constant.Storyboard.basketball, bundle: nil)
@@ -108,7 +106,6 @@ class SportItemsViewController: BaseViewController {
                         return
                     }
 
-                    print("=== Create user level list ===")
                     if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
 
                         let chooseLevelStorybard = UIStoryboard(name: Constant.Storyboard.chooseLevel, bundle: nil)

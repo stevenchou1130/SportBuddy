@@ -106,11 +106,9 @@ class SignUpViewController: BaseViewController {
         deselectGenderButton.deselect(animated: false)
 
         if isMale {
-            print("select male")
             userGender = Constant.Gender.male
 
         } else {
-            print("select female")
             userGender = Constant.Gender.female
         }
     }
@@ -149,8 +147,6 @@ class SignUpViewController: BaseViewController {
                         self.showErrorAlert(error: err, myErrorMsg: nil)
                         return
                     }
-
-                    print("Saved user successfully into Firebase db")
 
                     if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
                         let sportItemsStorybard = UIStoryboard(name: Constant.Storyboard.sportItems, bundle: nil)
