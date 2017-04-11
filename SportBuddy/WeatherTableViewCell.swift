@@ -25,7 +25,6 @@ class WeatherTableViewCell: UITableViewCell, Identifiable {
         super.awakeFromNib()
         // Initialization code
 
-        weatherImage.image = UIImage(named: "clear")
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

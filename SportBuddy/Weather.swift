@@ -11,10 +11,10 @@ import Foundation
 struct Weather {
 
     var desc: String            // 天氣敘述
-    var temperature: String     // 溫度
+    var temperature: Int        // 溫度
     var time: String            // 更新時間
 
-    init(desc: String, temperature: String, time: String) {
+    init(desc: String, temperature: Int, time: String) {
         self.desc = desc
         self.temperature = temperature
         self.time = time

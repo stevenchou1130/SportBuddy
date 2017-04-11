@@ -38,7 +38,7 @@ class WeatherProvider {
 
                         guard
                             let desc = result["desc"] as? String,
-                            let temperature = result["temperature"] as? String,
+                            let temperature = result["temperature"] as? Int,
                             let time = result["at"] as? String
                             else { return }
 
