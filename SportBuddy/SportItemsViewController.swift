@@ -8,8 +8,7 @@
 
 import UIKit
 import Firebase
-import FirebaseAuth
-import FirebaseDatabase
+import NVActivityIndicatorView
 
 class SportItemsViewController: BaseViewController {
 
@@ -76,8 +75,6 @@ class SportItemsViewController: BaseViewController {
         let rootRef = FIRDatabase.database().reference()
 
         rootRef.child(Constant.FirebaseLevel.nodeName).child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
-
-            // todo: Loding indicator
 
             if snapshot.exists() {
 

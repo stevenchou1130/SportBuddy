@@ -8,7 +8,6 @@
 
 import UIKit
 import Firebase
-import NVActivityIndicatorView
 
 class BaseViewController: UIViewController {
 
@@ -79,16 +78,5 @@ extension BaseViewController {
         alertController.addAction(defaultAction)
 
         self.present(alertController, animated: true, completion: nil)
-    }
-}
-
-// MARK: NVActivityIndicatorView
-extension BaseViewController {
-    
-    func setNVActivityIndicatorView() {
-        
-        NVActivityIndicatorView.DEFAULT_BLOCKER_SIZE = CGSize(width: 60, height: 60)
-        NVActivityIndicatorView.DEFAULT_BLOCKER_BACKGROUND_COLOR = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
-        
     }
 }

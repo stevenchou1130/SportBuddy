@@ -26,13 +26,12 @@ class BasketballCourtsTableViewController: BaseTableViewController {
         courtsTableView.delegate = self
         courtsTableView.dataSource = self
 
-        setNVActivityIndicatorView()
         setCourts()
     }
 
     func setCourts() {
 
-        // Loding indicator
+        // MARK: Loading indicator
         let activityData = ActivityData()
         NVActivityIndicatorPresenter.sharedInstance.startAnimating(activityData)
 
