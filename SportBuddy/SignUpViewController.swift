@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import DKImagePickerController
+import NVActivityIndicatorView
 
 class SignUpViewController: BaseViewController {
 
@@ -147,6 +148,12 @@ class SignUpViewController: BaseViewController {
         let gender = self.userGender
 
         if account != "" && password != "" && name != "" && userGender != "" {
+
+            // MARK: Start loading indicator
+            let activityData = ActivityData()
+            NVActivityIndicatorPresenter.sharedInstance.startAnimating(activityData)
+
+            // MARK: Save user info to firebase
             FIRAuth.auth()?.createUser(withEmail: account, password: password) { (user, error) in
 
                 if error != nil {
@@ -156,35 +163,64 @@ class SignUpViewController: BaseViewController {
 
                 guard let uid = user?.uid else { return }
 
-                let dbUrl = Constant.Firebase.dbUrl
+                let storageRef = FIRStorage.storage().reference()
+                    .child(Constant.FirebaseStorage.userPhoto)
+                    .child(Constant.FirebaseStorage.userPhoto + "_" + uid)
 
-                let ref = FIRDatabase.database().reference(fromURL: dbUrl)
+                guard
+                    let uploadData = UIImageJPEGRepresentation(self.userImage.image!, 0.5)
+                    else { return }
 
-                let usersReference = ref.child(Constant.FirebaseUser.nodeName).child(uid)
+                storageRef.put(uploadData, metadata: nil, completion: { (metadata, error) in
 
-                let value = [Constant.FirebaseUser.account: account,
-                             Constant.FirebaseUser.name: name,
-                             Constant.FirebaseUser.gender: gender]
-
-                usersReference.updateChildValues(value, withCompletionBlock: { (err, _) in
-
-                    if err != nil {
-                        self.showErrorAlert(error: err, myErrorMsg: nil)
+                    if error != nil {
+                        self.showErrorAlert(error: error, myErrorMsg: nil)
                         return
                     }
 
-                    if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
-                        let sportItemsStorybard = UIStoryboard(name: Constant.Storyboard.sportItems, bundle: nil)
-                        let sportItemsViewController = sportItemsStorybard.instantiateViewController(withIdentifier: Constant.Controller.sportItems) as? SportItemsViewController
+                    let userPhotoURL = metadata?.downloadURL()?.absoluteString
 
-                        appDelegate.window?.rootViewController = sportItemsViewController
-                    }
+                    self.setValueToFirebase(uid: uid,
+                                       account: account,
+                                       name: name,
+                                       gender: gender,
+                                       userPhotoURL: userPhotoURL)
                 })
             }
+
         } else {
             self.showErrorAlert(error: nil, myErrorMsg: "Please fill out all information about you.")
         }
+    }
 
+    func setValueToFirebase(uid: String, account: String, name: String, gender: String, userPhotoURL: String?) {
+
+        let dbUrl = Constant.Firebase.dbUrl
+        let ref = FIRDatabase.database().reference(fromURL: dbUrl)
+        let usersReference = ref.child(Constant.FirebaseUser.nodeName).child(uid)
+
+        let value = [Constant.FirebaseUser.account: account,
+                     Constant.FirebaseUser.name: name,
+                     Constant.FirebaseUser.gender: gender,
+                     Constant.FirebaseUser.photoURL: userPhotoURL ?? ""]
+
+        usersReference.updateChildValues(value, withCompletionBlock: { (err, _) in
+
+            if err != nil {
+                self.showErrorAlert(error: err, myErrorMsg: nil)
+                return
+            }
+
+            if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+                let sportItemsStorybard = UIStoryboard(name: Constant.Storyboard.sportItems, bundle: nil)
+                let sportItemsViewController = sportItemsStorybard.instantiateViewController(withIdentifier: Constant.Controller.sportItems) as? SportItemsViewController
+
+                appDelegate.window?.rootViewController = sportItemsViewController
+            }
+
+            // MARK: End loading indicator
+            NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
+        })
     }
 
     /*

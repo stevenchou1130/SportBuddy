@@ -58,19 +58,25 @@ struct Constant {
 
     struct FirebaseLevel {
 
-        static let nodeName = "levels"
-        static let host = "host"
-        static let basketball = "basketball"
-        static let baseball = "baseball"
-        static let jogging = "jogging"
+        static let nodeName = "Levels"
+        static let host = "Host"
+        static let basketball = "Basketball"
+        static let baseball = "Baseball"
+        static let jogging = "Jogging"
     }
 
     struct FirebaseUser {
 
-        static let nodeName = "users"
-        static let account = "account"
-        static let name = "name"
-        static let gender = "gender"
+        static let nodeName = "Users"
+        static let photoURL = "PhotoURL"
+        static let account = "Account"
+        static let name = "Name"
+        static let gender = "Gender"
+    }
+
+    struct FirebaseStorage {
+
+        static let userPhoto = "UserPhoto"
     }
 
     struct Cell {
@@ -104,5 +110,10 @@ struct Constant {
     struct GymType {
 
         static let basketball = "籃球場"
+    }
+
+    struct ImageName {
+
+        static let userDefaultPhoto = "Default_User_Photo"
     }
 }

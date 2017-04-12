@@ -22,7 +22,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nDv-tt-dH8">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Default_User_Photo" translatesAutoresizingMaskIntoConstraints="NO" id="nDv-tt-dH8">
                                 <rect key="frame" x="20" y="30" width="120" height="120"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -30,7 +30,7 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5rI-cF-PEj">
-                                <rect key="frame" x="295" y="66" width="50" height="50"/>
+                                <rect key="frame" x="295" y="65" width="50" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="5rI-cF-PEj" secondAttribute="height" multiplier="1:1" id="skX-8F-jm0"/>
                                 </constraints>
@@ -113,6 +113,7 @@
                     </view>
                     <connections>
                         <outlet property="userImage" destination="nDv-tt-dH8" id="v5R-bH-ycM"/>
+                        <outlet property="userName" destination="gzf-YV-mfV" id="dk6-Fk-0RY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KQG-hq-u5m" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -121,6 +122,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Default_User_Photo" width="240" height="240"/>
         <image name="Edit_Menu" width="50" height="46"/>
         <image name="Item_Baseball" width="300" height="400"/>
         <image name="Item_Basketball" width="300" height="400"/>

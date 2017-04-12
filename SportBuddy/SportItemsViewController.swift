@@ -13,14 +13,19 @@ import NVActivityIndicatorView
 class SportItemsViewController: BaseViewController {
 
     @IBOutlet weak var userImage: UIImageView!
-
-    var isfirstTime = true
+    @IBOutlet weak var userName: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         checkIfUserIsLoggedIn()
         setView()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        setUserInfo()
     }
 
     override func viewWillLayoutSubviews() {
@@ -36,7 +41,6 @@ class SportItemsViewController: BaseViewController {
         setBackground(imageName: Constant.BackgroundName.basketball)
 
         // todo: 滑動選單
-
     }
 
     func checkIfUserIsLoggedIn() {
@@ -50,9 +54,8 @@ class SportItemsViewController: BaseViewController {
         do {
             try FIRAuth.auth()?.signOut()
         } catch let logoutError {
-            print("=========")
+            print("LogoutError: ")
             print(logoutError)
-            print("=========")
         }
 
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
@@ -62,6 +65,37 @@ class SportItemsViewController: BaseViewController {
 
             appDelegate.window?.rootViewController = loginViewController
         }
+    }
+
+    func setUserInfo() {
+
+        guard let uid = FIRAuth.auth()?.currentUser?.uid else { return }
+
+        let ref = FIRDatabase.database().reference()
+                        .child(Constant.FirebaseUser.nodeName)
+                        .child(uid)
+
+        ref.observeSingleEvent(of: .value, with: { (snapshot) in
+
+            // MARK: Loading indicator
+            let activityData = ActivityData()
+            NVActivityIndicatorPresenter.sharedInstance.startAnimating(activityData)
+
+            if snapshot.exists() {
+
+                guard
+                    let data = snapshot.value as? [String: String],
+                    let userName = data[Constant.FirebaseUser.name],
+                    let imageUrlString = data[Constant.FirebaseUser.photoURL]
+                    else { return }
+
+                self.userName.text = userName
+                self.loadImage(imageUrlString: imageUrlString, imageView: self.userImage)
+
+            } else {
+                self.errorHandle(errString: "Can't find the data", error: nil)
+            }
+        })
     }
 
     // todo: toEditProfile
@@ -126,4 +160,44 @@ class SportItemsViewController: BaseViewController {
         }
     }
 
+}
+
+// MARK: - Load Image and Set to ImageView
+extension SportItemsViewController {
+
+    func loadImage(imageUrlString: String, imageView: UIImageView) {
+
+        DispatchQueue.global().async {
+            if let imageUrl = URL(string: imageUrlString) {
+                do {
+                    let imageData = try Data(contentsOf: imageUrl)
+                    if let image = UIImage(data: imageData) {
+                        DispatchQueue.main.async {
+                            imageView.image = image
+                            NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
+                        }
+                    }
+                } catch {
+                    self.errorHandle(errString: nil, error: error)
+                }
+            }
+        }
+    }
+}
+
+// MARK: - Error handle
+extension SportItemsViewController {
+
+    func errorHandle(errString: String?, error: Error?) {
+
+        if errString != nil {
+            print("== Error: \(String(describing: errString))")
+        }
+
+        if error != nil {
+            print("== Error: \(String(describing: error))")
+        }
+
+        NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
+    }
 }

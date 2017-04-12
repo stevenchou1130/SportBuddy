@@ -8,7 +8,7 @@
 
 import UIKit
 import Firebase
-import FirebaseAuth
+import NVActivityIndicatorView
 
 class LoginViewController: BaseViewController {
 
@@ -20,6 +20,12 @@ class LoginViewController: BaseViewController {
         super.viewDidLoad()
 
         setView()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
     }
 
     // todo: confirm use it or not.
@@ -54,9 +60,14 @@ class LoginViewController: BaseViewController {
         let account = accountTextfield.text!
         let password = passwordTextfield.text!
 
+        // MARK: Loading indicator
+        let activityData = ActivityData()
+        NVActivityIndicatorPresenter.sharedInstance.startAnimating(activityData)
+
         FIRAuth.auth()?.signIn(withEmail: account, password: password, completion: { (_, error) in
 
             if error != nil {
+                NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
                 self.showErrorAlert(error: error, myErrorMsg: nil)
                 return
             }
@@ -86,9 +97,15 @@ class LoginViewController: BaseViewController {
      *  For testing
      */
     @IBAction func testLogin(_ sender: Any) {
+
+        // MARK: Loading indicator
+        let activityData = ActivityData()
+        NVActivityIndicatorPresenter.sharedInstance.startAnimating(activityData)
+
         FIRAuth.auth()?.signIn(withEmail: "aaa@gmail.com", password: "aaaaaa", completion: { (_, error) in
 
             if error != nil {
+                NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
                 self.showErrorAlert(error: error, myErrorMsg: nil)
                 return
             }
