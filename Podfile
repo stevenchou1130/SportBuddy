@@ -14,6 +14,7 @@ target 'SportBuddy' do
 	pod 'Firebase/Storage'
     pod 'IQKeyboardManagerSwift'
     pod 'NVActivityIndicatorView'
+    pod 'DKImagePickerController'
 	pod 'BTNavigationDropdownMenu', :git => 'https://github.com/PhamBaTho/BTNavigationDropdownMenu.git', :branch => 'swift-3.0'
 
 end

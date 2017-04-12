@@ -18,6 +18,10 @@
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Please select a picture from your alarm to set your photo in this app.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Please let our app to use carmera, you can also take a picture to be your photo.</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>

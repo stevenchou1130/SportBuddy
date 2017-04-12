@@ -8,8 +8,7 @@
 
 import UIKit
 import Firebase
-import FirebaseAuth
-import FirebaseDatabase
+import DKImagePickerController
 
 class SignUpViewController: BaseViewController {
 
@@ -81,6 +80,31 @@ class SignUpViewController: BaseViewController {
             femaleRadioButton.trailingAnchor.constraint(equalTo: femaleButton.leadingAnchor, constant: -10),
             femaleRadioButton.heightAnchor.constraint(equalToConstant: femaleRadioButton.frame.height),
             femaleRadioButton.widthAnchor.constraint(equalToConstant: femaleRadioButton.frame.width)])
+
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+        userImage.isUserInteractionEnabled = true
+        userImage.addGestureRecognizer(tapGestureRecognizer)
+    }
+
+    func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
+        guard
+            let tappedImage = tapGestureRecognizer.view as? UIImageView
+            else { return }
+
+        let pickerController = DKImagePickerController()
+
+        pickerController.singleSelect = true
+        pickerController.assetType = .allPhotos
+
+        pickerController.didSelectAssets = { (assets: [DKAsset]) in
+            if assets.count != 0 {
+                assets[0].fetchOriginalImageWithCompleteBlock({ (image, _) in
+                    tappedImage.image = image
+                })
+            }
+        }
+
+        self.present(pickerController, animated: true) {}
     }
 
     // MARK: - Select Gender
