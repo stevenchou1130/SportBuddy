@@ -86,6 +86,7 @@ class SignUpViewController: BaseViewController {
         userImage.addGestureRecognizer(tapGestureRecognizer)
     }
 
+    // MARK: - Select Picture
     func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
         guard
             let tappedImage = tapGestureRecognizer.view as? UIImageView
