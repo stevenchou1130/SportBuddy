@@ -19,6 +19,8 @@ class LoginViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.hideKeyboardWhenTappedAround()
+
         setView()
     }
 
@@ -120,5 +122,4 @@ class LoginViewController: BaseViewController {
             }
         })
     }
-
 }
