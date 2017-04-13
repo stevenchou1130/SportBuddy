@@ -1,8 +1,8 @@
 //
-//  BasketballCourtsTableViewController.swift
+//  BasketballCourtsViewController.swift
 //  SportBuddy
 //
-//  Created by steven.chou on 2017/3/23.
+//  Created by steven.chou on 2017/4/13.
 //  Copyright © 2017年 stevenchou. All rights reserved.
 //
 
@@ -10,7 +10,7 @@ import UIKit
 import BTNavigationDropdownMenu
 import NVActivityIndicatorView
 
-class BasketballCourtsTableViewController: BaseTableViewController {
+class BasketballCourtsViewController: BaseViewController {
 
     @IBOutlet var courtsTableView: UITableView!
 
@@ -23,8 +23,6 @@ class BasketballCourtsTableViewController: BaseTableViewController {
 
         let nib = UINib(nibName: Constant.Cell.court, bundle: nil)
         courtsTableView.register(nib, forCellReuseIdentifier: Constant.Cell.court)
-        courtsTableView.delegate = self
-        courtsTableView.dataSource = self
 
         setCourts()
     }
@@ -40,7 +38,7 @@ class BasketballCourtsTableViewController: BaseTableViewController {
             if error == nil {
 
                 self.basketballCourts = basketballCourts!
-                self.tableView.reloadData()
+                self.courtsTableView.reloadData()
 
             } else {
 
@@ -55,7 +53,7 @@ class BasketballCourtsTableViewController: BaseTableViewController {
 }
 
 // MARK: NavigationBar
-extension BasketballCourtsTableViewController {
+extension BasketballCourtsViewController {
 
     func setNavigationBar() {
 
@@ -80,15 +78,15 @@ extension BasketballCourtsTableViewController {
 }
 
 // MARK: TableView
-extension BasketballCourtsTableViewController {
+extension BasketballCourtsViewController: UITableViewDelegate, UITableViewDataSource {
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
         guard basketballCourts.count != 0 else { return 0 }
         return basketballCourts.count
     }
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         guard
             let cell = tableView.dequeueReusableCell(withIdentifier: Constant.Cell.court,
@@ -102,7 +100,7 @@ extension BasketballCourtsTableViewController {
         return cell
     }
 
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         let storyBoard = UIStoryboard(name: Constant.Storyboard.basketballCourtDetail, bundle: nil)
 

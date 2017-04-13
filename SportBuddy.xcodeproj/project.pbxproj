@@ -23,7 +23,6 @@
 		B0754D631E83995A006A5754 /* Basketball.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0754D621E83995A006A5754 /* Basketball.storyboard */; };
 		B0754D681E8399FB006A5754 /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0754D671E8399FB006A5754 /* BaseTableViewController.swift */; };
 		B0754D6F1E83A2C3006A5754 /* BasketballTabbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0754D6E1E83A2C3006A5754 /* BasketballTabbarViewController.swift */; };
-		B0754D731E83AEEA006A5754 /* BasketballCourtsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0754D721E83AEEA006A5754 /* BasketballCourtsTableViewController.swift */; };
 		B0754D751E83AF55006A5754 /* BasketballProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0754D741E83AF55006A5754 /* BasketballProfileViewController.swift */; };
 		B0754D781E83C4F1006A5754 /* BasketballGamesNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0754D771E83C4F1006A5754 /* BasketballGamesNavigationController.swift */; };
 		B0754D7A1E83C5AF006A5754 /* BasketballCourtsNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0754D791E83C5AF006A5754 /* BasketballCourtsNavigationController.swift */; };
@@ -59,6 +58,7 @@
 		B0CE8AF61E8B67EF003F0F12 /* BasketballCourtDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0CE8AF51E8B67EF003F0F12 /* BasketballCourtDetail.storyboard */; };
 		B0CE8AF91E8B69F2003F0F12 /* Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CE8AF81E8B69F2003F0F12 /* Identifiable.swift */; };
 		B0E8816F1E9FCAFE0093AA11 /* BasketballGamesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E8816E1E9FCAFE0093AA11 /* BasketballGamesViewController.swift */; };
+		B0E881711E9FD2AF0093AA11 /* BasketballCourtsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E881701E9FD2AF0093AA11 /* BasketballCourtsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -82,7 +82,6 @@
 		B0754D621E83995A006A5754 /* Basketball.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Basketball.storyboard; sourceTree = "<group>"; };
 		B0754D671E8399FB006A5754 /* BaseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
 		B0754D6E1E83A2C3006A5754 /* BasketballTabbarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasketballTabbarViewController.swift; sourceTree = "<group>"; };
-		B0754D721E83AEEA006A5754 /* BasketballCourtsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasketballCourtsTableViewController.swift; sourceTree = "<group>"; };
 		B0754D741E83AF55006A5754 /* BasketballProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasketballProfileViewController.swift; sourceTree = "<group>"; };
 		B0754D771E83C4F1006A5754 /* BasketballGamesNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasketballGamesNavigationController.swift; sourceTree = "<group>"; };
 		B0754D791E83C5AF006A5754 /* BasketballCourtsNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasketballCourtsNavigationController.swift; sourceTree = "<group>"; };
@@ -118,6 +117,7 @@
 		B0CE8AF51E8B67EF003F0F12 /* BasketballCourtDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = BasketballCourtDetail.storyboard; sourceTree = "<group>"; };
 		B0CE8AF81E8B69F2003F0F12 /* Identifiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Identifiable.swift; sourceTree = "<group>"; };
 		B0E8816E1E9FCAFE0093AA11 /* BasketballGamesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasketballGamesViewController.swift; sourceTree = "<group>"; };
+		B0E881701E9FD2AF0093AA11 /* BasketballCourtsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasketballCourtsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -287,7 +287,7 @@
 				B0CCD1781E8909BF0046009B /* BasketballCourtDetail */,
 				B0CE8AEE1E8B63F6003F0F12 /* Comment */,
 				B0754D791E83C5AF006A5754 /* BasketballCourtsNavigationController.swift */,
-				B0754D721E83AEEA006A5754 /* BasketballCourtsTableViewController.swift */,
+				B0E881701E9FD2AF0093AA11 /* BasketballCourtsViewController.swift */,
 				B0AB6FF61E88C4590060D80E /* BasketballCourtsProvider.swift */,
 				B0AB6FFC1E88C5900060D80E /* BasketballCourtModel.swift */,
 				B0AB6FFA1E88C5210060D80E /* BasketballCourt.swift */,
@@ -540,7 +540,6 @@
 			files = (
 				B06DB2C21E7FB36700DCF016 /* LoginViewController.swift in Sources */,
 				B0754D781E83C4F1006A5754 /* BasketballGamesNavigationController.swift in Sources */,
-				B0754D731E83AEEA006A5754 /* BasketballCourtsTableViewController.swift in Sources */,
 				B0E8816F1E9FCAFE0093AA11 /* BasketballGamesViewController.swift in Sources */,
 				B099C6A91E89634D00C0B142 /* NewBasketballGameViewController.swift in Sources */,
 				B084BD341E7FDD3900DC48B2 /* Palette.swift in Sources */,
@@ -573,6 +572,7 @@
 				B0CE8AF91E8B69F2003F0F12 /* Identifiable.swift in Sources */,
 				B0754D7C1E83C5C6006A5754 /* BasketballProfileNavigationController.swift in Sources */,
 				B0AB6FFD1E88C5900060D80E /* BasketballCourtModel.swift in Sources */,
+				B0E881711E9FD2AF0093AA11 /* BasketballCourtsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

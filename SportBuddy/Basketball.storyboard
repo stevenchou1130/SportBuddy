@@ -39,27 +39,38 @@
             </objects>
             <point key="canvasLocation" x="1776.8" y="194.75262368815595"/>
         </scene>
-        <!--Basketball Courts Table View Controller-->
-        <scene sceneID="261-Wo-CSB">
+        <!--Basketball Courts View Controller-->
+        <scene sceneID="5RG-T2-AK4">
             <objects>
-                <tableViewController storyboardIdentifier="BasketballCourtsTableViewController" id="PIf-dK-xhO" customClass="BasketballCourtsTableViewController" customModule="SportBuddy" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="xw9-gJ-Rnj">
+                <viewController storyboardIdentifier="BasketballCourtsViewController" id="CgV-pN-sDq" customClass="BasketballCourtsViewController" customModule="SportBuddy" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="yY6-ye-B6c"/>
+                        <viewControllerLayoutGuide type="bottom" id="5Dn-RH-jgY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="2UG-6j-6Ha">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="f4L-ca-Ygt">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="CgV-pN-sDq" id="5aG-wW-1Ff"/>
+                                    <outlet property="delegate" destination="CgV-pN-sDq" id="1px-Y0-KTd"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <connections>
-                            <outlet property="dataSource" destination="PIf-dK-xhO" id="NN8-K1-1Zd"/>
-                            <outlet property="delegate" destination="PIf-dK-xhO" id="Rah-lO-KRx"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" id="isz-XT-KJH"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="gmm-21-pqE"/>
                     <connections>
-                        <outlet property="courtsTableView" destination="xw9-gJ-Rnj" id="Swi-ud-viM"/>
+                        <outlet property="courtsTableView" destination="f4L-ca-Ygt" id="3U0-gc-ftx"/>
                     </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="8nP-4u-TsZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fZW-DB-POq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1777" y="901"/>
+            <point key="canvasLocation" x="1776.8" y="900.89955022488766"/>
         </scene>
         <!--Basketball Profile View Controller-->
         <scene sceneID="8Vu-Wb-Gp7">
@@ -206,7 +217,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="PIf-dK-xhO" kind="relationship" relationship="rootViewController" id="ll7-no-fKh"/>
+                        <segue destination="CgV-pN-sDq" kind="relationship" relationship="rootViewController" id="Vzh-ub-7h6"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KeM-rQ-Gak" userLabel="First Responder" sceneMemberID="firstResponder"/>
