@@ -1,8 +1,8 @@
 //
-//  BasketballCourtDetailTableViewController.swift
+//  BasketballCourtDetailViewController.swift
 //  SportBuddy
 //
-//  Created by steven.chou on 2017/3/29.
+//  Created by steven.chou on 2017/4/14.
 //  Copyright © 2017年 stevenchou. All rights reserved.
 //
 
@@ -10,7 +10,9 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class BasketballCourtDetailTableViewController: BaseTableViewController {
+class BasketballCourtDetailViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
+
+    @IBOutlet weak var tableView: UITableView!
 
     enum Component {
 
@@ -32,6 +34,15 @@ class BasketballCourtDetailTableViewController: BaseTableViewController {
         getWeather()
     }
 
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        if let topPadding = navigationController?.navigationBar.frame.maxY {
+            self.tableView.contentInset = UIEdgeInsets(top: topPadding, left: 0, bottom: 0, right: 0)
+            self.tableView.scrollIndicatorInsets = UIEdgeInsets(top: topPadding, left: 0, bottom: 0, right: 0)
+        }
+    }
+
     func getWeather() {
 
         if basketballCourt != nil {
@@ -45,11 +56,11 @@ class BasketballCourtDetailTableViewController: BaseTableViewController {
                     self.weather = weather
                     self.tableView.reloadData()
                 } else {
-                    print("Error in BasketballCourtDetailTableViewController - Get weather")
+                    print("Error in BasketballCourtDetailViewController - Get weather")
                 }
             })
         } else {
-            print("Error in BasketballCourtDetailTableViewController getWeather()")
+            print("Error in BasketballCourtDetailViewController getWeather()")
         }
     }
 
@@ -70,13 +81,12 @@ class BasketballCourtDetailTableViewController: BaseTableViewController {
     }
 
     // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
 
         return components.count
     }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
         switch components[section] {
         case .weather, .map, .comment:
@@ -85,7 +95,7 @@ class BasketballCourtDetailTableViewController: BaseTableViewController {
         }
     }
 
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 
         switch components[indexPath.section] {
         case .weather:
@@ -106,7 +116,7 @@ class BasketballCourtDetailTableViewController: BaseTableViewController {
         }
     }
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // swiftlint:disable force_cast
 
         let component = components[indexPath.section]

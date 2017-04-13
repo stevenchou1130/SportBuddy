@@ -21,9 +21,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ci7-T1-aoT">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ci7-T1-aoT">
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="Fds-A8-hdd" id="zvh-x6-Y7H"/>
@@ -32,6 +31,12 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="ci7-T1-aoT" secondAttribute="trailing" id="0b2-sJ-jab"/>
+                            <constraint firstItem="ci7-T1-aoT" firstAttribute="leading" secondItem="QO2-OD-UJE" secondAttribute="leading" id="FIp-2O-HhI"/>
+                            <constraint firstItem="0fc-jH-muO" firstAttribute="top" secondItem="ci7-T1-aoT" secondAttribute="bottom" id="jS0-vR-5c1"/>
+                            <constraint firstItem="ci7-T1-aoT" firstAttribute="top" secondItem="4Cv-4y-sd5" secondAttribute="bottom" id="muR-LE-XIH"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Dye-Ki-gJ3"/>
                     <connections>
@@ -54,9 +59,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="f4L-ca-Ygt">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="f4L-ca-Ygt">
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="CgV-pN-sDq" id="5aG-wW-1Ff"/>
@@ -65,6 +69,12 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="5Dn-RH-jgY" firstAttribute="top" secondItem="f4L-ca-Ygt" secondAttribute="bottom" id="plV-fD-xTp"/>
+                            <constraint firstAttribute="trailing" secondItem="f4L-ca-Ygt" secondAttribute="trailing" id="rIc-9h-cRr"/>
+                            <constraint firstItem="f4L-ca-Ygt" firstAttribute="leading" secondItem="2UG-6j-6Ha" secondAttribute="leading" id="vLI-Po-JSk"/>
+                            <constraint firstItem="f4L-ca-Ygt" firstAttribute="top" secondItem="yY6-ye-B6c" secondAttribute="bottom" id="yyG-4w-pGN"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="gmm-21-pqE"/>
                     <connections>
