@@ -46,5 +46,41 @@ class BasketballGamesTableViewController: BaseTableViewController {
 
         self.navigationController?.pushViewController(newBasketballGameViewController, animated: true)
     }
+}
 
+// MARK: TableView
+extension BasketballGamesTableViewController {
+
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+
+        return 10
+    }
+
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+        let cell = UITableViewCell()
+
+//        guard
+//            let cell = UITableViewCell()
+//            else { return UITableViewCell() }
+
+        return cell
+    }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+        let storyBoard = UIStoryboard(name: Constant.Storyboard.basketballGameDetail, bundle: nil)
+
+        guard
+            let basketballGameDetailTableViewController = storyBoard.instantiateViewController(withIdentifier: Constant.Controller.basketballGameDetail) as? BasketballGameDetailTableViewController
+            else { return }
+
+//        guard
+//            let cell = tableView.cellForRow(at: indexPath) as? CourtTableViewCell
+//            else { return }
+
+//        basketballCourtDetailTableViewController.basketballCourt = basketballCourts[indexPath.row]
+//        basketballCourtDetailTableViewController.navigationItem.title = cell.courtName.text!
+        self.navigationController?.pushViewController(basketballGameDetailTableViewController, animated: true)
+    }
 }
