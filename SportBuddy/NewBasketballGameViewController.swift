@@ -39,11 +39,6 @@ class NewBasketballGameViewController: BaseViewController {
 
     func setView() {
 
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.isTranslucent = true
-        self.navigationController?.view.backgroundColor = UIColor.clear
-
         setBackground(imageName: Constant.BackgroundName.basketball)
 
         setCourtPicker()
@@ -98,7 +93,7 @@ class NewBasketballGameViewController: BaseViewController {
 
         // format date
         let formatter = DateFormatter()
-        formatter.dateFormat = "MM/dd   HH:mm"
+        formatter.dateFormat = "MM/dd HH:mm"
 
         timeTextField.text = formatter.string(from: timePicker.date)
         self.view.endEditing(true)

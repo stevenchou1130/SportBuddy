@@ -11,11 +11,39 @@ import BTNavigationDropdownMenu
 
 class BasketballGamesTableViewController: BaseTableViewController {
 
+    @IBOutlet var gamesTableView: UITableView!
+    var menuView: BTNavigationDropdownMenu?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setNavigationBar()
 
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        hideNavigationBar()
+
+//        if let topConstraint = navigationController?.navigationBar.frame.maxY {
+//            gamesTableView.contentInset = UIEdgeInsets(top: topConstraint, left: 0, bottom: 0, right: 0)
+//            gamesTableView.scrollIndicatorInsets = UIEdgeInsets(top: topConstraint, left: 0, bottom: 0, right: 0)
+//        }
+
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        if menuView != nil {
+            menuView?.hide()
+        }
     }
 
     func setNavigationBar() {
@@ -27,11 +55,20 @@ class BasketballGamesTableViewController: BaseTableViewController {
         setNavigationDropdownMenu()
     }
 
+    func hideNavigationBar() {
+
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.view.backgroundColor = UIColor.clear
+    }
+
     func setNavigationDropdownMenu() {
-        let menuView = BTNavigationDropdownMenu(title: items[Constant.CurrentCity.cityIndex], items: items as [AnyObject])
+
+        menuView = BTNavigationDropdownMenu(title: items[Constant.CurrentCity.cityIndex], items: items as [AnyObject])
         self.navigationItem.titleView = menuView
 
-        menuView.didSelectItemAtIndexHandler = { [weak self] (indexPath: Int) -> Void in
+        menuView?.didSelectItemAtIndexHandler = { [weak self] (indexPath: Int) -> Void in
 
             if let city = self?.items[indexPath] {
                 Constant.CurrentCity.cityIndex = indexPath
@@ -53,12 +90,13 @@ extension BasketballGamesTableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        return 10
+        return 30
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let cell = UITableViewCell()
+        cell.backgroundColor = UIColor.darkGray
 
 //        guard
 //            let cell = UITableViewCell()
