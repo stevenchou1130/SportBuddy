@@ -39,7 +39,7 @@ struct Constant {
         static let basketballProfile = "BasketballProfileViewController"
         static let basketballCourtDetail = "BasketballCourtDetailViewController"
         static let newBasketballGame = "NewBasketballGameViewController"
-        static let basketballGameDetail = "BasketballGameDetailTableViewController"
+        static let basketballGameDetail = "BasketballGameDetailViewController"
     }
 
     struct BackgroundName {

@@ -108,7 +108,7 @@ extension BasketballGamesViewController: UITableViewDelegate, UITableViewDataSou
         let storyBoard = UIStoryboard(name: Constant.Storyboard.basketballGameDetail, bundle: nil)
 
         guard
-            let basketballGameDetailTableViewController = storyBoard.instantiateViewController(withIdentifier: Constant.Controller.basketballGameDetail) as? BasketballGameDetailTableViewController
+            let basketballGameDetailViewController = storyBoard.instantiateViewController(withIdentifier: Constant.Controller.basketballGameDetail) as? BasketballGameDetailViewController
             else { return }
 
         //        guard
@@ -117,6 +117,6 @@ extension BasketballGamesViewController: UITableViewDelegate, UITableViewDataSou
 
         //        basketballCourtDetailTableViewController.basketballCourt = basketballCourts[indexPath.row]
         //        basketballCourtDetailTableViewController.navigationItem.title = cell.courtName.text!
-        self.navigationController?.pushViewController(basketballGameDetailTableViewController, animated: true)
+        self.navigationController?.pushViewController(basketballGameDetailViewController, animated: true)
     }
 }

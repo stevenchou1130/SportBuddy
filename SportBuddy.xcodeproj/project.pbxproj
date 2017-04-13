@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		86B393D6D3C6D9E1CDF02680 /* Pods_SportBuddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88D4B9B17EDC0172370C84CB /* Pods_SportBuddy.framework */; };
 		B0002A581E9E820700CD2241 /* BasketballGameDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0002A571E9E820700CD2241 /* BasketballGameDetail.storyboard */; };
-		B0002A5A1E9E821D00CD2241 /* BasketballGameDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0002A591E9E821D00CD2241 /* BasketballGameDetailTableViewController.swift */; };
 		B00708D91E94CC37005CFD0F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B00708D81E94CC37005CFD0F /* GoogleService-Info.plist */; };
 		B0072D071E9F54660056BC49 /* BasketballGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0072D061E9F54660056BC49 /* BasketballGame.swift */; };
 		B037B2921E826905007FD483 /* SportItems.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B037B2911E826905007FD483 /* SportItems.storyboard */; };
@@ -59,6 +58,7 @@
 		B0E8816F1E9FCAFE0093AA11 /* BasketballGamesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E8816E1E9FCAFE0093AA11 /* BasketballGamesViewController.swift */; };
 		B0E881711E9FD2AF0093AA11 /* BasketballCourtsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E881701E9FD2AF0093AA11 /* BasketballCourtsViewController.swift */; };
 		B0E881731E9FDBCF0093AA11 /* BasketballCourtDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E881721E9FDBCF0093AA11 /* BasketballCourtDetailViewController.swift */; };
+		B0E881751E9FE3820093AA11 /* BasketballGameDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E881741E9FE3820093AA11 /* BasketballGameDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,7 +66,6 @@
 		6A1C3E8AC94014525C4957ED /* Pods-SportBuddy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SportBuddy.release.xcconfig"; path = "Pods/Target Support Files/Pods-SportBuddy/Pods-SportBuddy.release.xcconfig"; sourceTree = "<group>"; };
 		88D4B9B17EDC0172370C84CB /* Pods_SportBuddy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SportBuddy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0002A571E9E820700CD2241 /* BasketballGameDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = BasketballGameDetail.storyboard; sourceTree = "<group>"; };
-		B0002A591E9E821D00CD2241 /* BasketballGameDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasketballGameDetailTableViewController.swift; sourceTree = "<group>"; };
 		B00708D81E94CC37005CFD0F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B0072D061E9F54660056BC49 /* BasketballGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasketballGame.swift; sourceTree = "<group>"; };
 		B037B2911E826905007FD483 /* SportItems.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SportItems.storyboard; sourceTree = "<group>"; };
@@ -118,6 +117,7 @@
 		B0E8816E1E9FCAFE0093AA11 /* BasketballGamesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasketballGamesViewController.swift; sourceTree = "<group>"; };
 		B0E881701E9FD2AF0093AA11 /* BasketballCourtsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasketballCourtsViewController.swift; sourceTree = "<group>"; };
 		B0E881721E9FDBCF0093AA11 /* BasketballCourtDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasketballCourtDetailViewController.swift; sourceTree = "<group>"; };
+		B0E881741E9FE3820093AA11 /* BasketballGameDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasketballGameDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,7 +152,7 @@
 		B0002A561E9E81DE00CD2241 /* BasketballGameDetail */ = {
 			isa = PBXGroup;
 			children = (
-				B0002A591E9E821D00CD2241 /* BasketballGameDetailTableViewController.swift */,
+				B0E881741E9FE3820093AA11 /* BasketballGameDetailViewController.swift */,
 				B0002A571E9E820700CD2241 /* BasketballGameDetail.storyboard */,
 			);
 			name = BasketballGameDetail;
@@ -562,12 +562,12 @@
 				B0AD470E1E8E241B00876498 /* WeatherProvider.swift in Sources */,
 				B07CF4A31E82D7C600E91F7E /* SportItemsViewController.swift in Sources */,
 				B0754D7A1E83C5AF006A5754 /* BasketballCourtsNavigationController.swift in Sources */,
+				B0E881751E9FE3820093AA11 /* BasketballGameDetailViewController.swift in Sources */,
 				B076C5601E89F5CF00F06390 /* User.swift in Sources */,
 				B0CE8AF11E8B640C003F0F12 /* CommentTableViewCell.swift in Sources */,
 				B0CE8AEC1E8B63BD003F0F12 /* MapTableViewCell.swift in Sources */,
 				B0AD470C1E8E23F000876498 /* Towns.swift in Sources */,
 				B0754D6F1E83A2C3006A5754 /* BasketballTabbarViewController.swift in Sources */,
-				B0002A5A1E9E821D00CD2241 /* BasketballGameDetailTableViewController.swift in Sources */,
 				B0C59FD21E9C925B00214A1F /* ActivityIndicator.swift in Sources */,
 				B0CE8AF91E8B69F2003F0F12 /* Identifiable.swift in Sources */,
 				B0754D7C1E83C5C6006A5754 /* BasketballProfileNavigationController.swift in Sources */,
