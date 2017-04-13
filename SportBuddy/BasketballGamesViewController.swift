@@ -1,17 +1,16 @@
 //
-//  BasketballGamesTableViewController.swift
+//  BasketballGamesViewController.swift
 //  SportBuddy
 //
-//  Created by steven.chou on 2017/3/23.
+//  Created by steven.chou on 2017/4/13.
 //  Copyright © 2017年 stevenchou. All rights reserved.
 //
 
 import UIKit
 import BTNavigationDropdownMenu
 
-class BasketballGamesTableViewController: BaseTableViewController {
+class BasketballGamesViewController: BaseViewController {
 
-    @IBOutlet var gamesTableView: UITableView!
     var menuView: BTNavigationDropdownMenu?
 
     override func viewDidLoad() {
@@ -31,10 +30,10 @@ class BasketballGamesTableViewController: BaseTableViewController {
 
         hideNavigationBar()
 
-//        if let topConstraint = navigationController?.navigationBar.frame.maxY {
-//            gamesTableView.contentInset = UIEdgeInsets(top: topConstraint, left: 0, bottom: 0, right: 0)
-//            gamesTableView.scrollIndicatorInsets = UIEdgeInsets(top: topConstraint, left: 0, bottom: 0, right: 0)
-//        }
+        //        if let topConstraint = navigationController?.navigationBar.frame.maxY {
+        //            gamesTableView.contentInset = UIEdgeInsets(top: topConstraint, left: 0, bottom: 0, right: 0)
+        //            gamesTableView.scrollIndicatorInsets = UIEdgeInsets(top: topConstraint, left: 0, bottom: 0, right: 0)
+        //        }
 
     }
 
@@ -86,26 +85,26 @@ class BasketballGamesTableViewController: BaseTableViewController {
 }
 
 // MARK: TableView
-extension BasketballGamesTableViewController {
+extension BasketballGamesViewController: UITableViewDelegate, UITableViewDataSource {
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
         return 30
     }
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let cell = UITableViewCell()
         cell.backgroundColor = UIColor.darkGray
 
-//        guard
-//            let cell = UITableViewCell()
-//            else { return UITableViewCell() }
+        //        guard
+        //            let cell = UITableViewCell()
+        //            else { return UITableViewCell() }
 
         return cell
     }
 
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         let storyBoard = UIStoryboard(name: Constant.Storyboard.basketballGameDetail, bundle: nil)
 
@@ -113,12 +112,12 @@ extension BasketballGamesTableViewController {
             let basketballGameDetailTableViewController = storyBoard.instantiateViewController(withIdentifier: Constant.Controller.basketballGameDetail) as? BasketballGameDetailTableViewController
             else { return }
 
-//        guard
-//            let cell = tableView.cellForRow(at: indexPath) as? CourtTableViewCell
-//            else { return }
+        //        guard
+        //            let cell = tableView.cellForRow(at: indexPath) as? CourtTableViewCell
+        //            else { return }
 
-//        basketballCourtDetailTableViewController.basketballCourt = basketballCourts[indexPath.row]
-//        basketballCourtDetailTableViewController.navigationItem.title = cell.courtName.text!
+        //        basketballCourtDetailTableViewController.basketballCourt = basketballCourts[indexPath.row]
+        //        basketballCourtDetailTableViewController.navigationItem.title = cell.courtName.text!
         self.navigationController?.pushViewController(basketballGameDetailTableViewController, animated: true)
     }
 }

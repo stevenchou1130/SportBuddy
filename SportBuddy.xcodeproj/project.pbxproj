@@ -22,7 +22,6 @@
 		B0754D611E839284006A5754 /* ChooseLevel.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0754D601E839284006A5754 /* ChooseLevel.storyboard */; };
 		B0754D631E83995A006A5754 /* Basketball.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0754D621E83995A006A5754 /* Basketball.storyboard */; };
 		B0754D681E8399FB006A5754 /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0754D671E8399FB006A5754 /* BaseTableViewController.swift */; };
-		B0754D6C1E839C20006A5754 /* BasketballGamesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0754D6B1E839C20006A5754 /* BasketballGamesTableViewController.swift */; };
 		B0754D6F1E83A2C3006A5754 /* BasketballTabbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0754D6E1E83A2C3006A5754 /* BasketballTabbarViewController.swift */; };
 		B0754D731E83AEEA006A5754 /* BasketballCourtsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0754D721E83AEEA006A5754 /* BasketballCourtsTableViewController.swift */; };
 		B0754D751E83AF55006A5754 /* BasketballProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0754D741E83AF55006A5754 /* BasketballProfileViewController.swift */; };
@@ -59,6 +58,7 @@
 		B0CE8AF41E8B67D6003F0F12 /* BasketballCourtDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CE8AF31E8B67D6003F0F12 /* BasketballCourtDetailTableViewController.swift */; };
 		B0CE8AF61E8B67EF003F0F12 /* BasketballCourtDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0CE8AF51E8B67EF003F0F12 /* BasketballCourtDetail.storyboard */; };
 		B0CE8AF91E8B69F2003F0F12 /* Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CE8AF81E8B69F2003F0F12 /* Identifiable.swift */; };
+		B0E8816F1E9FCAFE0093AA11 /* BasketballGamesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E8816E1E9FCAFE0093AA11 /* BasketballGamesViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -81,7 +81,6 @@
 		B0754D601E839284006A5754 /* ChooseLevel.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ChooseLevel.storyboard; sourceTree = "<group>"; };
 		B0754D621E83995A006A5754 /* Basketball.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Basketball.storyboard; sourceTree = "<group>"; };
 		B0754D671E8399FB006A5754 /* BaseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
-		B0754D6B1E839C20006A5754 /* BasketballGamesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasketballGamesTableViewController.swift; sourceTree = "<group>"; };
 		B0754D6E1E83A2C3006A5754 /* BasketballTabbarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasketballTabbarViewController.swift; sourceTree = "<group>"; };
 		B0754D721E83AEEA006A5754 /* BasketballCourtsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasketballCourtsTableViewController.swift; sourceTree = "<group>"; };
 		B0754D741E83AF55006A5754 /* BasketballProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasketballProfileViewController.swift; sourceTree = "<group>"; };
@@ -118,6 +117,7 @@
 		B0CE8AF31E8B67D6003F0F12 /* BasketballCourtDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasketballCourtDetailTableViewController.swift; sourceTree = "<group>"; };
 		B0CE8AF51E8B67EF003F0F12 /* BasketballCourtDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = BasketballCourtDetail.storyboard; sourceTree = "<group>"; };
 		B0CE8AF81E8B69F2003F0F12 /* Identifiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Identifiable.swift; sourceTree = "<group>"; };
+		B0E8816E1E9FCAFE0093AA11 /* BasketballGamesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasketballGamesViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -274,7 +274,7 @@
 				B0C59FD51E9CC9A300214A1F /* Cell */,
 				B0C59FDA1E9CC9E500214A1F /* CreateNewGame */,
 				B0754D771E83C4F1006A5754 /* BasketballGamesNavigationController.swift */,
-				B0754D6B1E839C20006A5754 /* BasketballGamesTableViewController.swift */,
+				B0E8816E1E9FCAFE0093AA11 /* BasketballGamesViewController.swift */,
 				B0072D061E9F54660056BC49 /* BasketballGame.swift */,
 			);
 			name = Games;
@@ -541,6 +541,7 @@
 				B06DB2C21E7FB36700DCF016 /* LoginViewController.swift in Sources */,
 				B0754D781E83C4F1006A5754 /* BasketballGamesNavigationController.swift in Sources */,
 				B0754D731E83AEEA006A5754 /* BasketballCourtsTableViewController.swift in Sources */,
+				B0E8816F1E9FCAFE0093AA11 /* BasketballGamesViewController.swift in Sources */,
 				B099C6A91E89634D00C0B142 /* NewBasketballGameViewController.swift in Sources */,
 				B084BD341E7FDD3900DC48B2 /* Palette.swift in Sources */,
 				B0971BC51E850EB10037E26D /* CourtTableViewCell.swift in Sources */,
@@ -553,7 +554,6 @@
 				B0CE8AF41E8B67D6003F0F12 /* BasketballCourtDetailTableViewController.swift in Sources */,
 				B0AB6FF71E88C4590060D80E /* BasketballCourtsProvider.swift in Sources */,
 				B084BD2E1E7FCE7900DC48B2 /* Constant.swift in Sources */,
-				B0754D6C1E839C20006A5754 /* BasketballGamesTableViewController.swift in Sources */,
 				B0A8F4311E80B9C4006CBA96 /* SignUpViewController.swift in Sources */,
 				B0CE8AE71E8B6330003F0F12 /* WeatherTableViewCell.swift in Sources */,
 				B0C59FD81E9CC9D600214A1F /* GameTableViewCell.swift in Sources */,

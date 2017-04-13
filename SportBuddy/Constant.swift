@@ -34,7 +34,7 @@ struct Constant {
         static let sportItems = "SportItemsViewController"
         static let chooseLevel = "ChooseLevelViewController"
         static let basketballTabbar = "BasketballTabbarViewController"
-        static let basketballGames = "BasketballGamesTableViewController"
+        static let basketballGames = "BasketballGamesViewController"
         static let basketballCourt = "BasketballCourtsTableViewController"
         static let basketballProfile = "BasketballProfileViewController"
         static let basketballCourtDetail = "BasketballCourtDetailTableViewController"
