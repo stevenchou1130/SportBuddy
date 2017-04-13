@@ -34,6 +34,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="Dye-Ki-gJ3"/>
+                    <connections>
+                        <outlet property="gamesTableView" destination="ci7-T1-aoT" id="gey-V0-vtx"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ro0-oy-bbf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

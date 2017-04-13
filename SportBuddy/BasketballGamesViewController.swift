@@ -11,6 +11,8 @@ import BTNavigationDropdownMenu
 
 class BasketballGamesViewController: BaseViewController {
 
+    @IBOutlet weak var gamesTableView: UITableView!
+
     var menuView: BTNavigationDropdownMenu?
 
     override func viewDidLoad() {
@@ -30,11 +32,8 @@ class BasketballGamesViewController: BaseViewController {
 
         hideNavigationBar()
 
-        //        if let topConstraint = navigationController?.navigationBar.frame.maxY {
-        //            gamesTableView.contentInset = UIEdgeInsets(top: topConstraint, left: 0, bottom: 0, right: 0)
-        //            gamesTableView.scrollIndicatorInsets = UIEdgeInsets(top: topConstraint, left: 0, bottom: 0, right: 0)
-        //        }
-
+        self.gamesTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        self.gamesTableView.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
 
     override func viewWillDisappear(_ animated: Bool) {

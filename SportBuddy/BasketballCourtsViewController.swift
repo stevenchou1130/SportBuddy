@@ -27,6 +27,14 @@ class BasketballCourtsViewController: BaseViewController {
         setCourts()
     }
 
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        self.courtsTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        self.courtsTableView.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+
+    }
+
     func setCourts() {
 
         // MARK: Loading indicator
