@@ -25,6 +25,9 @@ class WeatherTableViewCell: UITableViewCell, Identifiable {
         super.awakeFromNib()
         // Initialization code
 
+        weatherLabel.textColor = .white
+        temperatureLabel.textColor = .white
+        updateTimeLabel.textColor = .white
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -30,6 +30,14 @@ class BaseViewController: UIViewController {
         backgroundImage.image = UIImage(named: imageName)
         self.view.insertSubview(backgroundImage, at: 0)
     }
+
+    func setTableViewBackground(tableView: UITableView, imageName: String) {
+
+        let backgroundImage = UIImage(named: imageName)
+        let imageView = UIImageView(image: backgroundImage)
+        imageView.contentMode = .scaleAspectFill
+        tableView.backgroundView = imageView
+    }
 }
 
 // MARK: - Navigation Bar Back Button
@@ -37,7 +45,7 @@ extension BaseViewController {
 
     func createBackButton(action: Selector) -> UIBarButtonItem {
 
-        let button = UIBarButtonItem(title: Constant.ObjectValue.NavigationBarBackItemTitle,
+        let button = UIBarButtonItem(title: Constant.ObjectValue.navigationBarBackItemTitle,
                                      style: .done,
                                      target: self,
                                      action: action)

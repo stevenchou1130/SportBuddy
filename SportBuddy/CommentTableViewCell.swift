@@ -22,6 +22,9 @@ class CommentTableViewCell: UITableViewCell, Identifiable {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+
+        courtAddress.textColor = .white
+        courtTel.textColor = .white
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

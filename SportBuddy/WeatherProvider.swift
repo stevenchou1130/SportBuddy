@@ -42,7 +42,13 @@ class WeatherProvider {
                             let time = result["at"] as? String
                             else { return }
 
-                        let weatherInfo = Weather(desc: desc, temperature: temperature, time: time)
+                        let weatherPicName = self.getWeatherPicName(weahterDesc: desc)
+
+                        let weatherInfo = Weather(desc: desc,
+                                                  weatherPicName: weatherPicName,
+                                                  temperature: temperature,
+                                                  time: time)
+
                         completion(weatherInfo, nil)
 
                     } else { completion(nil, GetWeatherError.invalidResponseData) }
@@ -58,4 +64,39 @@ class WeatherProvider {
 
     }
 
+    func getWeatherPicName(weahterDesc: String) -> String {
+
+        var weatherPicName = ""
+
+        let characters = Array(weahterDesc.characters)
+
+        let rainy = characters.filter({ (char) -> Bool in
+            char == "雨"
+        })
+
+        let clear = characters.filter({ (char) -> Bool in
+            char == "晴"
+        })
+
+        let cloudy = characters.filter({ (char) -> Bool in
+            char == "雲" || char == "陰"
+        })
+
+        // check weather
+        if rainy.count != 0 && cloudy.count != 0 {
+            weatherPicName = Constant.ImageName.weatherRainy
+        } else if clear.count != 0 && cloudy.count != 0 {
+            weatherPicName = Constant.ImageName.weatherPartlyClear
+        } else if cloudy.count != 0 {
+            weatherPicName = Constant.ImageName.weatherCloudy
+        } else if clear.count != 0 {
+            weatherPicName = Constant.ImageName.weatherClear
+        } else if rainy.count != 0 {
+            weatherPicName = Constant.ImageName.weatherRainy
+        } else {
+            weatherPicName = Constant.ImageName.weatherClear
+        }
+
+        return weatherPicName
+    }
 }

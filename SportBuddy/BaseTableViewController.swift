@@ -37,7 +37,7 @@ extension BaseTableViewController {
 
     func createBackButton(action: Selector) -> UIBarButtonItem {
 
-        let button = UIBarButtonItem(title: Constant.ObjectValue.NavigationBarBackItemTitle,
+        let button = UIBarButtonItem(title: Constant.ObjectValue.navigationBarBackItemTitle,
                                      style: .done,
                                      target: self,
                                      action: action)

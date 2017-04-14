@@ -55,6 +55,13 @@ class NewBasketballGameViewController: BaseViewController {
         courtTextField.inputView = courtPicker
     }
 
+    func setLevelPicker() {
+
+        levelPicker.delegate = self
+        levelPicker.dataSource = self
+        levelTextField.inputView = levelPicker
+    }
+
     func setTimePicker() {
 
         let currentTime = Date()
@@ -85,7 +92,7 @@ class NewBasketballGameViewController: BaseViewController {
 
         timeTextField.inputAccessoryView = toolbar
 
-        // assigning date picker to text field
+        // assigning date picker to textfield
         timeTextField.inputView = timePicker
     }
 
@@ -99,21 +106,11 @@ class NewBasketballGameViewController: BaseViewController {
         self.view.endEditing(true)
     }
 
-    func setLevelPicker() {
-
-        levelPicker.delegate = self
-        levelPicker.dataSource = self
-        levelTextField.inputView = levelPicker
-    }
-
     func getCourts() {
 
         // MARK: Loading indicator
         let activityData = ActivityData()
         NVActivityIndicatorPresenter.sharedInstance.startAnimating(activityData)
-
-        print("===============")
-        print("Constant.CurrentCity.cityName: \(Constant.CurrentCity.cityName)")
 
         BasketballCourtsProvider.shared.getApiData(city: Constant.CurrentCity.cityName, gymType: Constant.GymType.basketball) { (basketballCourts, error) in
 
@@ -126,6 +123,9 @@ class NewBasketballGameViewController: BaseViewController {
                 // todo: error handling
 
             }
+
+            print("===============")
+            print("Constant.CurrentCity.cityName: \(Constant.CurrentCity.cityName)")
             print("basketballCourts?.count: \(String(describing: basketballCourts?.count))")
             print("===============")
             NVActivityIndicatorPresenter.sharedInstance.stopAnimating()

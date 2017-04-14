@@ -100,7 +100,7 @@ struct Constant {
 
     struct ObjectValue {
 
-        static let NavigationBarBackItemTitle = "Sport Items"
+        static let navigationBarBackItemTitle = "Sport Items"
     }
 
     struct CurrentCity {
@@ -114,8 +114,26 @@ struct Constant {
         static let basketball = "籃球場"
     }
 
+    struct WeatherDecs {
+
+        static let clear = "晴"
+        static let cloudy = "雲"
+        static let rainy = "雨"
+    }
+
     struct ImageName {
 
+        // User
         static let userDefaultPhoto = "Default_User_Photo"
+
+        // Weather
+        static let weatherClear = "Weather_Clear"
+        static let weatherCloudy = "Weather_Cloudy"
+        static let weatherPartlyClear = "Weather_PartlyClear"
+        static let weatherRainy = "Weather_Rainy"
+        static let weatherStorm = "Weather_Storm"
+
+        // Fixing
+        static let fixing = "Fixing"
     }
 }

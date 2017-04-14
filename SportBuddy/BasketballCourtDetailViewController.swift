@@ -30,7 +30,7 @@ class BasketballCourtDetailViewController: BaseViewController, UITableViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setUp()
+        setView()
         getWeather()
     }
 
@@ -64,10 +64,13 @@ class BasketballCourtDetailViewController: BaseViewController, UITableViewDelega
         }
     }
 
-    func setUp() {
+    func setView() {
+
+        setTableViewBackground(tableView: self.tableView,
+                               imageName: Constant.BackgroundName.basketball)
 
         // 分隔線
-        // tableView.separatorStyle = .none
+        tableView.separatorStyle = .none
 
         let weatherNib = UINib(nibName: WeatherTableViewCell.identifier, bundle: nil)
         tableView.register(weatherNib, forCellReuseIdentifier: WeatherTableViewCell.identifier)
@@ -152,16 +155,21 @@ class BasketballCourtDetailViewController: BaseViewController, UITableViewDelega
     func setWeatherCell(cell: WeatherTableViewCell) -> WeatherTableViewCell {
 
         cell.selectionStyle = .none
+        cell.layer.backgroundColor = UIColor.clear.cgColor
 
         if let desc = weather?.desc,
+            let weatherPicName = weather?.weatherPicName,
             let temperature = weather?.temperature,
             let time = weather?.time {
 
+            cell.weatherImage.image = UIImage(named: weatherPicName)
             cell.weatherLabel.text = "天氣 : \(desc)"
             cell.temperatureLabel.text = "氣溫 : \(temperature) 度"
             cell.updateTimeLabel.text = "更新時間 : \(time)"
 
         } else {
+
+            cell.weatherImage.image = UIImage(named: Constant.ImageName.fixing)
             cell.weatherLabel.text = ""
             cell.temperatureLabel.text = "天氣即時資訊更新維護中..."
             cell.updateTimeLabel.text = ""
@@ -177,6 +185,7 @@ class BasketballCourtDetailViewController: BaseViewController, UITableViewDelega
     func setMapCell(cell: MapTableViewCell) -> MapTableViewCell {
 
         cell.selectionStyle = .none
+        cell.layer.backgroundColor = UIColor.clear.cgColor
 
         if let latitudeString = basketballCourt?.latitude,
             let longitudeString = basketballCourt?.longitude {
@@ -204,6 +213,7 @@ class BasketballCourtDetailViewController: BaseViewController, UITableViewDelega
     func setCommentCell(cell: CommentTableViewCell) -> CommentTableViewCell {
 
         cell.selectionStyle = .none
+        cell.layer.backgroundColor = UIColor.clear.cgColor
 
         if let address = basketballCourt?.address,
             let tel = basketballCourt?.tel {
