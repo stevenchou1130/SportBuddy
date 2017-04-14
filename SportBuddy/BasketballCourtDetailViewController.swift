@@ -44,10 +44,11 @@ class BasketballCourtDetailViewController: BaseViewController, UITableViewDelega
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
-        if let topPadding = navigationController?.navigationBar.frame.maxY {
-            self.tableView.contentInset = UIEdgeInsets(top: topPadding, left: 0, bottom: 0, right: 0)
-            self.tableView.scrollIndicatorInsets = UIEdgeInsets(top: topPadding, left: 0, bottom: 0, right: 0)
-        }
+//        if let topPadding = navigationController?.navigationBar.frame.maxY {
+//            self.tableView.contentInset = UIEdgeInsets(top: topPadding, left: 0, bottom: 0, right: 0)
+//            self.tableView.scrollIndicatorInsets = UIEdgeInsets(top: topPadding, left: 0, bottom: 0, right: 0)
+//        }
+
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -88,7 +89,7 @@ class BasketballCourtDetailViewController: BaseViewController, UITableViewDelega
         setTableViewBackground(tableView: self.tableView,
                                imageName: Constant.BackgroundName.basketball)
 
-        // 分隔線
+        // Separator
         tableView.separatorStyle = .none
 
         let weatherNib = UINib(nibName: WeatherTableViewCell.identifier, bundle: nil)

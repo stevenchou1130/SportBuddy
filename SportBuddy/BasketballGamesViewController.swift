@@ -25,15 +25,16 @@ class BasketballGamesViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
+        transparentizeNavigationBar(navigationController: self.navigationController)
+        self.automaticallyAdjustsScrollViewInsets = false
+
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
-        hideNavigationBar()
-
-        self.gamesTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        self.gamesTableView.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+//        self.gamesTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+//        self.gamesTableView.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -53,14 +54,6 @@ class BasketballGamesViewController: BaseViewController {
         setNavigationDropdownMenu()
     }
 
-    func hideNavigationBar() {
-
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.isTranslucent = true
-        self.navigationController?.view.backgroundColor = UIColor.clear
-    }
-
     func setNavigationDropdownMenu() {
 
         menuView = BTNavigationDropdownMenu(title: items[Constant.CurrentCity.cityIndex], items: items as [AnyObject])
@@ -73,6 +66,12 @@ class BasketballGamesViewController: BaseViewController {
                 Constant.CurrentCity.cityName = city
             }
         }
+
+        menuView?.menuTitleColor = .white
+        menuView?.cellTextLabelColor = .white
+        menuView?.cellSelectionColor = .white
+        menuView?.cellSeparatorColor = .white
+        menuView?.cellBackgroundColor = .black
     }
 
     func createNewBasketballGameGame() {

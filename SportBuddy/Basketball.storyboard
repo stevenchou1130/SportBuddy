@@ -30,7 +30,6 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="ci7-T1-aoT" secondAttribute="trailing" id="0b2-sJ-jab"/>
                             <constraint firstItem="ci7-T1-aoT" firstAttribute="leading" secondItem="QO2-OD-UJE" secondAttribute="leading" id="FIp-2O-HhI"/>
@@ -68,7 +67,6 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="5Dn-RH-jgY" firstAttribute="top" secondItem="f4L-ca-Ygt" secondAttribute="bottom" id="plV-fD-xTp"/>
                             <constraint firstAttribute="trailing" secondItem="f4L-ca-Ygt" secondAttribute="trailing" id="rIc-9h-cRr"/>
@@ -182,7 +180,7 @@
         <!--Games-->
         <scene sceneID="d2d-Tb-JDW">
             <objects>
-                <navigationController storyboardIdentifier="GamesNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="bac-0g-vsq" customClass="BasketballGamesNavigationController" customModule="SportBuddy" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="BasketballGamesNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="bac-0g-vsq" customClass="BasketballGamesNavigationController" customModule="SportBuddy" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Games" id="kH5-om-PXZ"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="hgR-KB-MH3">
@@ -229,6 +227,10 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="c25-9t-6Gk">
+                        <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="CgV-pN-sDq" kind="relationship" relationship="rootViewController" id="Vzh-ub-7h6"/>
                     </connections>

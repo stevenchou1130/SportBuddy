@@ -20,18 +20,36 @@ class BasketballCourtsViewController: BaseViewController {
         super.viewDidLoad()
 
         setNavigationBar()
-
-        let nib = UINib(nibName: Constant.Cell.court, bundle: nil)
-        courtsTableView.register(nib, forCellReuseIdentifier: Constant.Cell.court)
-
+        setTableView()
         setCourts()
+
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        transparentizeNavigationBar(navigationController: self.navigationController)
+        self.automaticallyAdjustsScrollViewInsets = false
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
-        self.courtsTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        self.courtsTableView.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+//        self.courtsTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+//        self.courtsTableView.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+
+    }
+
+    func setTableView() {
+
+        let nib = UINib(nibName: Constant.Cell.court, bundle: nil)
+        courtsTableView.register(nib, forCellReuseIdentifier: Constant.Cell.court)
+
+        setTableViewBackground(tableView: courtsTableView,
+                               imageName: Constant.BackgroundName.basketball)
+
+        // Separator
+        courtsTableView.separatorStyle = .none
 
     }
 
@@ -56,7 +74,6 @@ class BasketballCourtsViewController: BaseViewController {
 
             NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
         }
-
     }
 }
 
@@ -82,6 +99,12 @@ extension BasketballCourtsViewController {
                 self?.setCourts()
             }
         }
+
+        menuView.menuTitleColor = .white
+        menuView.cellTextLabelColor = .white
+        menuView.cellSelectionColor = .white
+        menuView.cellSeparatorColor = .white
+        menuView.cellBackgroundColor = .black
     }
 }
 
@@ -102,7 +125,11 @@ extension BasketballCourtsViewController: UITableViewDelegate, UITableViewDataSo
             basketballCourts[indexPath.row].name != ""
             else { return UITableViewCell() }
 
+        cell.selectionStyle = .none
+        cell.layer.backgroundColor = UIColor.clear.cgColor
+
         cell.courtName.text = basketballCourts[indexPath.row].name
+        cell.courtName.textColor = .white
         cell.courtName.adjustsFontSizeToFitWidth = true
 
         return cell
@@ -122,6 +149,8 @@ extension BasketballCourtsViewController: UITableViewDelegate, UITableViewDataSo
 
         basketballCourtDetailViewController.basketballCourt = basketballCourts[indexPath.row]
         basketballCourtDetailViewController.navigationItem.title = cell.courtName.text!
+        basketballCourtDetailViewController.navigationController?.navigationBar.tintColor = .white
+
         self.navigationController?.pushViewController(basketballCourtDetailViewController, animated: true)
     }
 }

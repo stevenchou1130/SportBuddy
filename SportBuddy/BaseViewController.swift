@@ -40,6 +40,19 @@ class BaseViewController: UIViewController {
     }
 }
 
+// MARK: - Hide Navigation Bar
+extension BaseViewController {
+
+    func transparentizeNavigationBar(navigationController: UINavigationController?) {
+
+        let image = UIImage()
+        navigationController?.navigationBar.setBackgroundImage(image, for: UIBarMetrics.default)
+        navigationController?.navigationBar.shadowImage = image
+        navigationController?.navigationBar.isTranslucent = true
+        navigationController?.view.backgroundColor = UIColor.clear
+    }
+}
+
 // MARK: - Navigation Bar Back Button
 extension BaseViewController {
 
@@ -50,7 +63,7 @@ extension BaseViewController {
                                      target: self,
                                      action: action)
 
-        button.tintColor = UIColor.black
+        button.tintColor = .white
 
         return button
     }
@@ -58,13 +71,16 @@ extension BaseViewController {
 
 // MARK: - Hide Keyboard When Tapped Around
 extension BaseViewController {
+
     func hideKeyboardWhenTappedAround() {
+
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(BaseViewController.dismissKeyboard))
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
     }
 
     func dismissKeyboard() {
+
         view.endEditing(true)
     }
 }

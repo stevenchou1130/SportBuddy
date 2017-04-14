@@ -15,6 +15,7 @@ class BasketballGameDetailViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.automaticallyAdjustsScrollViewInsets = false
     }
 
     override func viewWillAppear(_ animated: Bool) {
