@@ -9,6 +9,7 @@
 import UIKit
 import MapKit
 import CoreLocation
+import NVActivityIndicatorView
 
 class BasketballCourtDetailViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -34,6 +35,12 @@ class BasketballCourtDetailViewController: BaseViewController, UITableViewDelega
         getWeather()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        self.tabBarController?.tabBar.isHidden = true
+    }
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
@@ -43,12 +50,22 @@ class BasketballCourtDetailViewController: BaseViewController, UITableViewDelega
         }
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        self.tabBarController?.tabBar.isHidden = false
+    }
+
     func getWeather() {
 
         if basketballCourt != nil {
             let courtAddress = basketballCourt!.address
             let index = courtAddress.index(courtAddress.startIndex, offsetBy: 5)
             let town = courtAddress.substring(to: index)
+
+            // MARK: Loading indicator
+            let activityData = ActivityData()
+            NVActivityIndicatorPresenter.sharedInstance.startAnimating(activityData)
 
             WeatherProvider.shared.getWeather(town: town, completion: { (weather, error) in
 
@@ -58,6 +75,8 @@ class BasketballCourtDetailViewController: BaseViewController, UITableViewDelega
                 } else {
                     print("Error in BasketballCourtDetailViewController - Get weather")
                 }
+
+                NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
             })
         } else {
             print("Error in BasketballCourtDetailViewController getWeather()")
@@ -169,7 +188,7 @@ class BasketballCourtDetailViewController: BaseViewController, UITableViewDelega
 
         } else {
 
-            cell.weatherImage.image = UIImage(named: Constant.ImageName.fixing)
+//            cell.weatherImage.image = UIImage(named: Constant.ImageName.fixing)
             cell.weatherLabel.text = ""
             cell.temperatureLabel.text = "天氣即時資訊更新維護中..."
             cell.updateTimeLabel.text = ""

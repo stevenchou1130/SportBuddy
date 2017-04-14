@@ -75,12 +75,11 @@ class SportItemsViewController: BaseViewController {
                         .child(Constant.FirebaseUser.nodeName)
                         .child(uid)
 
+        // MARK: Loading indicator
+        let activityData = ActivityData()
+        NVActivityIndicatorPresenter.sharedInstance.startAnimating(activityData)
+
         ref.observeSingleEvent(of: .value, with: { (snapshot) in
-
-            // MARK: Loading indicator
-            let activityData = ActivityData()
-            NVActivityIndicatorPresenter.sharedInstance.startAnimating(activityData)
-
             if snapshot.exists() {
 
                 guard
@@ -167,20 +166,34 @@ extension SportItemsViewController {
 
     func loadImage(imageUrlString: String, imageView: UIImageView) {
 
-        DispatchQueue.global().async {
+        var imageData: Data?
+
+        let workItem = DispatchWorkItem {
             if let imageUrl = URL(string: imageUrlString) {
                 do {
-                    let imageData = try Data(contentsOf: imageUrl)
-                    if let image = UIImage(data: imageData) {
-                        DispatchQueue.main.async {
-                            imageView.image = image
-                            NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
-                        }
-                    }
+                    imageData = try Data(contentsOf: imageUrl)
                 } catch {
                     self.errorHandle(errString: nil, error: error)
                 }
             }
+        }
+
+        workItem.perform()
+
+        let queue = DispatchQueue.global(qos: .default)
+
+        queue.async(execute: workItem)
+
+        workItem.notify(queue: DispatchQueue.main) {
+            guard
+                imageData != nil
+                else { return }
+
+            if let image = UIImage(data: imageData!) {
+                imageView.image = image
+            }
+
+            NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
         }
     }
 }
