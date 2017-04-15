@@ -55,8 +55,6 @@ extension BaseViewController {
                                      target: self,
                                      action: action)
 
-        button.tintColor = .white
-
         return button
     }
 }

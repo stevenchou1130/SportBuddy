@@ -55,8 +55,6 @@ extension BaseTableViewController {
                                      target: self,
                                      action: action)
 
-        button.tintColor = UIColor.black
-
         return button
     }
 }

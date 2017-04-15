@@ -23,7 +23,7 @@ class BasketballCourtDetailViewController: BaseViewController, UITableViewDelega
 
     // MARK: Property
 
-    var components: [Component] = [ .weather, .map, .comment, .comment, .comment ]
+    var components: [Component] = [ .weather, .map, .comment ]
 
     var basketballCourt: BasketballCourt?
     var weather: Weather?
@@ -88,6 +88,7 @@ class BasketballCourtDetailViewController: BaseViewController, UITableViewDelega
 
     func setView() {
 
+        // Background
         setBackground(imageName: Constant.BackgroundName.basketball)
 
         // Separator
