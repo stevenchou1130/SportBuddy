@@ -12,9 +12,9 @@ import NVActivityIndicatorView
 class NewBasketballGameViewController: BaseViewController {
 
     @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var timeTextField: UITextField!
     @IBOutlet weak var courtTextField: UITextField!
     @IBOutlet weak var levelTextField: UITextField!
+    @IBOutlet weak var timeTextField: UITextField!
 
     let levelArray = ["A", "B", "C", "D", "E"]
     var basketballCourts: [BasketballCourt] = []
@@ -51,9 +51,9 @@ class NewBasketballGameViewController: BaseViewController {
 
         setCourtPicker()
 
-        setTimePicker()
-
         setLevelPicker()
+
+        setTimePicker()
     }
 
     func setCourtPicker() {
@@ -145,6 +145,7 @@ class NewBasketballGameViewController: BaseViewController {
     }
 }
 
+// MARK: - Set Picker
 extension NewBasketballGameViewController: UIPickerViewDelegate, UIPickerViewDataSource {
 
     public func numberOfComponents(in pickerView: UIPickerView) -> Int {
