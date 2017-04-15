@@ -42,18 +42,25 @@ class BasketballGamesViewController: BaseViewController {
         self.automaticallyAdjustsScrollViewInsets = false
 
         // Separator
-        //        gamesTableView.separatorStyle = .none
+        // gamesTableView.separatorStyle = .none
     }
 
     func setNavigationBar() {
 
         transparentizeNavigationBar(navigationController: self.navigationController)
 
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "新增球賽", style: .done, target: self, action: #selector(createNewBasketballGameGame))
+        let backButton = createBackButton(action: #selector(backToSportItemsView))
+        self.navigationItem.leftBarButtonItem = backButton
 
-        navigationItem.leftBarButtonItem = createBackButton(action: #selector(backToSportItemsView))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "Button_New"), style: .done, target: self, action: #selector(createNewBasketballGameGame))
 
         setNavigationDropdownMenu()
+
+        /*
+        // todo: 看要不要調整 bar left button的位子
+        let flexible = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        self.navigationItem.setLeftBarButtonItems([flexible, backButton, flexible, flexible], animated: false)
+         */
     }
 
     func setNavigationDropdownMenu() {

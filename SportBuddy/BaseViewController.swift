@@ -50,7 +50,7 @@ extension BaseViewController {
 
     func createBackButton(action: Selector) -> UIBarButtonItem {
 
-        let button = UIBarButtonItem(title: Constant.ObjectValue.navigationBarBackItemTitle,
+        let button = UIBarButtonItem(image: #imageLiteral(resourceName: "Button_Home"),
                                      style: .done,
                                      target: self,
                                      action: action)

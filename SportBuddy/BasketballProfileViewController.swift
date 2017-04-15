@@ -13,7 +13,22 @@ class BasketballProfileViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setView()
+    }
+
+    func setView() {
+
+        setBackground(imageName: Constant.BackgroundName.basketball)
+
+        setNavigationBar()
+
+    }
+
+    func setNavigationBar() {
+
         navigationItem.leftBarButtonItem = createBackButton(action: #selector(backToSportItemsView))
+
+        transparentizeNavigationBar(navigationController: self.navigationController)
     }
 
 }
