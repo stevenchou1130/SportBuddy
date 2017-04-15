@@ -30,14 +30,6 @@ class BaseViewController: UIViewController {
         backgroundImage.image = UIImage(named: imageName)
         self.view.insertSubview(backgroundImage, at: 0)
     }
-
-    func setTableViewBackground(tableView: UITableView, imageName: String) {
-
-        let backgroundImage = UIImage(named: imageName)
-        let imageView = UIImageView(image: backgroundImage)
-        imageView.contentMode = .scaleAspectFill
-        tableView.backgroundView = imageView
-    }
 }
 
 // MARK: - Hide Navigation Bar

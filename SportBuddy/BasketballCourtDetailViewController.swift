@@ -23,7 +23,7 @@ class BasketballCourtDetailViewController: BaseViewController, UITableViewDelega
 
     // MARK: Property
 
-    var components: [Component] = [ .weather, .map, .comment ]
+    var components: [Component] = [ .weather, .map, .comment, .comment, .comment ]
 
     var basketballCourt: BasketballCourt?
     var weather: Weather?
@@ -33,6 +33,7 @@ class BasketballCourtDetailViewController: BaseViewController, UITableViewDelega
 
         setView()
         getWeather()
+
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -44,11 +45,12 @@ class BasketballCourtDetailViewController: BaseViewController, UITableViewDelega
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
-//        if let topPadding = navigationController?.navigationBar.frame.maxY {
-//            self.tableView.contentInset = UIEdgeInsets(top: topPadding, left: 0, bottom: 0, right: 0)
-//            self.tableView.scrollIndicatorInsets = UIEdgeInsets(top: topPadding, left: 0, bottom: 0, right: 0)
-//        }
-
+        if let topPadding = navigationController?.navigationBar.frame.maxY {
+            self.tableView.frame = CGRect(x: 0,
+                                          y: topPadding,
+                                          width: self.tableView.frame.width,
+                                          height: self.tableView.frame.height - topPadding)
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -86,8 +88,7 @@ class BasketballCourtDetailViewController: BaseViewController, UITableViewDelega
 
     func setView() {
 
-        setTableViewBackground(tableView: self.tableView,
-                               imageName: Constant.BackgroundName.basketball)
+        setBackground(imageName: Constant.BackgroundName.basketball)
 
         // Separator
         tableView.separatorStyle = .none
@@ -175,7 +176,7 @@ class BasketballCourtDetailViewController: BaseViewController, UITableViewDelega
     func setWeatherCell(cell: WeatherTableViewCell) -> WeatherTableViewCell {
 
         cell.selectionStyle = .none
-        cell.layer.backgroundColor = UIColor.clear.cgColor
+        cell.backgroundColor = .clear
 
         if let desc = weather?.desc,
             let weatherPicName = weather?.weatherPicName,
@@ -205,7 +206,7 @@ class BasketballCourtDetailViewController: BaseViewController, UITableViewDelega
     func setMapCell(cell: MapTableViewCell) -> MapTableViewCell {
 
         cell.selectionStyle = .none
-        cell.layer.backgroundColor = UIColor.clear.cgColor
+        cell.backgroundColor = .clear
 
         if let latitudeString = basketballCourt?.latitude,
             let longitudeString = basketballCourt?.longitude {
@@ -233,7 +234,7 @@ class BasketballCourtDetailViewController: BaseViewController, UITableViewDelega
     func setCommentCell(cell: CommentTableViewCell) -> CommentTableViewCell {
 
         cell.selectionStyle = .none
-        cell.layer.backgroundColor = UIColor.clear.cgColor
+        cell.backgroundColor = .clear
 
         if let address = basketballCourt?.address,
             let tel = basketballCourt?.tel {

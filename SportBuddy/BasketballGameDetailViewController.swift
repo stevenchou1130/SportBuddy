@@ -15,7 +15,7 @@ class BasketballGameDetailViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.automaticallyAdjustsScrollViewInsets = false
+        setView()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -27,16 +27,26 @@ class BasketballGameDetailViewController: BaseViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
-//        if let topPadding = navigationController?.navigationBar.frame.maxY {
-//            self.tableView.contentInset = UIEdgeInsets(top: topPadding, left: 0, bottom: 0, right: 0)
-//            self.tableView.scrollIndicatorInsets = UIEdgeInsets(top: topPadding, left: 0, bottom: 0, right: 0)
-//        }
+        if let topPadding = navigationController?.navigationBar.frame.maxY {
+            self.tableView.frame = CGRect(x: 0,
+                                          y: topPadding,
+                                          width: self.tableView.frame.width,
+                                          height: self.tableView.frame.height - topPadding)
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
         self.tabBarController?.tabBar.isHidden = false
+    }
+
+    func setView() {
+
+        setBackground(imageName: Constant.BackgroundName.basketball)
+
+        // Separator
+        tableView.separatorStyle = .none
     }
 }
 
@@ -55,7 +65,9 @@ extension BasketballGameDetailViewController: UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let cell = UITableViewCell()
-        cell.backgroundColor = UIColor.darkGray
+
+        cell.selectionStyle = .none
+        cell.backgroundColor = .clear
 
         return cell
     }

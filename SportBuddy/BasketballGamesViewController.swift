@@ -18,23 +18,7 @@ class BasketballGamesViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setNavigationBar()
-
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        transparentizeNavigationBar(navigationController: self.navigationController)
-        self.automaticallyAdjustsScrollViewInsets = false
-
-    }
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-
-//        self.gamesTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-//        self.gamesTableView.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        setView()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -45,7 +29,25 @@ class BasketballGamesViewController: BaseViewController {
         }
     }
 
+    func setView() {
+
+        setBackground(imageName: Constant.BackgroundName.basketball)
+
+        setNavigationBar()
+        setTableView()
+    }
+
+    func setTableView() {
+
+        self.automaticallyAdjustsScrollViewInsets = false
+
+        // Separator
+        //        gamesTableView.separatorStyle = .none
+    }
+
     func setNavigationBar() {
+
+        transparentizeNavigationBar(navigationController: self.navigationController)
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "新增球賽", style: .done, target: self, action: #selector(createNewBasketballGameGame))
 
@@ -93,11 +95,9 @@ extension BasketballGamesViewController: UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let cell = UITableViewCell()
-        cell.backgroundColor = UIColor.darkGray
 
-        //        guard
-        //            let cell = UITableViewCell()
-        //            else { return UITableViewCell() }
+        cell.selectionStyle = .none
+        cell.backgroundColor = .clear
 
         return cell
     }
@@ -110,12 +110,6 @@ extension BasketballGamesViewController: UITableViewDelegate, UITableViewDataSou
             let basketballGameDetailViewController = storyBoard.instantiateViewController(withIdentifier: Constant.Controller.basketballGameDetail) as? BasketballGameDetailViewController
             else { return }
 
-        //        guard
-        //            let cell = tableView.cellForRow(at: indexPath) as? CourtTableViewCell
-        //            else { return }
-
-        //        basketballCourtDetailTableViewController.basketballCourt = basketballCourts[indexPath.row]
-        //        basketballCourtDetailTableViewController.navigationItem.title = cell.courtName.text!
         self.navigationController?.pushViewController(basketballGameDetailViewController, animated: true)
     }
 }

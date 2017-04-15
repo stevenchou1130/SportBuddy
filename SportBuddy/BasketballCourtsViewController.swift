@@ -19,38 +19,27 @@ class BasketballCourtsViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setView()
+    }
+
+    func setView() {
+
+        setBackground(imageName: Constant.BackgroundName.basketball)
+
         setNavigationBar()
         setTableView()
         setCourts()
-
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        transparentizeNavigationBar(navigationController: self.navigationController)
-        self.automaticallyAdjustsScrollViewInsets = false
-    }
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-
-//        self.courtsTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-//        self.courtsTableView.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-
     }
 
     func setTableView() {
 
+        self.automaticallyAdjustsScrollViewInsets = false
+
         let nib = UINib(nibName: Constant.Cell.court, bundle: nil)
         courtsTableView.register(nib, forCellReuseIdentifier: Constant.Cell.court)
 
-        setTableViewBackground(tableView: courtsTableView,
-                               imageName: Constant.BackgroundName.basketball)
-
         // Separator
-        courtsTableView.separatorStyle = .none
-
+//        courtsTableView.separatorStyle = .none
     }
 
     func setCourts() {
@@ -82,8 +71,11 @@ extension BasketballCourtsViewController {
 
     func setNavigationBar() {
 
+        transparentizeNavigationBar(navigationController: self.navigationController)
+
         navigationItem.leftBarButtonItem = createBackButton(action: #selector(backToSportItemsView))
         setNavigationDropdownMenu()
+
     }
 
     func setNavigationDropdownMenu() {
@@ -126,7 +118,7 @@ extension BasketballCourtsViewController: UITableViewDelegate, UITableViewDataSo
             else { return UITableViewCell() }
 
         cell.selectionStyle = .none
-        cell.layer.backgroundColor = UIColor.clear.cgColor
+        cell.backgroundColor = .clear
 
         cell.courtName.text = basketballCourts[indexPath.row].name
         cell.courtName.textColor = .white
