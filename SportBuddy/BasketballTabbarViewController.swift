@@ -12,8 +12,17 @@ class BasketballTabbarViewController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tabBar.tintColor = UIColor.cyan
-        self.tabBar.barTintColor = UIColor.lightText
+
+        tabBar.barTintColor? = .clear
+        tabBar.backgroundImage = UIImage()
+        tabBar.isTranslucent = true
+
+        let tabBarControllerItems = tabBar.items
+
+        tabBarControllerItems?[0].image = #imageLiteral(resourceName: "Tabber_Basketball")
+        tabBarControllerItems?[1].image = #imageLiteral(resourceName: "Tabber_Basketball_Court")
+        tabBarControllerItems?[2].image = #imageLiteral(resourceName: "Tabber_Basketball_Player")
+
     }
 
 }
