@@ -14,7 +14,7 @@ import NVActivityIndicatorView
 class SignUpViewController: BaseViewController {
 
     @IBOutlet weak var userImage: UIImageView!
-    @IBOutlet weak var accountTextField: UITextField!
+    @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var genderLabel: UILabel!
@@ -47,10 +47,10 @@ class SignUpViewController: BaseViewController {
 
         setBackground(imageName: Constant.BackgroundName.basketball)
 
-        accountTextField.placeholder = "Emall address"
-        accountTextField.clearButtonMode = .whileEditing
-        accountTextField.keyboardType = .emailAddress
-        accountTextField.delegate = self
+        emailTextField.placeholder = "Emall address"
+        emailTextField.clearButtonMode = .whileEditing
+        emailTextField.keyboardType = .emailAddress
+        emailTextField.delegate = self
 
         passwordTextField.placeholder = "Password"
         passwordTextField.clearButtonMode = .whileEditing
@@ -142,19 +142,19 @@ class SignUpViewController: BaseViewController {
     // MARK: - Sign up
     @IBAction func signUp(_ sender: Any) {
 
-        let account = self.accountTextField.text!
+        let email = self.emailTextField.text!
         let password = self.passwordTextField.text!
         let name = self.nameTextField.text!
         let gender = self.userGender
 
-        if account != "" && password != "" && name != "" && userGender != "" {
+        if email != "" && password != "" && name != "" && userGender != "" {
 
             // MARK: Start loading indicator
             let activityData = ActivityData()
             NVActivityIndicatorPresenter.sharedInstance.startAnimating(activityData)
 
             // MARK: Save user info to firebase
-            FIRAuth.auth()?.createUser(withEmail: account, password: password) { (user, error) in
+            FIRAuth.auth()?.createUser(withEmail: email, password: password) { (user, error) in
 
                 if error != nil {
                     self.showErrorAlert(error: error, myErrorMsg: nil)
@@ -181,7 +181,7 @@ class SignUpViewController: BaseViewController {
                     let userPhotoURL = metadata?.downloadURL()?.absoluteString
 
                     self.setValueToFirebase(uid: uid,
-                                       account: account,
+                                       email: email,
                                        name: name,
                                        gender: gender,
                                        userPhotoURL: userPhotoURL)
@@ -193,13 +193,13 @@ class SignUpViewController: BaseViewController {
         }
     }
 
-    func setValueToFirebase(uid: String, account: String, name: String, gender: String, userPhotoURL: String?) {
+    func setValueToFirebase(uid: String, email: String, name: String, gender: String, userPhotoURL: String?) {
 
         let dbUrl = Constant.Firebase.dbUrl
         let ref = FIRDatabase.database().reference(fromURL: dbUrl)
         let usersReference = ref.child(Constant.FirebaseUser.nodeName).child(uid)
 
-        let value = [Constant.FirebaseUser.account: account,
+        let value = [Constant.FirebaseUser.email: email,
                      Constant.FirebaseUser.name: name,
                      Constant.FirebaseUser.gender: gender,
                      Constant.FirebaseUser.photoURL: userPhotoURL ?? ""]

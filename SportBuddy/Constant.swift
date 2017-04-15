@@ -71,7 +71,7 @@ struct Constant {
 
         static let nodeName = "Users"
         static let photoURL = "PhotoURL"
-        static let account = "Account"
+        static let email = "Email"
         static let name = "Name"
         static let gender = "Gender"
     }

@@ -13,7 +13,7 @@ import NVActivityIndicatorView
 class LoginViewController: BaseViewController {
 
     @IBOutlet weak var appNameLabel: UILabel!
-    @IBOutlet weak var accountTextfield: UITextField!
+    @IBOutlet weak var emailTexfield: UITextField!
     @IBOutlet weak var passwordTextfield: UITextField!
 
     override func viewDidLoad() {
@@ -59,14 +59,14 @@ class LoginViewController: BaseViewController {
 
     @IBAction func login(_ sender: Any) {
 
-        let account = accountTextfield.text!
+        let email = emailTexfield.text!
         let password = passwordTextfield.text!
 
         // MARK: Loading indicator
         let activityData = ActivityData()
         NVActivityIndicatorPresenter.sharedInstance.startAnimating(activityData)
 
-        FIRAuth.auth()?.signIn(withEmail: account, password: password, completion: { (_, error) in
+        FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (_, error) in
 
             if error != nil {
                 NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
@@ -104,7 +104,7 @@ class LoginViewController: BaseViewController {
         let activityData = ActivityData()
         NVActivityIndicatorPresenter.sharedInstance.startAnimating(activityData)
 
-        FIRAuth.auth()?.signIn(withEmail: "aaa@gmail.com", password: "aaaaaa", completion: { (_, error) in
+        FIRAuth.auth()?.signIn(withEmail: "steven@gmail.com", password: "aaaaaa", completion: { (_, error) in
 
             if error != nil {
                 NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
