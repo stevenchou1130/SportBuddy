@@ -99,6 +99,11 @@ class SportItemsViewController: BaseViewController {
 
     // todo: toEditProfile
     @IBAction func toEditProfile(_ sender: Any) {
+
+        let editProfileStorybard = UIStoryboard(name: Constant.Storyboard.editProfile, bundle: nil)
+        let editProfileViewController = editProfileStorybard.instantiateViewController(withIdentifier: Constant.Controller.editProfile) as? EditProfileViewController
+
+        self.present(editProfileViewController!, animated: true, completion: nil)
     }
 
     // todo: add another item button action

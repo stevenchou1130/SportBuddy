@@ -55,6 +55,8 @@
 		B0CE8AF21E8B640C003F0F12 /* CommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0CE8AF01E8B640C003F0F12 /* CommentTableViewCell.xib */; };
 		B0CE8AF61E8B67EF003F0F12 /* BasketballCourtDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0CE8AF51E8B67EF003F0F12 /* BasketballCourtDetail.storyboard */; };
 		B0CE8AF91E8B69F2003F0F12 /* Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CE8AF81E8B69F2003F0F12 /* Identifiable.swift */; };
+		B0D443CC1EA36EED008EF375 /* EditProfile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0D443CB1EA36EED008EF375 /* EditProfile.storyboard */; };
+		B0D443CE1EA36F79008EF375 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D443CD1EA36F79008EF375 /* EditProfileViewController.swift */; };
 		B0E8816F1E9FCAFE0093AA11 /* BasketballGamesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E8816E1E9FCAFE0093AA11 /* BasketballGamesViewController.swift */; };
 		B0E881711E9FD2AF0093AA11 /* BasketballCourtsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E881701E9FD2AF0093AA11 /* BasketballCourtsViewController.swift */; };
 		B0E881731E9FDBCF0093AA11 /* BasketballCourtDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E881721E9FDBCF0093AA11 /* BasketballCourtDetailViewController.swift */; };
@@ -114,6 +116,8 @@
 		B0CE8AF01E8B640C003F0F12 /* CommentTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentTableViewCell.xib; sourceTree = "<group>"; };
 		B0CE8AF51E8B67EF003F0F12 /* BasketballCourtDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = BasketballCourtDetail.storyboard; sourceTree = "<group>"; };
 		B0CE8AF81E8B69F2003F0F12 /* Identifiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Identifiable.swift; sourceTree = "<group>"; };
+		B0D443CB1EA36EED008EF375 /* EditProfile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EditProfile.storyboard; sourceTree = "<group>"; };
+		B0D443CD1EA36F79008EF375 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		B0E8816E1E9FCAFE0093AA11 /* BasketballGamesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasketballGamesViewController.swift; sourceTree = "<group>"; };
 		B0E881701E9FD2AF0093AA11 /* BasketballCourtsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasketballCourtsViewController.swift; sourceTree = "<group>"; };
 		B0E881721E9FDBCF0093AA11 /* BasketballCourtDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasketballCourtDetailViewController.swift; sourceTree = "<group>"; };
@@ -241,6 +245,7 @@
 				B076C55F1E89F5CF00F06390 /* User.swift */,
 				B06DB2C11E7FB36700DCF016 /* LoginViewController.swift */,
 				B0A8F4301E80B9C4006CBA96 /* SignUpViewController.swift */,
+				B0D443CD1EA36F79008EF375 /* EditProfileViewController.swift */,
 			);
 			name = User;
 			sourceTree = "<group>";
@@ -254,6 +259,7 @@
 				B037B2911E826905007FD483 /* SportItems.storyboard */,
 				B0754D601E839284006A5754 /* ChooseLevel.storyboard */,
 				B0754D621E83995A006A5754 /* Basketball.storyboard */,
+				B0D443CB1EA36EED008EF375 /* EditProfile.storyboard */,
 			);
 			name = Storyboard;
 			sourceTree = "<group>";
@@ -450,6 +456,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0D443CC1EA36EED008EF375 /* EditProfile.storyboard in Resources */,
 				B06DB2BA1E7FB28000DCF016 /* LaunchScreen.storyboard in Resources */,
 				B0754D631E83995A006A5754 /* Basketball.storyboard in Resources */,
 				B084BD301E7FCF8200DC48B2 /* Login.storyboard in Resources */,
@@ -546,6 +553,7 @@
 				B0971BC51E850EB10037E26D /* CourtTableViewCell.swift in Sources */,
 				B0754D5F1E83927A006A5754 /* ChooseLevelViewController.swift in Sources */,
 				B0072D071E9F54660056BC49 /* BasketballGame.swift in Sources */,
+				B0D443CE1EA36F79008EF375 /* EditProfileViewController.swift in Sources */,
 				B06DB2B01E7FB28000DCF016 /* AppDelegate.swift in Sources */,
 				B0754D581E837284006A5754 /* LTHRadioButton.swift in Sources */,
 				B0AD47101E8E242E00876498 /* Weather.swift in Sources */,
