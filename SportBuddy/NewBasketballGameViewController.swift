@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 import NVActivityIndicatorView
 
 class NewBasketballGameViewController: BaseViewController {
@@ -18,6 +19,7 @@ class NewBasketballGameViewController: BaseViewController {
 
     let levelArray = ["A", "B", "C", "D", "E"]
     var basketballCourts: [BasketballCourt] = []
+    var selectedCourt: BasketballCourt?
 
     let courtPicker = UIPickerView()
     let levelPicker = UIPickerView()
@@ -132,16 +134,61 @@ class NewBasketballGameViewController: BaseViewController {
 
             }
 
-            print("===============")
-            print("Constant.CurrentCity.cityName: \(Constant.CurrentCity.cityName)")
-            print("basketballCourts?.count: \(String(describing: basketballCourts?.count))")
-            print("===============")
             NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
         }
     }
 
     @IBAction func createGame(_ sender: Any) {
 
+        let name = nameTextField.text
+        let court = courtTextField.text
+        let level = levelTextField.text
+        let time = timeTextField.text
+
+        if name != "" && court != "" && level != "" && time != "" {
+
+            guard let uid = FIRAuth.auth()?.currentUser?.uid else { return }
+            let ref = FIRDatabase.database().reference().child(Constant.FirebaseGame.nodeName)
+
+            if selectedCourt != nil {
+
+                let selectedCourtInfo: [String: Any] = [
+                    Constant.CourtInfo.courtID: selectedCourt!.courtID,
+                    Constant.CourtInfo.name: selectedCourt!.name,
+                    Constant.CourtInfo.tel: selectedCourt!.tel ?? "",
+                    Constant.CourtInfo.address: selectedCourt!.address,
+                    Constant.CourtInfo.rate: selectedCourt!.rate,
+                    Constant.CourtInfo.rateCount: selectedCourt!.rateCount,
+                    Constant.CourtInfo.gymFuncList: selectedCourt!.gymFuncList,
+                    Constant.CourtInfo.latitude: selectedCourt!.latitude,
+                    Constant.CourtInfo.longitude: selectedCourt!.longitude
+                ]
+
+                let game: [String : Any] = [
+                    Constant.FirebaseGame.owner: uid,
+                    Constant.FirebaseGame.itme: Constant.SportItem.basketball,
+                    Constant.FirebaseGame.name: name!,
+                    Constant.FirebaseGame.time: time!,
+                    Constant.FirebaseGame.court: selectedCourtInfo,
+                    Constant.FirebaseGame.level: level!,
+                    Constant.FirebaseGame.members: [uid]
+                ]
+
+                let game1Ref = ref.childByAutoId()
+                game1Ref.setValue(game)
+
+                self.navigationController?.popViewController(animated: true)
+
+            } else {
+
+                return
+            }
+
+        } else {
+
+            self.showErrorAlert(error: nil,
+                                myErrorMsg: "Please fill out all information about you.")
+        }
     }
 }
 
@@ -191,6 +238,7 @@ extension NewBasketballGameViewController: UIPickerViewDelegate, UIPickerViewDat
         if pickerView == courtPicker {
 
             courtTextField.text = basketballCourts[row].name
+            selectedCourt = basketballCourts[row]
 
         } else if pickerView == levelPicker {
 

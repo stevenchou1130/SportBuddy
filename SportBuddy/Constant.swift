@@ -15,6 +15,11 @@ struct Constant {
         static let appName = NSLocalizedString("SportBuddy", comment: "")
     }
 
+    struct SportItem {
+
+        static let basketball = "Basketball"
+    }
+
     struct Storyboard {
 
         static let login = "Login"
@@ -58,15 +63,6 @@ struct Constant {
         static let dbUrl = "https://sportbuddy-710dd.firebaseio.com/"
     }
 
-    struct FirebaseLevel {
-
-        static let nodeName = "Levels"
-        static let host = "Host"
-        static let basketball = "Basketball"
-        static let baseball = "Baseball"
-        static let jogging = "Jogging"
-    }
-
     struct FirebaseUser {
 
         static let nodeName = "Users"
@@ -76,6 +72,27 @@ struct Constant {
         static let gender = "Gender"
     }
 
+    struct FirebaseLevel {
+
+        static let nodeName = "Levels"
+        static let host = "Host"
+        static let basketball = "Basketball"
+        static let baseball = "Baseball"
+        static let jogging = "Jogging"
+    }
+
+    struct FirebaseGame {
+
+        static let nodeName = "Games"
+        static let owner = "Owner"
+        static let itme = "Item"
+        static let name = "Name"
+        static let time = "Time"
+        static let court = "Court"
+        static let level = "Level"
+        static let members = "Members"
+    }
+
     struct FirebaseStorage {
 
         static let userPhoto = "UserPhoto"
@@ -83,7 +100,21 @@ struct Constant {
 
     struct Cell {
 
+        static let game = "GameTableViewCell"
         static let court = "CourtTableViewCell"
+    }
+
+    struct CourtInfo {
+
+        static let courtID = "GymID"
+        static let name = "Name"
+        static let tel = "OperationTel"
+        static let address = "Address"
+        static let rate = "Rate"
+        static let rateCount = "RateCount"
+        static let gymFuncList = "GymFuncList"
+        static let latitude = "Latitude"
+        static let longitude = "Longitude"
     }
 
     struct CourtAPIKey {

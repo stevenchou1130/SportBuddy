@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 import BTNavigationDropdownMenu
 
 class BasketballGamesViewController: BaseViewController {
@@ -35,11 +36,16 @@ class BasketballGamesViewController: BaseViewController {
 
         setNavigationBar()
         setTableView()
+
+        getGames()
     }
 
     func setTableView() {
 
         self.automaticallyAdjustsScrollViewInsets = false
+
+        let nib = UINib(nibName: Constant.Cell.game, bundle: nil)
+        gamesTableView.register(nib, forCellReuseIdentifier: Constant.Cell.game)
 
         // Separator
         // gamesTableView.separatorStyle = .none
@@ -81,6 +87,19 @@ class BasketballGamesViewController: BaseViewController {
         menuView?.cellSelectionColor = .white
         menuView?.cellSeparatorColor = .white
         menuView?.cellBackgroundColor = .black
+    }
+
+    func getGames() {
+
+        let ref = FIRDatabase.database().reference().child(Constant.FirebaseGame.nodeName)
+
+        ref.observeSingleEvent(of: .value, with: { (snapshot) in
+
+            if snapshot.exists() {
+
+                // todo: 將從firebase讀回來的資料，show在list上
+            }
+        })
     }
 
     func createNewBasketballGameGame() {
