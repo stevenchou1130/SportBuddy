@@ -233,6 +233,10 @@ open class DKImagePickerController : UINavigationController {
         getImageManager().groupDataManager.assetFetchOptions = self.createAssetFetchOptions()
         getImageManager().groupDataManager.showsEmptyAlbums = self.showsEmptyAlbums
         getImageManager().autoDownloadWhenAssetIsInCloud = self.autoDownloadWhenAssetIsInCloud
+
+        let nav = rootVC.navigationController?.navigationBar
+        nav?.barStyle = UIBarStyle.black
+        nav?.tintColor = UIColor.white
     }
     
     deinit {

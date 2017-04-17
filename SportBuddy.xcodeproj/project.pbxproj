@@ -44,6 +44,7 @@
 		B0AD470C1E8E23F000876498 /* Towns.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AD470B1E8E23F000876498 /* Towns.swift */; };
 		B0AD470E1E8E241B00876498 /* WeatherProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AD470D1E8E241A00876498 /* WeatherProvider.swift */; };
 		B0AD47101E8E242E00876498 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AD470F1E8E242E00876498 /* Weather.swift */; };
+		B0BF606F1EA46E4500E37C73 /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0BF606E1EA46E4500E37C73 /* LoadingIndicator.swift */; };
 		B0C59FD21E9C925B00214A1F /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C59FD11E9C925B00214A1F /* ActivityIndicator.swift */; };
 		B0C59FD81E9CC9D600214A1F /* GameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C59FD61E9CC9D600214A1F /* GameTableViewCell.swift */; };
 		B0C59FD91E9CC9D600214A1F /* GameTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0C59FD71E9CC9D600214A1F /* GameTableViewCell.xib */; };
@@ -105,6 +106,7 @@
 		B0AD470B1E8E23F000876498 /* Towns.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Towns.swift; sourceTree = "<group>"; };
 		B0AD470D1E8E241A00876498 /* WeatherProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherProvider.swift; sourceTree = "<group>"; };
 		B0AD470F1E8E242E00876498 /* Weather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
+		B0BF606E1EA46E4500E37C73 /* LoadingIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
 		B0C59FD11E9C925B00214A1F /* ActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		B0C59FD61E9CC9D600214A1F /* GameTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameTableViewCell.swift; sourceTree = "<group>"; };
 		B0C59FD71E9CC9D600214A1F /* GameTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GameTableViewCell.xib; sourceTree = "<group>"; };
@@ -209,6 +211,7 @@
 				B0CE8AE21E8B6248003F0F12 /* Weather */,
 				B0754D571E837284006A5754 /* LTHRadioButton.swift */,
 				B0C59FD11E9C925B00214A1F /* ActivityIndicator.swift */,
+				B0BF606E1EA46E4500E37C73 /* LoadingIndicator.swift */,
 			);
 			name = Component;
 			sourceTree = "<group>";
@@ -579,6 +582,7 @@
 				B0C59FD21E9C925B00214A1F /* ActivityIndicator.swift in Sources */,
 				B0CE8AF91E8B69F2003F0F12 /* Identifiable.swift in Sources */,
 				B0754D7C1E83C5C6006A5754 /* BasketballProfileNavigationController.swift in Sources */,
+				B0BF606F1EA46E4500E37C73 /* LoadingIndicator.swift in Sources */,
 				B0AB6FFD1E88C5900060D80E /* BasketballCourtModel.swift in Sources */,
 				B0E881711E9FD2AF0093AA11 /* BasketballCourtsViewController.swift in Sources */,
 			);
