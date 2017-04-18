@@ -14,12 +14,21 @@ class BasketballGamesViewController: BaseViewController {
 
     @IBOutlet weak var gamesTableView: UITableView!
 
+    let loadingIndicator = LoadingIndicator()
     var menuView: BTNavigationDropdownMenu?
+
+    var gamesList: [AnyObject] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setView()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        getGames()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -36,8 +45,6 @@ class BasketballGamesViewController: BaseViewController {
 
         setNavigationBar()
         setTableView()
-
-        getGames()
     }
 
     func setTableView() {
@@ -91,6 +98,8 @@ class BasketballGamesViewController: BaseViewController {
 
     func getGames() {
 
+        loadingIndicator.start()
+
         let ref = FIRDatabase.database().reference().child(Constant.FirebaseGame.nodeName)
 
         ref.observeSingleEvent(of: .value, with: { (snapshot) in
@@ -98,9 +107,95 @@ class BasketballGamesViewController: BaseViewController {
             if snapshot.exists() {
 
                 // todo: 將從firebase讀回來的資料，show在list上
+                // todo: 過期的game要刪掉 ( 可以先不show在list上，用另個App刪除 ) -> done
+                // todo: 拉出來成一個game provider
+                print("snapshot.exists()")
+
+                if let snaps = snapshot.children.allObjects as? [FIRDataSnapshot] {
+                    for snap in snaps {
+
+                        // Don't show overtime games and add to list
+                        if let gameInfo = snap.value as? NSDictionary,
+                            let gameTime = gameInfo[Constant.FirebaseGame.time] as? String {
+
+                            let formatter = DateFormatter()
+                            formatter.dateFormat = "yyyy/MM/dd HH:mm"
+                            formatter.locale = Locale.current
+
+                            let currectTime = formatter.string(from: Date())
+
+                            var isNotRepetition = true
+
+                            for gameDate in self.gamesList {
+
+                                guard
+                                    let game = gameDate as? NSDictionary
+                                    else { return }
+
+                                // Judgement - Having same item or not
+                                if game == gameInfo {
+                                    isNotRepetition = false
+                                }
+                            }
+
+                            if gameTime > currectTime && isNotRepetition {
+                                self.gamesList.append(gameInfo)
+                            }
+
+                        } else {
+                            print("== Parser is having question in BasketballGamesViewController01")
+                        }
+                    }
+
+                    self.gamesTableView.reloadData()
+
+                } else {
+                    print("== Parser is having question in BasketballGamesViewController02")
+                }
+
+                self.loadingIndicator.stop()
+
+            } else {
+                print("snapshot does not exist")
+                self.loadingIndicator.stop()
             }
         })
     }
+
+//    func parserCourtInfo(_ gameCourt: NSDictionary) {
+//
+//        if let gameCourt = gameCourt[Constant.FirebaseGame.court] as? NSDictionary,
+//            let gameMembers = gameCourt[Constant.FirebaseGame.members] as? NSArray,
+//            let gameName = gameCourt[Constant.FirebaseGame.name] as? String,
+//            let gameItem = gameCourt[Constant.FirebaseGame.itme] as? String,
+//            let gameOwner = gameCourt[Constant.FirebaseGame.owner] as? String,
+//            let gameTime = gameCourt[Constant.FirebaseGame.time] as? String,
+//            let gameLevel = gameCourt[Constant.FirebaseGame.level] as? String {
+//
+//            print("==========")
+//            print("gameName: \(gameName)")
+//            print("gameLevel: \(gameLevel)")
+//            print("gameCourt.count: \(gameCourt.count)")
+//            print("gameMembers.count: \(gameMembers.count)")
+//        }
+//
+//        var basketballCourt: BasketballCourt?
+//
+//        if let address = gameCourt[Constant.CourtInfo.address] as? String,
+//            let name = gameCourt[Constant.CourtInfo.name] as? String,
+//            let gymFuncList = gameCourt[Constant.CourtInfo.gymFuncList] as? String,
+//            let courtID = gameCourt[Constant.CourtInfo.courtID] as? Int,
+//            let latitude = gameCourt[Constant.CourtInfo.latitude] as? String,
+//            let longitude = gameCourt[Constant.CourtInfo.longitude] as? String,
+//            let tel = gameCourt[Constant.CourtInfo.tel] as? String?,
+//            let rate = gameCourt[Constant.CourtInfo.rate] as? Int,
+//            let rateCount = gameCourt[Constant.CourtInfo.rateCount] as? Int {
+//
+//            basketballCourt = BasketballCourt(courtID: courtID, name: name, tel: tel, address: address, rate: rate, rateCount: rateCount, gymFuncList: gymFuncList, latitude: latitude, longitude: longitude)
+//        }
+//
+//        return basketballCourt
+//    }
 
     func createNewBasketballGameGame() {
         let storyBoard = UIStoryboard(name: Constant.Storyboard.newBasketballGame, bundle: nil)
@@ -113,17 +208,63 @@ class BasketballGamesViewController: BaseViewController {
 // MARK: TableView
 extension BasketballGamesViewController: UITableViewDelegate, UITableViewDataSource {
 
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+
+        return GameTableViewCell.height
+    }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        return 30
+        return gamesList.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        let cell = UITableViewCell()
+        guard
+            let cell = tableView.dequeueReusableCell(withIdentifier: Constant.Cell.game,
+                                                     for: indexPath) as? GameTableViewCell
+            else { return UITableViewCell() }
 
         cell.selectionStyle = .none
         cell.backgroundColor = .clear
+
+        let gameInfo = gamesList[indexPath.row]
+
+        if let gameCourt = gameInfo[Constant.FirebaseGame.court] as? NSDictionary,
+            let gameMembers = gameInfo[Constant.FirebaseGame.members] as? NSArray,
+            let gameName = gameInfo[Constant.FirebaseGame.name] as? String,
+            let gameItem = gameInfo[Constant.FirebaseGame.itme] as? String,
+            let gameOwner = gameInfo[Constant.FirebaseGame.owner] as? String,
+            let gameTime = gameInfo[Constant.FirebaseGame.time] as? String,
+            let gameLevel = gameInfo[Constant.FirebaseGame.level] as? String {
+
+            if let courtName = gameCourt[Constant.CourtInfo.name] as? String {
+                cell.location.text = courtName
+            } else {
+                print("== Can't parser court name")
+            }
+
+            cell.name.text = gameName
+            cell.peopleNum.text = String(gameMembers.count)
+            cell.time.text = gameTime
+
+            switch gameLevel {
+
+            case "A":
+                cell.levelImage.image = #imageLiteral(resourceName: "Level_A")
+            case "B":
+                cell.levelImage.image = #imageLiteral(resourceName: "Level_B")
+            case "C":
+                cell.levelImage.image = #imageLiteral(resourceName: "Level_C")
+            case "D":
+                cell.levelImage.image = #imageLiteral(resourceName: "Level_D")
+            case "E":
+                cell.levelImage.image = #imageLiteral(resourceName: "Level_E")
+
+            default:
+                cell.levelImage.image = #imageLiteral(resourceName: "Level_C")
+            }
+        }
 
         return cell
     }

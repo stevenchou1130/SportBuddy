@@ -97,7 +97,6 @@ class SportItemsViewController: BaseViewController {
         })
     }
 
-    // todo: toEditProfile
     @IBAction func toEditProfile(_ sender: Any) {
 
         let editProfileStorybard = UIStoryboard(name: Constant.Storyboard.editProfile, bundle: nil)

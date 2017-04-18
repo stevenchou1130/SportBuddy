@@ -92,6 +92,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="cellView" destination="H2p-sc-9uM" id="xR0-We-WfJ"/>
                 <outlet property="levelImage" destination="7Gp-W4-gwj" id="pZC-vd-DGb"/>
                 <outlet property="location" destination="s7w-ls-LIu" id="uqi-GL-2dI"/>
                 <outlet property="name" destination="0Io-lh-T4G" id="L0T-1S-emz"/>

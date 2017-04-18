@@ -110,7 +110,7 @@ class NewBasketballGameViewController: BaseViewController {
 
         // format date
         let formatter = DateFormatter()
-        formatter.dateFormat = "MM/dd HH:mm"
+        formatter.dateFormat = "yyyy/MM/dd HH:mm"
 
         timeTextField.text = formatter.string(from: timePicker.date)
         self.view.endEditing(true)
@@ -203,11 +203,11 @@ extension NewBasketballGameViewController: UIPickerViewDelegate, UIPickerViewDat
 
         if pickerView == courtPicker {
 
-            return basketballCourts.count
+            return basketballCourts.count + 1
 
         } else if pickerView == levelPicker {
 
-            return levelArray.count
+            return levelArray.count + 1
 
         } else {
 
@@ -218,13 +218,17 @@ extension NewBasketballGameViewController: UIPickerViewDelegate, UIPickerViewDat
 
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
 
+        if row == 0 {
+            return "請選擇"
+        }
+
         if pickerView == courtPicker {
 
-            return basketballCourts[row].name
+            return basketballCourts[row - 1].name
 
         } else if pickerView == levelPicker {
 
-            return levelArray[row]
+            return levelArray[row - 1]
 
         } else {
 
@@ -237,13 +241,20 @@ extension NewBasketballGameViewController: UIPickerViewDelegate, UIPickerViewDat
 
         if pickerView == courtPicker {
 
-            courtTextField.text = basketballCourts[row].name
-            selectedCourt = basketballCourts[row]
+            if row == 0 {
+                courtTextField.text = ""
+            } else {
+                courtTextField.text = basketballCourts[row - 1].name
+                selectedCourt = basketballCourts[row - 1]
+            }
 
         } else if pickerView == levelPicker {
 
-            levelTextField.text = levelArray[row]
-
+            if row == 0 {
+                levelTextField.text = ""
+            } else {
+                levelTextField.text = levelArray[row - 1]
+            }
         }
     }
 
