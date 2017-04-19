@@ -106,9 +106,12 @@ class BasketballGamesViewController: BaseViewController {
 
             if snapshot.exists() {
 
-                // todo: 將從firebase讀回來的資料，show在list上
-                // todo: 過期的game要刪掉 ( 可以先不show在list上，用另個App刪除 ) -> done
+                // todo: 顯示顯示所在城市的game
                 // todo: 拉出來成一個game provider
+
+                // todo: 過期的game要刪掉 ( 可以先不show在list上，用另個App刪除 ) -> done
+                // todo: 將從firebase讀回來的資料，show在list上 -> done
+
                 print("snapshot.exists()")
 
                 if let snaps = snapshot.children.allObjects as? [FIRDataSnapshot] {
@@ -210,7 +213,10 @@ extension BasketballGamesViewController: UITableViewDelegate, UITableViewDataSou
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 
-        return GameTableViewCell.height
+        tableView.estimatedRowHeight = 44.0
+        tableView.rowHeight = UITableViewAutomaticDimension
+
+        return UITableViewAutomaticDimension
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

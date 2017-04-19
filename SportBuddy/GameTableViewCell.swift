@@ -26,7 +26,6 @@ class GameTableViewCell: UITableViewCell {
         cellView.backgroundColor = .clear
 
         levelImage.layer.cornerRadius = levelImage.bounds.size.height / 2.0
-        levelImage.layer.borderWidth = 1.0
         levelImage.layer.masksToBounds = true
     }
 
