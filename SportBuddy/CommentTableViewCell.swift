@@ -16,15 +16,19 @@ class CommentTableViewCell: UITableViewCell, Identifiable {
 
     static let height: CGFloat = 200.0
 
+    @IBOutlet weak var cellView: UIView!
+    @IBOutlet weak var courtName: UILabel!
     @IBOutlet weak var courtAddress: UILabel!
     @IBOutlet weak var courtTel: UILabel!
+    @IBOutlet weak var addressLabel: UILabel!
+    @IBOutlet weak var telLabel: UILabel!
+    @IBOutlet weak var courtLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
 
-        courtAddress.textColor = .white
-        courtTel.textColor = .white
+        cellView.backgroundColor = .clear
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

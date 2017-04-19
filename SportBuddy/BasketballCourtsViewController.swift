@@ -135,13 +135,7 @@ extension BasketballCourtsViewController: UITableViewDelegate, UITableViewDataSo
             let basketballCourtDetailViewController = storyBoard.instantiateViewController(withIdentifier: Constant.Controller.basketballCourtDetail) as? BasketballCourtDetailViewController
             else { return }
 
-        guard
-            let cell = tableView.cellForRow(at: indexPath) as? CourtTableViewCell
-            else { return }
-
         basketballCourtDetailViewController.basketballCourt = basketballCourts[indexPath.row]
-        basketballCourtDetailViewController.navigationItem.title = cell.courtName.text!
-        basketballCourtDetailViewController.navigationController?.navigationBar.tintColor = .white
 
         self.navigationController?.pushViewController(basketballCourtDetailViewController, animated: true)
     }

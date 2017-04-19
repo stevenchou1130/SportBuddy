@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -25,19 +25,19 @@
                             <constraint firstAttribute="width" secondItem="ADd-87-VAq" secondAttribute="height" multiplier="1:1" id="Icq-0D-aeq"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="Temperature" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hKh-lC-K9k">
-                        <rect key="frame" x="134.5" y="55.5" width="230.5" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="Temperature" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hKh-lC-K9k">
+                        <rect key="frame" x="134.5" y="51" width="230.5" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Update time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9IX-rj-Gvh">
-                        <rect key="frame" x="134.5" y="96.5" width="230.5" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Update time" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9IX-rj-Gvh">
+                        <rect key="frame" x="135" y="87" width="230" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weather" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qWS-uC-YJ7">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weather" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qWS-uC-YJ7">
                         <rect key="frame" x="134.5" y="15" width="230.5" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
@@ -50,11 +50,11 @@
                     <constraint firstItem="hKh-lC-K9k" firstAttribute="trailing" secondItem="qWS-uC-YJ7" secondAttribute="trailing" id="ZSN-pf-k9e"/>
                     <constraint firstItem="qWS-uC-YJ7" firstAttribute="leading" secondItem="ADd-87-VAq" secondAttribute="trailing" constant="15" id="bOo-YZ-iXn"/>
                     <constraint firstItem="hKh-lC-K9k" firstAttribute="leading" secondItem="qWS-uC-YJ7" secondAttribute="leading" id="beI-8t-AmP"/>
-                    <constraint firstItem="hKh-lC-K9k" firstAttribute="top" secondItem="qWS-uC-YJ7" secondAttribute="bottom" constant="20" id="fI2-9q-VlK"/>
+                    <constraint firstItem="hKh-lC-K9k" firstAttribute="top" secondItem="qWS-uC-YJ7" secondAttribute="bottom" constant="15" id="fI2-9q-VlK"/>
                     <constraint firstItem="qWS-uC-YJ7" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="jkg-gO-Nhm"/>
                     <constraint firstItem="ADd-87-VAq" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="lAU-E0-Pgu"/>
                     <constraint firstAttribute="trailing" secondItem="qWS-uC-YJ7" secondAttribute="trailing" constant="10" id="n8h-Tc-IYm"/>
-                    <constraint firstItem="9IX-rj-Gvh" firstAttribute="top" secondItem="hKh-lC-K9k" secondAttribute="bottom" constant="20" id="oVn-vU-p8u"/>
+                    <constraint firstItem="9IX-rj-Gvh" firstAttribute="top" secondItem="hKh-lC-K9k" secondAttribute="bottom" constant="15" id="oVn-vU-p8u"/>
                     <constraint firstItem="ADd-87-VAq" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="rfa-ct-4or"/>
                     <constraint firstItem="ADd-87-VAq" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="ut1-Dh-d6n"/>
                 </constraints>

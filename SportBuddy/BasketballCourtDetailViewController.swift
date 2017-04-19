@@ -88,6 +88,9 @@ class BasketballCourtDetailViewController: BaseViewController, UITableViewDelega
 
     func setView() {
 
+        // NavigationItem
+        self.navigationItem.title = "球場資訊"
+
         // Background
         setBackground(imageName: Constant.BackgroundName.basketball)
 
@@ -187,7 +190,7 @@ class BasketballCourtDetailViewController: BaseViewController, UITableViewDelega
             cell.weatherImage.image = UIImage(named: weatherPicName)
             cell.weatherLabel.text = "天氣 : \(desc)"
             cell.temperatureLabel.text = "氣溫 : \(temperature) 度"
-            cell.updateTimeLabel.text = "更新時間 : \(time)"
+            cell.updateTimeLabel.text = "更新時間 : \n \(time)"
 
         } else {
 
@@ -196,10 +199,6 @@ class BasketballCourtDetailViewController: BaseViewController, UITableViewDelega
             cell.temperatureLabel.text = "天氣即時資訊更新維護中..."
             cell.updateTimeLabel.text = ""
         }
-
-        cell.weatherLabel.adjustsFontSizeToFitWidth = true
-        cell.temperatureLabel.adjustsFontSizeToFitWidth = true
-        cell.updateTimeLabel.adjustsFontSizeToFitWidth = true
 
         return cell
     }
@@ -237,19 +236,22 @@ class BasketballCourtDetailViewController: BaseViewController, UITableViewDelega
         cell.selectionStyle = .none
         cell.backgroundColor = .clear
 
-        if let address = basketballCourt?.address,
+        if let name = basketballCourt?.name,
+            let address = basketballCourt?.address,
             let tel = basketballCourt?.tel {
 
-            cell.courtAddress.text = "地址 : \(address)"
-            cell.courtTel.text = "電話 : \(tel)"
+            cell.courtName.text = "\(name)"
+            cell.courtAddress.text = "\(address)"
+            cell.courtTel.text = "\(tel)"
 
         } else {
-            cell.courtAddress.text = "場地資料更新維護中..."
+            cell.addressLabel.text = ""
+            cell.courtLabel.text = ""
+            cell.telLabel.text = ""
+            cell.courtName.text = "場地資料更新維護中..."
+            cell.courtAddress.text = ""
             cell.courtTel.text = ""
         }
-
-        cell.courtAddress.adjustsFontSizeToFitWidth = true
-        cell.courtTel.adjustsFontSizeToFitWidth = true
 
         return cell
     }

@@ -112,8 +112,6 @@ class BasketballGamesViewController: BaseViewController {
                 // todo: 過期的game要刪掉 ( 可以先不show在list上，用另個App刪除 ) -> done
                 // todo: 將從firebase讀回來的資料，show在list上 -> done
 
-                print("snapshot.exists()")
-
                 if let snaps = snapshot.children.allObjects as? [FIRDataSnapshot] {
                     for snap in snaps {
 
@@ -165,41 +163,6 @@ class BasketballGamesViewController: BaseViewController {
         })
     }
 
-//    func parserCourtInfo(_ gameCourt: NSDictionary) {
-//
-//        if let gameCourt = gameCourt[Constant.FirebaseGame.court] as? NSDictionary,
-//            let gameMembers = gameCourt[Constant.FirebaseGame.members] as? NSArray,
-//            let gameName = gameCourt[Constant.FirebaseGame.name] as? String,
-//            let gameItem = gameCourt[Constant.FirebaseGame.itme] as? String,
-//            let gameOwner = gameCourt[Constant.FirebaseGame.owner] as? String,
-//            let gameTime = gameCourt[Constant.FirebaseGame.time] as? String,
-//            let gameLevel = gameCourt[Constant.FirebaseGame.level] as? String {
-//
-//            print("==========")
-//            print("gameName: \(gameName)")
-//            print("gameLevel: \(gameLevel)")
-//            print("gameCourt.count: \(gameCourt.count)")
-//            print("gameMembers.count: \(gameMembers.count)")
-//        }
-//
-//        var basketballCourt: BasketballCourt?
-//
-//        if let address = gameCourt[Constant.CourtInfo.address] as? String,
-//            let name = gameCourt[Constant.CourtInfo.name] as? String,
-//            let gymFuncList = gameCourt[Constant.CourtInfo.gymFuncList] as? String,
-//            let courtID = gameCourt[Constant.CourtInfo.courtID] as? Int,
-//            let latitude = gameCourt[Constant.CourtInfo.latitude] as? String,
-//            let longitude = gameCourt[Constant.CourtInfo.longitude] as? String,
-//            let tel = gameCourt[Constant.CourtInfo.tel] as? String?,
-//            let rate = gameCourt[Constant.CourtInfo.rate] as? Int,
-//            let rateCount = gameCourt[Constant.CourtInfo.rateCount] as? Int {
-//
-//            basketballCourt = BasketballCourt(courtID: courtID, name: name, tel: tel, address: address, rate: rate, rateCount: rateCount, gymFuncList: gymFuncList, latitude: latitude, longitude: longitude)
-//        }
-//
-//        return basketballCourt
-//    }
-
     func createNewBasketballGameGame() {
         let storyBoard = UIStoryboard(name: Constant.Storyboard.newBasketballGame, bundle: nil)
         guard let newBasketballGameViewController = storyBoard.instantiateViewController(withIdentifier: Constant.Controller.newBasketballGame) as? NewBasketballGameViewController else { return }
@@ -239,8 +202,6 @@ extension BasketballGamesViewController: UITableViewDelegate, UITableViewDataSou
         if let gameCourt = gameInfo[Constant.FirebaseGame.court] as? NSDictionary,
             let gameMembers = gameInfo[Constant.FirebaseGame.members] as? NSArray,
             let gameName = gameInfo[Constant.FirebaseGame.name] as? String,
-            let gameItem = gameInfo[Constant.FirebaseGame.itme] as? String,
-            let gameOwner = gameInfo[Constant.FirebaseGame.owner] as? String,
             let gameTime = gameInfo[Constant.FirebaseGame.time] as? String,
             let gameLevel = gameInfo[Constant.FirebaseGame.level] as? String {
 
@@ -282,6 +243,8 @@ extension BasketballGamesViewController: UITableViewDelegate, UITableViewDataSou
         guard
             let basketballGameDetailViewController = storyBoard.instantiateViewController(withIdentifier: Constant.Controller.basketballGameDetail) as? BasketballGameDetailViewController
             else { return }
+
+        basketballGameDetailViewController.gameInfo = gamesList[indexPath.row]
 
         self.navigationController?.pushViewController(basketballGameDetailViewController, animated: true)
     }
