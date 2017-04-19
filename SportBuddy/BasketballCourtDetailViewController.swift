@@ -49,7 +49,7 @@ class BasketballCourtDetailViewController: BaseViewController, UITableViewDelega
             self.tableView.frame = CGRect(x: 0,
                                           y: topPadding,
                                           width: self.tableView.frame.width,
-                                          height: self.tableView.frame.height - topPadding)
+                                          height: self.tableView.frame.height)
         }
     }
 

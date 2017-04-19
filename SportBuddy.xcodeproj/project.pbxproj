@@ -58,6 +58,12 @@
 		B0CE8AF91E8B69F2003F0F12 /* Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CE8AF81E8B69F2003F0F12 /* Identifiable.swift */; };
 		B0D443CC1EA36EED008EF375 /* EditProfile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0D443CB1EA36EED008EF375 /* EditProfile.storyboard */; };
 		B0D443CE1EA36F79008EF375 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D443CD1EA36F79008EF375 /* EditProfileViewController.swift */; };
+		B0DC15AF1EA7437C00443F9D /* MembersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0DC15AD1EA7437C00443F9D /* MembersTableViewCell.swift */; };
+		B0DC15B01EA7437C00443F9D /* MembersTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0DC15AE1EA7437C00443F9D /* MembersTableViewCell.xib */; };
+		B0DC15B71EA747D500443F9D /* MemberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0DC15B51EA747D500443F9D /* MemberCollectionViewCell.swift */; };
+		B0DC15B81EA747D500443F9D /* MemberCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0DC15B61EA747D500443F9D /* MemberCollectionViewCell.xib */; };
+		B0DC15BC1EA75BA600443F9D /* JoinOrLeaveTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0DC15BA1EA75BA600443F9D /* JoinOrLeaveTableViewCell.swift */; };
+		B0DC15BD1EA75BA600443F9D /* JoinOrLeaveTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0DC15BB1EA75BA600443F9D /* JoinOrLeaveTableViewCell.xib */; };
 		B0E8816F1E9FCAFE0093AA11 /* BasketballGamesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E8816E1E9FCAFE0093AA11 /* BasketballGamesViewController.swift */; };
 		B0E881711E9FD2AF0093AA11 /* BasketballCourtsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E881701E9FD2AF0093AA11 /* BasketballCourtsViewController.swift */; };
 		B0E881731E9FDBCF0093AA11 /* BasketballCourtDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E881721E9FDBCF0093AA11 /* BasketballCourtDetailViewController.swift */; };
@@ -120,6 +126,12 @@
 		B0CE8AF81E8B69F2003F0F12 /* Identifiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Identifiable.swift; sourceTree = "<group>"; };
 		B0D443CB1EA36EED008EF375 /* EditProfile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EditProfile.storyboard; sourceTree = "<group>"; };
 		B0D443CD1EA36F79008EF375 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
+		B0DC15AD1EA7437C00443F9D /* MembersTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembersTableViewCell.swift; sourceTree = "<group>"; };
+		B0DC15AE1EA7437C00443F9D /* MembersTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MembersTableViewCell.xib; sourceTree = "<group>"; };
+		B0DC15B51EA747D500443F9D /* MemberCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberCollectionViewCell.swift; sourceTree = "<group>"; };
+		B0DC15B61EA747D500443F9D /* MemberCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MemberCollectionViewCell.xib; sourceTree = "<group>"; };
+		B0DC15BA1EA75BA600443F9D /* JoinOrLeaveTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoinOrLeaveTableViewCell.swift; sourceTree = "<group>"; };
+		B0DC15BB1EA75BA600443F9D /* JoinOrLeaveTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JoinOrLeaveTableViewCell.xib; sourceTree = "<group>"; };
 		B0E8816E1E9FCAFE0093AA11 /* BasketballGamesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasketballGamesViewController.swift; sourceTree = "<group>"; };
 		B0E881701E9FD2AF0093AA11 /* BasketballCourtsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasketballCourtsViewController.swift; sourceTree = "<group>"; };
 		B0E881721E9FDBCF0093AA11 /* BasketballCourtDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasketballCourtDetailViewController.swift; sourceTree = "<group>"; };
@@ -158,6 +170,8 @@
 		B0002A561E9E81DE00CD2241 /* BasketballGameDetail */ = {
 			isa = PBXGroup;
 			children = (
+				B0DC15B91EA75B7400443F9D /* JoinOrLeave */,
+				B0DC15AC1EA7432E00443F9D /* Members */,
 				B0E881741E9FE3820093AA11 /* BasketballGameDetailViewController.swift */,
 				B0002A571E9E820700CD2241 /* BasketballGameDetail.storyboard */,
 			);
@@ -395,6 +409,26 @@
 			name = Library;
 			sourceTree = "<group>";
 		};
+		B0DC15AC1EA7432E00443F9D /* Members */ = {
+			isa = PBXGroup;
+			children = (
+				B0DC15AD1EA7437C00443F9D /* MembersTableViewCell.swift */,
+				B0DC15AE1EA7437C00443F9D /* MembersTableViewCell.xib */,
+				B0DC15B51EA747D500443F9D /* MemberCollectionViewCell.swift */,
+				B0DC15B61EA747D500443F9D /* MemberCollectionViewCell.xib */,
+			);
+			name = Members;
+			sourceTree = "<group>";
+		};
+		B0DC15B91EA75B7400443F9D /* JoinOrLeave */ = {
+			isa = PBXGroup;
+			children = (
+				B0DC15BA1EA75BA600443F9D /* JoinOrLeaveTableViewCell.swift */,
+				B0DC15BB1EA75BA600443F9D /* JoinOrLeaveTableViewCell.xib */,
+			);
+			name = JoinOrLeave;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -459,13 +493,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0DC15B81EA747D500443F9D /* MemberCollectionViewCell.xib in Resources */,
 				B0D443CC1EA36EED008EF375 /* EditProfile.storyboard in Resources */,
 				B06DB2BA1E7FB28000DCF016 /* LaunchScreen.storyboard in Resources */,
 				B0754D631E83995A006A5754 /* Basketball.storyboard in Resources */,
 				B084BD301E7FCF8200DC48B2 /* Login.storyboard in Resources */,
 				B0754D611E839284006A5754 /* ChooseLevel.storyboard in Resources */,
+				B0DC15BD1EA75BA600443F9D /* JoinOrLeaveTableViewCell.xib in Resources */,
 				B0CE8AF61E8B67EF003F0F12 /* BasketballCourtDetail.storyboard in Resources */,
 				B0CE8AE81E8B6330003F0F12 /* WeatherTableViewCell.xib in Resources */,
+				B0DC15B01EA7437C00443F9D /* MembersTableViewCell.xib in Resources */,
 				B0CE8AED1E8B63BD003F0F12 /* MapTableViewCell.xib in Resources */,
 				B084BD321E7FD29F00DC48B2 /* SignUp.storyboard in Resources */,
 				B0002A581E9E820700CD2241 /* BasketballGameDetail.storyboard in Resources */,
@@ -574,7 +611,9 @@
 				B07CF4A31E82D7C600E91F7E /* SportItemsViewController.swift in Sources */,
 				B0754D7A1E83C5AF006A5754 /* BasketballCourtsNavigationController.swift in Sources */,
 				B0E881751E9FE3820093AA11 /* BasketballGameDetailViewController.swift in Sources */,
+				B0DC15BC1EA75BA600443F9D /* JoinOrLeaveTableViewCell.swift in Sources */,
 				B076C5601E89F5CF00F06390 /* User.swift in Sources */,
+				B0DC15AF1EA7437C00443F9D /* MembersTableViewCell.swift in Sources */,
 				B0CE8AF11E8B640C003F0F12 /* CommentTableViewCell.swift in Sources */,
 				B0CE8AEC1E8B63BD003F0F12 /* MapTableViewCell.swift in Sources */,
 				B0AD470C1E8E23F000876498 /* Towns.swift in Sources */,
@@ -583,6 +622,7 @@
 				B0CE8AF91E8B69F2003F0F12 /* Identifiable.swift in Sources */,
 				B0754D7C1E83C5C6006A5754 /* BasketballProfileNavigationController.swift in Sources */,
 				B0BF606F1EA46E4500E37C73 /* LoadingIndicator.swift in Sources */,
+				B0DC15B71EA747D500443F9D /* MemberCollectionViewCell.swift in Sources */,
 				B0AB6FFD1E88C5900060D80E /* BasketballCourtModel.swift in Sources */,
 				B0E881711E9FD2AF0093AA11 /* BasketballCourtsViewController.swift in Sources */,
 			);
