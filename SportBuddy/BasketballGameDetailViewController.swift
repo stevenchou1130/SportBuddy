@@ -47,6 +47,9 @@ class BasketballGameDetailViewController: BaseViewController {
                                           width: self.tableView.frame.width,
                                           height: self.tableView.frame.height)
         }
+
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 200
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -176,6 +179,7 @@ extension BasketballGameDetailViewController: UITableViewDelegate, UITableViewDa
 
             cell.selectionStyle = .none
             cell.backgroundColor = .clear
+            cell.collectionView.reloadData()
 
             return cell
 
@@ -184,11 +188,6 @@ extension BasketballGameDetailViewController: UITableViewDelegate, UITableViewDa
             let identifier = JoinOrLeaveTableViewCell.identifier
 
             let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! JoinOrLeaveTableViewCell
-
-//            let cell = UITableViewCell()
-//            cell.frame = CGRect(x: 0.0, y: 0.0,
-//                                width: fullScreenSize.width,
-//                                height: fullScreenSize.height/5.0)
 
             cell.selectionStyle = .none
             cell.backgroundColor = .blue

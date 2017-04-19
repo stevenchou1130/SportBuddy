@@ -8,7 +8,11 @@
 
 import UIKit
 
-class MemberCollectionViewCell: UICollectionViewCell {
+class MemberCollectionViewCell: UICollectionViewCell, Identifiable {
+
+    // MARK: Property
+
+    class var identifier: String { return String(describing: self) }
 
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var userName: UILabel!
@@ -16,9 +20,6 @@ class MemberCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-
-        userImage.layer.cornerRadius = userImage.bounds.size.height / 2.0
-        userImage.layer.masksToBounds = true
 
         userName.textColor = .white
     }
