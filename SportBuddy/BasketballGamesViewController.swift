@@ -17,7 +17,7 @@ class BasketballGamesViewController: BaseViewController {
     let loadingIndicator = LoadingIndicator()
     var menuView: BTNavigationDropdownMenu?
 
-    var gamesList: [AnyObject] = []
+    var gamesList: [BasketballGame] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -109,49 +109,42 @@ class BasketballGamesViewController: BaseViewController {
                 // todo: 顯示顯示所在城市的game
                 // todo: 拉出來成一個game provider
 
-                // todo: 過期的game要刪掉 ( 可以先不show在list上，用另個App刪除 ) -> done
-                // todo: 將從firebase讀回來的資料，show在list上 -> done
-
                 if let snaps = snapshot.children.allObjects as? [FIRDataSnapshot] {
                     for snap in snaps {
 
                         // Don't show overtime games and add to list
-                        if let gameInfo = snap.value as? NSDictionary,
-                            let gameTime = gameInfo[Constant.FirebaseGame.time] as? String {
+                        guard
+                            let game = self.parserGame(snap)
+                            else { return }
 
-                            let formatter = DateFormatter()
-                            formatter.dateFormat = "yyyy/MM/dd HH:mm"
-                            formatter.locale = Locale.current
+                        let formatter = DateFormatter()
+                        formatter.dateFormat = "yyyy/MM/dd HH:mm"
+                        formatter.locale = Locale.current
 
-                            let currectTime = formatter.string(from: Date())
+                        let currectTime = formatter.string(from: Date())
 
-                            var isNotRepetition = true
+                        var isNotRepetition = true
 
-                            for gameDate in self.gamesList {
+                        for gameData in self.gamesList {
 
-                                guard
-                                    let game = gameDate as? NSDictionary
-                                    else { return }
-
-                                // Judgement - Having same item or not
-                                if game == gameInfo {
-                                    isNotRepetition = false
-                                }
+                            // Judgement - Having same item or not
+                            if gameData.court.name == game.court.name &&
+                                gameData.name == game.name &&
+                                gameData.owner == game.owner &&
+                                gameData.time == game.time {
+                                isNotRepetition = false
                             }
+                        }
 
-                            if gameTime > currectTime && isNotRepetition {
-                                self.gamesList.append(gameInfo)
-                            }
-
-                        } else {
-                            print("== Parser is having question in BasketballGamesViewController01")
+                        if game.time > currectTime && isNotRepetition {
+                            self.gamesList.append(game)
                         }
                     }
 
                     self.gamesTableView.reloadData()
 
                 } else {
-                    print("== Parser is having question in BasketballGamesViewController02")
+                    print("== Parser is having question in BasketballGamesViewController")
                 }
 
                 self.loadingIndicator.stop()
@@ -161,6 +154,38 @@ class BasketballGamesViewController: BaseViewController {
                 self.loadingIndicator.stop()
             }
         })
+    }
+
+    func parserGame(_ snap: FIRDataSnapshot) -> BasketballGame? {
+
+        if let gameInfo = snap.value as? NSDictionary,
+            let gameCourt = gameInfo[Constant.FirebaseGame.court] as? NSDictionary,
+            let gameItem = gameInfo[Constant.FirebaseGame.itme] as? String,
+            let gameLevel = gameInfo[Constant.FirebaseGame.level] as? String,
+            let gameName = gameInfo[Constant.FirebaseGame.name] as? String,
+            let gameOwner = gameInfo[Constant.FirebaseGame.owner] as? String,
+            let gameMembers = gameInfo[Constant.FirebaseGame.members] as? [String],
+            let gameTime = gameInfo[Constant.FirebaseGame.time] as? String {
+
+            if let address = gameCourt[Constant.CourtInfo.address] as? String,
+                let name = gameCourt[Constant.CourtInfo.name] as? String,
+                let gymFuncList = gameCourt[Constant.CourtInfo.gymFuncList] as? String,
+                let courtID = gameCourt[Constant.CourtInfo.courtID] as? Int,
+                let latitude = gameCourt[Constant.CourtInfo.latitude] as? String,
+                let longitude = gameCourt[Constant.CourtInfo.longitude] as? String,
+                let tel = gameCourt[Constant.CourtInfo.tel] as? String?,
+                let rate = gameCourt[Constant.CourtInfo.rate] as? Int,
+                let rateCount = gameCourt[Constant.CourtInfo.rateCount] as? Int {
+
+                let basketballCourt = BasketballCourt(courtID: courtID, name: name, tel: tel, address: address, rate: rate, rateCount: rateCount, gymFuncList: gymFuncList, latitude: latitude, longitude: longitude)
+
+                let basketballGame = BasketballGame(owner: gameOwner, item: gameItem, name: gameName, time: gameTime, court: basketballCourt, level: gameLevel, members: gameMembers)
+
+                return basketballGame
+            }
+            return nil
+        }
+        return nil
     }
 
     func createNewBasketballGameGame() {
@@ -197,40 +222,28 @@ extension BasketballGamesViewController: UITableViewDelegate, UITableViewDataSou
         cell.selectionStyle = .none
         cell.backgroundColor = .clear
 
-        let gameInfo = gamesList[indexPath.row]
+        let game = gamesList[indexPath.row]
 
-        if let gameCourt = gameInfo[Constant.FirebaseGame.court] as? NSDictionary,
-            let gameMembers = gameInfo[Constant.FirebaseGame.members] as? NSArray,
-            let gameName = gameInfo[Constant.FirebaseGame.name] as? String,
-            let gameTime = gameInfo[Constant.FirebaseGame.time] as? String,
-            let gameLevel = gameInfo[Constant.FirebaseGame.level] as? String {
+        cell.location.text = game.court.name
+        cell.name.text = game.name
+        cell.peopleNum.text = String(game.members.count)
+        cell.time.text = game.time
 
-            if let courtName = gameCourt[Constant.CourtInfo.name] as? String {
-                cell.location.text = courtName
-            } else {
-                print("== Can't parser court name")
-            }
+        switch game.level {
 
-            cell.name.text = gameName
-            cell.peopleNum.text = String(gameMembers.count)
-            cell.time.text = gameTime
+        case "A":
+            cell.levelImage.image = #imageLiteral(resourceName: "Level_A")
+        case "B":
+            cell.levelImage.image = #imageLiteral(resourceName: "Level_B")
+        case "C":
+            cell.levelImage.image = #imageLiteral(resourceName: "Level_C")
+        case "D":
+            cell.levelImage.image = #imageLiteral(resourceName: "Level_D")
+        case "E":
+            cell.levelImage.image = #imageLiteral(resourceName: "Level_E")
 
-            switch gameLevel {
-
-            case "A":
-                cell.levelImage.image = #imageLiteral(resourceName: "Level_A")
-            case "B":
-                cell.levelImage.image = #imageLiteral(resourceName: "Level_B")
-            case "C":
-                cell.levelImage.image = #imageLiteral(resourceName: "Level_C")
-            case "D":
-                cell.levelImage.image = #imageLiteral(resourceName: "Level_D")
-            case "E":
-                cell.levelImage.image = #imageLiteral(resourceName: "Level_E")
-
-            default:
-                cell.levelImage.image = #imageLiteral(resourceName: "Level_C")
-            }
+        default:
+            cell.levelImage.image = #imageLiteral(resourceName: "Level_C")
         }
 
         return cell
@@ -244,7 +257,7 @@ extension BasketballGamesViewController: UITableViewDelegate, UITableViewDataSou
             let basketballGameDetailViewController = storyBoard.instantiateViewController(withIdentifier: Constant.Controller.basketballGameDetail) as? BasketballGameDetailViewController
             else { return }
 
-        basketballGameDetailViewController.gameInfo = gamesList[indexPath.row]
+        basketballGameDetailViewController.game = gamesList[indexPath.row]
 
         self.navigationController?.pushViewController(basketballGameDetailViewController, animated: true)
     }
