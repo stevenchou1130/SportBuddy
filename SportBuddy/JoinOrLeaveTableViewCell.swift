@@ -17,7 +17,7 @@ class JoinOrLeaveTableViewCell: UITableViewCell, Identifiable {
 
     class var identifier: String { return String(describing: self) }
 
-    static let height: CGFloat = 200.0
+    static let height: CGFloat = 100.0
 
     override func awakeFromNib() {
         super.awakeFromNib()

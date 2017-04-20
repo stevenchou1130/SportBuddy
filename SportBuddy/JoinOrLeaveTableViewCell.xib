@@ -20,28 +20,27 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="98S-Yo-UsP">
-                        <rect key="frame" x="75" y="17" width="170" height="66"/>
+                        <rect key="frame" x="110" y="30" width="100" height="39"/>
                         <constraints>
-                            <constraint firstAttribute="width" secondItem="98S-Yo-UsP" secondAttribute="height" multiplier="85:33" id="2Zw-fs-iBC"/>
+                            <constraint firstAttribute="width" secondItem="98S-Yo-UsP" secondAttribute="height" multiplier="100:39" id="0Wl-dE-Yye"/>
                         </constraints>
                         <state key="normal" title="Button" image="Button_Joingame"/>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="23D-Pf-EKv">
-                        <rect key="frame" x="75" y="17" width="170" height="66"/>
+                        <rect key="frame" x="110" y="30" width="100" height="39"/>
                         <constraints>
-                            <constraint firstAttribute="width" secondItem="23D-Pf-EKv" secondAttribute="height" multiplier="85:33" id="tke-TV-myl"/>
+                            <constraint firstAttribute="width" secondItem="23D-Pf-EKv" secondAttribute="height" multiplier="100:39" id="gQ3-2W-l4i"/>
                         </constraints>
                         <state key="normal" title="Button" image="Button_Leavegame"/>
                     </button>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="98S-Yo-UsP" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="AtS-gj-wUG"/>
-                    <constraint firstItem="23D-Pf-EKv" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Poa-k2-MsG"/>
-                    <constraint firstItem="98S-Yo-UsP" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="height" multiplier="170:99" id="Zb4-QW-tA5"/>
-                    <constraint firstItem="23D-Pf-EKv" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="height" multiplier="17:10" id="f72-LZ-Npe"/>
-                    <constraint firstItem="98S-Yo-UsP" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="mAr-e2-pfq"/>
-                    <constraint firstItem="23D-Pf-EKv" firstAttribute="width" secondItem="23D-Pf-EKv" secondAttribute="height" multiplier="85:33" id="mlA-6u-vzs"/>
-                    <constraint firstItem="23D-Pf-EKv" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="uLC-dV-5l0"/>
+                    <constraint firstItem="98S-Yo-UsP" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="58q-jv-a52"/>
+                    <constraint firstItem="98S-Yo-UsP" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="height" multiplier="100:99" id="6tj-tu-ihz"/>
+                    <constraint firstItem="98S-Yo-UsP" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="cuX-fH-bop"/>
+                    <constraint firstItem="23D-Pf-EKv" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="ipV-2z-9NX"/>
+                    <constraint firstItem="23D-Pf-EKv" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="mtK-jm-Q1G"/>
+                    <constraint firstItem="23D-Pf-EKv" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="height" multiplier="100:99" id="uhf-au-xOI"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

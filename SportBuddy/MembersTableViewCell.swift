@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class MembersTableViewCell: UITableViewCell, Identifiable {
 
@@ -16,9 +17,10 @@ class MembersTableViewCell: UITableViewCell, Identifiable {
 
     class var identifier: String { return String(describing: self) }
 
-    static let height: CGFloat = 180.0
+    static let height: CGFloat = 170.0
 
     var game: BasketballGame?
+    var members: [User] = []
 
     let fullScreenSize = UIScreen.main.bounds.size
 
@@ -40,23 +42,50 @@ class MembersTableViewCell: UITableViewCell, Identifiable {
         // Configure the view for the selected state
     }
 
+    // MARK: - Load User Picture From Firebase
+    func loadAndSetUserPhoto(_ userImage: UIImageView, _ userPhotoUrlString: String) {
+
+        DispatchQueue.global().async {
+
+            if let imageUrl = URL(string: userPhotoUrlString) {
+                do {
+                    let imageData = try Data(contentsOf: imageUrl)
+                    if let image = UIImage(data: imageData) {
+                        DispatchQueue.main.async {
+                            userImage.image = image
+                        }
+                    }
+                } catch {
+                    print(error)
+                }
+            }
+        }
+    }
 }
 
 extension MembersTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 
-        return 10
+        return game?.members.count ?? 0
     }
 
     // swiftlint:disable force_cast
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+
+        guard
+            game != nil
+            else { return UICollectionViewCell() }
 
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MemberCollectionViewCell.identifier, for: indexPath) as! MemberCollectionViewCell
 
         cell.userImage.layer.cornerRadius = cell.userImage.bounds.size.height / 2.0
         cell.userImage.layer.masksToBounds = true
 
+        if members.count != 0 {
+            cell.userName.text = members[indexPath.row].name
+            loadAndSetUserPhoto(cell.userImage, (members[indexPath.row].photoURL))
+        }
         return cell
     }
     // swiftlint:enable force_cast
@@ -74,7 +103,7 @@ extension MembersTableViewCell: UICollectionViewDelegate, UICollectionViewDataSo
     // MARK: UICollectionViewDelegateFlowLayout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
-        let size = fullScreenSize.width / 4
+        let size = fullScreenSize.width / 3
         return CGSize(width: size, height: size)
     }
 

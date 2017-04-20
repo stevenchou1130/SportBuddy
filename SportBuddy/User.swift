@@ -10,13 +10,16 @@ import Foundation
 
 struct User {
 
-    var account: String
-    var password: String
+    var email: String
     var name: String
-    var gender: Int
-    var photo: Data
-    var basketballLevel: Int
-    var basketballGameTimes: Int
-    var basketballLastTime: Date
+    var gender: String
+    var photoURL: String
 
+    init(email: String, name: String, gender: String, photoURL: String) {
+
+        self.email = email
+        self.name = name
+        self.gender = gender
+        self.photoURL = photoURL
+    }
 }
