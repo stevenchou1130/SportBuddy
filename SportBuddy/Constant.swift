@@ -86,6 +86,7 @@ struct Constant {
     struct FirebaseGame {
 
         static let nodeName = "Games"
+        static let gameID = "GameID"
         static let owner = "Owner"
         static let itme = "Item"
         static let name = "Name"

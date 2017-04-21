@@ -152,6 +152,8 @@ class NewBasketballGameViewController: BaseViewController {
 
             if selectedCourt != nil {
 
+                let gameID = UUID().uuidString
+
                 let selectedCourtInfo: [String: Any] = [
                     Constant.CourtInfo.courtID: selectedCourt!.courtID,
                     Constant.CourtInfo.name: selectedCourt!.name,
@@ -165,6 +167,7 @@ class NewBasketballGameViewController: BaseViewController {
                 ]
 
                 let game: [String : Any] = [
+                    Constant.FirebaseGame.gameID: gameID,
                     Constant.FirebaseGame.owner: uid,
                     Constant.FirebaseGame.itme: Constant.SportItem.basketball,
                     Constant.FirebaseGame.name: name!,
@@ -174,8 +177,7 @@ class NewBasketballGameViewController: BaseViewController {
                     Constant.FirebaseGame.members: [uid]
                 ]
 
-                let game1Ref = ref.childByAutoId()
-                game1Ref.setValue(game)
+                ref.child(gameID).setValue(game)
 
                 self.navigationController?.popViewController(animated: true)
 

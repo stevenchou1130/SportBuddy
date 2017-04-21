@@ -20,15 +20,25 @@ class BasketballGameDetailViewController: BaseViewController {
 
     var components: [Component] = [ .weather, .map, .members, .joinOrLeave ]
 
+    var currentUserUid = ""
     var game: BasketballGame?
     var weather: Weather?
     var members: [User] = []
+
+    var isUserInMembers = false
+    var isUpdatedMembers = false
 
     let loadingIndicator = LoadingIndicator()
     let fullScreenSize = UIScreen.main.bounds.size
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        if let uid = FIRAuth.auth()?.currentUser?.uid {
+            currentUserUid = uid
+        } else {
+            print("Can't find this user in BasketballGameDetailViewController")
+        }
 
         setView()
         getWeather()
@@ -115,9 +125,24 @@ class BasketballGameDetailViewController: BaseViewController {
         guard
             game != nil,
             game?.members.count != 0
-            else {
-                return
-        }
+            else { return }
+
+//        if isUpdatedMembers {
+//
+//            let ref = FIRDatabase.database().reference().child(Constant.FirebaseGame.nodeName).child((game?.gameID)!)
+//            ref.observeSingleEvent(of: .value, with: { (snapshot) in
+//
+//                if snapshot.exists() {
+//                    let gameParser = BasketballGameParser()
+//                    let updatedGame = gameParser.parserGame(snapshot)
+//                    if updatedGame != nil {
+//                        self.game = updatedGame
+//                    } else {
+//                        print("=== Something is worng in BasketballGameDetailViewController")
+//                    }
+//                }
+//            })
+//        }
 
         for member in (game?.members)! {
             let ref = FIRDatabase.database().reference().child(Constant.FirebaseUser.nodeName).child(member)
@@ -138,7 +163,17 @@ class BasketballGameDetailViewController: BaseViewController {
 
                     let user = User(email: email, name: name, gender: gender, photoURL: photoURL)
 
+//                    if self.isUpdatedMembers {
+//                        if member != self.currentUserUid {
+//                            self.members.append(user)
+//                        }
+//                    } else {
+//                        self.members.append(user)
+//                    }
+
+                    self.members.removeAll()
                     self.members.append(user)
+
                     self.tableView.reloadData()
                 } else {
                     print("=== Error: Can't find the user - \(member)")
@@ -233,19 +268,29 @@ extension BasketballGameDetailViewController: UITableViewDelegate, UITableViewDa
 
             let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! JoinOrLeaveTableViewCell
 
-            if let uid = FIRAuth.auth()?.currentUser?.uid,
-                game != nil {
-
+            if currentUserUid != "" && game != nil {
                 for member in (game?.members)! {
 
-                    if member == uid {
+                    if member == currentUserUid {
+                        isUserInMembers = true
+                    }
+
+                    if isUserInMembers {
+                        // show leave button
 
                         cell.joinButton.isHidden = true
                         cell.leaveButton.isHidden = false
-                    } else {
 
-                        cell.joinButton.isHidden = false
+                        // todo: 加入或離開，最後reload tableview
+                        cell.leaveButton.addTarget(self, action: #selector(leaveFromGame), for: .touchUpInside)
+
+                    } else {
+                        // show join button
+
                         cell.leaveButton.isHidden = true
+                        cell.joinButton.isHidden = false
+
+                        cell.joinButton.addTarget(self, action: #selector(joinToGame), for: .touchUpInside)
                     }
                 }
             } else {
@@ -258,6 +303,49 @@ extension BasketballGameDetailViewController: UITableViewDelegate, UITableViewDa
             return cell
         }
         // swiftlint:enable force_cast
+    }
+
+    func joinToGame() {
+        print("=== joinToGame ===")
+//
+//        guard
+//            game != nil
+//            else { return }
+//
+//        var newMemberList: [String] = []
+//        var isCurrentUserInMember = false
+//
+//        for member in (game?.members)! {
+//            newMemberList.append(member)
+//
+//            if member == currentUserUid {
+//                isCurrentUserInMember = true
+//            }
+//        }
+//
+//        if !isCurrentUserInMember {
+//            newMemberList.append(currentUserUid)
+//        }
+//
+//        let value = [Constant.FirebaseGame.members: newMemberList]
+//
+//        let ref = getGameDBRef()
+//        ref.updateChildValues(value)
+//
+//        isUpdatedMembers = true
+//
+//        getMembersInfo()
+    }
+
+    func leaveFromGame() {
+        print("=== leaveFromGame ===")
+
+    }
+
+    func getGameDBRef() -> FIRDatabaseReference {
+
+        let ref = FIRDatabase.database().reference().child(Constant.FirebaseGame.nodeName).child((game?.gameID)!)
+        return ref
     }
 
     func setWeatherCell(cell: WeatherTableViewCell) -> WeatherTableViewCell {
@@ -313,5 +401,4 @@ extension BasketballGameDetailViewController: UITableViewDelegate, UITableViewDa
 
         return cell
     }
-
 }

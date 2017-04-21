@@ -10,6 +10,7 @@ import Foundation
 
 struct BasketballGame {
 
+    var gameID: String
     var owner: String
     var item: String
     var name: String
@@ -18,11 +19,12 @@ struct BasketballGame {
     var level: String
     var members: [String]
 
-    init(owner: String, item: String,
+    init(gameID: String, owner: String, item: String,
          name: String, time: String,
          court: BasketballCourt, level: String,
          members: [String]) {
 
+        self.gameID = gameID
         self.owner = owner
         self.item = item
         self.name = name
