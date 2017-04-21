@@ -30,24 +30,24 @@
                                     <constraint firstAttribute="width" secondItem="B6N-XQ-5dT" secondAttribute="height" multiplier="1:1" id="sr0-Ge-x1R"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PEW-GR-bGI">
-                                <rect key="frame" x="148" y="617" width="80" height="30"/>
-                                <color key="backgroundColor" red="0.49803921579999999" green="0.49803921579999999" blue="0.49803921579999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PEW-GR-bGI">
+                                <rect key="frame" x="220" y="614" width="85" height="33"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="80" id="8HD-SQ-Afy"/>
-                                    <constraint firstAttribute="height" constant="30" id="BqX-Tm-WrT"/>
+                                    <constraint firstAttribute="width" secondItem="PEW-GR-bGI" secondAttribute="height" multiplier="85:33" id="gtA-TA-VTo"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="Save">
+                                <state key="normal" image="Button_Save">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="saveProfileInfo:" destination="iqw-eI-C0u" eventType="touchUpInside" id="JBC-Rw-KAM"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wpL-tH-EAe">
-                                <rect key="frame" x="30" y="617" width="48" height="30"/>
-                                <state key="normal" title="Cancel"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wpL-tH-EAe">
+                                <rect key="frame" x="70" y="614" width="85" height="33"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="wpL-tH-EAe" secondAttribute="height" multiplier="85:33" id="RRK-1d-oq1"/>
+                                </constraints>
+                                <state key="normal" image="Button_Cancel"/>
                                 <connections>
                                     <action selector="cancelEdit:" destination="iqw-eI-C0u" eventType="touchUpInside" id="yPq-jF-H20"/>
                                 </connections>
@@ -72,15 +72,17 @@
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="LpE-fP-ZKT" firstAttribute="centerY" secondItem="14f-YZ-BvN" secondAttribute="centerY" id="4nw-kp-XDE"/>
-                            <constraint firstItem="LpE-fP-ZKT" firstAttribute="leading" secondItem="wpL-tH-EAe" secondAttribute="leading" id="9EJ-DU-Qxj"/>
-                            <constraint firstItem="PEW-GR-bGI" firstAttribute="centerX" secondItem="14f-YZ-BvN" secondAttribute="centerX" id="JZQ-Wh-fxR"/>
+                            <constraint firstItem="wpL-tH-EAe" firstAttribute="centerY" secondItem="PEW-GR-bGI" secondAttribute="centerY" id="8Xn-F2-CPW"/>
+                            <constraint firstItem="PEW-GR-bGI" firstAttribute="width" secondItem="14f-YZ-BvN" secondAttribute="height" multiplier="85:667" id="QlK-y5-ZVe"/>
                             <constraint firstItem="B6N-XQ-5dT" firstAttribute="top" secondItem="gWb-Aa-zW5" secondAttribute="bottom" constant="10" id="QlV-EQ-mLA"/>
                             <constraint firstItem="B6N-XQ-5dT" firstAttribute="width" secondItem="14f-YZ-BvN" secondAttribute="height" multiplier="200:667" id="VGc-hM-BQe"/>
+                            <constraint firstAttribute="trailing" secondItem="PEW-GR-bGI" secondAttribute="trailing" constant="70" id="XPU-6u-OMW"/>
                             <constraint firstItem="XeC-01-7ur" firstAttribute="leading" secondItem="LpE-fP-ZKT" secondAttribute="trailing" constant="4" id="XuF-Ei-5bv"/>
                             <constraint firstItem="B6N-XQ-5dT" firstAttribute="centerX" secondItem="14f-YZ-BvN" secondAttribute="centerX" id="Zk6-xN-raS"/>
+                            <constraint firstItem="wpL-tH-EAe" firstAttribute="leading" secondItem="14f-YZ-BvN" secondAttribute="leading" constant="70" id="hn2-fw-LjG"/>
                             <constraint firstItem="XeC-01-7ur" firstAttribute="centerY" secondItem="LpE-fP-ZKT" secondAttribute="centerY" id="ii9-36-0tz"/>
                             <constraint firstAttribute="trailing" secondItem="XeC-01-7ur" secondAttribute="trailing" constant="20" id="kW0-sE-ki2"/>
-                            <constraint firstItem="wpL-tH-EAe" firstAttribute="centerY" secondItem="PEW-GR-bGI" secondAttribute="centerY" id="kx3-gn-5Lz"/>
+                            <constraint firstItem="wpL-tH-EAe" firstAttribute="width" secondItem="14f-YZ-BvN" secondAttribute="height" multiplier="85:667" id="nsc-rC-7hu"/>
                             <constraint firstItem="sZm-Hz-plE" firstAttribute="top" secondItem="PEW-GR-bGI" secondAttribute="bottom" constant="20" id="wz8-py-a6y"/>
                             <constraint firstItem="LpE-fP-ZKT" firstAttribute="leading" secondItem="14f-YZ-BvN" secondAttribute="leadingMargin" constant="14" id="xvI-HF-uBA"/>
                         </constraints>
@@ -96,6 +98,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Button_Cancel" width="170" height="66"/>
+        <image name="Button_Save" width="170" height="66"/>
         <image name="Default_User_Photo" width="240" height="240"/>
     </resources>
 </document>
