@@ -52,7 +52,7 @@
                                     <action selector="cancelEdit:" destination="iqw-eI-C0u" eventType="touchUpInside" id="yPq-jF-H20"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LpE-fP-ZKT">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="名稱" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LpE-fP-ZKT">
                                 <rect key="frame" x="30" y="313" width="100" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="0nb-oY-6bc"/>

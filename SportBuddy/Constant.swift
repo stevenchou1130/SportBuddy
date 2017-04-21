@@ -50,7 +50,8 @@ struct Constant {
     }
 
     struct BackgroundName {
-
+        
+        static let login = "BG_Login"
         static let basketball = "BG_Basketball"
     }
 

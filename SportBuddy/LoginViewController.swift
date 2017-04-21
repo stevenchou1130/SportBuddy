@@ -12,7 +12,6 @@ import NVActivityIndicatorView
 
 class LoginViewController: BaseViewController {
 
-    @IBOutlet weak var appNameLabel: UILabel!
     @IBOutlet weak var emailTexfield: UITextField!
     @IBOutlet weak var passwordTextfield: UITextField!
 
@@ -52,9 +51,7 @@ class LoginViewController: BaseViewController {
 
     func setView() {
 
-        setBackground(imageName: Constant.BackgroundName.basketball)
-
-        appNameLabel.text = Constant.AppName.appName
+        setBackground(imageName: Constant.BackgroundName.login)
     }
 
     @IBAction func login(_ sender: Any) {

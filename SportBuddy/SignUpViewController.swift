@@ -45,7 +45,7 @@ class SignUpViewController: BaseViewController {
 
     func setView() {
 
-        setBackground(imageName: Constant.BackgroundName.basketball)
+        setBackground(imageName: Constant.BackgroundName.login)
 
         emailTextField.placeholder = "Emall address"
         emailTextField.clearButtonMode = .whileEditing
