@@ -64,7 +64,7 @@ class ChooseLevelViewController: BaseViewController {
 
         ref.updateChildValues(values) { (error, _) in
             if error != nil {
-                print("Error: \(String(describing: error))")
+                print("=== Error: \(String(describing: error))")
             }
         }
     }

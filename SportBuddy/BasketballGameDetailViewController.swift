@@ -18,7 +18,7 @@ class BasketballGameDetailViewController: BaseViewController {
         case weather, map, members, joinOrLeave
     }
 
-    var components: [Component] = [ .weather, .map, .members, .joinOrLeave ]
+    var components: [Component] = [ .weather, .map, .members, .joinOrLeave]
 
     var currentUserUid = ""
     var game: BasketballGame?
@@ -26,7 +26,7 @@ class BasketballGameDetailViewController: BaseViewController {
     var members: [User] = []
 
     var isUserInMembers = false
-    var isUpdatedMembers = false
+    var isTotallyUpdated = false
 
     let loadingIndicator = LoadingIndicator()
     let fullScreenSize = UIScreen.main.bounds.size
@@ -37,7 +37,7 @@ class BasketballGameDetailViewController: BaseViewController {
         if let uid = FIRAuth.auth()?.currentUser?.uid {
             currentUserUid = uid
         } else {
-            print("Can't find this user in BasketballGameDetailViewController")
+            print("=== Can't find this user in BasketballGameDetailViewController")
         }
 
         setView()
@@ -110,13 +110,13 @@ class BasketballGameDetailViewController: BaseViewController {
                     self.weather = weather
                     self.tableView.reloadData()
                 } else {
-                    print("Error in BasketballGameDetailViewController - Get weather")
+                    print("=== Error in BasketballGameDetailViewController - Get weather")
                 }
 
                 self.loadingIndicator.stop()
             })
         } else {
-            print("Error in BasketballGameDetailViewController getWeather()")
+            print("=== Error in BasketballGameDetailViewController getWeather()")
         }
     }
 
@@ -127,58 +127,36 @@ class BasketballGameDetailViewController: BaseViewController {
             game?.members.count != 0
             else { return }
 
-//        if isUpdatedMembers {
-//
-//            let ref = FIRDatabase.database().reference().child(Constant.FirebaseGame.nodeName).child((game?.gameID)!)
-//            ref.observeSingleEvent(of: .value, with: { (snapshot) in
-//
-//                if snapshot.exists() {
-//                    let gameParser = BasketballGameParser()
-//                    let updatedGame = gameParser.parserGame(snapshot)
-//                    if updatedGame != nil {
-//                        self.game = updatedGame
-//                    } else {
-//                        print("=== Something is worng in BasketballGameDetailViewController")
-//                    }
-//                }
-//            })
-//        }
+        MemebersProvider.sharded.getMembers(gameID: (game?.gameID)!) { (members) in
 
-        for member in (game?.members)! {
-            let ref = FIRDatabase.database().reference().child(Constant.FirebaseUser.nodeName).child(member)
+            for member in members {
+                let ref = FIRDatabase.database().reference().child(Constant.FirebaseUser.nodeName).child(member)
 
-            ref.observeSingleEvent(of: .value, with: { (snapshot) in
+                ref.observeSingleEvent(of: .value, with: { (snapshot) in
 
-                if snapshot.exists() {
+                    if snapshot.exists() {
 
-                    guard
-                        let userInfo = snapshot.value as? [String: String],
-                        let email = userInfo[Constant.FirebaseUser.email],
-                        let name = userInfo[Constant.FirebaseUser.name],
-                        let gender = userInfo[Constant.FirebaseUser.gender],
-                        let photoURL = userInfo[Constant.FirebaseUser.photoURL]
-                        else {
-                            return
+                        guard
+                            let userInfo = snapshot.value as? [String: String],
+                            let email = userInfo[Constant.FirebaseUser.email],
+                            let name = userInfo[Constant.FirebaseUser.name],
+                            let gender = userInfo[Constant.FirebaseUser.gender],
+                            let photoURL = userInfo[Constant.FirebaseUser.photoURL]
+                            else {
+                                return
+                        }
+
+                        let user = User(email: email, name: name, gender: gender, photoURL: photoURL)
+                        self.members.append(user)
+
+                        if member == members[members.count-1] {
+                            self.tableView.reloadData()
+                        }
+                    } else {
+                        print("=== Error: Can't find the user - \(member)")
                     }
-
-                    let user = User(email: email, name: name, gender: gender, photoURL: photoURL)
-
-//                    if self.isUpdatedMembers {
-//                        if member != self.currentUserUid {
-//                            self.members.append(user)
-//                        }
-//                    } else {
-//                        self.members.append(user)
-//                    }
-
-                    self.members.removeAll()
-                    self.members.append(user)
-
-                    self.tableView.reloadData()
-                } else {
-                    print("=== Error: Can't find the user - \(member)")
-                }
-            })
+                })
+            }
         }
     }
 }
@@ -306,35 +284,29 @@ extension BasketballGameDetailViewController: UITableViewDelegate, UITableViewDa
     }
 
     func joinToGame() {
-        print("=== joinToGame ===")
-//
-//        guard
-//            game != nil
-//            else { return }
-//
-//        var newMemberList: [String] = []
-//        var isCurrentUserInMember = false
-//
-//        for member in (game?.members)! {
-//            newMemberList.append(member)
-//
-//            if member == currentUserUid {
-//                isCurrentUserInMember = true
-//            }
-//        }
-//
-//        if !isCurrentUserInMember {
-//            newMemberList.append(currentUserUid)
-//        }
-//
-//        let value = [Constant.FirebaseGame.members: newMemberList]
-//
-//        let ref = getGameDBRef()
-//        ref.updateChildValues(value)
-//
-//        isUpdatedMembers = true
-//
-//        getMembersInfo()
+
+        guard
+            game != nil
+            else { return }
+
+        if isUserInMembers {
+            return
+        }
+
+        var newMemberList: [String] = []
+        newMemberList = (game?.members)!
+        newMemberList.append(currentUserUid)
+
+        let value = [Constant.FirebaseGame.members: newMemberList]
+        getGameDBRef().updateChildValues(value) { (error, _) in
+
+            if error == nil {
+                self.getMembersInfo()
+                self.navigationController?.popViewController(animated: true)
+            } else {
+                print("=== Error in BasketballGameDetailViewController joinToGame()")
+            }
+        }
     }
 
     func leaveFromGame() {

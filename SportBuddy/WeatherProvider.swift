@@ -56,7 +56,7 @@ class WeatherProvider {
             }
 
         } else {
-            print("Error: Cannot Get Town")
+            print("=== Error: Cannot Get Town")
 
             completion(nil, GetWeatherError.cannotGetTown)
             return

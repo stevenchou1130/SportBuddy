@@ -53,7 +53,7 @@ class BasketballCourtsProvider {
                             latitude = latitudeAndLongitude[0]
                             longitude = latitudeAndLongitude[1]
                         } else {
-                            print("The Latitude and Longitude are wrong -> Court: \(name)")
+                            print("=== The Latitude and Longitude are wrong -> Court: \(name)")
                         }
 
                         let basketballCourt = BasketballCourt(courtID: gymID, name: name, tel: operationTel, address: address, rate: rate, rateCount: rateCount, gymFuncList: gymFuncList, latitude: latitude, longitude: longitude)

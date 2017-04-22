@@ -76,13 +76,13 @@ class BasketballCourtDetailViewController: BaseViewController, UITableViewDelega
                     self.weather = weather
                     self.tableView.reloadData()
                 } else {
-                    print("Error in BasketballCourtDetailViewController - Get weather")
+                    print("=== Error in BasketballCourtDetailViewController - Get weather")
                 }
 
                 NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
             })
         } else {
-            print("Error in BasketballCourtDetailViewController getWeather()")
+            print("=== Error in BasketballCourtDetailViewController getWeather()")
         }
     }
 

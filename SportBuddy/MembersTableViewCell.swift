@@ -56,7 +56,7 @@ class MembersTableViewCell: UITableViewCell, Identifiable {
                         }
                     }
                 } catch {
-                    print(error)
+                    print("=== \(error)")
                 }
             }
         }

@@ -87,6 +87,8 @@ class BasketballGamesViewController: BaseViewController {
                 Constant.CurrentCity.cityIndex = indexPath
                 Constant.CurrentCity.cityName = city
             }
+
+            self?.getGames()
         }
 
         menuView?.menuTitleColor = .white
@@ -106,13 +108,13 @@ class BasketballGamesViewController: BaseViewController {
 
             if snapshot.exists() {
 
-                // todo: 顯示顯示所在城市的game
-                // todo: 拉出來成一個game provider
+                self.gamesList.removeAll()
 
+                // todo: 拉出來成一個game provider
                 if let snaps = snapshot.children.allObjects as? [FIRDataSnapshot] {
                     for snap in snaps {
 
-                        // Don't show overtime games and add to list
+                        // MARK: - Filter court by time
                         let gameParser = BasketballGameParser()
 
                         guard
@@ -126,6 +128,7 @@ class BasketballGamesViewController: BaseViewController {
                         let currectTime = formatter.string(from: Date())
 
                         var isNotRepetition = true
+                        var isInCurrentCity = true
 
                         for gameData in self.gamesList {
 
@@ -138,7 +141,16 @@ class BasketballGamesViewController: BaseViewController {
                             }
                         }
 
-                        if game.time > currectTime && isNotRepetition {
+                        // MARK: - Filter court by city
+                        let courtAddress = game.court.address
+                        let index = courtAddress.index(courtAddress.startIndex, offsetBy: 3)
+                        let city = courtAddress.substring(to: index)
+
+                        if Constant.CurrentCity.cityName != city {
+                            isInCurrentCity = false
+                        }
+
+                        if game.time > currectTime && isNotRepetition && isInCurrentCity {
                             self.gamesList.append(game)
                         }
                     }
@@ -146,13 +158,13 @@ class BasketballGamesViewController: BaseViewController {
                     self.gamesTableView.reloadData()
 
                 } else {
-                    print("== Parser is having question in BasketballGamesViewController")
+                    print("=== Parser is having question in BasketballGamesViewController")
                 }
 
                 self.loadingIndicator.stop()
 
             } else {
-                print("snapshot does not exist")
+                print("=== snapshot does not exist")
                 self.loadingIndicator.stop()
             }
         })

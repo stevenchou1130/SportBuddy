@@ -213,7 +213,7 @@ extension NewBasketballGameViewController: UIPickerViewDelegate, UIPickerViewDat
 
         } else {
 
-            print("== Error in NewBasketballGameViewController - pickerView")
+            print("=== Error in NewBasketballGameViewController - pickerView")
             return 1
         }
     }
@@ -234,7 +234,7 @@ extension NewBasketballGameViewController: UIPickerViewDelegate, UIPickerViewDat
 
         } else {
 
-            print("== Error in NewBasketballGameViewController - pickerView")
+            print("=== Error in NewBasketballGameViewController - pickerView")
             return ""
         }
     }

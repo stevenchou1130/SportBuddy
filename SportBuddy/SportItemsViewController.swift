@@ -54,7 +54,7 @@ class SportItemsViewController: BaseViewController {
         do {
             try FIRAuth.auth()?.signOut()
         } catch let logoutError {
-            print("LogoutError: ")
+            print("=== LogoutError: ")
             print(logoutError)
         }
 
@@ -208,11 +208,11 @@ extension SportItemsViewController {
     func errorHandle(errString: String?, error: Error?) {
 
         if errString != nil {
-            print("== Error: \(String(describing: errString))")
+            print("=== Error: \(String(describing: errString))")
         }
 
         if error != nil {
-            print("== Error: \(String(describing: error))")
+            print("=== Error: \(String(describing: error))")
         }
 
         NVActivityIndicatorPresenter.sharedInstance.stopAnimating()

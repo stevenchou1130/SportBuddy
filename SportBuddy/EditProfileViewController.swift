@@ -59,7 +59,7 @@ class EditProfileViewController: BaseViewController {
                 self.loadAndSetUserPhoto(userPhotoUrlString)
 
             } else {
-                print("== Can't find this user")
+                print("=== Can't find this user")
             }
         })
     }
@@ -79,7 +79,7 @@ class EditProfileViewController: BaseViewController {
                         }
                     }
                 } catch {
-                    print(error)
+                    print("=== \(error)")
                 }
             }
         }
@@ -146,7 +146,7 @@ class EditProfileViewController: BaseViewController {
                     self.uploadImageToFirebase(uid, storageRef)
 
                 } else {
-                    print("== Error in EditProfileViewController01 \(String(describing: error))")
+                    print("=== Error in EditProfileViewController01 \(String(describing: error))")
                 }
             }
 
@@ -165,7 +165,7 @@ class EditProfileViewController: BaseViewController {
         storageRef.put(uploadData, metadata: nil, completion: { (metadata, error) in
 
             if error != nil {
-                print("== Error in EditProfileViewController02: \(String(describing: error))")
+                print("=== Error in EditProfileViewController02: \(String(describing: error))")
                 return
             }
 
@@ -191,7 +191,7 @@ class EditProfileViewController: BaseViewController {
             if error == nil {
                 self.dismiss(animated: true, completion: nil)
             } else {
-                print("== Error in EditProfileViewController03: \(String(describing: error))")
+                print("=== Error in EditProfileViewController03: \(String(describing: error))")
             }
         }
     }

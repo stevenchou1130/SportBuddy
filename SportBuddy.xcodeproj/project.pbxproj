@@ -59,6 +59,7 @@
 		B0CE8AF91E8B69F2003F0F12 /* Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CE8AF81E8B69F2003F0F12 /* Identifiable.swift */; };
 		B0D443CC1EA36EED008EF375 /* EditProfile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0D443CB1EA36EED008EF375 /* EditProfile.storyboard */; };
 		B0D443CE1EA36F79008EF375 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D443CD1EA36F79008EF375 /* EditProfileViewController.swift */; };
+		B0DBB7E41EAB417200BCAD08 /* MemebersProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0DBB7E31EAB417200BCAD08 /* MemebersProvider.swift */; };
 		B0DC15AF1EA7437C00443F9D /* MembersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0DC15AD1EA7437C00443F9D /* MembersTableViewCell.swift */; };
 		B0DC15B01EA7437C00443F9D /* MembersTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0DC15AE1EA7437C00443F9D /* MembersTableViewCell.xib */; };
 		B0DC15B71EA747D500443F9D /* MemberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0DC15B51EA747D500443F9D /* MemberCollectionViewCell.swift */; };
@@ -128,6 +129,7 @@
 		B0CE8AF81E8B69F2003F0F12 /* Identifiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Identifiable.swift; sourceTree = "<group>"; };
 		B0D443CB1EA36EED008EF375 /* EditProfile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EditProfile.storyboard; sourceTree = "<group>"; };
 		B0D443CD1EA36F79008EF375 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
+		B0DBB7E31EAB417200BCAD08 /* MemebersProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemebersProvider.swift; sourceTree = "<group>"; };
 		B0DC15AD1EA7437C00443F9D /* MembersTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembersTableViewCell.swift; sourceTree = "<group>"; };
 		B0DC15AE1EA7437C00443F9D /* MembersTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MembersTableViewCell.xib; sourceTree = "<group>"; };
 		B0DC15B51EA747D500443F9D /* MemberCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -419,6 +421,7 @@
 				B0DC15AE1EA7437C00443F9D /* MembersTableViewCell.xib */,
 				B0DC15B51EA747D500443F9D /* MemberCollectionViewCell.swift */,
 				B0DC15B61EA747D500443F9D /* MemberCollectionViewCell.xib */,
+				B0DBB7E31EAB417200BCAD08 /* MemebersProvider.swift */,
 			);
 			name = Members;
 			sourceTree = "<group>";
@@ -592,6 +595,7 @@
 				B0754D781E83C4F1006A5754 /* BasketballGamesNavigationController.swift in Sources */,
 				B0E8816F1E9FCAFE0093AA11 /* BasketballGamesViewController.swift in Sources */,
 				B099C6A91E89634D00C0B142 /* NewBasketballGameViewController.swift in Sources */,
+				B0DBB7E41EAB417200BCAD08 /* MemebersProvider.swift in Sources */,
 				B084BD341E7FDD3900DC48B2 /* Palette.swift in Sources */,
 				B0971BC51E850EB10037E26D /* CourtTableViewCell.swift in Sources */,
 				B0754D5F1E83927A006A5754 /* ChooseLevelViewController.swift in Sources */,
