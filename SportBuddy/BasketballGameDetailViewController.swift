@@ -48,6 +48,9 @@ class BasketballGameDetailViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
+        // MARK: Loading indicator
+        self.loadingIndicator.start()
+
         self.tabBarController?.tabBar.isHidden = true
     }
 
@@ -101,9 +104,6 @@ class BasketballGameDetailViewController: BaseViewController {
             let index = courtAddress.index(courtAddress.startIndex, offsetBy: 5)
             let town = courtAddress.substring(to: index)
 
-            // MARK: Loading indicator
-            self.loadingIndicator.start()
-
             WeatherProvider.shared.getWeather(town: town, completion: { (weather, error) in
 
                 if error == nil {
@@ -112,8 +112,6 @@ class BasketballGameDetailViewController: BaseViewController {
                 } else {
                     print("=== Error in BasketballGameDetailViewController - Get weather")
                 }
-
-                self.loadingIndicator.stop()
             })
         } else {
             print("=== Error in BasketballGameDetailViewController getWeather()")
@@ -151,9 +149,11 @@ class BasketballGameDetailViewController: BaseViewController {
 
                         if member == members[members.count-1] {
                             self.tableView.reloadData()
+                            self.loadingIndicator.stop()
                         }
                     } else {
                         print("=== Error: Can't find the user - \(member)")
+                        self.loadingIndicator.stop()
                     }
                 })
             }
@@ -214,7 +214,7 @@ extension BasketballGameDetailViewController: UITableViewDelegate, UITableViewDa
 
             let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! WeatherTableViewCell
 
-            return setWeatherCell(cell: cell)
+            return setWeatherCell(cell)
 
         case .map:
 
@@ -222,20 +222,17 @@ extension BasketballGameDetailViewController: UITableViewDelegate, UITableViewDa
 
             let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! MapTableViewCell
 
-            return setMapCell(cell: cell)
+            return setMapCell(cell)
 
         case .members:
 
             let identifier = MembersTableViewCell.identifier
-
             let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! MembersTableViewCell
+
+            setCellBasicStyle(cell)
 
             cell.game = game
             cell.members = members
-
-            cell.selectionStyle = .none
-            cell.backgroundColor = .clear
-
             cell.collectionView.reloadData()
 
             return cell
@@ -246,41 +243,43 @@ extension BasketballGameDetailViewController: UITableViewDelegate, UITableViewDa
 
             let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! JoinOrLeaveTableViewCell
 
-            if currentUserUid != "" && game != nil {
-                for member in (game?.members)! {
-
-                    if member == currentUserUid {
-                        isUserInMembers = true
-                    }
-
-                    if isUserInMembers {
-                        // show leave button
-
-                        cell.joinButton.isHidden = true
-                        cell.leaveButton.isHidden = false
-
-                        // todo: 加入或離開，最後reload tableview
-                        cell.leaveButton.addTarget(self, action: #selector(leaveFromGame), for: .touchUpInside)
-
-                    } else {
-                        // show join button
-
-                        cell.leaveButton.isHidden = true
-                        cell.joinButton.isHidden = false
-
-                        cell.joinButton.addTarget(self, action: #selector(joinToGame), for: .touchUpInside)
-                    }
-                }
-            } else {
-                print("=== Error: Someing is wrong in BasketballGameDetailViewController")
-            }
-
-            cell.selectionStyle = .none
-            cell.backgroundColor = .clear
-
-            return cell
+            return setJoinOrLeaveTableViewCell(cell)
         }
+
         // swiftlint:enable force_cast
+    }
+
+    func setJoinOrLeaveTableViewCell(_ cell: JoinOrLeaveTableViewCell) -> JoinOrLeaveTableViewCell {
+
+        if currentUserUid != "" && game != nil {
+            for member in (game?.members)! {
+
+                if member == currentUserUid {
+                    isUserInMembers = true
+                }
+
+                if isUserInMembers {
+                    // show leave button
+                    cell.joinButton.isHidden = true
+                    cell.leaveButton.isHidden = false
+
+                    cell.leaveButton.addTarget(self, action: #selector(leaveFromGame), for: .touchUpInside)
+
+                } else {
+                    // show join button
+                    cell.leaveButton.isHidden = true
+                    cell.joinButton.isHidden = false
+
+                    cell.joinButton.addTarget(self, action: #selector(joinToGame), for: .touchUpInside)
+                }
+            }
+        } else {
+            print("=== Error: Someing is wrong in BasketballGameDetailViewController")
+        }
+
+        setCellBasicStyle(cell)
+
+        return cell
     }
 
     func joinToGame() {
@@ -310,8 +309,34 @@ extension BasketballGameDetailViewController: UITableViewDelegate, UITableViewDa
     }
 
     func leaveFromGame() {
-        print("=== leaveFromGame ===")
 
+        // todo: 如果是owner離開 -> 刪掉球局
+
+        guard
+            game != nil
+            else { return }
+
+        if !isUserInMembers {
+            return
+        }
+
+        var newMemberList: [String] = []
+
+        for member in (game?.members)! {
+            if member != currentUserUid {
+                newMemberList.append(member)
+            }
+        }
+        let value = [Constant.FirebaseGame.members: newMemberList]
+        getGameDBRef().updateChildValues(value) { (error, _) in
+
+            if error == nil {
+                self.getMembersInfo()
+                self.navigationController?.popViewController(animated: true)
+            } else {
+                print("=== Error in BasketballGameDetailViewController joinToGame()")
+            }
+        }
     }
 
     func getGameDBRef() -> FIRDatabaseReference {
@@ -320,10 +345,9 @@ extension BasketballGameDetailViewController: UITableViewDelegate, UITableViewDa
         return ref
     }
 
-    func setWeatherCell(cell: WeatherTableViewCell) -> WeatherTableViewCell {
+    func setWeatherCell(_ cell: WeatherTableViewCell) -> WeatherTableViewCell {
 
-        cell.selectionStyle = .none
-        cell.backgroundColor = .clear
+        setCellBasicStyle(cell)
 
         if let desc = weather?.desc,
             let weatherPicName = weather?.weatherPicName,
@@ -346,10 +370,9 @@ extension BasketballGameDetailViewController: UITableViewDelegate, UITableViewDa
         return cell
     }
 
-    func setMapCell(cell: MapTableViewCell) -> MapTableViewCell {
+    func setMapCell(_ cell: MapTableViewCell) -> MapTableViewCell {
 
-        cell.selectionStyle = .none
-        cell.backgroundColor = .clear
+        setCellBasicStyle(cell)
 
         if let latitudeString = game?.court.latitude,
             let longitudeString = game?.court.longitude {
@@ -372,5 +395,11 @@ extension BasketballGameDetailViewController: UITableViewDelegate, UITableViewDa
         }
 
         return cell
+    }
+
+    func setCellBasicStyle(_ cell: UITableViewCell) {
+
+        cell.selectionStyle = .none
+        cell.backgroundColor = .clear
     }
 }

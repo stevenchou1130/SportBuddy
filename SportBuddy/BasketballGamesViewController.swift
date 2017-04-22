@@ -114,43 +114,25 @@ class BasketballGamesViewController: BaseViewController {
                 if let snaps = snapshot.children.allObjects as? [FIRDataSnapshot] {
                     for snap in snaps {
 
-                        // MARK: - Filter court by time
                         let gameParser = BasketballGameParser()
 
                         guard
                             let game = gameParser.parserGame(snap)
-                            else { return }
-
-                        let formatter = DateFormatter()
-                        formatter.dateFormat = "yyyy/MM/dd HH:mm"
-                        formatter.locale = Locale.current
-
-                        let currectTime = formatter.string(from: Date())
-
-                        var isNotRepetition = true
-                        var isInCurrentCity = true
-
-                        for gameData in self.gamesList {
-
-                            // Judgement - Having same item or not
-                            if gameData.court.name == game.court.name &&
-                                gameData.name == game.name &&
-                                gameData.owner == game.owner &&
-                                gameData.time == game.time {
-                                isNotRepetition = false
+                            else {
+                                self.loadingIndicator.stop()
+                                continue
                             }
-                        }
 
-                        // MARK: - Filter court by city
-                        let courtAddress = game.court.address
-                        let index = courtAddress.index(courtAddress.startIndex, offsetBy: 3)
-                        let city = courtAddress.substring(to: index)
+                        let isOverTime = self.checkGameTime(game)
+                        let isNotRepetition = self.checkGameRepeted(game)
+                        let isInCurrentCity = self.checkGameInCurrentCity(game)
+                        let isOwnerInGame = self.checkOwnerInGame(game)
 
-                        if Constant.CurrentCity.cityName != city {
-                            isInCurrentCity = false
-                        }
+                        if isOverTime &&
+                            isNotRepetition &&
+                            isInCurrentCity &&
+                            isOwnerInGame {
 
-                        if game.time > currectTime && isNotRepetition && isInCurrentCity {
                             self.gamesList.append(game)
                         }
                     }
@@ -168,6 +150,61 @@ class BasketballGamesViewController: BaseViewController {
                 self.loadingIndicator.stop()
             }
         })
+    }
+
+    // MARK: - Filter court by time
+    func checkGameTime(_ game: BasketballGame) -> Bool {
+
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd HH:mm"
+        formatter.locale = Locale.current
+
+        let currectTime = formatter.string(from: Date())
+
+        return game.time > currectTime
+    }
+
+    // MARK: - Filter court by Having same item or not
+    func checkGameRepeted(_ game: BasketballGame) -> Bool {
+
+        var isNotRepetition = true
+
+        for gameData in self.gamesList {
+            if gameData.court.name == game.court.name &&
+                gameData.name == game.name &&
+                gameData.owner == game.owner &&
+                gameData.time == game.time {
+                isNotRepetition = false
+            }
+        }
+
+        return isNotRepetition
+    }
+
+    // MARK: - Filter court by city
+    func checkGameInCurrentCity(_ game: BasketballGame) -> Bool {
+
+        let courtAddress = game.court.address
+        let index = courtAddress.index(courtAddress.startIndex, offsetBy: 3)
+        let city = courtAddress.substring(to: index)
+
+        return (Constant.CurrentCity.cityName == city)
+    }
+
+    // MARK: - Filter court by is Owner in game
+    func checkOwnerInGame(_ game: BasketballGame) -> Bool {
+
+        var isOwnerInGame = true
+
+        let owner = game.members.filter({ (member) -> Bool in
+            member == game.owner
+        })
+
+        if owner.count == 0 {
+            isOwnerInGame = false
+        }
+
+        return isOwnerInGame
     }
 
     func createNewBasketballGameGame() {
