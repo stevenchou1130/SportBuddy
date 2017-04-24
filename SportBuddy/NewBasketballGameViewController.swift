@@ -206,9 +206,7 @@ class NewBasketballGameViewController: BaseViewController {
 
         ref.updateChildValues(value) { (error, _) in
 
-            if error == nil {
-                print("=== Successfully save gameID to UserGameList")
-            } else {
+            if error != nil {
                 print("=== Error in NewBasketballGameViewController setUserGameList()")
             }
         }

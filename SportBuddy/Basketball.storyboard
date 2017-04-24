@@ -126,7 +126,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="87" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NGu-5Q-tZB">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NGu-5Q-tZB">
                                 <rect key="frame" x="147" y="204" width="80" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="04M-tx-zkn"/>
@@ -142,6 +142,9 @@
                                     <constraint firstAttribute="width" secondItem="VVf-fY-mXm" secondAttribute="height" multiplier="25:11" id="06s-pM-WBi"/>
                                 </constraints>
                                 <state key="normal" image="Button_Upgrade"/>
+                                <connections>
+                                    <action selector="upgrade:" destination="Ysp-NS-ApK" eventType="touchUpInside" id="jdU-bw-uwV"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="上次打球時間" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A0r-Da-1T4">
                                 <rect key="frame" x="97" y="298" width="180" height="70"/>

@@ -358,9 +358,7 @@ extension BasketballGameDetailViewController: UITableViewDelegate, UITableViewDa
             let value: [String: Int] = [(game?.gameID)!: 1]
             ref.updateChildValues(value) { (error, _) in
 
-                if error == nil {
-                    print("=== Successfully save gameID to UserGameList")
-                } else {
+                if error != nil {
                     print("=== Error in BasketballGameDetailViewController setUserGameList() - join")
                 }
             }
