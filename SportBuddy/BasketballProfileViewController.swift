@@ -13,6 +13,7 @@ class BasketballProfileViewController: BaseViewController {
 
     @IBOutlet weak var joinedGamesCount: UILabel!
     @IBOutlet weak var lastGameTime: UILabel!
+    @IBOutlet weak var upgradeButton: UIButton!
 
     let loadingIndicator = LoadingIndicator()
 
@@ -31,6 +32,8 @@ class BasketballProfileViewController: BaseViewController {
     }
 
     func setView() {
+
+        upgradeButton.isHidden = true
 
         setBackground(imageName: Constant.BackgroundName.basketball)
 

@@ -178,6 +178,7 @@
                     <connections>
                         <outlet property="joinedGamesCount" destination="NGu-5Q-tZB" id="4PM-IC-XvX"/>
                         <outlet property="lastGameTime" destination="lH9-yg-6jS" id="Qrs-SZ-zKb"/>
+                        <outlet property="upgradeButton" destination="VVf-fY-mXm" id="cdA-2k-cMt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ct6-vb-kry" userLabel="First Responder" sceneMemberID="firstResponder"/>

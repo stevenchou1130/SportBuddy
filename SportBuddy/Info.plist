@@ -21,9 +21,9 @@
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Please select a picture from your alarm to set your photo in this app.</string>
+	<string>請允許存取您的相簿並挑選一張照片作為您的大頭照</string>
 	<key>NSCameraUsageDescription</key>
-	<string>Please let our app to use carmera, you can also take a picture to be your photo.</string>
+	<string>請允許存取您的相機並拍攝一張照片作為您的大頭照</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>

@@ -14,6 +14,7 @@ class LoginViewController: BaseViewController {
 
     @IBOutlet weak var emailTexfield: UITextField!
     @IBOutlet weak var passwordTextfield: UITextField!
+    @IBOutlet weak var testButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,6 +51,8 @@ class LoginViewController: BaseViewController {
     }
 
     func setView() {
+
+        testButton.isHidden = true
 
         setBackground(imageName: Constant.BackgroundName.login)
     }
