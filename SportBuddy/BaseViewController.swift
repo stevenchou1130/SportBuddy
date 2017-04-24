@@ -11,6 +11,8 @@ import Firebase
 
 class BaseViewController: UIViewController {
 
+    let items = ["臺北市", "新北市", "基隆市", "桃園市", "新竹市", "新竹縣", "苗栗縣", "臺中市", "彰化縣", "南投縣", "雲林縣", "嘉義市", "嘉義縣", "臺南市", "高雄市", "屏東縣", "宜蘭縣", "花蓮縣", "臺東縣", "澎湖縣", "金門縣" ]
+
     func backToSportItemsView() {
 
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
@@ -30,17 +32,28 @@ class BaseViewController: UIViewController {
     }
 }
 
+// MARK: - Hide Navigation Bar
+extension BaseViewController {
+
+    func transparentizeNavigationBar(navigationController: UINavigationController?) {
+
+        let image = UIImage()
+        navigationController?.navigationBar.setBackgroundImage(image, for: UIBarMetrics.default)
+        navigationController?.navigationBar.shadowImage = image
+        navigationController?.navigationBar.isTranslucent = true
+        navigationController?.view.backgroundColor = UIColor.clear
+    }
+}
+
 // MARK: - Navigation Bar Back Button
 extension BaseViewController {
 
     func createBackButton(action: Selector) -> UIBarButtonItem {
 
-        let button = UIBarButtonItem(title: Constant.ObjectValue.NavigationBarBackItemTitle,
+        let button = UIBarButtonItem(image: #imageLiteral(resourceName: "Button_Home"),
                                      style: .done,
                                      target: self,
                                      action: action)
-
-        button.tintColor = UIColor.black
 
         return button
     }
@@ -48,13 +61,16 @@ extension BaseViewController {
 
 // MARK: - Hide Keyboard When Tapped Around
 extension BaseViewController {
+
     func hideKeyboardWhenTappedAround() {
+
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(BaseViewController.dismissKeyboard))
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
     }
 
     func dismissKeyboard() {
+
         view.endEditing(true)
     }
 }

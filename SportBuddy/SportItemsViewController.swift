@@ -8,21 +8,26 @@
 
 import UIKit
 import Firebase
-import FirebaseAuth
-import FirebaseDatabase
+import NVActivityIndicatorView
 
 class SportItemsViewController: BaseViewController {
 
     @IBOutlet weak var userImage: UIImageView!
-
-    var isfirstTime = true
+    @IBOutlet weak var userName: UILabel!
+    @IBOutlet weak var jogButton: UIButton!
+    @IBOutlet weak var baseballButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("== SportItemsViewController ==")
 
         checkIfUserIsLoggedIn()
         setView()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        setUserInfo()
     }
 
     override func viewWillLayoutSubviews() {
@@ -39,6 +44,13 @@ class SportItemsViewController: BaseViewController {
 
         // todo: 滑動選單
 
+        let jobImageBW = convertImageToBW(image: #imageLiteral(resourceName: "Item_Jog"))
+        jogButton.setImage(jobImageBW, for: .normal)
+        jogButton.isEnabled = false
+
+        let baseballImageBW = convertImageToBW(image: #imageLiteral(resourceName: "Item_Baseball"))
+        baseballButton.setImage(baseballImageBW, for: .normal)
+        baseballButton.isEnabled = false
     }
 
     func checkIfUserIsLoggedIn() {
@@ -52,9 +64,8 @@ class SportItemsViewController: BaseViewController {
         do {
             try FIRAuth.auth()?.signOut()
         } catch let logoutError {
-            print("=========")
+            print("=== LogoutError: ")
             print(logoutError)
-            print("=========")
         }
 
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
@@ -66,8 +77,42 @@ class SportItemsViewController: BaseViewController {
         }
     }
 
-    // todo: toEditProfile
+    func setUserInfo() {
+
+        guard let uid = FIRAuth.auth()?.currentUser?.uid else { return }
+
+        let ref = FIRDatabase.database().reference()
+                        .child(Constant.FirebaseUser.nodeName)
+                        .child(uid)
+
+        // MARK: Loading indicator
+        let activityData = ActivityData()
+        NVActivityIndicatorPresenter.sharedInstance.startAnimating(activityData)
+
+        ref.observeSingleEvent(of: .value, with: { (snapshot) in
+            if snapshot.exists() {
+
+                guard
+                    let data = snapshot.value as? [String: String],
+                    let userName = data[Constant.FirebaseUser.name],
+                    let imageUrlString = data[Constant.FirebaseUser.photoURL]
+                    else { return }
+
+                self.userName.text = userName
+                self.loadImage(imageUrlString: imageUrlString, imageView: self.userImage)
+
+            } else {
+                self.errorHandle(errString: "Can't find the data", error: nil)
+            }
+        })
+    }
+
     @IBAction func toEditProfile(_ sender: Any) {
+
+        let editProfileStorybard = UIStoryboard(name: Constant.Storyboard.editProfile, bundle: nil)
+        let editProfileViewController = editProfileStorybard.instantiateViewController(withIdentifier: Constant.Controller.editProfile) as? EditProfileViewController
+
+        self.present(editProfileViewController!, animated: true, completion: nil)
     }
 
     // todo: add another item button action
@@ -77,11 +122,9 @@ class SportItemsViewController: BaseViewController {
         let rootRef = FIRDatabase.database().reference()
 
         rootRef.child(Constant.FirebaseLevel.nodeName).child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
-            // todo: 加上Loading圖示
 
             if snapshot.exists() {
 
-                print("=== level is exist ===")
                 if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
 
                     let basketballStorybard = UIStoryboard(name: Constant.Storyboard.basketball, bundle: nil)
@@ -108,7 +151,6 @@ class SportItemsViewController: BaseViewController {
                         return
                     }
 
-                    print("=== Create user level list ===")
                     if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
 
                         let chooseLevelStorybard = UIStoryboard(name: Constant.Storyboard.chooseLevel, bundle: nil)
@@ -131,4 +173,81 @@ class SportItemsViewController: BaseViewController {
         }
     }
 
+}
+
+// MARK: - Load Image and Set to ImageView
+extension SportItemsViewController {
+
+    func loadImage(imageUrlString: String, imageView: UIImageView) {
+
+        var imageData: Data?
+
+        let workItem = DispatchWorkItem {
+            if let imageUrl = URL(string: imageUrlString) {
+                do {
+                    imageData = try Data(contentsOf: imageUrl)
+                } catch {
+                    self.errorHandle(errString: nil, error: error)
+                }
+            }
+        }
+
+        workItem.perform()
+
+        let queue = DispatchQueue.global(qos: .default)
+
+        queue.async(execute: workItem)
+
+        workItem.notify(queue: DispatchQueue.main) {
+            guard
+                imageData != nil
+                else { return }
+
+            if let image = UIImage(data: imageData!) {
+                imageView.image = image
+            }
+
+            NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
+        }
+    }
+}
+
+// MARK: - Convert Image to grayscale
+extension SportItemsViewController {
+
+    func convertImageToBW(image: UIImage) -> UIImage {
+
+        let filter = CIFilter(name: "CIPhotoEffectMono")
+
+        // convert UIImage to CIImage and set as input
+
+        let ciInput = CIImage(image: image)
+        filter?.setValue(ciInput, forKey: "inputImage")
+
+        // get output CIImage, render as CGImage first to retain proper UIImage scale
+
+        let ciOutput = filter?.outputImage
+        let ciContext = CIContext()
+        let cgImage = ciContext.createCGImage(ciOutput!, from: (ciOutput?.extent)!)
+
+        return UIImage(cgImage: cgImage!)
+    }
+
+}
+
+// MARK: - Error handle
+extension SportItemsViewController {
+
+    func errorHandle(errString: String?, error: Error?) {
+
+        if errString != nil {
+            print("=== Error: \(String(describing: errString))")
+        }
+
+        if error != nil {
+            print("=== Error: \(String(describing: error))")
+        }
+
+        NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
+    }
 }

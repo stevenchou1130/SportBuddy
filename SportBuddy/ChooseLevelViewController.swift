@@ -63,7 +63,9 @@ class ChooseLevelViewController: BaseViewController {
         let values = [Constant.FirebaseLevel.basketball: level]
 
         ref.updateChildValues(values) { (error, _) in
-            print("Error: \(String(describing: error))")
+            if error != nil {
+                print("=== Error: \(String(describing: error))")
+            }
         }
     }
 

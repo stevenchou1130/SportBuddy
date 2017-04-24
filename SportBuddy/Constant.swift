@@ -15,15 +15,22 @@ struct Constant {
         static let appName = NSLocalizedString("SportBuddy", comment: "")
     }
 
+    struct SportItem {
+
+        static let basketball = "Basketball"
+    }
+
     struct Storyboard {
 
         static let login = "Login"
         static let signUp = "SignUp"
         static let sportItems = "SportItems"
+        static let editProfile = "EditProfile"
         static let chooseLevel = "ChooseLevel"
         static let basketball = "Basketball"
         static let basketballCourtDetail = "BasketballCourtDetail"
         static let newBasketballGame = "NewBasketballGame"
+        static let basketballGameDetail = "BasketballGameDetail"
     }
 
     struct Controller {
@@ -31,17 +38,20 @@ struct Constant {
         static let login = "LoginViewController"
         static let signUp = "SignUpViewController"
         static let sportItems = "SportItemsViewController"
+        static let editProfile = "EditProfileViewController"
         static let chooseLevel = "ChooseLevelViewController"
         static let basketballTabbar = "BasketballTabbarViewController"
-        static let basketballGames = "BasketballGamesTableViewController"
-        static let basketballCourt = "BasketballCourtsTableViewController"
+        static let basketballGames = "BasketballGamesViewController"
+        static let basketballCourt = "BasketballCourtsViewController"
         static let basketballProfile = "BasketballProfileViewController"
-        static let basketballCourtDetail = "BasketballCourtDetailTableViewController"
+        static let basketballCourtDetail = "BasketballCourtDetailViewController"
         static let newBasketballGame = "NewBasketballGameViewController"
+        static let basketballGameDetail = "BasketballGameDetailViewController"
     }
 
     struct BackgroundName {
 
+        static let login = "BG_Login"
         static let basketball = "BG_Basketball"
     }
 
@@ -56,26 +66,59 @@ struct Constant {
         static let dbUrl = "https://sportbuddy-710dd.firebaseio.com/"
     }
 
-    struct FirebaseLevel {
-
-        static let nodeName = "levels"
-        static let host = "host"
-        static let basketball = "basketball"
-        static let baseball = "baseball"
-        static let jogging = "jogging"
-    }
-
     struct FirebaseUser {
 
-        static let nodeName = "users"
-        static let account = "account"
-        static let name = "name"
-        static let gender = "gender"
+        static let nodeName = "Users"
+        static let photoURL = "PhotoURL"
+        static let email = "Email"
+        static let name = "Name"
+        static let gender = "Gender"
+    }
+
+    struct FirebaseLevel {
+
+        static let nodeName = "Levels"
+        static let host = "Host"
+        static let basketball = "Basketball"
+        static let baseball = "Baseball"
+        static let jogging = "Jogging"
+    }
+
+    struct FirebaseGame {
+
+        static let nodeName = "Games"
+        static let gameID = "GameID"
+        static let owner = "Owner"
+        static let itme = "Item"
+        static let name = "Name"
+        static let time = "Time"
+        static let court = "Court"
+        static let level = "Level"
+        static let members = "Members"
+    }
+
+    struct FirebaseStorage {
+
+        static let userPhoto = "UserPhoto"
     }
 
     struct Cell {
 
+        static let game = "GameTableViewCell"
         static let court = "CourtTableViewCell"
+    }
+
+    struct CourtInfo {
+
+        static let courtID = "GymID"
+        static let name = "Name"
+        static let tel = "OperationTel"
+        static let address = "Address"
+        static let rate = "Rate"
+        static let rateCount = "RateCount"
+        static let gymFuncList = "GymFuncList"
+        static let latitude = "Latitude"
+        static let longitude = "Longitude"
     }
 
     struct CourtAPIKey {
@@ -92,7 +135,7 @@ struct Constant {
 
     struct ObjectValue {
 
-        static let NavigationBarBackItemTitle = "Sport Items"
+        static let navigationBarBackItemTitle = "Sport Items"
     }
 
     struct CurrentCity {
@@ -104,5 +147,28 @@ struct Constant {
     struct GymType {
 
         static let basketball = "籃球場"
+    }
+
+    struct WeatherDecs {
+
+        static let clear = "晴"
+        static let cloudy = "雲"
+        static let rainy = "雨"
+    }
+
+    struct ImageName {
+
+        // User
+        static let userDefaultPhoto = "Default_User_Photo"
+
+        // Weather
+        static let weatherClear = "Weather_Clear"
+        static let weatherCloudy = "Weather_Cloudy"
+        static let weatherPartlyClear = "Weather_PartlyClear"
+        static let weatherRainy = "Weather_Rainy"
+        static let weatherStorm = "Weather_Storm"
+
+        // Fixing
+        static let fixing = "Fixing"
     }
 }

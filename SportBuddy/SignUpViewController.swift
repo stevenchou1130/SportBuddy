@@ -8,13 +8,13 @@
 
 import UIKit
 import Firebase
-import FirebaseAuth
-import FirebaseDatabase
+import DKImagePickerController
+import NVActivityIndicatorView
 
 class SignUpViewController: BaseViewController {
 
     @IBOutlet weak var userImage: UIImageView!
-    @IBOutlet weak var accountTextField: UITextField!
+    @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var genderLabel: UILabel!
@@ -45,12 +45,12 @@ class SignUpViewController: BaseViewController {
 
     func setView() {
 
-        setBackground(imageName: Constant.BackgroundName.basketball)
+        setBackground(imageName: Constant.BackgroundName.login)
 
-        accountTextField.placeholder = "Emall address"
-        accountTextField.clearButtonMode = .whileEditing
-        accountTextField.keyboardType = .emailAddress
-        accountTextField.delegate = self
+        emailTextField.placeholder = "Emall address"
+        emailTextField.clearButtonMode = .whileEditing
+        emailTextField.keyboardType = .emailAddress
+        emailTextField.delegate = self
 
         passwordTextField.placeholder = "Password"
         passwordTextField.clearButtonMode = .whileEditing
@@ -81,6 +81,32 @@ class SignUpViewController: BaseViewController {
             femaleRadioButton.trailingAnchor.constraint(equalTo: femaleButton.leadingAnchor, constant: -10),
             femaleRadioButton.heightAnchor.constraint(equalToConstant: femaleRadioButton.frame.height),
             femaleRadioButton.widthAnchor.constraint(equalToConstant: femaleRadioButton.frame.width)])
+
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+        userImage.isUserInteractionEnabled = true
+        userImage.addGestureRecognizer(tapGestureRecognizer)
+    }
+
+    // MARK: - Select Picture
+    func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
+        guard
+            let tappedImage = tapGestureRecognizer.view as? UIImageView
+            else { return }
+
+        let pickerController = DKImagePickerController()
+
+        pickerController.singleSelect = true
+        pickerController.assetType = .allPhotos
+
+        pickerController.didSelectAssets = { (assets: [DKAsset]) in
+            if assets.count != 0 {
+                assets[0].fetchOriginalImageWithCompleteBlock({ (image, _) in
+                    tappedImage.image = image
+                })
+            }
+        }
+
+        self.present(pickerController, animated: true) {}
     }
 
     // MARK: - Select Gender
@@ -106,11 +132,9 @@ class SignUpViewController: BaseViewController {
         deselectGenderButton.deselect(animated: false)
 
         if isMale {
-            print("select male")
             userGender = Constant.Gender.male
 
         } else {
-            print("select female")
             userGender = Constant.Gender.female
         }
     }
@@ -118,13 +142,19 @@ class SignUpViewController: BaseViewController {
     // MARK: - Sign up
     @IBAction func signUp(_ sender: Any) {
 
-        let account = self.accountTextField.text!
+        let email = self.emailTextField.text!
         let password = self.passwordTextField.text!
         let name = self.nameTextField.text!
         let gender = self.userGender
 
-        if account != "" && password != "" && name != "" && userGender != "" {
-            FIRAuth.auth()?.createUser(withEmail: account, password: password) { (user, error) in
+        if email != "" && password != "" && name != "" && userGender != "" {
+
+            // MARK: Start loading indicator
+            let activityData = ActivityData()
+            NVActivityIndicatorPresenter.sharedInstance.startAnimating(activityData)
+
+            // MARK: Save user info to firebase
+            FIRAuth.auth()?.createUser(withEmail: email, password: password) { (user, error) in
 
                 if error != nil {
                     self.showErrorAlert(error: error, myErrorMsg: nil)
@@ -133,37 +163,64 @@ class SignUpViewController: BaseViewController {
 
                 guard let uid = user?.uid else { return }
 
-                let dbUrl = Constant.Firebase.dbUrl
+                let storageRef = FIRStorage.storage().reference()
+                    .child(Constant.FirebaseStorage.userPhoto)
+                    .child(Constant.FirebaseStorage.userPhoto + "_" + uid)
 
-                let ref = FIRDatabase.database().reference(fromURL: dbUrl)
+                guard
+                    let uploadData = UIImageJPEGRepresentation(self.userImage.image!, 0.5)
+                    else { return }
 
-                let usersReference = ref.child(Constant.FirebaseUser.nodeName).child(uid)
+                storageRef.put(uploadData, metadata: nil, completion: { (metadata, error) in
 
-                let value = [Constant.FirebaseUser.account: account,
-                             Constant.FirebaseUser.name: name,
-                             Constant.FirebaseUser.gender: gender]
-
-                usersReference.updateChildValues(value, withCompletionBlock: { (err, _) in
-
-                    if err != nil {
-                        self.showErrorAlert(error: err, myErrorMsg: nil)
+                    if error != nil {
+                        self.showErrorAlert(error: error, myErrorMsg: nil)
                         return
                     }
 
-                    print("Saved user successfully into Firebase db")
+                    let userPhotoURL = metadata?.downloadURL()?.absoluteString
 
-                    if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
-                        let sportItemsStorybard = UIStoryboard(name: Constant.Storyboard.sportItems, bundle: nil)
-                        let sportItemsViewController = sportItemsStorybard.instantiateViewController(withIdentifier: Constant.Controller.sportItems) as? SportItemsViewController
-
-                        appDelegate.window?.rootViewController = sportItemsViewController
-                    }
+                    self.setValueToFirebase(uid: uid,
+                                       email: email,
+                                       name: name,
+                                       gender: gender,
+                                       userPhotoURL: userPhotoURL)
                 })
             }
+
         } else {
             self.showErrorAlert(error: nil, myErrorMsg: "Please fill out all information about you.")
         }
+    }
 
+    func setValueToFirebase(uid: String, email: String, name: String, gender: String, userPhotoURL: String?) {
+
+        let dbUrl = Constant.Firebase.dbUrl
+        let ref = FIRDatabase.database().reference(fromURL: dbUrl)
+        let usersReference = ref.child(Constant.FirebaseUser.nodeName).child(uid)
+
+        let value = [Constant.FirebaseUser.email: email,
+                     Constant.FirebaseUser.name: name,
+                     Constant.FirebaseUser.gender: gender,
+                     Constant.FirebaseUser.photoURL: userPhotoURL ?? ""]
+
+        usersReference.updateChildValues(value, withCompletionBlock: { (err, _) in
+
+            if err != nil {
+                self.showErrorAlert(error: err, myErrorMsg: nil)
+                return
+            }
+
+            if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+                let sportItemsStorybard = UIStoryboard(name: Constant.Storyboard.sportItems, bundle: nil)
+                let sportItemsViewController = sportItemsStorybard.instantiateViewController(withIdentifier: Constant.Controller.sportItems) as? SportItemsViewController
+
+                appDelegate.window?.rootViewController = sportItemsViewController
+            }
+
+            // MARK: End loading indicator
+            NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
+        })
     }
 
     /*

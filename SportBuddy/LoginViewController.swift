@@ -8,18 +8,25 @@
 
 import UIKit
 import Firebase
-import FirebaseAuth
+import NVActivityIndicatorView
 
 class LoginViewController: BaseViewController {
 
-    @IBOutlet weak var appNameLabel: UILabel!
-    @IBOutlet weak var accountTextfield: UITextField!
+    @IBOutlet weak var emailTexfield: UITextField!
     @IBOutlet weak var passwordTextfield: UITextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.hideKeyboardWhenTappedAround()
+
         setView()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
     }
 
     // todo: confirm use it or not.
@@ -28,7 +35,7 @@ class LoginViewController: BaseViewController {
         FIRAuth.auth()?.addStateDidChangeListener { _, user in
             if user != nil {
                 // User is signed in.
-                print("==== User is signed in ====")
+                print("=== User is signed in ===")
                 if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
                     let sportItemsStorybard = UIStoryboard(name: Constant.Storyboard.sportItems, bundle: nil)
                     let sportItemsViewController = sportItemsStorybard.instantiateViewController(withIdentifier: Constant.Controller.sportItems) as? SportItemsViewController
@@ -37,26 +44,29 @@ class LoginViewController: BaseViewController {
                 }
             } else {
                 // No user is signed in.
-                print("==== No user sign in ====")
+                print("=== No user sign in ===")
             }
         }
     }
 
     func setView() {
 
-        setBackground(imageName: Constant.BackgroundName.basketball)
-
-        appNameLabel.text = Constant.AppName.appName
+        setBackground(imageName: Constant.BackgroundName.login)
     }
 
     @IBAction func login(_ sender: Any) {
 
-        let account = accountTextfield.text!
+        let email = emailTexfield.text!
         let password = passwordTextfield.text!
 
-        FIRAuth.auth()?.signIn(withEmail: account, password: password, completion: { (_, error) in
+        // MARK: Loading indicator
+        let activityData = ActivityData()
+        NVActivityIndicatorPresenter.sharedInstance.startAnimating(activityData)
+
+        FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (_, error) in
 
             if error != nil {
+                NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
                 self.showErrorAlert(error: error, myErrorMsg: nil)
                 return
             }
@@ -86,9 +96,15 @@ class LoginViewController: BaseViewController {
      *  For testing
      */
     @IBAction func testLogin(_ sender: Any) {
-        FIRAuth.auth()?.signIn(withEmail: "aaa@gmail.com", password: "aaaaaa", completion: { (_, error) in
+
+        // MARK: Loading indicator
+        let activityData = ActivityData()
+        NVActivityIndicatorPresenter.sharedInstance.startAnimating(activityData)
+
+        FIRAuth.auth()?.signIn(withEmail: "steven@gmail.com", password: "aaaaaa", completion: { (_, error) in
 
             if error != nil {
+                NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
                 self.showErrorAlert(error: error, myErrorMsg: nil)
                 return
             }
@@ -103,5 +119,4 @@ class LoginViewController: BaseViewController {
             }
         })
     }
-
 }

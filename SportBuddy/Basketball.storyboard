@@ -1,64 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Basketball Games Table View Controller-->
-        <scene sceneID="6iK-3V-VMR">
+        <!--Basketball Games View Controller-->
+        <scene sceneID="X8l-ft-bYk">
             <objects>
-                <tableViewController storyboardIdentifier="BasketballGamesTableViewController" id="DpY-qt-evq" customClass="BasketballGamesTableViewController" customModule="SportBuddy" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="d4Q-gj-BcY">
+                <viewController storyboardIdentifier="BasketballGamesViewController" id="Fds-A8-hdd" customClass="BasketballGamesViewController" customModule="SportBuddy" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="4Cv-4y-sd5"/>
+                        <viewControllerLayoutGuide type="bottom" id="0fc-jH-muO"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="QO2-OD-UJE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="gameCell" id="aJW-Jw-bzs">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aJW-Jw-bzs" id="cIB-gi-0LF">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="DpY-qt-evq" id="i7c-O5-1qo"/>
-                            <outlet property="delegate" destination="DpY-qt-evq" id="3Tm-5L-te0"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" id="52I-lJ-Prx"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="nPj-Id-QfN" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1777" y="195"/>
-        </scene>
-        <!--Basketball Courts Table View Controller-->
-        <scene sceneID="261-Wo-CSB">
-            <objects>
-                <tableViewController storyboardIdentifier="BasketballCourtsTableViewController" id="PIf-dK-xhO" customClass="BasketballCourtsTableViewController" customModule="SportBuddy" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="xw9-gJ-Rnj">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <connections>
-                            <outlet property="dataSource" destination="PIf-dK-xhO" id="NN8-K1-1Zd"/>
-                            <outlet property="delegate" destination="PIf-dK-xhO" id="Rah-lO-KRx"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" id="isz-XT-KJH"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ci7-T1-aoT">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Fds-A8-hdd" id="zvh-x6-Y7H"/>
+                                    <outlet property="delegate" destination="Fds-A8-hdd" id="dp4-hF-ltB"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="ci7-T1-aoT" secondAttribute="trailing" id="0b2-sJ-jab"/>
+                            <constraint firstItem="ci7-T1-aoT" firstAttribute="leading" secondItem="QO2-OD-UJE" secondAttribute="leading" id="FIp-2O-HhI"/>
+                            <constraint firstItem="0fc-jH-muO" firstAttribute="top" secondItem="ci7-T1-aoT" secondAttribute="bottom" id="jS0-vR-5c1"/>
+                            <constraint firstItem="ci7-T1-aoT" firstAttribute="top" secondItem="4Cv-4y-sd5" secondAttribute="bottom" id="muR-LE-XIH"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Dye-Ki-gJ3"/>
                     <connections>
-                        <outlet property="courtsTableView" destination="xw9-gJ-Rnj" id="Swi-ud-viM"/>
+                        <outlet property="gamesTableView" destination="ci7-T1-aoT" id="gey-V0-vtx"/>
                     </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="8nP-4u-TsZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ro0-oy-bbf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1777" y="901"/>
+            <point key="canvasLocation" x="1776.8" y="194.75262368815595"/>
+        </scene>
+        <!--Basketball Courts View Controller-->
+        <scene sceneID="5RG-T2-AK4">
+            <objects>
+                <viewController storyboardIdentifier="BasketballCourtsViewController" id="CgV-pN-sDq" customClass="BasketballCourtsViewController" customModule="SportBuddy" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="yY6-ye-B6c"/>
+                        <viewControllerLayoutGuide type="bottom" id="5Dn-RH-jgY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="2UG-6j-6Ha">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="f4L-ca-Ygt">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="CgV-pN-sDq" id="5aG-wW-1Ff"/>
+                                    <outlet property="delegate" destination="CgV-pN-sDq" id="1px-Y0-KTd"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="5Dn-RH-jgY" firstAttribute="top" secondItem="f4L-ca-Ygt" secondAttribute="bottom" id="plV-fD-xTp"/>
+                            <constraint firstAttribute="trailing" secondItem="f4L-ca-Ygt" secondAttribute="trailing" id="rIc-9h-cRr"/>
+                            <constraint firstItem="f4L-ca-Ygt" firstAttribute="leading" secondItem="2UG-6j-6Ha" secondAttribute="leading" id="vLI-Po-JSk"/>
+                            <constraint firstItem="f4L-ca-Ygt" firstAttribute="top" secondItem="yY6-ye-B6c" secondAttribute="bottom" id="yyG-4w-pGN"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="gmm-21-pqE"/>
+                    <connections>
+                        <outlet property="courtsTableView" destination="f4L-ca-Ygt" id="3U0-gc-ftx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fZW-DB-POq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1776.8" y="900.89955022488766"/>
         </scene>
         <!--Basketball Profile View Controller-->
         <scene sceneID="8Vu-Wb-Gp7">
@@ -79,7 +102,7 @@
                                     <constraint firstAttribute="width" constant="180" id="wxg-l4-nf1"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2017-03-27" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lH9-yg-6jS">
@@ -89,7 +112,7 @@
                                     <constraint firstAttribute="width" constant="180" id="WJq-Yv-nR5"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="次" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DPq-mC-bYj">
@@ -99,7 +122,7 @@
                                     <constraint firstAttribute="height" constant="50" id="ueN-nE-15g"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="87" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NGu-5Q-tZB">
@@ -109,7 +132,7 @@
                                     <constraint firstAttribute="height" constant="50" id="TBN-pQ-Is2"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VVf-fY-mXm">
@@ -128,7 +151,7 @@
                                     <constraint firstAttribute="height" constant="70" id="r8A-cU-0yO"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -157,7 +180,7 @@
         <!--Games-->
         <scene sceneID="d2d-Tb-JDW">
             <objects>
-                <navigationController storyboardIdentifier="GamesNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="bac-0g-vsq" customClass="BasketballGamesNavigationController" customModule="SportBuddy" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="BasketballGamesNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="bac-0g-vsq" customClass="BasketballGamesNavigationController" customModule="SportBuddy" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Games" id="kH5-om-PXZ"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="hgR-KB-MH3">
@@ -166,7 +189,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="DpY-qt-evq" kind="relationship" relationship="rootViewController" id="8kX-8k-laC"/>
+                        <segue destination="Fds-A8-hdd" kind="relationship" relationship="rootViewController" id="iON-t5-ISy"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yJ1-To-TpW" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -191,7 +214,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qoU-wM-bb3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="222" y="901"/>
+            <point key="canvasLocation" x="202" y="901"/>
         </scene>
         <!--Courts-->
         <scene sceneID="II3-JX-q7t">
@@ -204,8 +227,12 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="c25-9t-6Gk">
+                        <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
-                        <segue destination="PIf-dK-xhO" kind="relationship" relationship="rootViewController" id="ll7-no-fKh"/>
+                        <segue destination="CgV-pN-sDq" kind="relationship" relationship="rootViewController" id="Vzh-ub-7h6"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KeM-rQ-Gak" userLabel="First Responder" sceneMemberID="firstResponder"/>
