@@ -7,13 +7,18 @@
 //
 
 import UIKit
+import Firebase
 
 class BasketballProfileViewController: BaseViewController {
+
+    @IBOutlet weak var joinedGamesCount: UILabel!
+    @IBOutlet weak var lastGameTime: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setView()
+        getUserInfo()
     }
 
     func setView() {
@@ -21,6 +26,19 @@ class BasketballProfileViewController: BaseViewController {
         setBackground(imageName: Constant.BackgroundName.basketball)
 
         setNavigationBar()
+
+    }
+
+    func getUserInfo() {
+
+        let uid = FIRAuth.auth()?.currentUser?.uid
+
+        let ref = FIRDatabase.database().reference().child(Constant.FirebaseGame.nodeName)
+        ref.queryOrdered(byChild: "Members").queryEqual(toValue: uid).observeSingleEvent(of: .value, with: { (snapshot) in
+
+            print("=== snapshot: \(snapshot)")
+
+        })
 
     }
 

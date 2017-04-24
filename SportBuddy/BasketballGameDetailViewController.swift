@@ -301,6 +301,7 @@ extension BasketballGameDetailViewController: UITableViewDelegate, UITableViewDa
 
             if error == nil {
                 self.getMembersInfo()
+                self.setUserGameList(isJoined: true)
                 self.navigationController?.popViewController(animated: true)
             } else {
                 print("=== Error in BasketballGameDetailViewController joinToGame()")
@@ -332,6 +333,7 @@ extension BasketballGameDetailViewController: UITableViewDelegate, UITableViewDa
 
             if error == nil {
                 self.getMembersInfo()
+                self.setUserGameList(isJoined: false)
                 self.navigationController?.popViewController(animated: true)
             } else {
                 print("=== Error in BasketballGameDetailViewController joinToGame()")
@@ -343,6 +345,35 @@ extension BasketballGameDetailViewController: UITableViewDelegate, UITableViewDa
 
         let ref = FIRDatabase.database().reference().child(Constant.FirebaseGame.nodeName).child((game?.gameID)!)
         return ref
+    }
+
+    func setUserGameList(isJoined: Bool) {
+
+        let ref = FIRDatabase.database().reference()
+            .child(Constant.FirebaseUserGameList.nodeName)
+            .child(currentUserUid)
+
+        if isJoined {
+
+            let value: [String: Int] = [(game?.gameID)!: 1]
+            ref.updateChildValues(value) { (error, _) in
+
+                if error == nil {
+                    print("=== Successfully save gameID to UserGameList")
+                } else {
+                    print("=== Error in BasketballGameDetailViewController setUserGameList() - join")
+                }
+            }
+
+        } else {
+
+            ref.child((game?.gameID)!).removeValue(completionBlock: { (error, _) in
+
+                if error != nil {
+                    print("=== Error in BasketballGameDetailViewController setUserGameList() - delete")
+                }
+            })
+        }
     }
 
     func setWeatherCell(_ cell: WeatherTableViewCell) -> WeatherTableViewCell {

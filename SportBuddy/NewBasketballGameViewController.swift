@@ -178,6 +178,7 @@ class NewBasketballGameViewController: BaseViewController {
                 ]
 
                 ref.child(gameID).setValue(game)
+                self.setUserGameList(uid, gameID)
 
                 self.navigationController?.popViewController(animated: true)
 
@@ -190,6 +191,26 @@ class NewBasketballGameViewController: BaseViewController {
 
             self.showErrorAlert(error: nil,
                                 myErrorMsg: "Please fill out all information about you.")
+        }
+    }
+
+    func setUserGameList(_ uid: String, _ gameID: String) {
+
+        guard let uid = FIRAuth.auth()?.currentUser?.uid else { return }
+
+        let ref = FIRDatabase.database().reference()
+            .child(Constant.FirebaseUserGameList.nodeName)
+            .child(uid)
+
+        let value: [String: Int] = [gameID: 1]
+
+        ref.updateChildValues(value) { (error, _) in
+
+            if error == nil {
+                print("=== Successfully save gameID to UserGameList")
+            } else {
+                print("=== Error in NewBasketballGameViewController setUserGameList()")
+            }
         }
     }
 }

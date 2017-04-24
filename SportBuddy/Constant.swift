@@ -75,6 +75,11 @@ struct Constant {
         static let gender = "Gender"
     }
 
+    struct FirebaseUserGameList {
+
+        static let nodeName = "UserGameList"
+    }
+
     struct FirebaseLevel {
 
         static let nodeName = "Levels"
