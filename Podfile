@@ -6,7 +6,9 @@ target 'SportBuddy' do
   use_frameworks!
 
   # Pods for SportBuddy
-	
+
+    pod 'Fabric'
+    pod 'Crashlytics'
 	pod 'Alamofire'
 	pod 'Firebase/Core'
 	pod 'Firebase/Auth'
