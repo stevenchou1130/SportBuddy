@@ -73,6 +73,8 @@ struct Constant {
         static let email = "Email"
         static let name = "Name"
         static let gender = "Gender"
+        static let playedGamesCount = "PlayedGamesCount"
+        static let lastTimePlayedGame = "LastTimePlayedGame"
     }
 
     struct FirebaseUserGameList {

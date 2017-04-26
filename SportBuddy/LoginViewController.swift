@@ -23,6 +23,7 @@ class LoginViewController: BaseViewController {
         self.hideKeyboardWhenTappedAround()
 
 //        setCrashlyticsButton()
+//        testButton.isHidden = true
 
         setView()
     }
@@ -66,8 +67,6 @@ class LoginViewController: BaseViewController {
     }
 
     func setView() {
-
-        testButton.isHidden = true
 
         setBackground(imageName: Constant.BackgroundName.login)
     }

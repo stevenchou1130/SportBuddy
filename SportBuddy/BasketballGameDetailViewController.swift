@@ -285,8 +285,7 @@ extension BasketballGameDetailViewController: UITableViewDelegate, UITableViewDa
     func joinToGame() {
 
         guard
-            game != nil
-            else { return }
+            game != nil else { return }
 
         if isUserInMembers {
             return
@@ -311,11 +310,8 @@ extension BasketballGameDetailViewController: UITableViewDelegate, UITableViewDa
 
     func leaveFromGame() {
 
-        // todo: 如果是owner離開 -> 刪掉球局
-
         guard
-            game != nil
-            else { return }
+            game != nil else { return }
 
         if !isUserInMembers {
             return
@@ -328,6 +324,7 @@ extension BasketballGameDetailViewController: UITableViewDelegate, UITableViewDa
                 newMemberList.append(member)
             }
         }
+
         let value = [Constant.FirebaseGame.members: newMemberList]
         getGameDBRef().updateChildValues(value) { (error, _) in
 
@@ -362,7 +359,6 @@ extension BasketballGameDetailViewController: UITableViewDelegate, UITableViewDa
                     print("=== Error in BasketballGameDetailViewController setUserGameList() - join")
                 }
             }
-
         } else {
 
             ref.child((game?.gameID)!).removeValue(completionBlock: { (error, _) in

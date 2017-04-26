@@ -45,6 +45,7 @@
 		B0AD470C1E8E23F000876498 /* Towns.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AD470B1E8E23F000876498 /* Towns.swift */; };
 		B0AD470E1E8E241B00876498 /* WeatherProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AD470D1E8E241A00876498 /* WeatherProvider.swift */; };
 		B0AD47101E8E242E00876498 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AD470F1E8E242E00876498 /* Weather.swift */; };
+		B0AF703C1EB0F49200D09E20 /* BasketballProfileProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AF703B1EB0F49200D09E20 /* BasketballProfileProvider.swift */; };
 		B0BF606F1EA46E4500E37C73 /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0BF606E1EA46E4500E37C73 /* LoadingIndicator.swift */; };
 		B0C59FD21E9C925B00214A1F /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C59FD11E9C925B00214A1F /* ActivityIndicator.swift */; };
 		B0C59FD81E9CC9D600214A1F /* GameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C59FD61E9CC9D600214A1F /* GameTableViewCell.swift */; };
@@ -115,6 +116,7 @@
 		B0AD470B1E8E23F000876498 /* Towns.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Towns.swift; sourceTree = "<group>"; };
 		B0AD470D1E8E241A00876498 /* WeatherProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherProvider.swift; sourceTree = "<group>"; };
 		B0AD470F1E8E242E00876498 /* Weather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
+		B0AF703B1EB0F49200D09E20 /* BasketballProfileProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasketballProfileProvider.swift; sourceTree = "<group>"; };
 		B0BF606E1EA46E4500E37C73 /* LoadingIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
 		B0C59FD11E9C925B00214A1F /* ActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		B0C59FD61E9CC9D600214A1F /* GameTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameTableViewCell.swift; sourceTree = "<group>"; };
@@ -239,6 +241,7 @@
 			children = (
 				B0754D7B1E83C5C6006A5754 /* BasketballProfileNavigationController.swift */,
 				B0754D741E83AF55006A5754 /* BasketballProfileViewController.swift */,
+				B0AF703B1EB0F49200D09E20 /* BasketballProfileProvider.swift */,
 			);
 			name = BasketballProfile;
 			sourceTree = "<group>";
@@ -644,6 +647,7 @@
 				B0C59FD21E9C925B00214A1F /* ActivityIndicator.swift in Sources */,
 				B0CE8AF91E8B69F2003F0F12 /* Identifiable.swift in Sources */,
 				B0754D7C1E83C5C6006A5754 /* BasketballProfileNavigationController.swift in Sources */,
+				B0AF703C1EB0F49200D09E20 /* BasketballProfileProvider.swift in Sources */,
 				B0BF606F1EA46E4500E37C73 /* LoadingIndicator.swift in Sources */,
 				B0DC15B71EA747D500443F9D /* MemberCollectionViewCell.swift in Sources */,
 				B0AB6FFD1E88C5900060D80E /* BasketballCourtModel.swift in Sources */,

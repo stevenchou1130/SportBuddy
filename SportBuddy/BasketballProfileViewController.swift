@@ -15,11 +15,18 @@ class BasketballProfileViewController: BaseViewController {
     @IBOutlet weak var lastGameTime: UILabel!
     @IBOutlet weak var upgradeButton: UIButton!
 
+    var currentUserUID = ""
+
     let loadingIndicator = LoadingIndicator()
+
+    var totalGameNum = 0
+    var joinedGamesNum = 0
+    var lastGameDate = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.currentUserUID = getCurrentUID()
         setView()
 
     }
@@ -27,13 +34,19 @@ class BasketballProfileViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        getUserInfo()
+        getUserJoinedGames()
 
     }
 
-    func setView() {
+    func getCurrentUID() -> String {
+        guard
+            let uid = FIRAuth.auth()?.currentUser?.uid
+            else { return "" }
 
-        upgradeButton.isHidden = true
+        return uid
+    }
+
+    func setView() {
 
         setBackground(imageName: Constant.BackgroundName.basketball)
 
@@ -41,22 +54,17 @@ class BasketballProfileViewController: BaseViewController {
 
     }
 
-    func getUserInfo() {
+    func getUserJoinedGames() {
 
-        guard
-            let uid = FIRAuth.auth()?.currentUser?.uid
-            else { return }
+        totalGameNum = 0
+        joinedGamesNum = 0
+        lastGameDate = ""
 
         let ref = FIRDatabase.database().reference()
                     .child(Constant.FirebaseUserGameList.nodeName)
-                    .child(uid)
+                    .child(currentUserUID)
 
-        let parser = BasketballGameParser()
-
-        var totalGameNum = 0
-        var doneGameNum = 0
-        var lastGameDate = ""
-
+        // MARK: - Start Loading Indicator
         loadingIndicator.start()
 
         ref.observeSingleEvent(of: .value, with: { (snapshot) in
@@ -69,45 +77,79 @@ class BasketballProfileViewController: BaseViewController {
                         let gameIDString = gameID as? String
                         else { return }
 
-                    let gameRef = FIRDatabase.database().reference()
-                                    .child(Constant.FirebaseGame.nodeName)
-                                    .child(gameIDString)
+                    let totalGames = (snapshot.value as AnyObject).allKeys.count
 
-                    gameRef.observeSingleEvent(of: .value, with: { (snap) in
+                    self.getUserHasDoneGamesInfo(gameIDString, totalGames)
 
-                        if snap.exists() {
-                            let game = parser.parserGame(snap)
-
-                            guard game != nil else { return }
-
-                            totalGameNum += 1
-
-                            let isOwnerInGame = self.checkOwnerInGame(game!)
-                            let isOverTime = self.checkGameTime(game!)
-
-                            if isOwnerInGame && isOverTime {
-                                doneGameNum += 1
-                                lastGameDate = self.checkLastGameTime(lastGameDate, game!)
-                                // todo: 增加user 完成game次數 to firebase
-                            }
-
-                            if totalGameNum == (snapshot.value as AnyObject).allKeys.count {
-                                DispatchQueue.main.async {
-                                    self.joinedGamesCount.text = String(doneGameNum)
-                                    self.lastGameTime.text = String(lastGameDate)
-                                    self.loadingIndicator.stop()
-                                }
-                            }
-                        } else {
-                            print("=== Can't find the game in BasketballProfileViewController")
-                        }
-                    })
                 }
             } else {
                 print("=== Can't find any date in BasketballProfileViewController - getUserInfo()")
+                self.loadingIndicator.stop()
+            }
+        })
+    }
+
+    func getUserHasDoneGamesInfo(_ gameIDString: String, _ totalGames: Int) {
+
+        let parser = BasketballGameParser()
+
+        let gameRef = FIRDatabase.database().reference()
+            .child(Constant.FirebaseGame.nodeName)
+            .child(gameIDString)
+
+        gameRef.observeSingleEvent(of: .value, with: { (snap) in
+
+            self.totalGameNum += 1
+
+            if snap.exists() {
+                let game = parser.parserGame(snap)
+
+                guard game != nil else { return }
+
+                let isOwnerInGame = self.checkOwnerInGame(game!)
+                let isOverTime = self.checkGameTime(game!)
+
+                // 1. Count how many games user had joined
+                // 2. Get the date of last game
+                if isOwnerInGame && isOverTime {
+                    self.joinedGamesNum += 1
+                    self.setLastGameTime(self.lastGameDate, game!)
+                }
+
+                if self.totalGameNum == totalGames {
+                    DispatchQueue.main.async {
+                        self.joinedGamesCount.text = String(self.joinedGamesNum)
+                        self.lastGameTime.text = String(self.lastGameDate)
+                    }
+
+                    // todo: 增加user 完成game次數 to firebase
+                    self.updateFireBaseDB()
+                }
+            } else {
+                print("=== Can't find the game: \(snap.key) in BasketballProfileViewController")
+            }
+        })
+    }
+
+    func updateFireBaseDB() {
+
+        let ref = FIRDatabase.database().reference()
+                    .child(Constant.FirebaseUser.nodeName)
+                    .child(currentUserUID)
+
+        let userUpdatedInfo: [String: Any] = [Constant.FirebaseUser.playedGamesCount: joinedGamesNum,
+                                              Constant.FirebaseUser.lastTimePlayedGame: lastGameDate]
+
+        ref.updateChildValues(userUpdatedInfo) { (error, _) in
+
+            if error != nil {
+                print("=== Error in BasketballProfileViewController: \(String(describing: error))")
             }
 
-        })
+            // MARK: - Stop Loading Indicator
+            self.loadingIndicator.stop()
+        }
+
     }
 
     // MARK: - Check Owner in game
@@ -139,7 +181,7 @@ class BasketballProfileViewController: BaseViewController {
     }
 
     // MARK: - Check last game time
-    func checkLastGameTime(_ tempLastGameTime: String, _ game: BasketballGame) -> String {
+    func setLastGameTime(_ tempLastGameTime: String, _ game: BasketballGame) {
 
         var time = ""
 
@@ -151,7 +193,7 @@ class BasketballProfileViewController: BaseViewController {
 
         let splitedArray = time.characters.split { $0 == " " }.map(String.init)
 
-        return splitedArray[0]
+        self.lastGameDate = splitedArray[0]
     }
 
     func setNavigationBar() {
