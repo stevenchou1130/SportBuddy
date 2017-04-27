@@ -1,16 +1,17 @@
 //
-//  BasketballProfileProvider.swift
+//  UserProvider.swift
 //  SportBuddy
 //
-//  Created by steven.chou on 2017/4/26.
+//  Created by steven.chou on 2017/4/27.
 //  Copyright © 2017年 stevenchou. All rights reserved.
 //
 
+import Foundation
 import Firebase
 
-class BasketballProfileProvider {
+class UserProvider {
 
-    static let shared = BasketballProfileProvider()
+    static let shared = UserProvider()
 
     typealias UserHadler = (User?, Error?) -> Void
 
@@ -52,8 +53,6 @@ class BasketballProfileProvider {
         }) { (error) in
 
             completion(nil, error)
-
         }
-
     }
 }

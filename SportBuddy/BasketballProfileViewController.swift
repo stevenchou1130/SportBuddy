@@ -29,7 +29,7 @@ class BasketballProfileViewController: BaseViewController {
 
         self.currentUserUID = getCurrentUID()
 
-        BasketballProfileProvider.shared.getUserInfo(currentUserUID: currentUserUID) { (user, error) in
+        UserProvider.shared.getUserInfo(currentUserUID: currentUserUID) { (user, error) in
 
             if error == nil {
                 self.userInfo = user
@@ -135,7 +135,6 @@ class BasketballProfileViewController: BaseViewController {
                 if self.totalGameNum == totalGames {
                     DispatchQueue.main.async {
                         self.joinedGamesCount.text = String(self.joinedGamesNum)
-
                         if self.lastGameDate != "" {
                             self.lastGameTime.text = String(self.lastGameDate)
                         }

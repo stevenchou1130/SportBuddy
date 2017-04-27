@@ -17,6 +17,7 @@
 		B06DB2BA1E7FB28000DCF016 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B06DB2B81E7FB28000DCF016 /* LaunchScreen.storyboard */; };
 		B06DB2C21E7FB36700DCF016 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06DB2C11E7FB36700DCF016 /* LoginViewController.swift */; };
 		B07131FC1EAA0C5A00874DEF /* BasketballGameParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07131FB1EAA0C5A00874DEF /* BasketballGameParser.swift */; };
+		B07315031EB1D8F100BFB4CA /* UserProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07315021EB1D8F100BFB4CA /* UserProvider.swift */; };
 		B0754D581E837284006A5754 /* LTHRadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0754D571E837284006A5754 /* LTHRadioButton.swift */; };
 		B0754D5F1E83927A006A5754 /* ChooseLevelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0754D5E1E83927A006A5754 /* ChooseLevelViewController.swift */; };
 		B0754D611E839284006A5754 /* ChooseLevel.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0754D601E839284006A5754 /* ChooseLevel.storyboard */; };
@@ -45,7 +46,6 @@
 		B0AD470C1E8E23F000876498 /* Towns.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AD470B1E8E23F000876498 /* Towns.swift */; };
 		B0AD470E1E8E241B00876498 /* WeatherProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AD470D1E8E241A00876498 /* WeatherProvider.swift */; };
 		B0AD47101E8E242E00876498 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AD470F1E8E242E00876498 /* Weather.swift */; };
-		B0AF703C1EB0F49200D09E20 /* BasketballProfileProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AF703B1EB0F49200D09E20 /* BasketballProfileProvider.swift */; };
 		B0BF606F1EA46E4500E37C73 /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0BF606E1EA46E4500E37C73 /* LoadingIndicator.swift */; };
 		B0C59FD21E9C925B00214A1F /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C59FD11E9C925B00214A1F /* ActivityIndicator.swift */; };
 		B0C59FD81E9CC9D600214A1F /* GameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C59FD61E9CC9D600214A1F /* GameTableViewCell.swift */; };
@@ -88,6 +88,7 @@
 		B06DB2BB1E7FB28000DCF016 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B06DB2C11E7FB36700DCF016 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		B07131FB1EAA0C5A00874DEF /* BasketballGameParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasketballGameParser.swift; sourceTree = "<group>"; };
+		B07315021EB1D8F100BFB4CA /* UserProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProvider.swift; sourceTree = "<group>"; };
 		B0754D571E837284006A5754 /* LTHRadioButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LTHRadioButton.swift; sourceTree = "<group>"; };
 		B0754D5E1E83927A006A5754 /* ChooseLevelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseLevelViewController.swift; sourceTree = "<group>"; };
 		B0754D601E839284006A5754 /* ChooseLevel.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ChooseLevel.storyboard; sourceTree = "<group>"; };
@@ -116,7 +117,6 @@
 		B0AD470B1E8E23F000876498 /* Towns.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Towns.swift; sourceTree = "<group>"; };
 		B0AD470D1E8E241A00876498 /* WeatherProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherProvider.swift; sourceTree = "<group>"; };
 		B0AD470F1E8E242E00876498 /* Weather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
-		B0AF703B1EB0F49200D09E20 /* BasketballProfileProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasketballProfileProvider.swift; sourceTree = "<group>"; };
 		B0BF606E1EA46E4500E37C73 /* LoadingIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
 		B0C59FD11E9C925B00214A1F /* ActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		B0C59FD61E9CC9D600214A1F /* GameTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameTableViewCell.swift; sourceTree = "<group>"; };
@@ -214,6 +214,7 @@
 				B0754D641E839977006A5754 /* BasketballProfile */,
 				B084BD2A1E7FCCE200DC48B2 /* User */,
 				B084BD2B1E7FCD3900DC48B2 /* Storyboard */,
+				B07315011EB1D84B00BFB4CA /* Provider */,
 				B0754D521E836196006A5754 /* Component */,
 				B084BD2C1E7FCE4600DC48B2 /* Utilities */,
 				B06DB2AF1E7FB28000DCF016 /* AppDelegate.swift */,
@@ -222,6 +223,14 @@
 				B00708D81E94CC37005CFD0F /* GoogleService-Info.plist */,
 			);
 			path = SportBuddy;
+			sourceTree = "<group>";
+		};
+		B07315011EB1D84B00BFB4CA /* Provider */ = {
+			isa = PBXGroup;
+			children = (
+				B07315021EB1D8F100BFB4CA /* UserProvider.swift */,
+			);
+			name = Provider;
 			sourceTree = "<group>";
 		};
 		B0754D521E836196006A5754 /* Component */ = {
@@ -241,7 +250,6 @@
 			children = (
 				B0754D7B1E83C5C6006A5754 /* BasketballProfileNavigationController.swift */,
 				B0754D741E83AF55006A5754 /* BasketballProfileViewController.swift */,
-				B0AF703B1EB0F49200D09E20 /* BasketballProfileProvider.swift */,
 			);
 			name = BasketballProfile;
 			sourceTree = "<group>";
@@ -632,6 +640,7 @@
 				B0754D681E8399FB006A5754 /* BaseTableViewController.swift in Sources */,
 				B0E881731E9FDBCF0093AA11 /* BasketballCourtDetailViewController.swift in Sources */,
 				B0754D751E83AF55006A5754 /* BasketballProfileViewController.swift in Sources */,
+				B07315031EB1D8F100BFB4CA /* UserProvider.swift in Sources */,
 				B07131FC1EAA0C5A00874DEF /* BasketballGameParser.swift in Sources */,
 				B0AD470E1E8E241B00876498 /* WeatherProvider.swift in Sources */,
 				B07CF4A31E82D7C600E91F7E /* SportItemsViewController.swift in Sources */,
@@ -647,7 +656,6 @@
 				B0C59FD21E9C925B00214A1F /* ActivityIndicator.swift in Sources */,
 				B0CE8AF91E8B69F2003F0F12 /* Identifiable.swift in Sources */,
 				B0754D7C1E83C5C6006A5754 /* BasketballProfileNavigationController.swift in Sources */,
-				B0AF703C1EB0F49200D09E20 /* BasketballProfileProvider.swift in Sources */,
 				B0BF606F1EA46E4500E37C73 /* LoadingIndicator.swift in Sources */,
 				B0DC15B71EA747D500443F9D /* MemberCollectionViewCell.swift in Sources */,
 				B0AB6FFD1E88C5900060D80E /* BasketballCourtModel.swift in Sources */,
