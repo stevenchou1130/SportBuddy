@@ -13,11 +13,12 @@ class LevelManager {
 
     static let shared = LevelManager()
 
-    typealias UserHadler = (Level?, Error?) -> Void
+    typealias LevelHadler = (Level?, String?, Error?) -> Void
 
-    func getUserInfo(currentUserUID: String, completion: @escaping UserHadler) {
+    func getUserLevel(currentUserUID: String, completion: @escaping LevelHadler) {
 
         var level: Level?
+        let newUser = "newUser"
 
         let ref = FIRDatabase.database().reference()
             .child(Constant.FirebaseLevel.nodeName)
@@ -37,17 +38,32 @@ class LevelManager {
                     let jogging = userLevel[Constant.FirebaseLevel.jogging] as? String
                     else { return }
 
-                level = Level(baseball: baseball, basketball: basketball, jogging: jogging)
+                if baseball == "" && basketball == "" && jogging == "" {
+                    completion(nil, newUser, nil)
+                } else {
+                    level = Level(baseball: baseball, basketball: basketball, jogging: jogging)
+                    completion(level, nil, nil)
+                }
 
             } else {
-                print("=== Can't find this user")
+                completion(nil, newUser, nil)
             }
 
-            completion(level, nil)
-
         }) { (error) in
+            completion(nil, nil, error)
+        }
+    }
 
-            completion(nil, error)
+    func updateUserLevel(currentUserUID: String, values: [String: String], completion: @escaping (Error?) -> Void) {
+
+        let ref = FIRDatabase.database().reference()
+            .child(Constant.FirebaseLevel.nodeName)
+            .child(currentUserUID)
+
+        ref.updateChildValues(values) { (error, _) in
+            if error != nil {
+                completion(error)
+            }
         }
     }
 }

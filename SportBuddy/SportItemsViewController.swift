@@ -66,8 +66,7 @@ class SportItemsViewController: BaseViewController {
         do {
             try FIRAuth.auth()?.signOut()
         } catch let logoutError {
-            print("=== LogoutError: ")
-            print(logoutError)
+            errorHandle(errString: nil, error: logoutError)
         }
 
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
@@ -110,60 +109,61 @@ class SportItemsViewController: BaseViewController {
     @IBAction func toBasketballGameList(_ sender: Any) {
 
         guard let uid = FIRAuth.auth()?.currentUser?.uid else { return }
-        let rootRef = FIRDatabase.database().reference()
 
-        rootRef.child(Constant.FirebaseLevel.nodeName).child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+        LevelManager.shared.getUserLevel(currentUserUID: uid) { (level, newUser, error) in
 
-            if snapshot.exists() {
+            if level != nil {
+                self.toBasketballTabbarViewController()
+            }
 
-                if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+            if newUser != nil {
+                let values = [Constant.FirebaseLevel.basketball: "",
+                              Constant.FirebaseLevel.baseball: "",
+                              Constant.FirebaseLevel.jogging: ""]
 
-                    let basketballStorybard = UIStoryboard(name: Constant.Storyboard.basketball, bundle: nil)
-                    let basketballTabbarViewController = basketballStorybard.instantiateViewController(withIdentifier: Constant.Controller.basketballTabbar) as? BasketballTabbarViewController
+                LevelManager.shared.updateUserLevel(currentUserUID: uid, values: values, completion: { (error) in
 
-                    appDelegate.window?.rootViewController = basketballTabbarViewController
-                }
-
-            } else {
-
-                let dbUrl = Constant.Firebase.dbUrl
-                let ref = FIRDatabase.database().reference(fromURL: dbUrl)
-
-                let levelsReference = ref.child(Constant.FirebaseLevel.nodeName).child(uid)
-
-                let value = [Constant.FirebaseLevel.basketball: "",
-                             Constant.FirebaseLevel.baseball: "",
-                             Constant.FirebaseLevel.jogging: ""]
-
-                levelsReference.updateChildValues(value, withCompletionBlock: { (err, _) in
-
-                    if err != nil {
-                        self.showErrorAlert(error: err, myErrorMsg: nil)
+                    if error != nil {
+                        self.errorHandle(errString: nil, error: error)
                         return
                     }
-
-                    if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
-
-                        let chooseLevelStorybard = UIStoryboard(name: Constant.Storyboard.chooseLevel, bundle: nil)
-                        let chooseLevelViewController = chooseLevelStorybard.instantiateViewController(withIdentifier: Constant.Controller.chooseLevel) as? ChooseLevelViewController
-
-                        appDelegate.window?.rootViewController = chooseLevelViewController
-                    }
                 })
+
+                self.toChooseLevelViewController()
             }
-        })
+
+            if error != nil {
+                self.errorHandle(errString: nil, error: error)
+            }
+        }
     }
 
-    /*
-     *  For testing
-     */
+    func toBasketballTabbarViewController() {
+        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+
+            let basketballStorybard = UIStoryboard(name: Constant.Storyboard.basketball, bundle: nil)
+            let basketballTabbarViewController = basketballStorybard.instantiateViewController(withIdentifier: Constant.Controller.basketballTabbar) as? BasketballTabbarViewController
+
+            appDelegate.window?.rootViewController = basketballTabbarViewController
+        }
+    }
+
+    func toChooseLevelViewController() {
+        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+
+            let chooseLevelStorybard = UIStoryboard(name: Constant.Storyboard.chooseLevel, bundle: nil)
+            let chooseLevelViewController = chooseLevelStorybard.instantiateViewController(withIdentifier: Constant.Controller.chooseLevel) as? ChooseLevelViewController
+
+            appDelegate.window?.rootViewController = chooseLevelViewController
+        }
+    }
+
     @IBAction func logout(_ sender: Any) {
 
         if FIRAuth.auth()?.currentUser?.uid != nil {
             handleLogout()
         }
     }
-
 }
 
 // MARK: - Load Image and Set to ImageView

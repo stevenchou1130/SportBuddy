@@ -56,13 +56,9 @@ class ChooseLevelViewController: BaseViewController {
             let uid = FIRAuth.auth()?.currentUser?.uid
             else { return }
 
-        let ref = FIRDatabase.database().reference()
-                    .child(Constant.FirebaseLevel.nodeName)
-                    .child(uid)
-
         let values = [Constant.FirebaseLevel.basketball: level]
 
-        ref.updateChildValues(values) { (error, _) in
+        LevelManager.shared.updateUserLevel(currentUserUID: uid, values: values) { (error) in
             if error != nil {
                 print("=== Error: \(String(describing: error))")
             }

@@ -18,7 +18,7 @@
 		B06DB2C21E7FB36700DCF016 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06DB2C11E7FB36700DCF016 /* LoginViewController.swift */; };
 		B07131FC1EAA0C5A00874DEF /* BasketballGameParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07131FB1EAA0C5A00874DEF /* BasketballGameParser.swift */; };
 		B07315031EB1D8F100BFB4CA /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07315021EB1D8F100BFB4CA /* UserManager.swift */; };
-		B07315051EB1E13C00BFB4CA /* LevelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07315041EB1E13C00BFB4CA /* LevelProvider.swift */; };
+		B07315051EB1E13C00BFB4CA /* LevelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07315041EB1E13C00BFB4CA /* LevelManager.swift */; };
 		B07315081EB1E18100BFB4CA /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07315071EB1E18100BFB4CA /* Level.swift */; };
 		B0754D581E837284006A5754 /* LTHRadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0754D571E837284006A5754 /* LTHRadioButton.swift */; };
 		B0754D5F1E83927A006A5754 /* ChooseLevelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0754D5E1E83927A006A5754 /* ChooseLevelViewController.swift */; };
@@ -91,7 +91,7 @@
 		B06DB2C11E7FB36700DCF016 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		B07131FB1EAA0C5A00874DEF /* BasketballGameParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasketballGameParser.swift; sourceTree = "<group>"; };
 		B07315021EB1D8F100BFB4CA /* UserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
-		B07315041EB1E13C00BFB4CA /* LevelProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelProvider.swift; sourceTree = "<group>"; };
+		B07315041EB1E13C00BFB4CA /* LevelManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelManager.swift; sourceTree = "<group>"; };
 		B07315071EB1E18100BFB4CA /* Level.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
 		B0754D571E837284006A5754 /* LTHRadioButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LTHRadioButton.swift; sourceTree = "<group>"; };
 		B0754D5E1E83927A006A5754 /* ChooseLevelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseLevelViewController.swift; sourceTree = "<group>"; };
@@ -234,7 +234,7 @@
 			isa = PBXGroup;
 			children = (
 				B07315021EB1D8F100BFB4CA /* UserManager.swift */,
-				B07315041EB1E13C00BFB4CA /* LevelProvider.swift */,
+				B07315041EB1E13C00BFB4CA /* LevelManager.swift */,
 			);
 			name = Manager;
 			sourceTree = "<group>";
@@ -673,7 +673,7 @@
 				B0754D7C1E83C5C6006A5754 /* BasketballProfileNavigationController.swift in Sources */,
 				B0BF606F1EA46E4500E37C73 /* LoadingIndicator.swift in Sources */,
 				B0DC15B71EA747D500443F9D /* MemberCollectionViewCell.swift in Sources */,
-				B07315051EB1E13C00BFB4CA /* LevelProvider.swift in Sources */,
+				B07315051EB1E13C00BFB4CA /* LevelManager.swift in Sources */,
 				B0AB6FFD1E88C5900060D80E /* BasketballCourtModel.swift in Sources */,
 				B0E881711E9FD2AF0093AA11 /* BasketballCourtsViewController.swift in Sources */,
 			);
