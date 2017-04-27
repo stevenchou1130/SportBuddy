@@ -1,5 +1,5 @@
 //
-//  UserProvider.swift
+//  UserManager.swift
 //  SportBuddy
 //
 //  Created by steven.chou on 2017/4/27.
@@ -9,9 +9,9 @@
 import Foundation
 import Firebase
 
-class UserProvider {
+class UserManager {
 
-    static let shared = UserProvider()
+    static let shared = UserManager()
 
     typealias UserHadler = (User?, Error?) -> Void
 

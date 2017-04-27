@@ -29,7 +29,7 @@ class BasketballProfileViewController: BaseViewController {
 
         self.currentUserUID = getCurrentUID()
 
-        UserProvider.shared.getUserInfo(currentUserUID: currentUserUID) { (user, error) in
+        UserManager.shared.getUserInfo(currentUserUID: currentUserUID) { (user, error) in
 
             if error == nil {
                 self.userInfo = user
@@ -39,7 +39,6 @@ class BasketballProfileViewController: BaseViewController {
         }
 
         setView()
-
     }
 
     override func viewWillAppear(_ animated: Bool) {

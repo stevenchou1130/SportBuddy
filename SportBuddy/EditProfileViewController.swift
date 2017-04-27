@@ -39,7 +39,7 @@ class EditProfileViewController: BaseViewController {
 
         loadingIndicator.start()
 
-        UserProvider.shared.getUserInfo(currentUserUID: uid) { (user, error) in
+        UserManager.shared.getUserInfo(currentUserUID: uid) { (user, error) in
 
             if user != nil {
                 self.userOriginName = user!.name

@@ -129,7 +129,7 @@ class BasketballGameDetailViewController: BaseViewController {
 
             for member in members {
 
-                UserProvider.shared.getUserInfo(currentUserUID: member, completion: { (user, error) in
+                UserManager.shared.getUserInfo(currentUserUID: member, completion: { (user, error) in
 
                     if user != nil {
                         self.members.append(user!)

@@ -85,7 +85,6 @@ struct Constant {
     struct FirebaseLevel {
 
         static let nodeName = "Levels"
-        static let host = "Host"
         static let basketball = "Basketball"
         static let baseball = "Baseball"
         static let jogging = "Jogging"
