@@ -135,7 +135,10 @@ class BasketballProfileViewController: BaseViewController {
                 if self.totalGameNum == totalGames {
                     DispatchQueue.main.async {
                         self.joinedGamesCount.text = String(self.joinedGamesNum)
-                        self.lastGameTime.text = String(self.lastGameDate)
+
+                        if self.lastGameDate != "" {
+                            self.lastGameTime.text = String(self.lastGameDate)
+                        }
                     }
 
                     self.updateFireBaseDB()
@@ -206,6 +209,7 @@ class BasketballProfileViewController: BaseViewController {
             time = game.time
         }
 
+        // Remove hh:mm
         let splitedArray = time.characters.split { $0 == " " }.map(String.init)
 
         self.lastGameDate = splitedArray[0]
