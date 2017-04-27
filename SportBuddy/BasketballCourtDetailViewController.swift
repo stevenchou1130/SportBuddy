@@ -15,6 +15,8 @@ class BasketballCourtDetailViewController: BaseViewController, UITableViewDelega
 
     @IBOutlet weak var tableView: UITableView!
 
+    let loadingIndicator = LoadingIndicator()
+
     enum Component {
 
         case weather, map, comment
@@ -67,8 +69,7 @@ class BasketballCourtDetailViewController: BaseViewController, UITableViewDelega
             let town = courtAddress.substring(to: index)
 
             // MARK: Loading indicator
-            let activityData = ActivityData()
-            NVActivityIndicatorPresenter.sharedInstance.startAnimating(activityData)
+            loadingIndicator.start()
 
             WeatherProvider.shared.getWeather(town: town, completion: { (weather, error) in
 
@@ -79,9 +80,10 @@ class BasketballCourtDetailViewController: BaseViewController, UITableViewDelega
                     print("=== Error in BasketballCourtDetailViewController - Get weather")
                 }
 
-                NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
+                self.loadingIndicator.stop()
             })
         } else {
+            self.loadingIndicator.stop()
             print("=== Error in BasketballCourtDetailViewController getWeather()")
         }
     }

@@ -17,6 +17,8 @@ class NewBasketballGameViewController: BaseViewController {
     @IBOutlet weak var levelTextField: UITextField!
     @IBOutlet weak var timeTextField: UITextField!
 
+    let loadingIndicator = LoadingIndicator()
+
     let levelArray = ["A", "B", "C", "D", "E"]
     var basketballCourts: [BasketballCourt] = []
     var selectedCourt: BasketballCourt?
@@ -119,8 +121,7 @@ class NewBasketballGameViewController: BaseViewController {
     func getCourts() {
 
         // MARK: Loading indicator
-        let activityData = ActivityData()
-        NVActivityIndicatorPresenter.sharedInstance.startAnimating(activityData)
+        loadingIndicator.start()
 
         BasketballCourtsProvider.shared.getApiData(city: Constant.CurrentCity.cityName, gymType: Constant.GymType.basketball) { (basketballCourts, error) in
 
@@ -134,7 +135,7 @@ class NewBasketballGameViewController: BaseViewController {
 
             }
 
-            NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
+            self.loadingIndicator.stop()
         }
     }
 

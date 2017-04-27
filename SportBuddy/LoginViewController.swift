@@ -17,6 +17,8 @@ class LoginViewController: BaseViewController {
     @IBOutlet weak var passwordTextfield: UITextField!
     @IBOutlet weak var testButton: UIButton!
 
+    let loadingIndicator = LoadingIndicator()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -31,7 +33,7 @@ class LoginViewController: BaseViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
-        NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
+        loadingIndicator.stop()
     }
 
     // todo: confirm use it or not.
@@ -77,13 +79,12 @@ class LoginViewController: BaseViewController {
         let password = passwordTextfield.text!
 
         // MARK: Loading indicator
-        let activityData = ActivityData()
-        NVActivityIndicatorPresenter.sharedInstance.startAnimating(activityData)
+        loadingIndicator.start()
 
         FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (_, error) in
 
             if error != nil {
-                NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
+                self.loadingIndicator.stop()
                 self.showErrorAlert(error: error, myErrorMsg: nil)
                 return
             }
@@ -115,13 +116,12 @@ class LoginViewController: BaseViewController {
     @IBAction func testLogin(_ sender: Any) {
 
         // MARK: Loading indicator
-        let activityData = ActivityData()
-        NVActivityIndicatorPresenter.sharedInstance.startAnimating(activityData)
+        loadingIndicator.start()
 
         FIRAuth.auth()?.signIn(withEmail: "steven@gmail.com", password: "aaaaaa", completion: { (_, error) in
 
             if error != nil {
-                NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
+                self.loadingIndicator.stop()
                 self.showErrorAlert(error: error, myErrorMsg: nil)
                 return
             }
