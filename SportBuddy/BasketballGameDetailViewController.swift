@@ -128,33 +128,20 @@ class BasketballGameDetailViewController: BaseViewController {
         MemebersProvider.sharded.getMembers(gameID: (game?.gameID)!) { (members) in
 
             for member in members {
-                let ref = FIRDatabase.database().reference().child(Constant.FirebaseUser.nodeName).child(member)
 
-                ref.observeSingleEvent(of: .value, with: { (snapshot) in
+                UserProvider.shared.getUserInfo(currentUserUID: member, completion: { (user, error) in
 
-                    if snapshot.exists() {
+                    if user != nil {
+                        self.members.append(user!)
+                    }
 
-                        guard
-                            let userData = snapshot.value as? [String: Any],
-                            let name = userData[Constant.FirebaseUser.name] as? String,
-                            let email = userData[Constant.FirebaseUser.email] as? String,
-                            let gender = userData[Constant.FirebaseUser.gender] as? String,
-                            let photoURL = userData[Constant.FirebaseUser.photoURL] as? String,
-                            let lastTimePlayedGame = userData[Constant.FirebaseUser.lastTimePlayedGame] as? String,
-                            let playedGamesCount = userData[Constant.FirebaseUser.playedGamesCount] as? Int
-                            else { return }
+                    if member == members[members.count-1] {
+                        self.tableView.reloadData()
+                        self.loadingIndicator.stop()
+                    }
 
-                        let user = User(email: email, name: name, gender: gender, photoURL: photoURL,
-                                        lastTimePlayedGame: lastTimePlayedGame, playedGamesCount: playedGamesCount)
-
-                        self.members.append(user)
-
-                        if member == members[members.count-1] {
-                            self.tableView.reloadData()
-                            self.loadingIndicator.stop()
-                        }
-                    } else {
-                        print("=== Error: Can't find the user - \(member)")
+                    if error != nil {
+                        print("=== Error: \(String(describing: error))")
                         self.loadingIndicator.stop()
                     }
                 })

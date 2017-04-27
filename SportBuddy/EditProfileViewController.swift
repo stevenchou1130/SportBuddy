@@ -35,33 +35,23 @@ class EditProfileViewController: BaseViewController {
     // MARK: - Get User Info From Firebase
     func getUserInfo() {
 
-        loadingIndicator.start()
-
         guard let uid = FIRAuth.auth()?.currentUser?.uid else { return }
 
-        let ref = FIRDatabase.database().reference().child(Constant.FirebaseUser.nodeName).child(uid)
+        loadingIndicator.start()
 
-        ref.observeSingleEvent(of: .value, with: { (snapshot) in
+        UserProvider.shared.getUserInfo(currentUserUID: uid) { (user, error) in
 
-            if snapshot.exists() {
-
-                guard
-                    let userData = snapshot.value as? [String: Any]
-                    else { return }
-
-                guard
-                    let userName = userData[Constant.FirebaseUser.name] as? String,
-                    let userPhotoUrlString = userData[Constant.FirebaseUser.photoURL] as? String
-                    else { return }
-
-                self.userOriginName = userName
-                self.nameTextField.text = userName
-                self.loadAndSetUserPhoto(userPhotoUrlString)
-
-            } else {
-                print("=== Can't find this user")
+            if user != nil {
+                self.userOriginName = user!.name
+                self.nameTextField.text = user!.name
+                self.loadAndSetUserPhoto(user!.photoURL)
             }
-        })
+
+            if error != nil {
+                print("=== Error in EditProfileViewController: \(String(describing: error))")
+                self.loadingIndicator.stop()
+            }
+        }
     }
 
     // MARK: - Load User Picture From Firebase

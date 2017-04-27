@@ -17,6 +17,8 @@ class SportItemsViewController: BaseViewController {
     @IBOutlet weak var jogButton: UIButton!
     @IBOutlet weak var baseballButton: UIButton!
 
+    let loadingIndicator = LoadingIndicator()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -81,30 +83,19 @@ class SportItemsViewController: BaseViewController {
 
         guard let uid = FIRAuth.auth()?.currentUser?.uid else { return }
 
-        let ref = FIRDatabase.database().reference()
-                        .child(Constant.FirebaseUser.nodeName)
-                        .child(uid)
+        loadingIndicator.start()
 
-        // MARK: Loading indicator
-        let activityData = ActivityData()
-        NVActivityIndicatorPresenter.sharedInstance.startAnimating(activityData)
+        UserProvider.shared.getUserInfo(currentUserUID: uid) { (user, error) in
 
-        ref.observeSingleEvent(of: .value, with: { (snapshot) in
-            if snapshot.exists() {
+            if user != nil {
+                self.userName.text = user!.name
+                self.loadImage(imageUrlString: user!.photoURL, imageView: self.userImage)
+            }
 
-                guard
-                    let data = snapshot.value as? [String: Any],
-                    let userName = data[Constant.FirebaseUser.name] as? String,
-                    let imageUrlString = data[Constant.FirebaseUser.photoURL] as? String
-                    else { return }
-
-                self.userName.text = userName
-                self.loadImage(imageUrlString: imageUrlString, imageView: self.userImage)
-
-            } else {
+            if error != nil {
                 self.errorHandle(errString: "Can't find the data", error: nil)
             }
-        })
+        }
     }
 
     @IBAction func toEditProfile(_ sender: Any) {
@@ -207,7 +198,7 @@ extension SportItemsViewController {
                 imageView.image = image
             }
 
-            NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
+            self.loadingIndicator.stop()
         }
     }
 }
@@ -248,6 +239,6 @@ extension SportItemsViewController {
             print("=== Error: \(String(describing: error))")
         }
 
-        NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
+        loadingIndicator.stop()
     }
 }

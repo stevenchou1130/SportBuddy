@@ -184,7 +184,6 @@ class SignUpViewController: BaseViewController {
                                     photoURL: userPhotoURL ?? "", lastTimePlayedGame: "",
                                     playedGamesCount: 0)
 
-                    // todo: 加入預設字串到最後一次打球時間
                     self.setValueToFirebase(uid: uid, userInfo: userInfo)
                 })
             }
