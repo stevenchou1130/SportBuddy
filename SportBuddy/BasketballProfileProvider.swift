@@ -13,41 +13,32 @@ class BasketballProfileProvider {
     static let shared = BasketballProfileProvider()
 
     typealias UserHadler = (User?, Error?) -> Void
-    
+
     func getUserInfo(currentUserUID: String, completion: @escaping UserHadler) {
 
         var user: User?
-        
+
         let ref = FIRDatabase.database().reference()
             .child(Constant.FirebaseUser.nodeName)
             .child(currentUserUID)
 
         ref.observeSingleEvent(of: .value, with: { (snapshot) in
-            
+
             if snapshot.exists() {
 
                 guard
                     let userData = snapshot.value as? [String: Any]
                     else { return }
-                
+
                 guard
                     let name = userData[Constant.FirebaseUser.name] as? String,
                     let email = userData[Constant.FirebaseUser.email] as? String,
                     let gender = userData[Constant.FirebaseUser.gender] as? String,
-                    let photoURL = userData[Constant.FirebaseUser.photoURL] as? String
+                    let photoURL = userData[Constant.FirebaseUser.photoURL] as? String,
+                    let lastTimePlayedGame = userData[Constant.FirebaseUser.lastTimePlayedGame] as? String,
+                    let playedGamesCount = userData[Constant.FirebaseUser.playedGamesCount] as? Int
                     else { return }
 
-                var lastTimePlayedGame = ""
-                var playedGamesCount = 0
-
-                if let lastTime = userData[Constant.FirebaseUser.lastTimePlayedGame] as? String {
-                    lastTimePlayedGame = lastTime
-                }
-                
-                if let gamesCount = userData[Constant.FirebaseUser.playedGamesCount] as? Int {
-                    playedGamesCount = gamesCount
-                }
-                
                 user = User(email: email, name: name, gender: gender,
                             photoURL: photoURL, lastTimePlayedGame: lastTimePlayedGame,
                             playedGamesCount: playedGamesCount)
@@ -57,11 +48,11 @@ class BasketballProfileProvider {
             }
 
             completion(user, nil)
-            
+
         }) { (error) in
 
             completion(nil, error)
-            
+
         }
 
     }

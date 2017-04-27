@@ -139,22 +139,11 @@ class BasketballGameDetailViewController: BaseViewController {
                             let name = userData[Constant.FirebaseUser.name] as? String,
                             let email = userData[Constant.FirebaseUser.email] as? String,
                             let gender = userData[Constant.FirebaseUser.gender] as? String,
-                            let photoURL = userData[Constant.FirebaseUser.photoURL] as? String
-                            else {
-                                return
-                        }
+                            let photoURL = userData[Constant.FirebaseUser.photoURL] as? String,
+                            let lastTimePlayedGame = userData[Constant.FirebaseUser.lastTimePlayedGame] as? String,
+                            let playedGamesCount = userData[Constant.FirebaseUser.playedGamesCount] as? Int
+                            else { return }
 
-                        var lastTimePlayedGame = ""
-                        var playedGamesCount = 0
-                        
-                        if let lastTime = userData[Constant.FirebaseUser.lastTimePlayedGame] as? String {
-                            lastTimePlayedGame = lastTime
-                        }
-                        
-                        if let gamesCount = userData[Constant.FirebaseUser.playedGamesCount] as? Int {
-                            playedGamesCount = gamesCount
-                        }
-                        
                         let user = User(email: email, name: name, gender: gender, photoURL: photoURL,
                                         lastTimePlayedGame: lastTimePlayedGame, playedGamesCount: playedGamesCount)
 

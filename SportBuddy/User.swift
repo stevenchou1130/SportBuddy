@@ -14,11 +14,10 @@ struct User {
     var name: String
     var gender: String
     var photoURL: String
-    var lastTimePlayedGame: String?
-    var playedGamesCount: Int?
+    var lastTimePlayedGame: String
+    var playedGamesCount: Int
 
-    init(email: String, name: String, gender: String, photoURL: String,
-            lastTimePlayedGame: String, playedGamesCount: Int) {
+    init(email: String, name: String, gender: String, photoURL: String, lastTimePlayedGame: String, playedGamesCount: Int) {
 
         self.email = email
         self.name = name

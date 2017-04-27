@@ -138,7 +138,6 @@ class BasketballProfileViewController: BaseViewController {
                         self.lastGameTime.text = String(self.lastGameDate)
                     }
 
-                    // todo: 增加user 完成game次數 to firebase
                     self.updateFireBaseDB()
                 }
             } else {
@@ -217,7 +216,7 @@ class BasketballProfileViewController: BaseViewController {
 
         // todo: 完成多少場比賽，就可以Level up
 
-        print("last game: \(userInfo?.lastTimePlayedGame)")
-        print("game times: \(userInfo?.playedGamesCount)")
+        print("last game: \(String(describing: userInfo?.lastTimePlayedGame))")
+        print("game times: \(String(describing: userInfo?.playedGamesCount))")
     }
 }
