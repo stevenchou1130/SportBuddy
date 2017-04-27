@@ -16,6 +16,7 @@ class BasketballProfileViewController: BaseViewController {
     @IBOutlet weak var upgradeButton: UIButton!
 
     var currentUserUID = ""
+    var userInfo: User?
 
     let loadingIndicator = LoadingIndicator()
 
@@ -27,6 +28,16 @@ class BasketballProfileViewController: BaseViewController {
         super.viewDidLoad()
 
         self.currentUserUID = getCurrentUID()
+
+        BasketballProfileProvider.shared.getUserInfo(currentUserUID: currentUserUID) { (user, error) in
+
+            if error == nil {
+                self.userInfo = user
+            } else {
+                // Todo: Error handle
+            }
+        }
+
         setView()
 
     }
@@ -51,7 +62,12 @@ class BasketballProfileViewController: BaseViewController {
         setBackground(imageName: Constant.BackgroundName.basketball)
 
         setNavigationBar()
+    }
 
+    func setNavigationBar() {
+
+        navigationItem.leftBarButtonItem = createBackButton(action: #selector(backToSportItemsView))
+        transparentizeNavigationBar(navigationController: self.navigationController)
     }
 
     func getUserJoinedGames() {
@@ -196,16 +212,12 @@ class BasketballProfileViewController: BaseViewController {
         self.lastGameDate = splitedArray[0]
     }
 
-    func setNavigationBar() {
-
-        navigationItem.leftBarButtonItem = createBackButton(action: #selector(backToSportItemsView))
-
-        transparentizeNavigationBar(navigationController: self.navigationController)
-    }
-
     @IBAction func upgrade(_ sender: Any) {
         print(" === upgrade ===")
 
         // todo: 完成多少場比賽，就可以Level up
+
+        print("last game: \(userInfo?.lastTimePlayedGame)")
+        print("game times: \(userInfo?.playedGamesCount)")
     }
 }

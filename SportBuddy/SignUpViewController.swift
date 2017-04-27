@@ -180,11 +180,14 @@ class SignUpViewController: BaseViewController {
 
                     let userPhotoURL = metadata?.downloadURL()?.absoluteString
 
+                    // todo: 加入預設字串到最後一次打球時間
                     self.setValueToFirebase(uid: uid,
-                                       email: email,
-                                       name: name,
-                                       gender: gender,
-                                       userPhotoURL: userPhotoURL)
+                                            email: email,
+                                            name: name,
+                                            gender: gender,
+                                            userPhotoURL: userPhotoURL,
+                                            lastTimePlayedGame: "",
+                                            playedGamesCount: 0 )
                 })
             }
 
@@ -193,16 +196,20 @@ class SignUpViewController: BaseViewController {
         }
     }
 
-    func setValueToFirebase(uid: String, email: String, name: String, gender: String, userPhotoURL: String?) {
+    func setValueToFirebase(uid: String, email: String, name: String,
+                            gender: String, userPhotoURL: String?,
+                            lastTimePlayedGame: String, playedGamesCount: Int) {
 
         let dbUrl = Constant.Firebase.dbUrl
         let ref = FIRDatabase.database().reference(fromURL: dbUrl)
         let usersReference = ref.child(Constant.FirebaseUser.nodeName).child(uid)
 
-        let value = [Constant.FirebaseUser.email: email,
+        let value: [String : Any] = [Constant.FirebaseUser.email: email,
                      Constant.FirebaseUser.name: name,
                      Constant.FirebaseUser.gender: gender,
-                     Constant.FirebaseUser.photoURL: userPhotoURL ?? ""]
+                     Constant.FirebaseUser.photoURL: userPhotoURL ?? "",
+                     Constant.FirebaseUser.lastTimePlayedGame: lastTimePlayedGame,
+                     Constant.FirebaseUser.playedGamesCount: playedGamesCount]
 
         usersReference.updateChildValues(value, withCompletionBlock: { (err, _) in
 

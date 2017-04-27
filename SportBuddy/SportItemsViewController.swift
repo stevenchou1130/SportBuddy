@@ -93,9 +93,9 @@ class SportItemsViewController: BaseViewController {
             if snapshot.exists() {
 
                 guard
-                    let data = snapshot.value as? [String: String],
-                    let userName = data[Constant.FirebaseUser.name],
-                    let imageUrlString = data[Constant.FirebaseUser.photoURL]
+                    let data = snapshot.value as? [String: Any],
+                    let userName = data[Constant.FirebaseUser.name] as? String,
+                    let imageUrlString = data[Constant.FirebaseUser.photoURL] as? String
                     else { return }
 
                 self.userName.text = userName
