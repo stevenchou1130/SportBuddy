@@ -156,6 +156,12 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Star" translatesAutoresizingMaskIntoConstraints="NO" id="7Oh-mg-AnG">
+                                <rect key="frame" x="261" y="514" width="64" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="7Oh-mg-AnG" secondAttribute="height" multiplier="1:1" id="goh-Vh-6TU"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -170,7 +176,10 @@
                             <constraint firstItem="A0r-Da-1T4" firstAttribute="centerX" secondItem="ORF-Bs-lKf" secondAttribute="centerX" id="QXz-Va-MFu"/>
                             <constraint firstItem="NGu-5Q-tZB" firstAttribute="centerY" secondItem="DPq-mC-bYj" secondAttribute="centerY" id="RYL-Tr-1Nr"/>
                             <constraint firstItem="NGu-5Q-tZB" firstAttribute="centerX" secondItem="2YE-ro-7xt" secondAttribute="centerX" id="U8B-Ft-ihl"/>
+                            <constraint firstItem="i5o-pJ-TBT" firstAttribute="top" secondItem="7Oh-mg-AnG" secondAttribute="bottom" constant="40" id="XAf-oF-pII"/>
                             <constraint firstItem="lH9-yg-6jS" firstAttribute="centerX" secondItem="A0r-Da-1T4" secondAttribute="centerX" id="hJP-6A-hWC"/>
+                            <constraint firstAttribute="trailing" secondItem="7Oh-mg-AnG" secondAttribute="trailing" constant="50" id="kdz-zX-CN8"/>
+                            <constraint firstItem="7Oh-mg-AnG" firstAttribute="width" secondItem="ORF-Bs-lKf" secondAttribute="height" multiplier="64:667" id="xE7-sw-g30"/>
                             <constraint firstItem="VVf-fY-mXm" firstAttribute="centerX" secondItem="ORF-Bs-lKf" secondAttribute="centerX" id="xkf-hw-pr0"/>
                         </constraints>
                     </view>
@@ -178,6 +187,7 @@
                     <connections>
                         <outlet property="joinedGamesCount" destination="NGu-5Q-tZB" id="4PM-IC-XvX"/>
                         <outlet property="lastGameTime" destination="lH9-yg-6jS" id="Qrs-SZ-zKb"/>
+                        <outlet property="starImage" destination="7Oh-mg-AnG" id="C3X-fw-0f3"/>
                         <outlet property="upgradeButton" destination="VVf-fY-mXm" id="cdA-2k-cMt"/>
                     </connections>
                 </viewController>
@@ -269,5 +279,6 @@
     </scenes>
     <resources>
         <image name="Button_Upgrade" width="170" height="66"/>
+        <image name="Star" width="32" height="32"/>
     </resources>
 </document>

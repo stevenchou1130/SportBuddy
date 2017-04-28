@@ -77,8 +77,8 @@ class LevelManager {
                     switch level!.basketball {
                         case "A": return playedGamesCount >= 100
                         case "B": return playedGamesCount >= 40
-                        case "C": return playedGamesCount >= 30
-                        case "D": return playedGamesCount >= 20
+                        case "C": return playedGamesCount >= 3
+                        case "D": return playedGamesCount >= 2
                         case "E": return playedGamesCount >= 10
                         default:
                             return playedGamesCount >= 10
@@ -100,8 +100,6 @@ class LevelManager {
             .child(Constant.FirebaseLevel.nodeName)
             .child(currentUserUID)
 
-        print("=== userCorrentBasketballLevel: \(userCorrentBasketballLevel)")
-
         var nextLevel: String {
             switch userCorrentBasketballLevel {
             case "A": return "AA"
@@ -113,8 +111,6 @@ class LevelManager {
                 return "D"
             }
         }
-
-        print("=== nextLevel: \(nextLevel)")
 
         let value = [Constant.FirebaseLevel.basketball: nextLevel]
 

@@ -14,6 +14,7 @@ class BasketballProfileViewController: BaseViewController {
     @IBOutlet weak var joinedGamesCount: UILabel!
     @IBOutlet weak var lastGameTime: UILabel!
     @IBOutlet weak var upgradeButton: UIButton!
+    @IBOutlet weak var starImage: UIImageView!
 
     var currentUserUID = ""
     var userInfo: User?
@@ -24,8 +25,9 @@ class BasketballProfileViewController: BaseViewController {
     var joinedGamesNum = 0
     var lastGameDate = ""
 
-    var isAbleToUpgrade = false
     var userCorrentBasketballLevel = ""
+
+    var originStarFrame: CGRect?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,12 +69,20 @@ class BasketballProfileViewController: BaseViewController {
         setBackground(imageName: Constant.BackgroundName.basketball)
 
         setNavigationBar()
+
+        setHidingStar()
     }
 
     func setNavigationBar() {
 
         navigationItem.leftBarButtonItem = createBackButton(action: #selector(backToSportItemsView))
         transparentizeNavigationBar(navigationController: self.navigationController)
+    }
+
+    func setHidingStar() {
+
+        originStarFrame = starImage.frame
+        starImage.isHidden = true
     }
 
     func getUserJoinedGames() {
@@ -162,22 +172,25 @@ class BasketballProfileViewController: BaseViewController {
                 userLevelInfo != nil
                 else { return }
 
+            self.setUpgradeButton(isEnoughToUpgrade: isEnoughToUpgrade!)
+
             self.userCorrentBasketballLevel = (userLevelInfo?.basketball)!
+        }
+    }
 
-            self.isAbleToUpgrade = isEnoughToUpgrade!
+    func setUpgradeButton(isEnoughToUpgrade: Bool) {
 
-            if isEnoughToUpgrade! {
+        if isEnoughToUpgrade {
 
-                self.upgradeButton.setImage(#imageLiteral(resourceName: "Button_Upgrade"), for: .normal)
-                self.upgradeButton.isEnabled = true
+            self.upgradeButton.setImage(#imageLiteral(resourceName: "Button_Upgrade"), for: .normal)
+            self.upgradeButton.isEnabled = true
 
-            } else {
+        } else {
 
-                let converter = ConverImageToBW()
-                let upgrateImageBW = converter.convertImageToBW(image: #imageLiteral(resourceName: "Button_Upgrade"))
-                self.upgradeButton.setImage(upgrateImageBW, for: .normal)
-                self.upgradeButton.isEnabled = false
-            }
+            let converter = ConverImageToBW()
+            let upgrateImageBW = converter.convertImageToBW(image: #imageLiteral(resourceName: "Button_Upgrade"))
+            self.upgradeButton.setImage(upgrateImageBW, for: .normal)
+            self.upgradeButton.isEnabled = false
         }
     }
 
@@ -249,15 +262,37 @@ class BasketballProfileViewController: BaseViewController {
 
     @IBAction func upgrade(_ sender: Any) {
 
-        // todo: 多幾次測試，加上loading 圈圈，更新之後畫面要重load，讓升級按鈕變回灰階
+        // todo: 多幾次測試，加上升級動畫
         LevelManager.shared.upgradeBasketballLevel(currentUserUID: currentUserUID, userCorrentBasketballLevel: userCorrentBasketballLevel) { (error) in
 
             if error == nil {
                 print("Level Up!!")
+                self.setUpgradeButton(isEnoughToUpgrade: false)
+                self.showLevelUpAnimation()
             } else {
                 print("=== Error in BasketballProfileViewController upgrade(): \(String(describing: error))")
             }
         }
+    }
+
+    func showLevelUpAnimation() {
+        print("Show LevelUp Animation")
+
+        guard originStarFrame != nil else { return }
+
+        self.starImage.frame = originStarFrame!
+        self.starImage.isHidden = false
+
+        UIView.animate(withDuration: 2, delay: 0, options:
+            UIViewAnimationOptions.curveEaseOut, animations: {
+
+                self.starImage.frame = CGRect(x: 1, y: -200,
+                                              width: self.starImage.frame.size.width * 3,
+                                              height: self.starImage.frame.size.height * 3)
+        }, completion: { _ -> Void in
+            self.starImage.isHidden = true
+            print("Finish Animation")
+        })
     }
 
 }
