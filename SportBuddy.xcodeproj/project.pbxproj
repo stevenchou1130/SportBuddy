@@ -257,6 +257,7 @@
 				B0CE8AE21E8B6248003F0F12 /* Weather */,
 				B0754D571E837284006A5754 /* LTHRadioButton.swift */,
 				B0C59FD11E9C925B00214A1F /* ActivityIndicator.swift */,
+				B08BD7211EB30BC5007385F1 /* ConvertImageToBW.swift */,
 				B0BF606E1EA46E4500E37C73 /* LoadingIndicator.swift */,
 			);
 			name = Component;
@@ -317,7 +318,6 @@
 			children = (
 				B084BD2D1E7FCE7900DC48B2 /* Constant.swift */,
 				B084BD331E7FDD3900DC48B2 /* Palette.swift */,
-				B08BD7211EB30BC5007385F1 /* ConvertImageToBW.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";

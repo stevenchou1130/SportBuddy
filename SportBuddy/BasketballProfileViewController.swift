@@ -158,11 +158,16 @@ class BasketballProfileViewController: BaseViewController {
                 isEnoughToUpgrade != nil else { return }
 
             if isEnoughToUpgrade! {
-                // todo: 按鈕變亮色 and 能按
-                print("=== can press")
+
+                self.upgradeButton.setImage(#imageLiteral(resourceName: "Button_Upgrade"), for: .normal)
+                self.upgradeButton.isEnabled = true
+
             } else {
-                // todo: 按鈕變灰階 and 不能按
-                print("=== can't press")
+
+                let converter = ConverImageToBW()
+                let upgrateImageBW = converter.convertImageToBW(image: #imageLiteral(resourceName: "Button_Upgrade"))
+                self.upgradeButton.setImage(upgrateImageBW, for: .normal)
+                self.upgradeButton.isEnabled = false
             }
         }
     }
