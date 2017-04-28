@@ -13,9 +13,9 @@ class LevelManager {
 
     static let shared = LevelManager()
 
-    typealias LevelHadler = (Level?, String?, Error?) -> Void
+    typealias LevelHandler = (Level?, String?, Error?) -> Void
 
-    func getUserLevel(currentUserUID: String, completion: @escaping LevelHadler) {
+    func getUserLevel(currentUserUID: String, completion: @escaping LevelHandler) {
 
         var level: Level?
         let newUser = "newUser"
@@ -66,4 +66,32 @@ class LevelManager {
             }
         }
     }
+
+    func checkLevelStatus(userID: String, playedGamesCount: Int, completion: @escaping (Bool?) -> Void) {
+
+        getUserLevel(currentUserUID: userID) { (level, _, error) in
+
+            if level != nil {
+
+                var isEnoughToUpgrade: Bool {
+                    switch level!.basketball {
+                        case "A": return playedGamesCount >= 100
+                        case "B": return playedGamesCount >= 40
+                        case "C": return playedGamesCount >= 30
+                        case "D": return playedGamesCount >= 20
+                        case "E": return playedGamesCount >= 10
+                        default:
+                            return playedGamesCount >= 10
+                        }
+                    }
+                completion(isEnoughToUpgrade)
+            }
+
+            if error != nil {
+                print("=== Error in checkLevelStatus(): \(String(describing: error))")
+            }
+        }
+    }
+
+    func upgradeLevel() {}
 }

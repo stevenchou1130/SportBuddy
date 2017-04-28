@@ -46,11 +46,12 @@ class SportItemsViewController: BaseViewController {
 
         // todo: 滑動選單
 
-        let jobImageBW = convertImageToBW(image: #imageLiteral(resourceName: "Item_Jog"))
+        let converter = ConverImageToBW()
+        let jobImageBW = converter.convertImageToBW(image: #imageLiteral(resourceName: "Item_Jog"))
         jogButton.setImage(jobImageBW, for: .normal)
         jogButton.isEnabled = false
 
-        let baseballImageBW = convertImageToBW(image: #imageLiteral(resourceName: "Item_Baseball"))
+        let baseballImageBW = converter.convertImageToBW(image: #imageLiteral(resourceName: "Item_Baseball"))
         baseballButton.setImage(baseballImageBW, for: .normal)
         baseballButton.isEnabled = false
     }
@@ -201,29 +202,6 @@ extension SportItemsViewController {
             self.loadingIndicator.stop()
         }
     }
-}
-
-// MARK: - Convert Image to grayscale
-extension SportItemsViewController {
-
-    func convertImageToBW(image: UIImage) -> UIImage {
-
-        let filter = CIFilter(name: "CIPhotoEffectMono")
-
-        // convert UIImage to CIImage and set as input
-
-        let ciInput = CIImage(image: image)
-        filter?.setValue(ciInput, forKey: "inputImage")
-
-        // get output CIImage, render as CGImage first to retain proper UIImage scale
-
-        let ciOutput = filter?.outputImage
-        let ciContext = CIContext()
-        let cgImage = ciContext.createCGImage(ciOutput!, from: (ciOutput?.extent)!)
-
-        return UIImage(cgImage: cgImage!)
-    }
-
 }
 
 // MARK: - Error handle

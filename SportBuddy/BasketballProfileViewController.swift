@@ -27,17 +27,8 @@ class BasketballProfileViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.currentUserUID = getCurrentUID()
-
-        UserManager.shared.getUserInfo(currentUserUID: currentUserUID) { (user, error) in
-
-            if error == nil {
-                self.userInfo = user
-            } else {
-                // Todo: Error handle
-            }
-        }
-
+        setCurrentUID()
+        setUser()
         setView()
     }
 
@@ -45,15 +36,27 @@ class BasketballProfileViewController: BaseViewController {
         super.viewWillAppear(animated)
 
         getUserJoinedGames()
-
     }
 
-    func getCurrentUID() -> String {
+    func setCurrentUID() {
+
         guard
             let uid = FIRAuth.auth()?.currentUser?.uid
-            else { return "" }
+            else { return }
 
-        return uid
+        self.currentUserUID = uid
+    }
+
+    func setUser() {
+
+        UserManager.shared.getUserInfo(currentUserUID: currentUserUID) { (user, error) in
+
+            if error == nil {
+                self.userInfo = user
+            } else {
+                print("=== error in BasketballProfileViewController: \(String(describing: error))")
+            }
+        }
     }
 
     func setView() {
@@ -95,10 +98,9 @@ class BasketballProfileViewController: BaseViewController {
                     let totalGames = (snapshot.value as AnyObject).allKeys.count
 
                     self.getUserHasDoneGamesInfo(gameIDString, totalGames)
-
                 }
             } else {
-                print("=== Can't find any date in BasketballProfileViewController - getUserInfo()")
+                print("=== Can't find any date in BasketballProfileViewController - getUserJoinedGames()")
                 self.loadingIndicator.stop()
             }
         })
@@ -131,6 +133,7 @@ class BasketballProfileViewController: BaseViewController {
                     self.setLastGameTime(self.lastGameDate, game!)
                 }
 
+                // Set data to UI & firebase in final of  this loop
                 if self.totalGameNum == totalGames {
                     DispatchQueue.main.async {
                         self.joinedGamesCount.text = String(self.joinedGamesNum)
@@ -138,13 +141,30 @@ class BasketballProfileViewController: BaseViewController {
                             self.lastGameTime.text = String(self.lastGameDate)
                         }
                     }
-
+                    self.setUpgradeButton()
                     self.updateFireBaseDB()
                 }
             } else {
                 print("=== Can't find the game: \(snap.key) in BasketballProfileViewController")
             }
         })
+    }
+
+    func setUpgradeButton() {
+
+        LevelManager.shared.checkLevelStatus(userID: currentUserUID, playedGamesCount: (userInfo?.playedGamesCount)!) { (isEnoughToUpgrade) in
+
+            guard
+                isEnoughToUpgrade != nil else { return }
+
+            if isEnoughToUpgrade! {
+                // todo: 按鈕變亮色 and 能按
+                print("=== can press")
+            } else {
+                // todo: 按鈕變灰階 and 不能按
+                print("=== can't press")
+            }
+        }
     }
 
     func updateFireBaseDB() {
@@ -214,11 +234,12 @@ class BasketballProfileViewController: BaseViewController {
     }
 
     @IBAction func upgrade(_ sender: Any) {
-        print(" === upgrade ===")
 
         // todo: 完成多少場比賽，就可以Level up
-
         print("last game: \(String(describing: userInfo?.lastTimePlayedGame))")
         print("game times: \(String(describing: userInfo?.playedGamesCount))")
+
+        LevelManager.shared.upgradeLevel()
     }
+
 }

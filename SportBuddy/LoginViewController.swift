@@ -18,7 +18,7 @@ class LoginViewController: BaseViewController {
     @IBOutlet weak var testButton: UIButton!
 
     let loadingIndicator = LoadingIndicator()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
