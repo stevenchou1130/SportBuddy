@@ -67,7 +67,7 @@ class LevelManager {
         }
     }
 
-    func checkLevelStatus(userID: String, playedGamesCount: Int, completion: @escaping (Bool?) -> Void) {
+    func checkLevelStatus(userID: String, playedGamesCount: Int, completion: @escaping (Bool?, Level?) -> Void) {
 
         getUserLevel(currentUserUID: userID) { (level, _, error) in
 
@@ -77,14 +77,15 @@ class LevelManager {
                     switch level!.basketball {
                         case "A": return playedGamesCount >= 100
                         case "B": return playedGamesCount >= 40
-                        case "C": return playedGamesCount >= 3
+                        case "C": return playedGamesCount >= 30
                         case "D": return playedGamesCount >= 20
                         case "E": return playedGamesCount >= 10
                         default:
                             return playedGamesCount >= 10
-                        }
                     }
-                completion(isEnoughToUpgrade)
+                }
+
+                completion(isEnoughToUpgrade, level)
             }
 
             if error != nil {
@@ -93,5 +94,36 @@ class LevelManager {
         }
     }
 
-    func upgradeLevel() {}
+    func upgradeBasketballLevel(currentUserUID: String, userCorrentBasketballLevel: String, completion: @escaping (Error?) -> Void) {
+
+        let ref = FIRDatabase.database().reference()
+            .child(Constant.FirebaseLevel.nodeName)
+            .child(currentUserUID)
+
+        print("=== userCorrentBasketballLevel: \(userCorrentBasketballLevel)")
+
+        var nextLevel: String {
+            switch userCorrentBasketballLevel {
+            case "A": return "AA"
+            case "B": return "A"
+            case "C": return "B"
+            case "D": return "C"
+            case "E": return "D"
+            default:
+                return "D"
+            }
+        }
+
+        print("=== nextLevel: \(nextLevel)")
+
+        let value = [Constant.FirebaseLevel.basketball: nextLevel]
+
+        ref.updateChildValues(value) { (error, _) in
+            if error != nil {
+                completion(error)
+            } else {
+                completion(nil)
+            }
+        }
+    }
 }

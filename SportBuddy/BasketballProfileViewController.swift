@@ -24,6 +24,9 @@ class BasketballProfileViewController: BaseViewController {
     var joinedGamesNum = 0
     var lastGameDate = ""
 
+    var isAbleToUpgrade = false
+    var userCorrentBasketballLevel = ""
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -141,7 +144,7 @@ class BasketballProfileViewController: BaseViewController {
                             self.lastGameTime.text = String(self.lastGameDate)
                         }
                     }
-                    self.setUpgradeButton()
+                    self.setUpgradeButtonAndUserLevel()
                     self.updateFireBaseDB()
                 }
             } else {
@@ -150,12 +153,18 @@ class BasketballProfileViewController: BaseViewController {
         })
     }
 
-    func setUpgradeButton() {
+    func setUpgradeButtonAndUserLevel() {
 
-        LevelManager.shared.checkLevelStatus(userID: currentUserUID, playedGamesCount: (userInfo?.playedGamesCount)!) { (isEnoughToUpgrade) in
+        LevelManager.shared.checkLevelStatus(userID: currentUserUID, playedGamesCount: (userInfo?.playedGamesCount)!) { (isEnoughToUpgrade, userLevelInfo) in
 
             guard
-                isEnoughToUpgrade != nil else { return }
+                isEnoughToUpgrade != nil,
+                userLevelInfo != nil
+                else { return }
+
+            self.userCorrentBasketballLevel = (userLevelInfo?.basketball)!
+
+            self.isAbleToUpgrade = isEnoughToUpgrade!
 
             if isEnoughToUpgrade! {
 
@@ -240,11 +249,15 @@ class BasketballProfileViewController: BaseViewController {
 
     @IBAction func upgrade(_ sender: Any) {
 
-        // todo: 完成多少場比賽，就可以Level up
-        print("last game: \(String(describing: userInfo?.lastTimePlayedGame))")
-        print("game times: \(String(describing: userInfo?.playedGamesCount))")
+        // todo: 多幾次測試，加上loading 圈圈，更新之後畫面要重load，讓升級按鈕變回灰階
+        LevelManager.shared.upgradeBasketballLevel(currentUserUID: currentUserUID, userCorrentBasketballLevel: userCorrentBasketballLevel) { (error) in
 
-        LevelManager.shared.upgradeLevel()
+            if error == nil {
+                print("Level Up!!")
+            } else {
+                print("=== Error in BasketballProfileViewController upgrade(): \(String(describing: error))")
+            }
+        }
     }
 
 }
