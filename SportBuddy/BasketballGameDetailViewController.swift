@@ -76,7 +76,7 @@ class BasketballGameDetailViewController: BaseViewController {
 
     func setView() {
         // NavigationItem
-        self.navigationItem.title = "球賽資訊"
+        self.navigationItem.title = game?.name
 
         // Background
         setBackground(imageName: Constant.BackgroundName.basketball)

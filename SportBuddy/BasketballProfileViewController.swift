@@ -75,6 +75,7 @@ class BasketballProfileViewController: BaseViewController {
         setBackground(imageName: Constant.BackgroundName.basketball)
 
         setNavigationBar()
+
     }
 
     func setNavigationBar() {
@@ -118,6 +119,18 @@ class BasketballProfileViewController: BaseViewController {
                 }
             } else {
                 print("=== Can't find any date in BasketballProfileViewController - getUserJoinedGames()")
+
+                LevelManager.shared.getUserLevel(currentUserUID: self.currentUserUID) { (level, _, error) in
+
+                    if level != nil {
+                        self.setLevelImage(level: (level?.basketball)!)
+                    }
+
+                    if error != nil {
+                        print("=== Error in BasketballProfileViewController getUserJoinedGames(): \(String(describing: error))")
+                    }
+                }
+                self.setUpgradeButton(isEnoughToUpgrade: false)
                 self.loadingIndicator.stop()
             }
         })

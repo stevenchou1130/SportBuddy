@@ -73,6 +73,10 @@ class SignUpViewController: BaseViewController {
             maleRadioButton.heightAnchor.constraint(equalToConstant: maleRadioButton.frame.height),
             maleRadioButton.widthAnchor.constraint(equalToConstant: maleRadioButton.frame.width)])
 
+        // todo: 為了先上架，所以把Gender藏起來，之後再打開
+        maleRadioButton.isHidden = true
+        maleButton.isHidden = true
+
         // Female Radio Button
         femaleRadioButton = LTHRadioButton(selectedColor: .blue)
         view.addSubview(femaleRadioButton)
@@ -83,6 +87,11 @@ class SignUpViewController: BaseViewController {
             femaleRadioButton.trailingAnchor.constraint(equalTo: femaleButton.leadingAnchor, constant: -10),
             femaleRadioButton.heightAnchor.constraint(equalToConstant: femaleRadioButton.frame.height),
             femaleRadioButton.widthAnchor.constraint(equalToConstant: femaleRadioButton.frame.width)])
+
+        // todo: 為了先上架，所以把Gender藏起來，之後再打開
+        femaleRadioButton.isHidden = true
+        femaleButton.isHidden = true
+        genderLabel.isHidden = true
 
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
         userImage.isUserInteractionEnabled = true
@@ -143,6 +152,9 @@ class SignUpViewController: BaseViewController {
 
     // MARK: - Sign up
     @IBAction func signUp(_ sender: Any) {
+
+        // todo: 為了先上架，所以把Gender藏起來，之後再打開
+        userGender = "Default"
 
         let email = self.emailTextField.text!
         let password = self.passwordTextField.text!
