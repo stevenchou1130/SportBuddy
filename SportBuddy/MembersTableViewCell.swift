@@ -17,7 +17,7 @@ class MembersTableViewCell: UITableViewCell, Identifiable {
 
     class var identifier: String { return String(describing: self) }
 
-    static let height: CGFloat = 170.0
+    static let height: CGFloat = 185.0
 
     var game: BasketballGame?
     var members: [User] = []

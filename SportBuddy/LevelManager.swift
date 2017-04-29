@@ -77,8 +77,8 @@ class LevelManager {
                     switch level!.basketball {
                         case "A": return playedGamesCount >= 100
                         case "B": return playedGamesCount >= 40
-                        case "C": return playedGamesCount >= 3
-                        case "D": return playedGamesCount >= 2
+                        case "C": return playedGamesCount >= 30
+                        case "D": return playedGamesCount >= 20
                         case "E": return playedGamesCount >= 10
                         default:
                             return playedGamesCount >= 10
