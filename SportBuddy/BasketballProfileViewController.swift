@@ -15,6 +15,7 @@ class BasketballProfileViewController: BaseViewController {
     @IBOutlet weak var lastGameTime: UILabel!
     @IBOutlet weak var upgradeButton: UIButton!
     @IBOutlet weak var starImage: UIImageView!
+    @IBOutlet weak var levelImage: UIImageView!
 
     var currentUserUID = ""
     var userInfo: User?
@@ -43,6 +44,11 @@ class BasketballProfileViewController: BaseViewController {
         getUserJoinedGames()
     }
 
+    override func viewDidLayoutSubviews() {
+
+        setHidingStar()
+    }
+
     func setCurrentUID() {
 
         guard
@@ -69,8 +75,6 @@ class BasketballProfileViewController: BaseViewController {
         setBackground(imageName: Constant.BackgroundName.basketball)
 
         setNavigationBar()
-
-        setHidingStar()
     }
 
     func setNavigationBar() {
@@ -175,7 +179,26 @@ class BasketballProfileViewController: BaseViewController {
             self.setUpgradeButton(isEnoughToUpgrade: isEnoughToUpgrade!)
 
             self.userCorrentBasketballLevel = (userLevelInfo?.basketball)!
+            self.setLevelImage(level: (userLevelInfo?.basketball)!)
         }
+    }
+
+    func setLevelImage(level: String) {
+
+        var image: UIImage {
+            switch level {
+            case "A": return #imageLiteral(resourceName: "Level_A")
+            case "B": return #imageLiteral(resourceName: "Level_B")
+            case "C": return #imageLiteral(resourceName: "Level_C")
+            case "D": return #imageLiteral(resourceName: "Level_D")
+            case "E": return #imageLiteral(resourceName: "Level_E")
+            default:
+                return #imageLiteral(resourceName: "Level_A")
+            }
+        }
+
+        self.levelImage.image = image
+        self.levelImage.layer.cornerRadius = self.levelImage.bounds.size.height / 2.0
     }
 
     func setUpgradeButton(isEnoughToUpgrade: Bool) {
@@ -263,13 +286,17 @@ class BasketballProfileViewController: BaseViewController {
     @IBAction func upgrade(_ sender: Any) {
 
         // todo: 多幾次測試，加上升級動畫
-        LevelManager.shared.upgradeBasketballLevel(currentUserUID: currentUserUID, userCorrentBasketballLevel: userCorrentBasketballLevel) { (error) in
+        LevelManager.shared.upgradeBasketballLevel(currentUserUID: currentUserUID, userCorrentBasketballLevel: userCorrentBasketballLevel) { (nextLevel, error) in
 
-            if error == nil {
+            if nextLevel != nil {
                 print("Level Up!!")
                 self.setUpgradeButton(isEnoughToUpgrade: false)
-                self.showLevelUpAnimation()
-            } else {
+                self.setLevelImage(level: nextLevel!)
+
+//                self.showLevelUpAnimation()
+            }
+
+            if error != nil {
                 print("=== Error in BasketballProfileViewController upgrade(): \(String(describing: error))")
             }
         }
@@ -280,17 +307,22 @@ class BasketballProfileViewController: BaseViewController {
 
         guard originStarFrame != nil else { return }
 
-        self.starImage.frame = originStarFrame!
         self.starImage.isHidden = false
 
-        UIView.animate(withDuration: 2, delay: 0, options:
+//        self.starImage.frame = CGRect(x: 215.5, y: 424.5, width: 54.5, height: 54.5)
+//
+//        let width = (originStarFrame?.width)! * 3
+//        let height = (originStarFrame?.height)! * 3
+
+        UIView.animate(withDuration: 2.0, delay: 0.0, options:
             UIViewAnimationOptions.curveEaseOut, animations: {
 
-                self.starImage.frame = CGRect(x: 1, y: -200,
+                self.starImage.frame = CGRect(x: 10, y: -200,
                                               width: self.starImage.frame.size.width * 3,
                                               height: self.starImage.frame.size.height * 3)
         }, completion: { _ -> Void in
             self.starImage.isHidden = true
+            self.starImage.frame = self.originStarFrame!
             print("Finish Animation")
         })
     }

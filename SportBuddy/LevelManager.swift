@@ -73,12 +73,13 @@ class LevelManager {
 
             if level != nil {
 
+                // todo: 調整回正確的升級機制
                 var isEnoughToUpgrade: Bool {
                     switch level!.basketball {
                         case "A": return playedGamesCount >= 100
                         case "B": return playedGamesCount >= 40
-                        case "C": return playedGamesCount >= 30
-                        case "D": return playedGamesCount >= 20
+                        case "C": return playedGamesCount >= 3
+                        case "D": return playedGamesCount >= 2
                         case "E": return playedGamesCount >= 10
                         default:
                             return playedGamesCount >= 10
@@ -94,7 +95,7 @@ class LevelManager {
         }
     }
 
-    func upgradeBasketballLevel(currentUserUID: String, userCorrentBasketballLevel: String, completion: @escaping (Error?) -> Void) {
+    func upgradeBasketballLevel(currentUserUID: String, userCorrentBasketballLevel: String, completion: @escaping (String?, Error?) -> Void) {
 
         let ref = FIRDatabase.database().reference()
             .child(Constant.FirebaseLevel.nodeName)
@@ -102,7 +103,7 @@ class LevelManager {
 
         var nextLevel: String {
             switch userCorrentBasketballLevel {
-            case "A": return "AA"
+            case "A": return "A"
             case "B": return "A"
             case "C": return "B"
             case "D": return "C"
@@ -116,9 +117,9 @@ class LevelManager {
 
         ref.updateChildValues(value) { (error, _) in
             if error != nil {
-                completion(error)
+                completion(nil, error)
             } else {
-                completion(nil)
+                completion(nextLevel, nil)
             }
         }
     }
