@@ -218,13 +218,13 @@ class BasketballProfileViewController: BaseViewController {
 
         if isEnoughToUpgrade {
 
-            self.upgradeButton.setImage(#imageLiteral(resourceName: "Button_Upgrade"), for: .normal)
+            self.upgradeButton.setImage(#imageLiteral(resourceName: "Button_LevelUp"), for: .normal)
             self.upgradeButton.isEnabled = true
 
         } else {
 
             let converter = ConverImageToBW()
-            let upgrateImageBW = converter.convertImageToBW(image: #imageLiteral(resourceName: "Button_Upgrade"))
+            let upgrateImageBW = converter.convertImageToBW(image: #imageLiteral(resourceName: "Button_LevelUp"))
             self.upgradeButton.setImage(upgrateImageBW, for: .normal)
             self.upgradeButton.isEnabled = false
         }
