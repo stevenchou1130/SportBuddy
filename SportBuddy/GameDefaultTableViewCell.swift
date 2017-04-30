@@ -10,12 +10,15 @@ import UIKit
 
 class GameDefaultTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var cellView: UIView!
     @IBOutlet weak var defaultStringLabel: UILabel!
 
     static let height: CGFloat = 300.0
 
     override func awakeFromNib() {
         super.awakeFromNib()
+
+        cellView.backgroundColor = .clear
 
         defaultStringLabel.textColor = .white
         defaultStringLabel.text = "目前還沒有人開團打球\n就由你來創建第一個球局吧!"
