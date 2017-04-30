@@ -111,6 +111,7 @@ struct Constant {
     struct Cell {
 
         static let game = "GameTableViewCell"
+        static let gameDefault = "GameDefaultTableViewCell"
         static let court = "CourtTableViewCell"
     }
 

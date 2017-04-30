@@ -63,6 +63,8 @@
 		B0CE8AF91E8B69F2003F0F12 /* Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CE8AF81E8B69F2003F0F12 /* Identifiable.swift */; };
 		B0D443CC1EA36EED008EF375 /* EditProfile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0D443CB1EA36EED008EF375 /* EditProfile.storyboard */; };
 		B0D443CE1EA36F79008EF375 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D443CD1EA36F79008EF375 /* EditProfileViewController.swift */; };
+		B0DB35021EB5AC8800F505F0 /* GameDefaultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0DB35001EB5AC8800F505F0 /* GameDefaultTableViewCell.swift */; };
+		B0DB35031EB5AC8800F505F0 /* GameDefaultTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0DB35011EB5AC8800F505F0 /* GameDefaultTableViewCell.xib */; };
 		B0DBB7E41EAB417200BCAD08 /* MemebersProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0DBB7E31EAB417200BCAD08 /* MemebersProvider.swift */; };
 		B0DC15AF1EA7437C00443F9D /* MembersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0DC15AD1EA7437C00443F9D /* MembersTableViewCell.swift */; };
 		B0DC15B01EA7437C00443F9D /* MembersTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0DC15AE1EA7437C00443F9D /* MembersTableViewCell.xib */; };
@@ -137,6 +139,8 @@
 		B0CE8AF81E8B69F2003F0F12 /* Identifiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Identifiable.swift; sourceTree = "<group>"; };
 		B0D443CB1EA36EED008EF375 /* EditProfile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EditProfile.storyboard; sourceTree = "<group>"; };
 		B0D443CD1EA36F79008EF375 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
+		B0DB35001EB5AC8800F505F0 /* GameDefaultTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameDefaultTableViewCell.swift; sourceTree = "<group>"; };
+		B0DB35011EB5AC8800F505F0 /* GameDefaultTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GameDefaultTableViewCell.xib; sourceTree = "<group>"; };
 		B0DBB7E31EAB417200BCAD08 /* MemebersProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemebersProvider.swift; sourceTree = "<group>"; };
 		B0DC15AD1EA7437C00443F9D /* MembersTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembersTableViewCell.swift; sourceTree = "<group>"; };
 		B0DC15AE1EA7437C00443F9D /* MembersTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MembersTableViewCell.xib; sourceTree = "<group>"; };
@@ -373,6 +377,8 @@
 			children = (
 				B0C59FD61E9CC9D600214A1F /* GameTableViewCell.swift */,
 				B0C59FD71E9CC9D600214A1F /* GameTableViewCell.xib */,
+				B0DB35001EB5AC8800F505F0 /* GameDefaultTableViewCell.swift */,
+				B0DB35011EB5AC8800F505F0 /* GameDefaultTableViewCell.xib */,
 			);
 			name = Cell;
 			sourceTree = "<group>";
@@ -541,6 +547,7 @@
 				B0CE8AED1E8B63BD003F0F12 /* MapTableViewCell.xib in Resources */,
 				B084BD321E7FD29F00DC48B2 /* SignUp.storyboard in Resources */,
 				B0002A581E9E820700CD2241 /* BasketballGameDetail.storyboard in Resources */,
+				B0DB35031EB5AC8800F505F0 /* GameDefaultTableViewCell.xib in Resources */,
 				B037B2921E826905007FD483 /* SportItems.storyboard in Resources */,
 				B06DB2B71E7FB28000DCF016 /* Assets.xcassets in Resources */,
 				B0CE8AF21E8B640C003F0F12 /* CommentTableViewCell.xib in Resources */,
@@ -666,6 +673,7 @@
 				B0754D7A1E83C5AF006A5754 /* BasketballCourtsNavigationController.swift in Sources */,
 				B0E881751E9FE3820093AA11 /* BasketballGameDetailViewController.swift in Sources */,
 				B0DC15BC1EA75BA600443F9D /* JoinOrLeaveTableViewCell.swift in Sources */,
+				B0DB35021EB5AC8800F505F0 /* GameDefaultTableViewCell.swift in Sources */,
 				B076C5601E89F5CF00F06390 /* User.swift in Sources */,
 				B0DC15AF1EA7437C00443F9D /* MembersTableViewCell.swift in Sources */,
 				B0CE8AF11E8B640C003F0F12 /* CommentTableViewCell.swift in Sources */,
