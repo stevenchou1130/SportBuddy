@@ -72,7 +72,13 @@ class LoginViewController: BaseViewController {
 
         setBackground(imageName: Constant.BackgroundName.login)
 
+        emailTexfield.placeholder = "Emall address"
         emailTexfield.autocorrectionType = .no
+        emailTexfield.keyboardType = .emailAddress
+
+        passwordTextfield.placeholder = "Password"
+        passwordTextfield.clearButtonMode = .whileEditing
+
     }
 
     @IBAction func login(_ sender: Any) {
@@ -137,15 +143,5 @@ class LoginViewController: BaseViewController {
                 appDelegate.window?.rootViewController = sportItemsViewController
             }
         })
-    }
-    
-    
-}
-
-extension LoginViewController: UITextFieldDelegate {
-
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        
-        self.view.bounds = CGRect(x: self.view.frame.minX, y: self.view.frame.minY - 100, width: self.view.frame.width, height: self.view.frame.height)
     }
 }

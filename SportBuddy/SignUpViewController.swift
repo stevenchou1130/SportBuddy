@@ -52,6 +52,7 @@ class SignUpViewController: BaseViewController {
         emailTextField.placeholder = "Emall address"
         emailTextField.clearButtonMode = .whileEditing
         emailTextField.keyboardType = .emailAddress
+        emailTextField.autocorrectionType = .no
         emailTextField.delegate = self
 
         passwordTextField.placeholder = "Password"
@@ -60,6 +61,7 @@ class SignUpViewController: BaseViewController {
 
         nameTextField.placeholder = "It will be displaied in app"
         nameTextField.clearButtonMode = .whileEditing
+        nameTextField.autocorrectionType = .no
         nameTextField.delegate = self
 
         // Male Radio Button
