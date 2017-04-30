@@ -64,8 +64,8 @@ class BasketballGameDetailViewController: BaseViewController {
                                           height: self.tableView.frame.height)
         }
 
-        self.tableView.rowHeight = UITableViewAutomaticDimension
-        self.tableView.estimatedRowHeight = 200
+//        self.tableView.rowHeight = UITableViewAutomaticDimension
+//        self.tableView.estimatedRowHeight = 200
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -243,22 +243,38 @@ extension BasketballGameDetailViewController: UITableViewDelegate, UITableViewDa
         if currentUserUid != "" && game != nil {
             for member in (game?.members)! {
 
+                var isGameOwner = false
+
+                if game?.owner == currentUserUid {
+                    isGameOwner = true
+                }
+
                 if member == currentUserUid {
                     isUserInMembers = true
                 }
 
-                if isUserInMembers {
+                if isUserInMembers && isGameOwner {
+                    // show cancel button
+                    cell.joinButton.isHidden = true
+                    cell.leaveButton.isHidden = true
+
+                    cell.cancelGameButton.isHidden = false
+                    cell.cancelGameButton.addTarget(self, action: #selector(leaveFromGame), for: .touchUpInside)
+
+                } else if isUserInMembers && !isGameOwner {
                     // show leave button
                     cell.joinButton.isHidden = true
-                    cell.leaveButton.isHidden = false
+                    cell.cancelGameButton.isHidden = true
 
+                    cell.leaveButton.isHidden = false
                     cell.leaveButton.addTarget(self, action: #selector(leaveFromGame), for: .touchUpInside)
 
                 } else {
                     // show join button
                     cell.leaveButton.isHidden = true
-                    cell.joinButton.isHidden = false
+                    cell.cancelGameButton.isHidden = true
 
+                    cell.joinButton.isHidden = false
                     cell.joinButton.addTarget(self, action: #selector(joinToGame), for: .touchUpInside)
                 }
             }

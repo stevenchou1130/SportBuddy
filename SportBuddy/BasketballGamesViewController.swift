@@ -237,14 +237,10 @@ extension BasketballGamesViewController: UITableViewDelegate, UITableViewDataSou
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        print("=== gamesList.count: \(gamesList.count)")
-
         if gamesList.count == 0 {
-//            gamesTableView.separatorStyle = .none
             isShowDefaultCell = true
             return 1
         } else {
-//            gamesTableView.separatorStyle = .singleLine
             isShowDefaultCell = false
             return gamesList.count
         }
