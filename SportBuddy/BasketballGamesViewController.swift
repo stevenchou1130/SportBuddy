@@ -142,6 +142,8 @@ class BasketballGamesViewController: BaseViewController {
                         }
                     }
 
+                    self.gamesList.sort { $0.time < $1.time }
+
                     self.gamesTableView.reloadData()
 
                 } else {
