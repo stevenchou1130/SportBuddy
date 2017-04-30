@@ -54,7 +54,7 @@ class NewBasketballGameViewController: BaseViewController {
         setBackground(imageName: Constant.BackgroundName.basketball)
 
         nameTextField.autocorrectionType = .no
-        
+
         setCourtPicker()
 
         setLevelPicker()
