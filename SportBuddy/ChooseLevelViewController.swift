@@ -11,6 +11,11 @@ import Firebase
 
 class ChooseLevelViewController: BaseViewController {
 
+    @IBOutlet weak var introductionView: UIView!
+    @IBOutlet weak var introductionLabel: UILabel!
+    @IBOutlet weak var introductionButton: UIButton!
+    @IBOutlet weak var fakeButton: UIButton!
+
     private var level = ""
 
     override func viewDidLoad() {
@@ -48,6 +53,28 @@ class ChooseLevelViewController: BaseViewController {
 
         setBackground(imageName: Constant.BackgroundName.basketball)
 
+        introductionLabel.text = "請選擇您在這項運動所自認的等級, 以便之後尋找差不多等級的球友\n\n範例: 球齡大概兩年, 但技巧還算拙劣, 那可以考慮選擇從D這等級起步"
+
+        let tap = UITapGestureRecognizer(target: self, action: #selector(hideIntroduction))
+        introductionView.addGestureRecognizer(tap)
+
+        fakeButton.addTarget(self, action: #selector(hideIntroduction), for: .touchUpInside)
+
+        introductionButton.addTarget(self, action: #selector(showIntroduction), for: .touchUpInside)
+    }
+
+    func hideIntroduction() {
+
+        introductionView.isHidden = true
+        introductionLabel.isHidden = true
+        fakeButton.isHidden = true
+    }
+
+    func showIntroduction() {
+
+        introductionView.isHidden = false
+        introductionLabel.isHidden = false
+        fakeButton.isHidden = false
     }
 
     func saveLevel(level: String) {
