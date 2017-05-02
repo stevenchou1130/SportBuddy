@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import NVActivityIndicatorView
+import UserNotifications
 
 class SportItemsViewController: BaseViewController {
 
@@ -24,6 +25,7 @@ class SportItemsViewController: BaseViewController {
 
         checkIfUserIsLoggedIn()
         setView()
+        prepareNotification()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -77,6 +79,22 @@ class SportItemsViewController: BaseViewController {
 
             appDelegate.window?.rootViewController = loginViewController
         }
+    }
+
+    func prepareNotification() {
+
+        let content = UNMutableNotificationContent()
+        content.title = "該運動囉!"
+        content.body = "距離上次運動已經有一陣子了吧? 事務繁忙也得重視一下自己的健康, 不少運動夥伴們正等著您的加入他們呢! 快來一起運動吧!"
+        content.sound = UNNotificationSound.default()
+
+        let secendsOfDay: Double = 60 * 60 * 24
+        let days: Double = 10 * secendsOfDay
+
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: days, repeats: false)
+        let request = UNNotificationRequest(identifier: "firstNotification", content: content, trigger: trigger)
+
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
     }
 
     func setUserInfo() {
