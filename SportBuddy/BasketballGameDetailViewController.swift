@@ -31,6 +31,9 @@ class BasketballGameDetailViewController: BaseViewController {
     let loadingIndicator = LoadingIndicator()
     let fullScreenSize = UIScreen.main.bounds.size
 
+    var selectedWeatherIndex: IndexPath = IndexPath()
+    var isWeatherExpanded = false
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -63,9 +66,6 @@ class BasketballGameDetailViewController: BaseViewController {
                                           width: self.tableView.frame.width,
                                           height: self.tableView.frame.height)
         }
-
-//        self.tableView.rowHeight = UITableViewAutomaticDimension
-//        self.tableView.estimatedRowHeight = 200
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -95,6 +95,12 @@ class BasketballGameDetailViewController: BaseViewController {
 
         let joinOrLeaveNib = UINib(nibName: JoinOrLeaveTableViewCell.identifier, bundle: nil)
         tableView.register(joinOrLeaveNib, forCellReuseIdentifier: JoinOrLeaveTableViewCell.identifier)
+    }
+
+    func didExpandWeatherCell() {
+
+        self.isWeatherExpanded = !isWeatherExpanded
+        self.tableView.reloadRows(at: [selectedWeatherIndex], with: .automatic)
     }
 
     func getWeather() {
@@ -171,7 +177,12 @@ extension BasketballGameDetailViewController: UITableViewDelegate, UITableViewDa
         switch components[indexPath.section] {
         case .weather:
 
-            return WeatherTableViewCell.height
+            // todo: 動態伸展
+            if isWeatherExpanded && self.selectedWeatherIndex == indexPath {
+                return WeatherTableViewCell.gameCellHeight
+            } else {
+                return WeatherTableViewCell.gameDefaultHeight
+            }
 
         case .map:
 
@@ -236,6 +247,22 @@ extension BasketballGameDetailViewController: UITableViewDelegate, UITableViewDa
         }
 
         // swiftlint:enable force_cast
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+        let component = components[indexPath.section]
+
+        switch component {
+            case .weather:
+                self.selectedWeatherIndex = indexPath
+                self.didExpandWeatherCell()
+
+            case .map: print("didSelectRowAt: map \(indexPath.row)")
+            case .members: print("didSelectRowAt: members \(indexPath.row)")
+            case .joinOrLeave: print("didSelectRowAt: joinOrLeave \(indexPath.row)")
+        }
+
     }
 
     func setJoinOrLeaveTableViewCell(_ cell: JoinOrLeaveTableViewCell) -> JoinOrLeaveTableViewCell {
@@ -378,23 +405,39 @@ extension BasketballGameDetailViewController: UITableViewDelegate, UITableViewDa
     func setWeatherCell(_ cell: WeatherTableViewCell) -> WeatherTableViewCell {
 
         setCellBasicStyle(cell)
-
-        if let desc = weather?.desc,
-            let weatherPicName = weather?.weatherPicName,
-            let temperature = weather?.temperature,
-            let time = weather?.time {
-
-            cell.weatherImage.image = UIImage(named: weatherPicName)
-            cell.weatherLabel.text = "天氣 : \(desc)"
-            cell.temperatureLabel.text = "氣溫 : \(temperature) 度"
-            cell.updateTimeLabel.text = "更新時間 : \n \(time)"
+        // todo: 動態伸展
+        if !isWeatherExpanded {
+            cell.weatherImage.isHidden = true
+            cell.weatherLabel.isHidden = true
+            cell.temperatureLabel.isHidden = true
+            cell.updateTimeLabel.isHidden = true
+            cell.weatherCellTitle.text = "▶︎ 天氣資訊"
 
         } else {
 
-            //            cell.weatherImage.image = UIImage(named: Constant.ImageName.fixing)
-            cell.weatherLabel.text = ""
-            cell.temperatureLabel.text = "天氣即時資訊更新維護中..."
-            cell.updateTimeLabel.text = ""
+            cell.weatherImage.isHidden = false
+            cell.weatherLabel.isHidden = false
+            cell.temperatureLabel.isHidden = false
+            cell.updateTimeLabel.isHidden = false
+            cell.weatherCellTitle.text = "▼ 天氣資訊"
+
+            if let desc = weather?.desc,
+                let weatherPicName = weather?.weatherPicName,
+                let temperature = weather?.temperature,
+                let time = weather?.time {
+
+                cell.weatherImage.image = UIImage(named: weatherPicName)
+                cell.weatherLabel.text = "\(desc)"
+                cell.temperatureLabel.text = "氣溫 : \(temperature) 度"
+                cell.updateTimeLabel.text = "更新時間 : \n\(time)"
+
+            } else {
+
+                //            cell.weatherImage.image = UIImage(named: Constant.ImageName.fixing)
+                cell.weatherLabel.text = ""
+                cell.temperatureLabel.text = "天氣即時資訊更新維護中..."
+                cell.updateTimeLabel.text = ""
+            }
         }
 
         return cell

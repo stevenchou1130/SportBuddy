@@ -130,7 +130,7 @@ class BasketballCourtDetailViewController: BaseViewController, UITableViewDelega
         switch components[indexPath.section] {
         case .weather:
 
-            return WeatherTableViewCell.height
+            return WeatherTableViewCell.courtCellHeight
 
         case .map:
 
@@ -192,15 +192,20 @@ class BasketballCourtDetailViewController: BaseViewController, UITableViewDelega
             cell.weatherImage.image = UIImage(named: weatherPicName)
             cell.weatherLabel.text = "天氣 : \(desc)"
             cell.temperatureLabel.text = "氣溫 : \(temperature) 度"
-            cell.updateTimeLabel.text = "更新時間 : \n \(time)"
+            cell.updateTimeLabel.text = "更新時間 : \n\(time)"
 
         } else {
 
-//            cell.weatherImage.image = UIImage(named: Constant.ImageName.fixing)
+            cell.weatherImage.image = UIImage(named: Constant.ImageName.fixing)
             cell.weatherLabel.text = ""
             cell.temperatureLabel.text = "天氣即時資訊更新維護中..."
             cell.updateTimeLabel.text = ""
         }
+
+        // todo: 動態伸展
+        cell.weatherCellTitle.isHidden = true
+        cell.weatherImage.topAnchor.constraint(equalTo: cell.topAnchor, constant: 10).isActive = true
+        cell.weatherImage.bottomAnchor.constraint(equalTo: cell.bottomAnchor, constant: -45).isActive = true
 
         return cell
     }
