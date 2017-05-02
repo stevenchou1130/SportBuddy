@@ -32,7 +32,7 @@
                                 </constraints>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Main_AppName" translatesAutoresizingMaskIntoConstraints="NO" id="mff-lg-qxV">
-                                <rect key="frame" x="41" y="202" width="238" height="34"/>
+                                <rect key="frame" x="41" y="202.5" width="238" height="34"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>

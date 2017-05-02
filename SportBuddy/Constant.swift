@@ -178,4 +178,15 @@ struct Constant {
         // Fixing
         static let fixing = "Fixing"
     }
+
+    struct UserNotifacationIdentifier {
+
+        static let comeBackToPlayGame = "comeBackToPlayGame"
+    }
+
+    struct UserNotifacationContent {
+
+        static let title = "該運動囉!"
+        static let body = "距離上次運動已經有一陣子了吧? 事務繁忙也得重視一下自己的健康, 不少運動夥伴們正等著您的加入他們呢! 快來一起運動吧!"
+    }
 }
