@@ -20,7 +20,6 @@ class WeatherTableViewCell: UITableViewCell, Identifiable {
 
     class var identifier: String { return String(describing: self) }
 
-    // todo: 動態伸展
     static let gameDefaultHeight: CGFloat = 40.0
     static let gameCellHeight: CGFloat = 180.0
     static let courtCellHeight: CGFloat = 150.0

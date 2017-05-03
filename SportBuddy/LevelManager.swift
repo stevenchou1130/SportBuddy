@@ -77,10 +77,10 @@ class LevelManager {
                 var isEnoughToUpgrade: Bool {
                     switch level!.basketball {
                         case "A": return playedGamesCount >= 100
-                        case "B": return playedGamesCount >= 40
-                        case "C": return playedGamesCount >= 3
-                        case "D": return playedGamesCount >= 2
-                        case "E": return playedGamesCount >= 10
+                        case "B": return playedGamesCount >= 0
+                        case "C": return playedGamesCount >= 0
+                        case "D": return playedGamesCount >= 0
+                        case "E": return playedGamesCount >= 0
                         default:
                             return playedGamesCount >= 10
                     }

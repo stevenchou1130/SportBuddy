@@ -11,13 +11,14 @@ import Firebase
 
 class MembersTableViewCell: UITableViewCell, Identifiable {
 
-    @IBOutlet weak var collectionView: UICollectionView!
-
     // MARK: Property
+    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var memberCellTitle: UILabel!
 
     class var identifier: String { return String(describing: self) }
 
     static let height: CGFloat = 185.0
+    static let defaultHeight: CGFloat = 40.0
 
     var game: BasketballGame?
     var members: [User] = []
@@ -26,7 +27,8 @@ class MembersTableViewCell: UITableViewCell, Identifiable {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+
+        memberCellTitle.textColor = .white
 
         collectionView.dataSource = self
         collectionView.delegate = self

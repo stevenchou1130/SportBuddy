@@ -34,6 +34,12 @@ class BasketballGameDetailViewController: BaseViewController {
     var selectedWeatherIndex: IndexPath = IndexPath()
     var isWeatherExpanded = false
 
+    var selectedMapIndex: IndexPath = IndexPath()
+    var isMapExpanded = false
+
+    var selectedMemberIndex: IndexPath = IndexPath()
+    var isMemberExpanded = true
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -101,6 +107,18 @@ class BasketballGameDetailViewController: BaseViewController {
 
         self.isWeatherExpanded = !isWeatherExpanded
         self.tableView.reloadRows(at: [selectedWeatherIndex], with: .automatic)
+    }
+
+    func didExpandMapCell() {
+
+        self.isMapExpanded = !isMapExpanded
+        self.tableView.reloadRows(at: [selectedMapIndex], with: .automatic)
+    }
+
+    func didExpandMemberCell() {
+
+        self.isMemberExpanded = !isMemberExpanded
+        self.tableView.reloadRows(at: [selectedMemberIndex], with: .automatic)
     }
 
     func getWeather() {
@@ -172,35 +190,6 @@ extension BasketballGameDetailViewController: UITableViewDelegate, UITableViewDa
         }
     }
 
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-
-        switch components[indexPath.section] {
-        case .weather:
-
-            // todo: 動態伸展
-            if isWeatherExpanded && self.selectedWeatherIndex == indexPath {
-                return WeatherTableViewCell.gameCellHeight
-            } else {
-                return WeatherTableViewCell.gameDefaultHeight
-            }
-
-        case .map:
-
-            let width = view.bounds.size.width
-            let height = width / MapTableViewCell.aspectRatio
-
-            return height
-
-        case .members:
-
-            return MembersTableViewCell.height
-
-        case .joinOrLeave:
-
-            return JoinOrLeaveTableViewCell.height
-        }
-    }
-
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         // swiftlint:disable force_cast
@@ -229,13 +218,7 @@ extension BasketballGameDetailViewController: UITableViewDelegate, UITableViewDa
             let identifier = MembersTableViewCell.identifier
             let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! MembersTableViewCell
 
-            setCellBasicStyle(cell)
-
-            cell.game = game
-            cell.members = members
-            cell.collectionView.reloadData()
-
-            return cell
+            return setMemberCell(cell)
 
         case .joinOrLeave:
 
@@ -249,6 +232,34 @@ extension BasketballGameDetailViewController: UITableViewDelegate, UITableViewDa
         // swiftlint:enable force_cast
     }
 
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+
+        switch components[indexPath.section] {
+        case .weather:
+
+            return isWeatherExpanded ?
+                WeatherTableViewCell.gameCellHeight :
+                WeatherTableViewCell.gameDefaultHeight
+
+        case .map:
+
+            let cellWidth = view.bounds.size.width
+            let height = cellWidth / MapTableViewCell.aspectRatio
+
+            return isMapExpanded ? height+30 : MapTableViewCell.gameDefaultHeight
+
+        case .members:
+
+            return isMemberExpanded ?
+                MembersTableViewCell.height :
+                MembersTableViewCell.defaultHeight
+
+        case .joinOrLeave:
+
+            return JoinOrLeaveTableViewCell.height
+        }
+    }
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         let component = components[indexPath.section]
@@ -258,14 +269,149 @@ extension BasketballGameDetailViewController: UITableViewDelegate, UITableViewDa
                 self.selectedWeatherIndex = indexPath
                 self.didExpandWeatherCell()
 
-            case .map: print("didSelectRowAt: map \(indexPath.row)")
-            case .members: print("didSelectRowAt: members \(indexPath.row)")
+            case .map:
+                self.selectedMapIndex = indexPath
+                self.didExpandMapCell()
+
+            case .members:
+                self.selectedMemberIndex = indexPath
+                self.didExpandMemberCell()
+
             case .joinOrLeave: print("didSelectRowAt: joinOrLeave \(indexPath.row)")
         }
 
     }
 
+    func getGameDBRef() -> FIRDatabaseReference {
+
+        let ref = FIRDatabase.database().reference().child(Constant.FirebaseGame.nodeName).child((game?.gameID)!)
+        return ref
+    }
+
+    func setUserGameList(isJoined: Bool) {
+
+        let ref = FIRDatabase.database().reference()
+            .child(Constant.FirebaseUserGameList.nodeName)
+            .child(currentUserUid)
+
+        if isJoined {
+
+            let value: [String: Int] = [(game?.gameID)!: 1]
+            ref.updateChildValues(value) { (error, _) in
+
+                if error != nil {
+                    print("=== Error in BasketballGameDetailViewController setUserGameList() - join")
+                }
+            }
+        } else {
+
+            ref.child((game?.gameID)!).removeValue(completionBlock: { (error, _) in
+
+                if error != nil {
+                    print("=== Error in BasketballGameDetailViewController setUserGameList() - delete")
+                }
+            })
+        }
+    }
+
+    func setWeatherCell(_ cell: WeatherTableViewCell) -> WeatherTableViewCell {
+
+        setCellBasicStyle(cell)
+
+        if !isWeatherExpanded {
+            cell.weatherImage.isHidden = true
+            cell.weatherLabel.isHidden = true
+            cell.temperatureLabel.isHidden = true
+            cell.updateTimeLabel.isHidden = true
+            cell.weatherCellTitle.text = "▶︎ 天氣資訊"
+
+        } else {
+
+            cell.weatherImage.isHidden = false
+            cell.weatherLabel.isHidden = false
+            cell.temperatureLabel.isHidden = false
+            cell.updateTimeLabel.isHidden = false
+            cell.weatherCellTitle.text = "▼ 天氣資訊"
+        }
+
+        if let desc = weather?.desc,
+            let weatherPicName = weather?.weatherPicName,
+            let temperature = weather?.temperature,
+            let time = weather?.time {
+
+            cell.weatherImage.image = UIImage(named: weatherPicName)
+            cell.weatherLabel.text = "\(desc)"
+            cell.temperatureLabel.text = "氣溫 : \(temperature) 度"
+            cell.updateTimeLabel.text = "更新時間 : \n\(time)"
+
+        } else {
+
+            //cell.weatherImage.image = UIImage(named: Constant.ImageName.fixing)
+            cell.weatherLabel.text = ""
+            cell.temperatureLabel.text = "天氣即時資訊更新維護中..."
+            cell.updateTimeLabel.text = ""
+        }
+
+        return cell
+    }
+
+    func setMapCell(_ cell: MapTableViewCell) -> MapTableViewCell {
+
+        setCellBasicStyle(cell)
+
+        if !isMapExpanded {
+            cell.mapView.isHidden = true
+            cell.mapCellTitle.text = "▶︎ 球場位置"
+        } else {
+            cell.mapView.isHidden = false
+            cell.mapCellTitle.text = "▼ 球場位置"
+        }
+
+        if let latitudeString = game?.court.latitude,
+            let longitudeString = game?.court.longitude {
+
+            let latitude = (latitudeString as NSString).doubleValue
+            let longitude = (longitudeString as NSString).doubleValue
+
+            let coordinate: CLLocationCoordinate2D = CLLocationCoordinate2DMake(latitude, longitude)
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = coordinate
+            cell.mapView.addAnnotation(annotation)
+
+            let latDelta: CLLocationDegrees = 0.01
+            let lonDelta: CLLocationDegrees = 0.01
+            let span: MKCoordinateSpan = MKCoordinateSpanMake(latDelta, lonDelta)
+            let region: MKCoordinateRegion = MKCoordinateRegionMake(coordinate, span)
+
+            cell.mapView.setRegion(region, animated: true)
+            cell.mapView.mapType = .standard
+        }
+
+        return cell
+    }
+
+    func setMemberCell(_ cell: MembersTableViewCell) -> MembersTableViewCell {
+
+        setCellBasicStyle(cell)
+
+        if !isMemberExpanded {
+            cell.collectionView.isHidden = true
+            cell.memberCellTitle.text = "▶︎ 球賽成員"
+        } else {
+            cell.collectionView.isHidden = false
+            cell.memberCellTitle.text = "▼ 球賽成員"
+        }
+
+        cell.game = game
+        cell.members = members
+        cell.collectionView.reloadData()
+
+        return cell
+    }
+
     func setJoinOrLeaveTableViewCell(_ cell: JoinOrLeaveTableViewCell) -> JoinOrLeaveTableViewCell {
+
+        setCellBasicStyle(cell)
 
         if currentUserUid != "" && game != nil {
             for member in (game?.members)! {
@@ -308,8 +454,6 @@ extension BasketballGameDetailViewController: UITableViewDelegate, UITableViewDa
         } else {
             print("=== Error: Someing is wrong in BasketballGameDetailViewController")
         }
-
-        setCellBasicStyle(cell)
 
         return cell
     }
@@ -368,106 +512,6 @@ extension BasketballGameDetailViewController: UITableViewDelegate, UITableViewDa
                 print("=== Error in BasketballGameDetailViewController joinToGame()")
             }
         }
-    }
-
-    func getGameDBRef() -> FIRDatabaseReference {
-
-        let ref = FIRDatabase.database().reference().child(Constant.FirebaseGame.nodeName).child((game?.gameID)!)
-        return ref
-    }
-
-    func setUserGameList(isJoined: Bool) {
-
-        let ref = FIRDatabase.database().reference()
-            .child(Constant.FirebaseUserGameList.nodeName)
-            .child(currentUserUid)
-
-        if isJoined {
-
-            let value: [String: Int] = [(game?.gameID)!: 1]
-            ref.updateChildValues(value) { (error, _) in
-
-                if error != nil {
-                    print("=== Error in BasketballGameDetailViewController setUserGameList() - join")
-                }
-            }
-        } else {
-
-            ref.child((game?.gameID)!).removeValue(completionBlock: { (error, _) in
-
-                if error != nil {
-                    print("=== Error in BasketballGameDetailViewController setUserGameList() - delete")
-                }
-            })
-        }
-    }
-
-    func setWeatherCell(_ cell: WeatherTableViewCell) -> WeatherTableViewCell {
-
-        setCellBasicStyle(cell)
-        // todo: 動態伸展
-        if !isWeatherExpanded {
-            cell.weatherImage.isHidden = true
-            cell.weatherLabel.isHidden = true
-            cell.temperatureLabel.isHidden = true
-            cell.updateTimeLabel.isHidden = true
-            cell.weatherCellTitle.text = "▶︎ 天氣資訊"
-
-        } else {
-
-            cell.weatherImage.isHidden = false
-            cell.weatherLabel.isHidden = false
-            cell.temperatureLabel.isHidden = false
-            cell.updateTimeLabel.isHidden = false
-            cell.weatherCellTitle.text = "▼ 天氣資訊"
-
-            if let desc = weather?.desc,
-                let weatherPicName = weather?.weatherPicName,
-                let temperature = weather?.temperature,
-                let time = weather?.time {
-
-                cell.weatherImage.image = UIImage(named: weatherPicName)
-                cell.weatherLabel.text = "\(desc)"
-                cell.temperatureLabel.text = "氣溫 : \(temperature) 度"
-                cell.updateTimeLabel.text = "更新時間 : \n\(time)"
-
-            } else {
-
-                //            cell.weatherImage.image = UIImage(named: Constant.ImageName.fixing)
-                cell.weatherLabel.text = ""
-                cell.temperatureLabel.text = "天氣即時資訊更新維護中..."
-                cell.updateTimeLabel.text = ""
-            }
-        }
-
-        return cell
-    }
-
-    func setMapCell(_ cell: MapTableViewCell) -> MapTableViewCell {
-
-        setCellBasicStyle(cell)
-
-        if let latitudeString = game?.court.latitude,
-            let longitudeString = game?.court.longitude {
-
-            let latitude = (latitudeString as NSString).doubleValue
-            let longitude = (longitudeString as NSString).doubleValue
-
-            let coordinate: CLLocationCoordinate2D = CLLocationCoordinate2DMake(latitude, longitude)
-            let annotation = MKPointAnnotation()
-            annotation.coordinate = coordinate
-            cell.mapView.addAnnotation(annotation)
-
-            let latDelta: CLLocationDegrees = 0.01
-            let lonDelta: CLLocationDegrees = 0.01
-            let span: MKCoordinateSpan = MKCoordinateSpanMake(latDelta, lonDelta)
-            let region: MKCoordinateRegion = MKCoordinateRegionMake(coordinate, span)
-
-            cell.mapView.setRegion(region, animated: true)
-            cell.mapView.mapType = .standard
-        }
-
-        return cell
     }
 
     func setCellBasicStyle(_ cell: UITableViewCell) {

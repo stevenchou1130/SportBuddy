@@ -12,16 +12,22 @@ import MapKit
 class MapTableViewCell: UITableViewCell, Identifiable {
 
     // MARK: Property
+    @IBOutlet weak var mapCellTitle: UILabel!
+    @IBOutlet weak var mapView: MKMapView!
 
     class var identifier: String { return String(describing: self) }
 
     static let aspectRatio: CGFloat = 3.0 / 2.0
 
-    @IBOutlet weak var mapView: MKMapView!
+    static let gameDefaultHeight: CGFloat = 40.0
+    static let gameCellHeight: CGFloat = 180.0
+    static let courtCellHeight: CGFloat = 150.0
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+
+        mapCellTitle.textColor = .white
+
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

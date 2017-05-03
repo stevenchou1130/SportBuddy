@@ -202,7 +202,6 @@ class BasketballCourtDetailViewController: BaseViewController, UITableViewDelega
             cell.updateTimeLabel.text = ""
         }
 
-        // todo: 動態伸展
         cell.weatherCellTitle.isHidden = true
         cell.weatherImage.topAnchor.constraint(equalTo: cell.topAnchor, constant: 10).isActive = true
         cell.weatherImage.bottomAnchor.constraint(equalTo: cell.bottomAnchor, constant: -45).isActive = true
@@ -234,6 +233,9 @@ class BasketballCourtDetailViewController: BaseViewController, UITableViewDelega
             cell.mapView.setRegion(region, animated: true)
             cell.mapView.mapType = .standard
         }
+
+        cell.mapCellTitle.isHidden = true
+        cell.mapView.topAnchor.constraint(equalTo: cell.topAnchor, constant: 10).isActive = true
 
         return cell
     }
