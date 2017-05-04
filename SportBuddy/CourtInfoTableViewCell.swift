@@ -1,5 +1,5 @@
 //
-//  CommentTableViewCell.swift
+//  CourtInfoTableViewCell.swift
 //  SportBuddy
 //
 //  Created by steven.chou on 2017/3/29.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CommentTableViewCell: UITableViewCell, Identifiable {
+class CourtInfoTableViewCell: UITableViewCell, Identifiable {
 
     // MARK: Property
 

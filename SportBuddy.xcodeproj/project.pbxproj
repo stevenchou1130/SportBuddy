@@ -57,8 +57,8 @@
 		B0CE8AE81E8B6330003F0F12 /* WeatherTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0CE8AE61E8B6330003F0F12 /* WeatherTableViewCell.xib */; };
 		B0CE8AEC1E8B63BD003F0F12 /* MapTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CE8AEA1E8B63BD003F0F12 /* MapTableViewCell.swift */; };
 		B0CE8AED1E8B63BD003F0F12 /* MapTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0CE8AEB1E8B63BD003F0F12 /* MapTableViewCell.xib */; };
-		B0CE8AF11E8B640C003F0F12 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CE8AEF1E8B640C003F0F12 /* CommentTableViewCell.swift */; };
-		B0CE8AF21E8B640C003F0F12 /* CommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0CE8AF01E8B640C003F0F12 /* CommentTableViewCell.xib */; };
+		B0CE8AF11E8B640C003F0F12 /* CourtInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CE8AEF1E8B640C003F0F12 /* CourtInfoTableViewCell.swift */; };
+		B0CE8AF21E8B640C003F0F12 /* CourtInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0CE8AF01E8B640C003F0F12 /* CourtInfoTableViewCell.xib */; };
 		B0CE8AF61E8B67EF003F0F12 /* BasketballCourtDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0CE8AF51E8B67EF003F0F12 /* BasketballCourtDetail.storyboard */; };
 		B0CE8AF91E8B69F2003F0F12 /* Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CE8AF81E8B69F2003F0F12 /* Identifiable.swift */; };
 		B0D443CC1EA36EED008EF375 /* EditProfile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0D443CB1EA36EED008EF375 /* EditProfile.storyboard */; };
@@ -133,8 +133,8 @@
 		B0CE8AE61E8B6330003F0F12 /* WeatherTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WeatherTableViewCell.xib; sourceTree = "<group>"; };
 		B0CE8AEA1E8B63BD003F0F12 /* MapTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapTableViewCell.swift; sourceTree = "<group>"; };
 		B0CE8AEB1E8B63BD003F0F12 /* MapTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapTableViewCell.xib; sourceTree = "<group>"; };
-		B0CE8AEF1E8B640C003F0F12 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
-		B0CE8AF01E8B640C003F0F12 /* CommentTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentTableViewCell.xib; sourceTree = "<group>"; };
+		B0CE8AEF1E8B640C003F0F12 /* CourtInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourtInfoTableViewCell.swift; sourceTree = "<group>"; };
+		B0CE8AF01E8B640C003F0F12 /* CourtInfoTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CourtInfoTableViewCell.xib; sourceTree = "<group>"; };
 		B0CE8AF51E8B67EF003F0F12 /* BasketballCourtDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = BasketballCourtDetail.storyboard; sourceTree = "<group>"; };
 		B0CE8AF81E8B69F2003F0F12 /* Identifiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Identifiable.swift; sourceTree = "<group>"; };
 		B0D443CB1EA36EED008EF375 /* EditProfile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EditProfile.storyboard; sourceTree = "<group>"; };
@@ -345,7 +345,7 @@
 			children = (
 				B0CCD1771E89096F0046009B /* Cell */,
 				B0CCD1781E8909BF0046009B /* BasketballCourtDetail */,
-				B0CE8AEE1E8B63F6003F0F12 /* Comment */,
+				B0CE8AEE1E8B63F6003F0F12 /* CourtInfo */,
 				B0754D791E83C5AF006A5754 /* BasketballCourtsNavigationController.swift */,
 				B0E881701E9FD2AF0093AA11 /* BasketballCourtsViewController.swift */,
 				B0AB6FF61E88C4590060D80E /* BasketballCourtsProvider.swift */,
@@ -431,13 +431,13 @@
 			name = Map;
 			sourceTree = "<group>";
 		};
-		B0CE8AEE1E8B63F6003F0F12 /* Comment */ = {
+		B0CE8AEE1E8B63F6003F0F12 /* CourtInfo */ = {
 			isa = PBXGroup;
 			children = (
-				B0CE8AEF1E8B640C003F0F12 /* CommentTableViewCell.swift */,
-				B0CE8AF01E8B640C003F0F12 /* CommentTableViewCell.xib */,
+				B0CE8AEF1E8B640C003F0F12 /* CourtInfoTableViewCell.swift */,
+				B0CE8AF01E8B640C003F0F12 /* CourtInfoTableViewCell.xib */,
 			);
-			name = Comment;
+			name = CourtInfo;
 			sourceTree = "<group>";
 		};
 		B0CE8AF71E8B69D0003F0F12 /* Library */ = {
@@ -550,7 +550,7 @@
 				B0DB35031EB5AC8800F505F0 /* GameDefaultTableViewCell.xib in Resources */,
 				B037B2921E826905007FD483 /* SportItems.storyboard in Resources */,
 				B06DB2B71E7FB28000DCF016 /* Assets.xcassets in Resources */,
-				B0CE8AF21E8B640C003F0F12 /* CommentTableViewCell.xib in Resources */,
+				B0CE8AF21E8B640C003F0F12 /* CourtInfoTableViewCell.xib in Resources */,
 				B0C59FD91E9CC9D600214A1F /* GameTableViewCell.xib in Resources */,
 				B099C6A71E89634000C0B142 /* NewBasketballGame.storyboard in Resources */,
 				B0971BC61E850EB10037E26D /* CourtTableViewCell.xib in Resources */,
@@ -676,7 +676,7 @@
 				B0DB35021EB5AC8800F505F0 /* GameDefaultTableViewCell.swift in Sources */,
 				B076C5601E89F5CF00F06390 /* User.swift in Sources */,
 				B0DC15AF1EA7437C00443F9D /* MembersTableViewCell.swift in Sources */,
-				B0CE8AF11E8B640C003F0F12 /* CommentTableViewCell.swift in Sources */,
+				B0CE8AF11E8B640C003F0F12 /* CourtInfoTableViewCell.swift in Sources */,
 				B0CE8AEC1E8B63BD003F0F12 /* MapTableViewCell.swift in Sources */,
 				B0AD470C1E8E23F000876498 /* Towns.swift in Sources */,
 				B0754D6F1E83A2C3006A5754 /* BasketballTabbarViewController.swift in Sources */,

@@ -19,13 +19,13 @@ class BasketballCourtDetailViewController: BaseViewController, UITableViewDelega
 
     enum Component {
 
-        case weather, map, comment
+        case weather, map, info
 
     }
 
     // MARK: Property
 
-    var components: [Component] = [ .weather, .map, .comment ]
+    var components: [Component] = [ .weather, .map, .info ]
 
     var basketballCourt: BasketballCourt?
     var weather: Weather?
@@ -105,8 +105,8 @@ class BasketballCourtDetailViewController: BaseViewController, UITableViewDelega
         let mapNib = UINib(nibName: MapTableViewCell.identifier, bundle: nil)
         tableView.register(mapNib, forCellReuseIdentifier: MapTableViewCell.identifier)
 
-        let commentNib = UINib(nibName: CommentTableViewCell.identifier, bundle: nil)
-        tableView.register(commentNib, forCellReuseIdentifier: CommentTableViewCell.identifier)
+        let courtInfoNib = UINib(nibName: CourtInfoTableViewCell.identifier, bundle: nil)
+        tableView.register(courtInfoNib, forCellReuseIdentifier: CourtInfoTableViewCell.identifier)
 
     }
 
@@ -119,7 +119,7 @@ class BasketballCourtDetailViewController: BaseViewController, UITableViewDelega
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
         switch components[section] {
-        case .weather, .map, .comment:
+        case .weather, .map, .info:
 
             return 1
         }
@@ -140,9 +140,9 @@ class BasketballCourtDetailViewController: BaseViewController, UITableViewDelega
 
             return height
 
-        case .comment:
+        case .info:
 
-            return CommentTableViewCell.height
+            return CourtInfoTableViewCell.height
         }
     }
 
@@ -168,13 +168,13 @@ class BasketballCourtDetailViewController: BaseViewController, UITableViewDelega
 
             return setMapCell(cell: cell)
 
-        case .comment:
+        case .info:
 
-            let identifier = CommentTableViewCell.identifier
+            let identifier = CourtInfoTableViewCell.identifier
 
-            let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! CommentTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! CourtInfoTableViewCell
 
-            return setCommentCell(cell: cell)
+            return setCourtInfoCell(cell: cell)
         }
         // swiftlint:enable force_cast
     }
@@ -240,7 +240,7 @@ class BasketballCourtDetailViewController: BaseViewController, UITableViewDelega
         return cell
     }
 
-    func setCommentCell(cell: CommentTableViewCell) -> CommentTableViewCell {
+    func setCourtInfoCell(cell: CourtInfoTableViewCell) -> CourtInfoTableViewCell {
 
         cell.selectionStyle = .none
         cell.backgroundColor = .clear
