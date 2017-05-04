@@ -11,6 +11,11 @@
 		B0002A581E9E820700CD2241 /* BasketballGameDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0002A571E9E820700CD2241 /* BasketballGameDetail.storyboard */; };
 		B00708D91E94CC37005CFD0F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B00708D81E94CC37005CFD0F /* GoogleService-Info.plist */; };
 		B0072D071E9F54660056BC49 /* BasketballGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0072D061E9F54660056BC49 /* BasketballGame.swift */; };
+		B01437BA1EBAFCA400675239 /* GameCommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01437B81EBAFCA400675239 /* GameCommentTableViewCell.swift */; };
+		B01437BB1EBAFCA400675239 /* GameCommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B01437B91EBAFCA400675239 /* GameCommentTableViewCell.xib */; };
+		B01437BD1EBB319100675239 /* GameComment.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01437BC1EBB319100675239 /* GameComment.swift */; };
+		B01437C01EBB334A00675239 /* CommentDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01437BE1EBB334A00675239 /* CommentDetailTableViewCell.swift */; };
+		B01437C11EBB334A00675239 /* CommentDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B01437BF1EBB334A00675239 /* CommentDetailTableViewCell.xib */; };
 		B037B2921E826905007FD483 /* SportItems.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B037B2911E826905007FD483 /* SportItems.storyboard */; };
 		B06DB2B01E7FB28000DCF016 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06DB2AF1E7FB28000DCF016 /* AppDelegate.swift */; };
 		B06DB2B71E7FB28000DCF016 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B06DB2B61E7FB28000DCF016 /* Assets.xcassets */; };
@@ -85,6 +90,11 @@
 		B0002A571E9E820700CD2241 /* BasketballGameDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = BasketballGameDetail.storyboard; sourceTree = "<group>"; };
 		B00708D81E94CC37005CFD0F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B0072D061E9F54660056BC49 /* BasketballGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasketballGame.swift; sourceTree = "<group>"; };
+		B01437B81EBAFCA400675239 /* GameCommentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameCommentTableViewCell.swift; sourceTree = "<group>"; };
+		B01437B91EBAFCA400675239 /* GameCommentTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GameCommentTableViewCell.xib; sourceTree = "<group>"; };
+		B01437BC1EBB319100675239 /* GameComment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameComment.swift; sourceTree = "<group>"; };
+		B01437BE1EBB334A00675239 /* CommentDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentDetailTableViewCell.swift; sourceTree = "<group>"; };
+		B01437BF1EBB334A00675239 /* CommentDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentDetailTableViewCell.xib; sourceTree = "<group>"; };
 		B037B2911E826905007FD483 /* SportItems.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SportItems.storyboard; sourceTree = "<group>"; };
 		B06DB2AC1E7FB28000DCF016 /* SportBuddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SportBuddy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B06DB2AF1E7FB28000DCF016 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -186,12 +196,25 @@
 		B0002A561E9E81DE00CD2241 /* BasketballGameDetail */ = {
 			isa = PBXGroup;
 			children = (
+				B01437B71EBAFC3600675239 /* Comment */,
 				B0DC15B91EA75B7400443F9D /* JoinOrLeave */,
 				B0DC15AC1EA7432E00443F9D /* Members */,
 				B0E881741E9FE3820093AA11 /* BasketballGameDetailViewController.swift */,
 				B0002A571E9E820700CD2241 /* BasketballGameDetail.storyboard */,
 			);
 			name = BasketballGameDetail;
+			sourceTree = "<group>";
+		};
+		B01437B71EBAFC3600675239 /* Comment */ = {
+			isa = PBXGroup;
+			children = (
+				B01437B81EBAFCA400675239 /* GameCommentTableViewCell.swift */,
+				B01437B91EBAFCA400675239 /* GameCommentTableViewCell.xib */,
+				B01437BE1EBB334A00675239 /* CommentDetailTableViewCell.swift */,
+				B01437BF1EBB334A00675239 /* CommentDetailTableViewCell.xib */,
+				B01437BC1EBB319100675239 /* GameComment.swift */,
+			);
+			name = Comment;
 			sourceTree = "<group>";
 		};
 		B06DB2A31E7FB28000DCF016 = {
@@ -537,9 +560,11 @@
 				B0DC15B81EA747D500443F9D /* MemberCollectionViewCell.xib in Resources */,
 				B0D443CC1EA36EED008EF375 /* EditProfile.storyboard in Resources */,
 				B06DB2BA1E7FB28000DCF016 /* LaunchScreen.storyboard in Resources */,
+				B01437BB1EBAFCA400675239 /* GameCommentTableViewCell.xib in Resources */,
 				B0754D631E83995A006A5754 /* Basketball.storyboard in Resources */,
 				B084BD301E7FCF8200DC48B2 /* Login.storyboard in Resources */,
 				B0754D611E839284006A5754 /* ChooseLevel.storyboard in Resources */,
+				B01437C11EBB334A00675239 /* CommentDetailTableViewCell.xib in Resources */,
 				B0DC15BD1EA75BA600443F9D /* JoinOrLeaveTableViewCell.xib in Resources */,
 				B0CE8AF61E8B67EF003F0F12 /* BasketballCourtDetail.storyboard in Resources */,
 				B0CE8AE81E8B6330003F0F12 /* WeatherTableViewCell.xib in Resources */,
@@ -649,10 +674,13 @@
 				B0DBB7E41EAB417200BCAD08 /* MemebersProvider.swift in Sources */,
 				B084BD341E7FDD3900DC48B2 /* Palette.swift in Sources */,
 				B0971BC51E850EB10037E26D /* CourtTableViewCell.swift in Sources */,
+				B01437C01EBB334A00675239 /* CommentDetailTableViewCell.swift in Sources */,
 				B0754D5F1E83927A006A5754 /* ChooseLevelViewController.swift in Sources */,
+				B01437BA1EBAFCA400675239 /* GameCommentTableViewCell.swift in Sources */,
 				B0072D071E9F54660056BC49 /* BasketballGame.swift in Sources */,
 				B0D443CE1EA36F79008EF375 /* EditProfileViewController.swift in Sources */,
 				B06DB2B01E7FB28000DCF016 /* AppDelegate.swift in Sources */,
+				B01437BD1EBB319100675239 /* GameComment.swift in Sources */,
 				B0754D581E837284006A5754 /* LTHRadioButton.swift in Sources */,
 				B0AD47101E8E242E00876498 /* Weather.swift in Sources */,
 				B0AB6FFB1E88C5210060D80E /* BasketballCourt.swift in Sources */,

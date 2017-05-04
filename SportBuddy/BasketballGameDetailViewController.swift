@@ -15,10 +15,10 @@ class BasketballGameDetailViewController: BaseViewController {
     @IBOutlet weak var tableView: UITableView!
 
     enum Component {
-        case weather, map, members, joinOrLeave
+        case weather, map, members, comment, joinOrLeave
     }
 
-    var components: [Component] = [ .weather, .map, .members, .joinOrLeave]
+    var components: [Component] = [ .weather, .map, .members, .comment, .joinOrLeave]
 
     var currentUserUid = ""
     var game: BasketballGame?
@@ -99,6 +99,9 @@ class BasketballGameDetailViewController: BaseViewController {
         let membersNib = UINib(nibName: MembersTableViewCell.identifier, bundle: nil)
         tableView.register(membersNib, forCellReuseIdentifier: MembersTableViewCell.identifier)
 
+        let commentNib = UINib(nibName: GameCommentTableViewCell.identifier, bundle: nil)
+        tableView.register(commentNib, forCellReuseIdentifier: GameCommentTableViewCell.identifier)
+
         let joinOrLeaveNib = UINib(nibName: JoinOrLeaveTableViewCell.identifier, bundle: nil)
         tableView.register(joinOrLeaveNib, forCellReuseIdentifier: JoinOrLeaveTableViewCell.identifier)
     }
@@ -160,6 +163,9 @@ class BasketballGameDetailViewController: BaseViewController {
                     }
 
                     if member == members[members.count-1] {
+
+                        // test
+//                        self.tableView.reloadSections(IndexSet(integer: Component.members.hashValue), with: .automatic)
                         self.tableView.reloadData()
                         self.loadingIndicator.stop()
                     }
@@ -184,7 +190,7 @@ extension BasketballGameDetailViewController: UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
         switch components[section] {
-        case .weather, .map, .members, .joinOrLeave:
+        case .weather, .map, .members, .comment, .joinOrLeave:
 
             return 1
         }
@@ -200,7 +206,6 @@ extension BasketballGameDetailViewController: UITableViewDelegate, UITableViewDa
         case .weather:
 
             let identifier = WeatherTableViewCell.identifier
-
             let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! WeatherTableViewCell
 
             return setWeatherCell(cell)
@@ -208,7 +213,6 @@ extension BasketballGameDetailViewController: UITableViewDelegate, UITableViewDa
         case .map:
 
             let identifier = MapTableViewCell.identifier
-
             let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! MapTableViewCell
 
             return setMapCell(cell)
@@ -220,10 +224,16 @@ extension BasketballGameDetailViewController: UITableViewDelegate, UITableViewDa
 
             return setMemberCell(cell)
 
+        case .comment:
+
+            let identifier = GameCommentTableViewCell.identifier
+            let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! GameCommentTableViewCell
+
+            return setCommentCell(cell)
+
         case .joinOrLeave:
 
             let identifier = JoinOrLeaveTableViewCell.identifier
-
             let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! JoinOrLeaveTableViewCell
 
             return setJoinOrLeaveTableViewCell(cell)
@@ -254,6 +264,10 @@ extension BasketballGameDetailViewController: UITableViewDelegate, UITableViewDa
                 MembersTableViewCell.height :
                 MembersTableViewCell.defaultHeight
 
+        case .comment:
+
+            return GameCommentTableViewCell.height
+
         case .joinOrLeave:
 
             return JoinOrLeaveTableViewCell.height
@@ -277,7 +291,9 @@ extension BasketballGameDetailViewController: UITableViewDelegate, UITableViewDa
                 self.selectedMemberIndex = indexPath
                 self.didExpandMemberCell()
 
-            case .joinOrLeave: print("didSelectRowAt: joinOrLeave \(indexPath.row)")
+            case .comment: break
+
+            case .joinOrLeave: break
         }
 
     }
@@ -518,5 +534,31 @@ extension BasketballGameDetailViewController: UITableViewDelegate, UITableViewDa
 
         cell.selectionStyle = .none
         cell.backgroundColor = .clear
+    }
+
+    func setCommentCell(_ cell: GameCommentTableViewCell) -> GameCommentTableViewCell {
+
+        setCellBasicStyle(cell)
+
+        cell.game = game
+        cell.commentDelegate = self
+        cell.commentTableView.reloadData()
+
+        return cell
+    }
+}
+
+// MARK: - Show Alert
+extension BasketballGameDetailViewController: CommentCallDelegate {
+
+    func showAlert(title: String, message: String) {
+        let alertController = UIAlertController(title: title,
+                                      message: message,
+                                      preferredStyle: .alert)
+
+        let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        alertController.addAction(defaultAction)
+
+        self.present(alertController, animated: true, completion: nil)
     }
 }

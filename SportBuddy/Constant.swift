@@ -103,6 +103,14 @@ struct Constant {
         static let members = "Members"
     }
 
+    struct FirebaseGameMessage {
+
+        static let nodeName = "GameMessages"
+        static let gameID = "GameID"
+        static let userID = "UserID"
+        static let comment = "Comment"
+    }
+
     struct FirebaseStorage {
 
         static let userPhoto = "UserPhoto"

@@ -23,7 +23,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Eamil" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XnY-wk-qwf">
-                                <rect key="frame" x="30" y="272.5" width="75.5" height="22.5"/>
+                                <rect key="frame" x="30" y="273" width="75.5" height="22.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="XnY-wk-qwf" secondAttribute="height" multiplier="10:3" id="TPU-PV-X0a"/>
                                 </constraints>
@@ -32,7 +32,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P1P-56-zwc">
-                                <rect key="frame" x="30" y="318" width="75.5" height="22.5"/>
+                                <rect key="frame" x="30" y="318.5" width="75.5" height="22.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="P1P-56-zwc" secondAttribute="height" multiplier="10:3" id="3eD-rZ-G5d"/>
                                 </constraints>
@@ -40,8 +40,8 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VfK-DY-BOf">
-                                <rect key="frame" x="120.5" y="271.5" width="174.5" height="25.5"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="VfK-DY-BOf">
+                                <rect key="frame" x="120.5" y="272" width="174.5" height="25.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="VfK-DY-BOf" secondAttribute="height" multiplier="41:6" id="4iF-Vl-X4D"/>
                                 </constraints>
@@ -49,8 +49,8 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="d9U-s8-4kk">
-                                <rect key="frame" x="120.5" y="317" width="174.5" height="25.5"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="d9U-s8-4kk">
+                                <rect key="frame" x="120.5" y="317.5" width="174.5" height="25.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="d9U-s8-4kk" secondAttribute="height" multiplier="41:6" id="fUc-TQ-EJs"/>
                                 </constraints>
@@ -63,7 +63,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Dqn-bd-pcQ" secondAttribute="height" multiplier="2:1" id="zgA-zl-TGL"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                 <state key="normal" title="註冊帳號">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -72,7 +72,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RST-79-8wF">
-                                <rect key="frame" x="222.5" y="372.5" width="72.5" height="28"/>
+                                <rect key="frame" x="222.5" y="373" width="72.5" height="28"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="RST-79-8wF" secondAttribute="height" multiplier="85:33" id="qgf-fv-e1b"/>
                                 </constraints>
@@ -84,19 +84,19 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Main_Logo" translatesAutoresizingMaskIntoConstraints="NO" id="FDl-sX-phW">
-                                <rect key="frame" x="96" y="65" width="128" height="127"/>
+                                <rect key="frame" x="96" y="65" width="128" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="FDl-sX-phW" secondAttribute="height" multiplier="1:1" id="mCm-jm-dtB"/>
                                 </constraints>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Main_AppName" translatesAutoresizingMaskIntoConstraints="NO" id="4fv-zT-Xre">
-                                <rect key="frame" x="41" y="202" width="238" height="34.5"/>
+                                <rect key="frame" x="41" y="203" width="238" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="4fv-zT-Xre" secondAttribute="height" multiplier="7:1" id="msY-pV-Agr"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gNj-IW-SQZ">
-                                <rect key="frame" x="249" y="425.5" width="46" height="30"/>
+                                <rect key="frame" x="249" y="426" width="46" height="30"/>
                                 <state key="normal" title="Button"/>
                                 <connections>
                                     <action selector="testLogin:" destination="VL4-OP-pfq" eventType="touchUpInside" id="cVo-8Q-lMH"/>
@@ -107,7 +107,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="I7p-yw-gqL" secondAttribute="height" multiplier="2:1" id="ZQq-J8-Yfs"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                 <state key="normal" title="忘記密碼">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
