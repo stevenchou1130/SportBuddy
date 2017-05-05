@@ -24,6 +24,7 @@ class BasketballGameDetailViewController: BaseViewController {
     var game: BasketballGame?
     var weather: Weather?
     var members: [User] = []
+    var comments: [GameComment] = []
 
     var isUserInMembers = false
     var isTotallyUpdated = false
@@ -52,6 +53,7 @@ class BasketballGameDetailViewController: BaseViewController {
         setView()
         getWeather()
         getMembersInfo()
+        getGameComments()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -178,6 +180,19 @@ class BasketballGameDetailViewController: BaseViewController {
             }
         }
     }
+    
+    func getGameComments() {
+
+        guard
+            game != nil
+            else { return }
+        
+        GameCommentProvider.sharded.getComments(gameID: (game?.gameID)!) { (gameComments) in
+            
+            self.comments = gameComments
+            self.tableView.reloadData()
+        }
+    }
 }
 
 extension BasketballGameDetailViewController: UITableViewDelegate, UITableViewDataSource {
@@ -295,12 +310,18 @@ extension BasketballGameDetailViewController: UITableViewDelegate, UITableViewDa
 
             case .joinOrLeave: break
         }
-
     }
+}
+
+// MARK: - Set cell
+extension BasketballGameDetailViewController {
 
     func getGameDBRef() -> FIRDatabaseReference {
 
-        let ref = FIRDatabase.database().reference().child(Constant.FirebaseGame.nodeName).child((game?.gameID)!)
+        let ref = FIRDatabase.database().reference()
+                    .child(Constant.FirebaseGame.nodeName)
+                    .child((game?.gameID)!)
+
         return ref
     }
 
@@ -425,6 +446,18 @@ extension BasketballGameDetailViewController: UITableViewDelegate, UITableViewDa
         return cell
     }
 
+    func setCommentCell(_ cell: GameCommentTableViewCell) -> GameCommentTableViewCell {
+
+        setCellBasicStyle(cell)
+
+        cell.game = game
+        cell.comments = comments
+        cell.commentDelegate = self
+        cell.commentTableView.reloadData()
+
+        return cell
+    }
+
     func setJoinOrLeaveTableViewCell(_ cell: JoinOrLeaveTableViewCell) -> JoinOrLeaveTableViewCell {
 
         setCellBasicStyle(cell)
@@ -476,12 +509,9 @@ extension BasketballGameDetailViewController: UITableViewDelegate, UITableViewDa
 
     func joinToGame() {
 
-        guard
-            game != nil else { return }
+        guard game != nil else { return }
 
-        if isUserInMembers {
-            return
-        }
+        if isUserInMembers { return }
 
         var newMemberList: [String] = []
         newMemberList = (game?.members)!
@@ -502,12 +532,9 @@ extension BasketballGameDetailViewController: UITableViewDelegate, UITableViewDa
 
     func leaveFromGame() {
 
-        guard
-            game != nil else { return }
+        guard game != nil else { return }
 
-        if !isUserInMembers {
-            return
-        }
+        if !isUserInMembers { return }
 
         var newMemberList: [String] = []
 
@@ -534,17 +561,6 @@ extension BasketballGameDetailViewController: UITableViewDelegate, UITableViewDa
 
         cell.selectionStyle = .none
         cell.backgroundColor = .clear
-    }
-
-    func setCommentCell(_ cell: GameCommentTableViewCell) -> GameCommentTableViewCell {
-
-        setCellBasicStyle(cell)
-
-        cell.game = game
-        cell.commentDelegate = self
-        cell.commentTableView.reloadData()
-
-        return cell
     }
 }
 

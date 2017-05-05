@@ -168,7 +168,7 @@ class LoginViewController: BaseViewController {
 
     func showAlert(myMsg: String?) {
 
-        let alertController = UIAlertController(title: "Message",
+        let alertController = UIAlertController(title: "通知",
                                                 message: myMsg,
                                                 preferredStyle: .alert)
 

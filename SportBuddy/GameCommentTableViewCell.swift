@@ -40,7 +40,6 @@ class GameCommentTableViewCell: UITableViewCell {
         commentTableView.delegate = self
 
         getUser()
-        loadAllMessages()
         initNib()
         setView()
     }
@@ -52,18 +51,6 @@ class GameCommentTableViewCell: UITableViewCell {
             else { return }
 
         currentUser = uid
-    }
-
-    func loadAllMessages() {
-
-        guard
-            let gameID = game?.gameID
-            else { return }
-
-        let ref = FIRDatabase.database().reference()
-                    .child(Constant.FirebaseGameMessage.nodeName)
-                    .child(gameID)
-
     }
 
     func initNib() {
@@ -87,6 +74,8 @@ class GameCommentTableViewCell: UITableViewCell {
 
         commentButton.tintColor = .white
         commentButton.addTarget(self, action: #selector(sendMessage), for: .touchUpInside)
+
+        moveToLastComment()
     }
 
     func sendMessage() {
@@ -109,8 +98,6 @@ class GameCommentTableViewCell: UITableViewCell {
 
     func saveComment(_ gameID: String) {
 
-//        let comment = GameComment(commentOwner: currentUser!, comment: commentTextField.text!)
-
         let ref = FIRDatabase.database().reference()
             .child(Constant.FirebaseGameMessage.nodeName)
             .child(gameID)
@@ -123,6 +110,29 @@ class GameCommentTableViewCell: UITableViewCell {
             if error != nil {
                 print("=== Error in GameCommentTableViewCell: \(String(describing: error))")
             }
+        }
+
+        let comment = GameComment(commentOwner: currentUser!, comment: commentTextField.text!)
+        comments.append(comment)
+
+        commentTableView.beginUpdates()
+        commentTableView.insertRows(at: [IndexPath(row: comments.count - 1, section: 0)], with: .automatic)
+        commentTableView.endUpdates()
+
+        commentTableView.reloadData()
+        moveToLastComment()
+    }
+
+    func moveToLastComment() {
+        if commentTableView.contentSize.height > commentTableView.frame.height {
+            // First figure out how many sections there are
+            let lastSectionIndex = commentTableView.numberOfSections - 1
+            // Then grab the number of rows in the last section
+            let lastRowIndex = commentTableView.numberOfRows(inSection: lastSectionIndex) - 1
+            // Now just construct the index path
+            let pathToLastRow = NSIndexPath(row: lastRowIndex, section: lastSectionIndex)
+            // Make the last row visible
+            commentTableView.scrollToRow(at: pathToLastRow as IndexPath, at: UITableViewScrollPosition.bottom, animated: true)
         }
     }
 }
@@ -144,6 +154,8 @@ extension GameCommentTableViewCell: UITableViewDelegate, UITableViewDataSource {
 
         cell?.userImage.layer.cornerRadius = (cell?.userImage.bounds.size.height)! / 2.0
         cell?.userImage.layer.masksToBounds = true
+
+        cell?.comment.text = comments[indexPath.row].comment
 
         return cell!
     }

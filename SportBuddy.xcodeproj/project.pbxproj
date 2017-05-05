@@ -16,6 +16,7 @@
 		B01437BD1EBB319100675239 /* GameComment.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01437BC1EBB319100675239 /* GameComment.swift */; };
 		B01437C01EBB334A00675239 /* CommentDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01437BE1EBB334A00675239 /* CommentDetailTableViewCell.swift */; };
 		B01437C11EBB334A00675239 /* CommentDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B01437BF1EBB334A00675239 /* CommentDetailTableViewCell.xib */; };
+		B0301DE01EBC1D8D00A7001A /* GameCommentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0301DDF1EBC1D8D00A7001A /* GameCommentProvider.swift */; };
 		B037B2921E826905007FD483 /* SportItems.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B037B2911E826905007FD483 /* SportItems.storyboard */; };
 		B06DB2B01E7FB28000DCF016 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06DB2AF1E7FB28000DCF016 /* AppDelegate.swift */; };
 		B06DB2B71E7FB28000DCF016 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B06DB2B61E7FB28000DCF016 /* Assets.xcassets */; };
@@ -95,6 +96,7 @@
 		B01437BC1EBB319100675239 /* GameComment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameComment.swift; sourceTree = "<group>"; };
 		B01437BE1EBB334A00675239 /* CommentDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentDetailTableViewCell.swift; sourceTree = "<group>"; };
 		B01437BF1EBB334A00675239 /* CommentDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentDetailTableViewCell.xib; sourceTree = "<group>"; };
+		B0301DDF1EBC1D8D00A7001A /* GameCommentProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameCommentProvider.swift; sourceTree = "<group>"; };
 		B037B2911E826905007FD483 /* SportItems.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SportItems.storyboard; sourceTree = "<group>"; };
 		B06DB2AC1E7FB28000DCF016 /* SportBuddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SportBuddy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B06DB2AF1E7FB28000DCF016 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -212,6 +214,7 @@
 				B01437B91EBAFCA400675239 /* GameCommentTableViewCell.xib */,
 				B01437BE1EBB334A00675239 /* CommentDetailTableViewCell.swift */,
 				B01437BF1EBB334A00675239 /* CommentDetailTableViewCell.xib */,
+				B0301DDF1EBC1D8D00A7001A /* GameCommentProvider.swift */,
 				B01437BC1EBB319100675239 /* GameComment.swift */,
 			);
 			name = Comment;
@@ -675,6 +678,7 @@
 				B084BD341E7FDD3900DC48B2 /* Palette.swift in Sources */,
 				B0971BC51E850EB10037E26D /* CourtTableViewCell.swift in Sources */,
 				B01437C01EBB334A00675239 /* CommentDetailTableViewCell.swift in Sources */,
+				B0301DE01EBC1D8D00A7001A /* GameCommentProvider.swift in Sources */,
 				B0754D5F1E83927A006A5754 /* ChooseLevelViewController.swift in Sources */,
 				B01437BA1EBAFCA400675239 /* GameCommentTableViewCell.swift in Sources */,
 				B0072D071E9F54660056BC49 /* BasketballGame.swift in Sources */,
