@@ -180,17 +180,18 @@ class BasketballGameDetailViewController: BaseViewController {
             }
         }
     }
-    
+
     func getGameComments() {
 
         guard
             game != nil
             else { return }
-        
+
         GameCommentProvider.sharded.getComments(gameID: (game?.gameID)!) { (gameComments) in
-            
+
             self.comments = gameComments
             self.tableView.reloadData()
+            self.loadingIndicator.stop()
         }
     }
 }

@@ -26,12 +26,13 @@ class GameCommentTableViewCell: UITableViewCell {
     weak var commentDelegate: CommentCallDelegate?
 
     static let defaultHeight: CGFloat = 40.0
-    static let height: CGFloat = 300.0
+    static let height: CGFloat = 240.0
 
     var currentUser: String?
     var game: BasketballGame?
 
     var comments: [GameComment] = []
+    var commentsUserPhoto: [String] = []
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -79,21 +80,30 @@ class GameCommentTableViewCell: UITableViewCell {
     }
 
     func sendMessage() {
-        print("=== sendMessage ===")
 
-        guard
-            let gameID = game?.gameID
-            else { return }
+        var gameID = ""
+        var isUserInGame = false
 
-        print("gameID: \(gameID)")
+        if game != nil {
+            gameID = (game?.gameID)!
+        } else {
+            return
+        }
+
+        for member in (game?.members)! {
+            if currentUser == member {
+                isUserInGame = true
+            }
+        }
 
         if commentTextField.text == "" {
             self.commentDelegate?.showAlert(title: "訊息", message: "請輸入留言內容")
+        } else if !isUserInGame {
+            self.commentDelegate?.showAlert(title: "訊息", message: "需要是球賽裡頭的成員才能留言")
         } else {
             saveComment(gameID)
             commentTextField.text = ""
         }
-
     }
 
     func saveComment(_ gameID: String) {
@@ -112,14 +122,15 @@ class GameCommentTableViewCell: UITableViewCell {
             }
         }
 
-        let comment = GameComment(commentOwner: currentUser!, comment: commentTextField.text!)
-        comments.append(comment)
+        let comment = GameComment(commentOwner: self.currentUser!, comment: self.commentTextField.text!)
+        self.comments.append(comment)
 
-        commentTableView.beginUpdates()
-        commentTableView.insertRows(at: [IndexPath(row: comments.count - 1, section: 0)], with: .automatic)
-        commentTableView.endUpdates()
+        self.commentTableView.beginUpdates()
+        self.commentTableView.insertRows(at: [IndexPath(row: self.comments.count - 1, section: 0)], with: .automatic)
+        self.commentTableView.endUpdates()
 
-        commentTableView.reloadData()
+        self.commentTableView.reloadData()
+
         moveToLastComment()
     }
 
@@ -127,12 +138,17 @@ class GameCommentTableViewCell: UITableViewCell {
         if commentTableView.contentSize.height > commentTableView.frame.height {
             // First figure out how many sections there are
             let lastSectionIndex = commentTableView.numberOfSections - 1
+
             // Then grab the number of rows in the last section
             let lastRowIndex = commentTableView.numberOfRows(inSection: lastSectionIndex) - 1
+
             // Now just construct the index path
             let pathToLastRow = NSIndexPath(row: lastRowIndex, section: lastSectionIndex)
+
             // Make the last row visible
-            commentTableView.scrollToRow(at: pathToLastRow as IndexPath, at: UITableViewScrollPosition.bottom, animated: true)
+            commentTableView.scrollToRow(at: pathToLastRow as IndexPath,
+                                         at: UITableViewScrollPosition.bottom,
+                                         animated: true)
         }
     }
 }
@@ -162,7 +178,7 @@ extension GameCommentTableViewCell: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        print("indexPath: \(indexPath.row)")
+        // todo: 點擊後可看訊息詳細的時間
     }
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
