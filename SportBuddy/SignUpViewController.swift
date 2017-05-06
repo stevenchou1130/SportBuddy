@@ -184,7 +184,7 @@ class SignUpViewController: BaseViewController {
                     .child(Constant.FirebaseStorage.userPhoto + "_" + uid)
 
                 guard
-                    let uploadData = UIImageJPEGRepresentation(self.userImage.image!, 0.5)
+                    let uploadData = UIImageJPEGRepresentation(self.userImage.image!, 0.3)
                     else { return }
 
                 storageRef.put(uploadData, metadata: nil, completion: { (metadata, error) in

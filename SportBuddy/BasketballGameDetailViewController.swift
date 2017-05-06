@@ -25,7 +25,7 @@ class BasketballGameDetailViewController: BaseViewController {
     var weather: Weather?
     var members: [User] = []
     var comments: [GameComment] = []
-    var commentOwnersPhoto: [String: String] = [:]
+    var commentOwnersPhoto: [String: UIImage] = [:]
 
     var isUserInMembers = false
     var isTotallyUpdated = false
@@ -215,19 +215,34 @@ class BasketballGameDetailViewController: BaseViewController {
             for commentOwner in commentOwners {
                 UserManager.shared.getUserInfo(currentUserUID: commentOwner, completion: { (user, error) in
 
-                    totalCommentOwners += 1
-
                     if user != nil {
-                        self.commentOwnersPhoto.updateValue((user?.photoURL)!, forKey: commentOwner)
-                    }
+                        DispatchQueue.global().async {
+                            if let imageUrl = URL(string: (user?.photoURL)!) {
+                                do {
+                                    let imageData = try Data(contentsOf: imageUrl)
+                                    if let image = UIImage(data: imageData) {
+                                        totalCommentOwners += 1
+                                            self.commentOwnersPhoto.updateValue(image, forKey: commentOwner)
 
-                    if totalCommentOwners == commentOwners.count {
+                                            if totalCommentOwners == commentOwners.count {
 
-                        self.isFinishLoadComments = true
+                                                self.isFinishLoadComments = true
 
-                        if self.isFinishLoadMembers && self.isFinishLoadComments {
-                            self.tableView.reloadData()
-                            self.loadingIndicator.stop()
+                                                if self.isFinishLoadMembers && self.isFinishLoadComments {
+
+                                                    DispatchQueue.main.async {
+
+                                                    self.tableView.reloadData()
+                                                    self.loadingIndicator.stop()
+                                                }
+                                            }
+                                        }
+                                    }
+                                } catch {
+                                    print("=== Error: \(error)")
+                                    self.loadingIndicator.stop()
+                                }
+                            }
                         }
                     }
 
@@ -641,10 +656,5 @@ extension BasketballGameDetailViewController: CommentCallDelegate {
         alertController.addAction(defaultAction)
 
         self.present(alertController, animated: true, completion: nil)
-    }
-
-    func refreshTableView() {
-//        self.tableView.reloadData()
-        self.tableView.reloadRows(at: [selectedCommentIndex], with: .automatic)
     }
 }

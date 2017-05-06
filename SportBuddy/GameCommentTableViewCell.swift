@@ -35,7 +35,7 @@ class GameCommentTableViewCell: UITableViewCell {
     var game: BasketballGame?
     var members: [User] = []
     var comments: [GameComment] = []
-    var commentOwnersPhoto: [String: String] = [:]
+    var commentOwnersPhoto: [String: UIImage] = [:]
 
     var isEndCell = false
 
@@ -163,28 +163,6 @@ class GameCommentTableViewCell: UITableViewCell {
                                          animated: true)
         }
     }
-
-    // MARK: - Load User Picture From Firebase
-    func loadAndSetUserPhoto(_ userImage: UIImageView, _ userPhotoUrlString: String) {
-
-        DispatchQueue.global().async {
-
-            if let imageUrl = URL(string: userPhotoUrlString) {
-                do {
-                    let imageData = try Data(contentsOf: imageUrl)
-                    if let image = UIImage(data: imageData) {
-                        DispatchQueue.main.async {
-                            userImage.layer.cornerRadius = userImage.bounds.size.height / 2.0
-                            userImage.layer.masksToBounds = true
-                            userImage.image = image
-                        }
-                    }
-                } catch {
-                    print("=== \(error)")
-                }
-            }
-        }
-    }
 }
 
 // MARK: - TableView
@@ -208,15 +186,16 @@ extension GameCommentTableViewCell: UITableViewDelegate, UITableViewDataSource {
 
         if comments.count != 0 {
             cell?.comment.text = comments[indexPath.row].comment
-            let userPhotoURL = commentOwnersPhoto[(comments[indexPath.row].commentOwner)]
-            if userPhotoURL != nil {
-                loadAndSetUserPhoto((cell?.userImage)!, userPhotoURL!)
+
+            let userPhoto = commentOwnersPhoto[(comments[indexPath.row].commentOwner)]
+            if userPhoto != nil {
+                cell?.userImage.image = userPhoto
             }
         }
 
         return cell!
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         // todo: 點擊後可看訊息詳細的時間
