@@ -25,6 +25,7 @@ class BasketballGameDetailViewController: BaseViewController {
     var weather: Weather?
     var members: [User] = []
     var comments: [GameComment] = []
+    var commentOwnersPhoto: [String: String] = [:]
 
     var isUserInMembers = false
     var isTotallyUpdated = false
@@ -174,9 +175,6 @@ class BasketballGameDetailViewController: BaseViewController {
                     }
 
                     if member == members[members.count-1] {
-
-                        // test
-//                        self.tableView.reloadSections(IndexSet(integer: Component.members.hashValue), with: .automatic)
                         self.tableView.reloadData()
                         self.loadingIndicator.stop()
                     }
@@ -196,11 +194,38 @@ class BasketballGameDetailViewController: BaseViewController {
             game != nil
             else { return }
 
+        var commentOwners = Set<String>()
+        var totalCommentOwners = 0
+
         GameCommentProvider.sharded.getComments(gameID: (game?.gameID)!) { (gameComments) in
 
             self.comments = gameComments
-            self.tableView.reloadData()
-            self.loadingIndicator.stop()
+
+            for comment in self.comments {
+                commentOwners.insert(comment.commentOwner)
+            }
+
+            for commentOwner in commentOwners {
+                UserManager.shared.getUserInfo(currentUserUID: commentOwner, completion: { (user, error) in
+
+                    totalCommentOwners += 1
+
+                    if user != nil {
+                        self.commentOwnersPhoto.updateValue((user?.photoURL)!, forKey: commentOwner)
+                    }
+
+                    if totalCommentOwners == commentOwners.count {
+
+                        self.tableView.reloadData()
+                        self.loadingIndicator.stop()
+                    }
+
+                    if error != nil {
+                        print("=== Error: \(String(describing: error))")
+                        self.loadingIndicator.stop()
+                    }
+                })
+            }
         }
     }
 }
@@ -478,7 +503,9 @@ extension BasketballGameDetailViewController {
         }
 
         cell.game = game
+        cell.members = members
         cell.comments = comments
+        cell.commentOwnersPhoto = commentOwnersPhoto
         cell.commentDelegate = self
         cell.commentTableView.reloadData()
 
@@ -603,5 +630,10 @@ extension BasketballGameDetailViewController: CommentCallDelegate {
         alertController.addAction(defaultAction)
 
         self.present(alertController, animated: true, completion: nil)
+    }
+
+    func refreshTableView() {
+//        self.tableView.reloadData()
+        self.tableView.reloadRows(at: [selectedCommentIndex], with: .automatic)
     }
 }

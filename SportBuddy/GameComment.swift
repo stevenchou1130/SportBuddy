@@ -8,7 +8,7 @@
 
 import Foundation
 
-class GameComment {
+struct GameComment {
 
     let commentOwner: String
     let comment: String

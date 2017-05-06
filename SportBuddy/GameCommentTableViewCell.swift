@@ -20,6 +20,7 @@ class GameCommentTableViewCell: UITableViewCell {
     @IBOutlet weak var commentTableView: UITableView!
     @IBOutlet weak var commentTextField: UITextField!
     @IBOutlet weak var commentButton: UIButton!
+    @IBOutlet weak var editCommentView: UIView!
 
     class var identifier: String { return String(describing: self) }
 
@@ -30,9 +31,11 @@ class GameCommentTableViewCell: UITableViewCell {
 
     var currentUser: String?
     var game: BasketballGame?
-
+    var members: [User] = []
     var comments: [GameComment] = []
-    var commentsUserPhoto: [String] = []
+    var commentOwnersPhoto: [String: String] = [:]
+
+    var isEndCell = false
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -63,6 +66,8 @@ class GameCommentTableViewCell: UITableViewCell {
     func setView() {
 
         commentTableView.separatorStyle = .none
+        commentTableView.rowHeight = UITableViewAutomaticDimension
+        commentTableView.estimatedRowHeight = 22
 
         commentTitleLabel.textColor = .white
 
@@ -76,8 +81,13 @@ class GameCommentTableViewCell: UITableViewCell {
         commentButton.tintColor = .white
         commentButton.addTarget(self, action: #selector(sendMessage), for: .touchUpInside)
 
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        editCommentView.addGestureRecognizer(tap)
+
         moveToLastComment()
     }
+
+    func handleTap(_ sender: UITapGestureRecognizer) {}
 
     func sendMessage() {
 
@@ -151,6 +161,28 @@ class GameCommentTableViewCell: UITableViewCell {
                                          animated: true)
         }
     }
+
+    // MARK: - Load User Picture From Firebase
+    func loadAndSetUserPhoto(_ userImage: UIImageView, _ userPhotoUrlString: String) {
+
+        DispatchQueue.global().async {
+
+            if let imageUrl = URL(string: userPhotoUrlString) {
+                do {
+                    let imageData = try Data(contentsOf: imageUrl)
+                    if let image = UIImage(data: imageData) {
+                        DispatchQueue.main.async {
+                            userImage.layer.cornerRadius = userImage.bounds.size.height / 2.0
+                            userImage.layer.masksToBounds = true
+                            userImage.image = image
+                        }
+                    }
+                } catch {
+                    print("=== \(error)")
+                }
+            }
+        }
+    }
 }
 
 // MARK: - TableView
@@ -171,7 +203,13 @@ extension GameCommentTableViewCell: UITableViewDelegate, UITableViewDataSource {
         cell?.userImage.layer.cornerRadius = (cell?.userImage.bounds.size.height)! / 2.0
         cell?.userImage.layer.masksToBounds = true
 
-        cell?.comment.text = comments[indexPath.row].comment
+        if comments.count != 0 {
+            cell?.comment.text = comments[indexPath.row].comment
+            let userPhotoURL = commentOwnersPhoto[(comments[indexPath.row].commentOwner)]
+            if userPhotoURL != nil {
+                loadAndSetUserPhoto((cell?.userImage)!, userPhotoURL!)
+            }
+        }
 
         return cell!
     }

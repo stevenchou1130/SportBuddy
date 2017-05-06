@@ -33,15 +33,19 @@ class MembersTableViewCell: UITableViewCell, Identifiable {
         collectionView.dataSource = self
         collectionView.delegate = self
 
-        let memberNib = UINib(nibName: MemberCollectionViewCell.identifier, bundle: nil)
-        collectionView.register(memberNib, forCellWithReuseIdentifier: MemberCollectionViewCell.identifier)
-
+        initNib()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+
+    func initNib() {
+
+        let memberNib = UINib(nibName: MemberCollectionViewCell.identifier, bundle: nil)
+        collectionView.register(memberNib, forCellWithReuseIdentifier: MemberCollectionViewCell.identifier)
     }
 
     // MARK: - Load User Picture From Firebase
@@ -54,6 +58,8 @@ class MembersTableViewCell: UITableViewCell, Identifiable {
                     let imageData = try Data(contentsOf: imageUrl)
                     if let image = UIImage(data: imageData) {
                         DispatchQueue.main.async {
+                            userImage.layer.cornerRadius = userImage.bounds.size.height / 2.0
+                            userImage.layer.masksToBounds = true
                             userImage.image = image
                         }
                     }

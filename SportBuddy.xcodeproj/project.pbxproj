@@ -42,6 +42,7 @@
 		B084BD301E7FCF8200DC48B2 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B084BD2F1E7FCF8200DC48B2 /* Login.storyboard */; };
 		B084BD321E7FD29F00DC48B2 /* SignUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B084BD311E7FD29F00DC48B2 /* SignUp.storyboard */; };
 		B084BD341E7FDD3900DC48B2 /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = B084BD331E7FDD3900DC48B2 /* Palette.swift */; };
+		B08ABE481EBDB80F00266BEF /* UserWithPhotoURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08ABE471EBDB80F00266BEF /* UserWithPhotoURL.swift */; };
 		B08BD7221EB30BC5007385F1 /* ConvertImageToBW.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08BD7211EB30BC5007385F1 /* ConvertImageToBW.swift */; };
 		B0971BC51E850EB10037E26D /* CourtTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0971BC31E850EB10037E26D /* CourtTableViewCell.swift */; };
 		B0971BC61E850EB10037E26D /* CourtTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0971BC41E850EB10037E26D /* CourtTableViewCell.xib */; };
@@ -124,6 +125,7 @@
 		B084BD2F1E7FCF8200DC48B2 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		B084BD311E7FD29F00DC48B2 /* SignUp.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SignUp.storyboard; sourceTree = "<group>"; };
 		B084BD331E7FDD3900DC48B2 /* Palette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
+		B08ABE471EBDB80F00266BEF /* UserWithPhotoURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserWithPhotoURL.swift; sourceTree = "<group>"; };
 		B08BD7211EB30BC5007385F1 /* ConvertImageToBW.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConvertImageToBW.swift; sourceTree = "<group>"; };
 		B0971BC31E850EB10037E26D /* CourtTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourtTableViewCell.swift; sourceTree = "<group>"; };
 		B0971BC41E850EB10037E26D /* CourtTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CourtTableViewCell.xib; sourceTree = "<group>"; };
@@ -215,7 +217,6 @@
 				B01437BE1EBB334A00675239 /* CommentDetailTableViewCell.swift */,
 				B01437BF1EBB334A00675239 /* CommentDetailTableViewCell.xib */,
 				B0301DDF1EBC1D8D00A7001A /* GameCommentProvider.swift */,
-				B01437BC1EBB319100675239 /* GameComment.swift */,
 			);
 			name = Comment;
 			sourceTree = "<group>";
@@ -276,6 +277,8 @@
 			children = (
 				B076C55F1E89F5CF00F06390 /* User.swift */,
 				B07315071EB1E18100BFB4CA /* Level.swift */,
+				B01437BC1EBB319100675239 /* GameComment.swift */,
+				B08ABE471EBDB80F00266BEF /* UserWithPhotoURL.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -718,6 +721,7 @@
 				B0BF606F1EA46E4500E37C73 /* LoadingIndicator.swift in Sources */,
 				B0DC15B71EA747D500443F9D /* MemberCollectionViewCell.swift in Sources */,
 				B07315051EB1E13C00BFB4CA /* LevelManager.swift in Sources */,
+				B08ABE481EBDB80F00266BEF /* UserWithPhotoURL.swift in Sources */,
 				B0AB6FFD1E88C5900060D80E /* BasketballCourtModel.swift in Sources */,
 				B0E881711E9FD2AF0093AA11 /* BasketballCourtsViewController.swift in Sources */,
 			);

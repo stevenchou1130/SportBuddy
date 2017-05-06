@@ -108,7 +108,6 @@ class BasketballCourtDetailViewController: BaseViewController, UITableViewDelega
         let courtInfoNib = UINib(nibName: CourtInfoTableViewCell.identifier, bundle: nil)
         tableView.register(courtInfoNib, forCellReuseIdentifier: CourtInfoTableViewCell.identifier)
 
-        self.automaticallyAdjustsScrollViewInsets = true
     }
 
     // MARK: - Table view data source
