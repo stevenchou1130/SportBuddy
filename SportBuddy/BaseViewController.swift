@@ -88,7 +88,7 @@ extension BaseViewController {
             errorMsg = myErrorMsg!
         }
 
-        let alertController = UIAlertController(title: "Error Message", message: errorMsg, preferredStyle: .alert)
+        let alertController = UIAlertController(title: "訊息", message: errorMsg, preferredStyle: .alert)
 
         let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         alertController.addAction(defaultAction)

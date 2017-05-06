@@ -207,7 +207,7 @@ class SignUpViewController: BaseViewController {
 
         } else {
             self.loadingIndicator.stop()
-            self.showErrorAlert(error: nil, myErrorMsg: "Please fill out all information about you.")
+            self.showErrorAlert(error: nil, myErrorMsg: "請確認您已填完所有欄位")
         }
     }
 

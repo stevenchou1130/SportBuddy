@@ -111,7 +111,7 @@ class GameCommentTableViewCell: UITableViewCell {
         if commentTextField.text == "" {
             self.commentDelegate?.showAlert(title: "訊息", message: "請輸入留言內容")
         } else if !isUserInGame {
-            self.commentDelegate?.showAlert(title: "訊息", message: "需要是球賽裡頭的成員才能留言")
+            self.commentDelegate?.showAlert(title: "訊息", message: "必須是球賽裡頭的成員才能留言")
         } else {
             saveComment(gameID)
             commentTextField.text = ""

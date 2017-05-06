@@ -19,13 +19,13 @@ class BasketballCourtDetailViewController: BaseViewController, UITableViewDelega
 
     enum Component {
 
-        case weather, map, info
+        case weather, map, info, empty
 
     }
 
     // MARK: Property
 
-    var components: [Component] = [ .weather, .map, .info ]
+    var components: [Component] = [ .weather, .map, .info, .empty]
 
     var basketballCourt: BasketballCourt?
     var weather: Weather?
@@ -107,7 +107,6 @@ class BasketballCourtDetailViewController: BaseViewController, UITableViewDelega
 
         let courtInfoNib = UINib(nibName: CourtInfoTableViewCell.identifier, bundle: nil)
         tableView.register(courtInfoNib, forCellReuseIdentifier: CourtInfoTableViewCell.identifier)
-
     }
 
     // MARK: - Table view data source
@@ -119,7 +118,7 @@ class BasketballCourtDetailViewController: BaseViewController, UITableViewDelega
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
         switch components[section] {
-        case .weather, .map, .info:
+        case .weather, .map, .info, .empty:
 
             return 1
         }
@@ -143,7 +142,12 @@ class BasketballCourtDetailViewController: BaseViewController, UITableViewDelega
         case .info:
 
             return CourtInfoTableViewCell.height
+
+        case .empty:
+
+            return 66
         }
+
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -175,7 +179,14 @@ class BasketballCourtDetailViewController: BaseViewController, UITableViewDelega
             let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! CourtInfoTableViewCell
 
             return setCourtInfoCell(cell: cell)
+
+        case .empty:
+
+            let cell = UITableViewCell()
+            cell.backgroundColor = .clear
+            return cell
         }
+
         // swiftlint:enable force_cast
     }
 

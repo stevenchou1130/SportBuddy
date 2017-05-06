@@ -193,7 +193,7 @@ class NewBasketballGameViewController: BaseViewController {
         } else {
 
             self.showErrorAlert(error: nil,
-                                myErrorMsg: "Please fill out all information about you.")
+                                myErrorMsg: "請確認您已填完所有欄位")
         }
     }
 
