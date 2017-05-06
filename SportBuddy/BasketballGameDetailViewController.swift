@@ -41,6 +41,9 @@ class BasketballGameDetailViewController: BaseViewController {
     var selectedMemberIndex: IndexPath = IndexPath()
     var isMemberExpanded = true
 
+    var selectedCommentIndex: IndexPath = IndexPath()
+    var isCommentExpanded = true
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -124,6 +127,12 @@ class BasketballGameDetailViewController: BaseViewController {
 
         self.isMemberExpanded = !isMemberExpanded
         self.tableView.reloadRows(at: [selectedMemberIndex], with: .automatic)
+    }
+
+    func didExpandCommentCell() {
+
+        self.isCommentExpanded = !isCommentExpanded
+        self.tableView.reloadRows(at: [selectedCommentIndex], with: .automatic)
     }
 
     func getWeather() {
@@ -282,7 +291,9 @@ extension BasketballGameDetailViewController: UITableViewDelegate, UITableViewDa
 
         case .comment:
 
-            return GameCommentTableViewCell.height
+            return isCommentExpanded ?
+                GameCommentTableViewCell.height :
+                GameCommentTableViewCell.defaultHeight
 
         case .joinOrLeave:
 
@@ -307,7 +318,9 @@ extension BasketballGameDetailViewController: UITableViewDelegate, UITableViewDa
                 self.selectedMemberIndex = indexPath
                 self.didExpandMemberCell()
 
-            case .comment: break
+            case .comment:
+                self.selectedCommentIndex = indexPath
+                self.didExpandCommentCell()
 
             case .joinOrLeave: break
         }
@@ -450,6 +463,19 @@ extension BasketballGameDetailViewController {
     func setCommentCell(_ cell: GameCommentTableViewCell) -> GameCommentTableViewCell {
 
         setCellBasicStyle(cell)
+
+        if !isCommentExpanded {
+            cell.commentTableView.isHidden = true
+            cell.commentTextField.isHidden = true
+            cell.commentButton.isHidden = true
+            cell.commentTitleLabel.text = "▶︎ 球賽留言板"
+        } else {
+
+            cell.commentTableView.isHidden = false
+            cell.commentTextField.isHidden = false
+            cell.commentButton.isHidden = false
+            cell.commentTitleLabel.text = "▼ 球賽留言板"
+        }
 
         cell.game = game
         cell.comments = comments
