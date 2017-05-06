@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import MessageUI
 
 class BasketballProfileViewController: BaseViewController {
 
@@ -36,6 +37,7 @@ class BasketballProfileViewController: BaseViewController {
         setCurrentUID()
         setUser()
         setView()
+
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -75,13 +77,45 @@ class BasketballProfileViewController: BaseViewController {
         setBackground(imageName: Constant.BackgroundName.basketball)
 
         setNavigationBar()
-
     }
 
     func setNavigationBar() {
 
         navigationItem.leftBarButtonItem = createBackButton(action: #selector(backToSportItemsView))
         transparentizeNavigationBar(navigationController: self.navigationController)
+
+//         todo: 增加寄送mail功能
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "Button_Mail"),
+                                                                 style: .done,
+                                                                 target: self,
+                                                                 action: #selector(sendEmail))
+    }
+
+    func sendEmail() {
+        if MFMailComposeViewController.canSendMail() {
+
+            let mailController = MFMailComposeViewController()
+            mailController.mailComposeDelegate = self
+            mailController.setToRecipients(["sportbuddy.tw@gmail.com"])
+            mailController.setSubject("Sport Buddy 回報")
+            mailController.setMessageBody("<p>如果您在使用上有遇到什麼問題，或是有什麼球場資訊可以跟我們分享，歡迎寫下您的訊息並寄送給我們</p>", isHTML: true)
+
+            mailController.navigationController?.navigationBar.tintColor = .blue
+
+            // todo: 改不了 navigationBar title的顏色
+            mailController.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.blue]
+
+            present(mailController, animated: true)
+
+        } else {
+
+            let alertController = UIAlertController(title: "無法寄信", message: "您的裝置目前無法寄送email\n請確認您的信箱設定", preferredStyle: .alert)
+
+            let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            alertController.addAction(defaultAction)
+
+            self.present(alertController, animated: true, completion: nil)
+        }
     }
 
     func setHidingStar() {
@@ -339,5 +373,12 @@ class BasketballProfileViewController: BaseViewController {
             print("Finish Animation")
         })
     }
+}
 
+// MARK: - Setting MessageUI
+extension BasketballProfileViewController: MFMailComposeViewControllerDelegate {
+
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
+    }
 }

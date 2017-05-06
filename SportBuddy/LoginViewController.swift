@@ -122,7 +122,7 @@ class LoginViewController: BaseViewController {
 
         if emailTexfield.text == "" {
 
-            self.showAlert(myMsg: "請在Email欄位中填寫您所註冊的Email, 填完後再點選忘記密碼, 我們將會寄一封重設密碼的信件到您信箱")
+            self.showAlert(myMsg: "請在Email欄位中填寫您所註冊的Email\n填完後點選忘記密碼\n我們將會寄一封重設密碼信件給您")
 
         } else {
 
@@ -131,9 +131,9 @@ class LoginViewController: BaseViewController {
             ref?.sendPasswordReset(withEmail: emailTexfield.text!, completion: { (error) in
 
                 if error != nil {
-                    self.showAlert(myMsg: "這Email似乎還沒註冊, 請再次確認您所填寫的Email是否正確")
+                    self.showAlert(myMsg: "這Email似乎還沒註冊\n請再次確認您所填寫的Email是否正確")
                 } else {
-                    self.showAlert(myMsg: "我們已發了一封信件到您的信箱, 請使用裡頭的連結來重設您的密碼")
+                    self.showAlert(myMsg: "我們已發了一封信件到您的信箱\n請使用裡頭的連結來重設您的密碼")
                 }
             })
         }
