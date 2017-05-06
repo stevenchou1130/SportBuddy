@@ -73,14 +73,13 @@ class LevelManager {
 
             if level != nil {
 
-                // todo: 調整回正確的升級機制
                 var isEnoughToUpgrade: Bool {
                     switch level!.basketball {
-                        case "A": return playedGamesCount >= 100
-                        case "B": return playedGamesCount >= 0
-                        case "C": return playedGamesCount >= 0
-                        case "D": return playedGamesCount >= 0
-                        case "E": return playedGamesCount >= 0
+                        case "A": return playedGamesCount >= 999
+                        case "B": return playedGamesCount >= 40
+                        case "C": return playedGamesCount >= 30
+                        case "D": return playedGamesCount >= 20
+                        case "E": return playedGamesCount >= 10
                         default:
                             return playedGamesCount >= 10
                     }

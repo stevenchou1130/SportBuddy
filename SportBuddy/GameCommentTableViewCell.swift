@@ -29,6 +29,8 @@ class GameCommentTableViewCell: UITableViewCell {
     static let defaultHeight: CGFloat = 40.0
     static let height: CGFloat = 240.0
 
+    let loadingIndicator = LoadingIndicator()
+
     var currentUser: String?
     var game: BasketballGame?
     var members: [User] = []
@@ -200,6 +202,7 @@ extension GameCommentTableViewCell: UITableViewDelegate, UITableViewDataSource {
 
         cell?.selectionStyle = .none
 
+        cell?.userImage.image = #imageLiteral(resourceName: "Default_User_Photo")
         cell?.userImage.layer.cornerRadius = (cell?.userImage.bounds.size.height)! / 2.0
         cell?.userImage.layer.masksToBounds = true
 
@@ -213,7 +216,7 @@ extension GameCommentTableViewCell: UITableViewDelegate, UITableViewDataSource {
 
         return cell!
     }
-
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         // todo: 點擊後可看訊息詳細的時間

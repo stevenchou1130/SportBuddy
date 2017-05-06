@@ -84,7 +84,6 @@ class BasketballProfileViewController: BaseViewController {
         navigationItem.leftBarButtonItem = createBackButton(action: #selector(backToSportItemsView))
         transparentizeNavigationBar(navigationController: self.navigationController)
 
-//         todo: 增加寄送mail功能
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "Button_Mail"),
                                                                  style: .done,
                                                                  target: self,

@@ -45,6 +45,9 @@ class BasketballGameDetailViewController: BaseViewController {
     var selectedCommentIndex: IndexPath = IndexPath()
     var isCommentExpanded = true
 
+    var isFinishLoadMembers = false
+    var isFinishLoadComments = false
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -175,8 +178,12 @@ class BasketballGameDetailViewController: BaseViewController {
                     }
 
                     if member == members[members.count-1] {
-                        self.tableView.reloadData()
-                        self.loadingIndicator.stop()
+                        self.isFinishLoadMembers = true
+
+                        if self.isFinishLoadMembers && self.isFinishLoadComments {
+                            self.tableView.reloadData()
+                            self.loadingIndicator.stop()
+                        }
                     }
 
                     if error != nil {
@@ -216,8 +223,12 @@ class BasketballGameDetailViewController: BaseViewController {
 
                     if totalCommentOwners == commentOwners.count {
 
-                        self.tableView.reloadData()
-                        self.loadingIndicator.stop()
+                        self.isFinishLoadComments = true
+
+                        if self.isFinishLoadMembers && self.isFinishLoadComments {
+                            self.tableView.reloadData()
+                            self.loadingIndicator.stop()
+                        }
                     }
 
                     if error != nil {
