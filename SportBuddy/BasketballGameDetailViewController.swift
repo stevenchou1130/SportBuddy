@@ -195,6 +195,7 @@ class BasketballGameDetailViewController: BaseViewController {
         }
     }
 
+    // todo: 可以把function裡頭的東西拉開, 剛加入game的人無法顯示大頭照在第一次留言時
     func getGameComments() {
 
         guard
@@ -206,22 +207,55 @@ class BasketballGameDetailViewController: BaseViewController {
 
         GameCommentProvider.sharded.getComments(gameID: (game?.gameID)!) { (gameComments) in
 
-            self.comments = gameComments
+            if gameComments.count == 0 {
 
-            for comment in self.comments {
-                commentOwners.insert(comment.commentOwner)
-            }
+                UserManager.shared.getUserInfo(currentUserUID: self.currentUserUid, completion: { (user, error) in
+                    DispatchQueue.global().async {
+                        if let imageUrl = URL(string: (user?.photoURL)!) {
+                            do {
+                                let imageData = try Data(contentsOf: imageUrl)
+                                if let image = UIImage(data: imageData) {
+                                    self.commentOwnersPhoto.updateValue(image, forKey: self.currentUserUid)
 
-            for commentOwner in commentOwners {
-                UserManager.shared.getUserInfo(currentUserUID: commentOwner, completion: { (user, error) in
+                                    if totalCommentOwners == commentOwners.count {
 
-                    if user != nil {
-                        DispatchQueue.global().async {
-                            if let imageUrl = URL(string: (user?.photoURL)!) {
-                                do {
-                                    let imageData = try Data(contentsOf: imageUrl)
-                                    if let image = UIImage(data: imageData) {
-                                        totalCommentOwners += 1
+                                        self.isFinishLoadComments = true
+
+                                        if self.isFinishLoadMembers && self.isFinishLoadComments {
+
+                                            DispatchQueue.main.async {
+
+                                                self.tableView.reloadData()
+                                                self.loadingIndicator.stop()
+                                            }
+                                        }
+                                    }
+                                }
+                            } catch {
+                                print("=== Error: \(error)")
+                                self.loadingIndicator.stop()
+                            }
+                        }
+                    }
+                })
+            } else {
+
+                self.comments = gameComments
+
+                for comment in self.comments {
+                    commentOwners.insert(comment.commentOwner)
+                }
+
+                for commentOwner in commentOwners {
+                    UserManager.shared.getUserInfo(currentUserUID: commentOwner, completion: { (user, error) in
+
+                        if user != nil {
+                            DispatchQueue.global().async {
+                                if let imageUrl = URL(string: (user?.photoURL)!) {
+                                    do {
+                                        let imageData = try Data(contentsOf: imageUrl)
+                                        if let image = UIImage(data: imageData) {
+                                            totalCommentOwners += 1
                                             self.commentOwnersPhoto.updateValue(image, forKey: commentOwner)
 
                                             if totalCommentOwners == commentOwners.count {
@@ -232,26 +266,29 @@ class BasketballGameDetailViewController: BaseViewController {
 
                                                     DispatchQueue.main.async {
 
-                                                    self.tableView.reloadData()
-                                                    self.loadingIndicator.stop()
+                                                        self.tableView.reloadData()
+                                                        self.loadingIndicator.stop()
+                                                    }
                                                 }
                                             }
                                         }
+                                    } catch {
+                                        print("=== Error: \(error)")
+                                        self.loadingIndicator.stop()
                                     }
-                                } catch {
-                                    print("=== Error: \(error)")
-                                    self.loadingIndicator.stop()
                                 }
                             }
                         }
-                    }
 
-                    if error != nil {
-                        print("=== Error: \(String(describing: error))")
-                        self.loadingIndicator.stop()
-                    }
-                })
+                        if error != nil {
+                            print("=== Error: \(String(describing: error))")
+                            self.loadingIndicator.stop()
+                        }
+                    })
+                }
+
             }
+
         }
     }
 }
