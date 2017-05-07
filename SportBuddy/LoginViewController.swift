@@ -25,7 +25,7 @@ class LoginViewController: BaseViewController {
         self.hideKeyboardWhenTappedAround()
 
 //        setCrashlyticsButton()
-//        testButton.isHidden = true
+        testButton.isHidden = true
 
         setView()
     }
