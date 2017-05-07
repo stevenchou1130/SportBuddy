@@ -12,6 +12,7 @@ class WeatherTableViewCell: UITableViewCell, Identifiable {
 
     // MARK: Property
 
+    @IBOutlet weak var weatherCellTitle: UILabel!
     @IBOutlet weak var weatherImage: UIImageView!
     @IBOutlet weak var weatherLabel: UILabel!
     @IBOutlet weak var temperatureLabel: UILabel!
@@ -19,12 +20,15 @@ class WeatherTableViewCell: UITableViewCell, Identifiable {
 
     class var identifier: String { return String(describing: self) }
 
-    static let height: CGFloat = 135.0
+    static let gameDefaultHeight: CGFloat = 40.0
+    static let gameCellHeight: CGFloat = 180.0
+    static let courtCellHeight: CGFloat = 150.0
 
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
 
+        weatherCellTitle.textColor = .white
         weatherLabel.textColor = .white
         temperatureLabel.textColor = .white
         updateTimeLabel.textColor = .white
@@ -33,7 +37,7 @@ class WeatherTableViewCell: UITableViewCell, Identifiable {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
+//        weatherCellTitle.text = "▼ 天氣資訊"
     }
 
 }

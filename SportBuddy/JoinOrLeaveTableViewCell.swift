@@ -12,6 +12,7 @@ class JoinOrLeaveTableViewCell: UITableViewCell, Identifiable {
 
     @IBOutlet weak var joinButton: UIButton!
     @IBOutlet weak var leaveButton: UIButton!
+    @IBOutlet weak var cancelGameButton: UIButton!
 
     // MARK: Property
 

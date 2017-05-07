@@ -14,6 +14,8 @@ class BasketballCourtsViewController: BaseViewController {
 
     @IBOutlet var courtsTableView: UITableView!
 
+    let loadingIndicator = LoadingIndicator()
+
     var basketballCourts: [BasketballCourt] = []
 
     override func viewDidLoad() {
@@ -45,8 +47,7 @@ class BasketballCourtsViewController: BaseViewController {
     func setCourts() {
 
         // MARK: Loading indicator
-        let activityData = ActivityData()
-        NVActivityIndicatorPresenter.sharedInstance.startAnimating(activityData)
+        loadingIndicator.start()
 
         BasketballCourtsProvider.shared.getApiData(city: Constant.CurrentCity.cityName, gymType: Constant.GymType.basketball) { (basketballCourts, error) in
 
@@ -61,7 +62,7 @@ class BasketballCourtsViewController: BaseViewController {
 
             }
 
-            NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
+            self.loadingIndicator.stop()
         }
     }
 }

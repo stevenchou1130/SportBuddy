@@ -6,7 +6,7 @@ target 'SportBuddy' do
   use_frameworks!
 
   # Pods for SportBuddy
-	
+
 	pod 'Alamofire'
 	pod 'Firebase/Core'
 	pod 'Firebase/Auth'
@@ -16,5 +16,7 @@ target 'SportBuddy' do
     pod 'NVActivityIndicatorView'
     pod 'DKImagePickerController'
 	pod 'BTNavigationDropdownMenu', :git => 'https://github.com/PhamBaTho/BTNavigationDropdownMenu.git', :branch => 'swift-3.0'
+    pod 'Fabric'
+    pod 'Crashlytics'
 
 end

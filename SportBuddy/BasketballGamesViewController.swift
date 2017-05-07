@@ -19,6 +19,8 @@ class BasketballGamesViewController: BaseViewController {
 
     var gamesList: [BasketballGame] = []
 
+    var isShowDefaultCell = false
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -51,11 +53,14 @@ class BasketballGamesViewController: BaseViewController {
 
         self.automaticallyAdjustsScrollViewInsets = false
 
-        let nib = UINib(nibName: Constant.Cell.game, bundle: nil)
-        gamesTableView.register(nib, forCellReuseIdentifier: Constant.Cell.game)
+        let gameNib = UINib(nibName: Constant.Cell.game, bundle: nil)
+        gamesTableView.register(gameNib, forCellReuseIdentifier: Constant.Cell.game)
+
+        let gameDefaultNib = UINib(nibName: Constant.Cell.gameDefault, bundle: nil)
+        gamesTableView.register(gameDefaultNib, forCellReuseIdentifier: Constant.Cell.gameDefault)
 
         // Separator
-        // gamesTableView.separatorStyle = .none
+        gamesTableView.separatorStyle = .none
     }
 
     func setNavigationBar() {
@@ -136,6 +141,8 @@ class BasketballGamesViewController: BaseViewController {
                             self.gamesList.append(game)
                         }
                     }
+
+                    self.gamesList.sort { $0.time < $1.time }
 
                     self.gamesTableView.reloadData()
 
@@ -220,18 +227,74 @@ extension BasketballGamesViewController: UITableViewDelegate, UITableViewDataSou
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 
-        tableView.estimatedRowHeight = 44.0
-        tableView.rowHeight = UITableViewAutomaticDimension
+        if gamesList.count == 0 {
+            tableView.rowHeight = GameDefaultTableViewCell.height
+        } else {
+            tableView.estimatedRowHeight = 44.0
+            tableView.rowHeight = UITableViewAutomaticDimension
+        }
 
-        return UITableViewAutomaticDimension
+        return tableView.rowHeight
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        return gamesList.count
+        if gamesList.count == 0 {
+            isShowDefaultCell = true
+            return 1
+        } else {
+            isShowDefaultCell = false
+            return gamesList.count
+        }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+        if isShowDefaultCell {
+            return setDefaultTableViewCell(tableView: tableView, indexPath: indexPath)
+        } else {
+            return setGameTableViewCell(tableView: tableView, indexPath: indexPath)
+        }
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+        if isShowDefaultCell {
+
+            self.createNewBasketballGameGame()
+
+        } else {
+
+            let storyBoard = UIStoryboard(name: Constant.Storyboard.basketballGameDetail, bundle: nil)
+
+            guard
+                let basketballGameDetailViewController = storyBoard.instantiateViewController(withIdentifier: Constant.Controller.basketballGameDetail) as? BasketballGameDetailViewController
+                else { return }
+
+            basketballGameDetailViewController.game = gamesList[indexPath.row]
+
+            self.navigationController?.pushViewController(basketballGameDetailViewController, animated: true)
+        }
+    }
+
+}
+
+// MARK: TableView - Set Cell
+extension BasketballGamesViewController {
+
+    func setDefaultTableViewCell(tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
+        guard
+            let cell = tableView.dequeueReusableCell(withIdentifier: Constant.Cell.gameDefault,
+                                                     for: indexPath) as? GameDefaultTableViewCell
+            else { return UITableViewCell() }
+
+        cell.selectionStyle = .none
+        cell.backgroundColor = .clear
+
+        return cell
+    }
+
+    func setGameTableViewCell(tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
 
         guard
             let cell = tableView.dequeueReusableCell(withIdentifier: Constant.Cell.game,
@@ -266,18 +329,5 @@ extension BasketballGamesViewController: UITableViewDelegate, UITableViewDataSou
         }
 
         return cell
-    }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
-        let storyBoard = UIStoryboard(name: Constant.Storyboard.basketballGameDetail, bundle: nil)
-
-        guard
-            let basketballGameDetailViewController = storyBoard.instantiateViewController(withIdentifier: Constant.Controller.basketballGameDetail) as? BasketballGameDetailViewController
-            else { return }
-
-        basketballGameDetailViewController.game = gamesList[indexPath.row]
-
-        self.navigationController?.pushViewController(basketballGameDetailViewController, animated: true)
     }
 }

@@ -9,6 +9,9 @@
 import UIKit
 import Firebase
 import IQKeyboardManagerSwift
+import Fabric
+import Crashlytics
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -27,6 +30,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // Set status bar
         UIApplication.shared.statusBarStyle = .lightContent
+
+        // Set UserNotification
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (granted, _) in
+
+            if granted {
+                print("User notifications are allowed")
+            } else {
+                print("User notifications are not allowed")
+            }
+        }
+
+        Fabric.with([Crashlytics.self])
 
         return true
     }

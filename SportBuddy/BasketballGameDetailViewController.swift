@@ -15,21 +15,38 @@ class BasketballGameDetailViewController: BaseViewController {
     @IBOutlet weak var tableView: UITableView!
 
     enum Component {
-        case weather, map, members, joinOrLeave
+        case weather, map, members, comment, joinOrLeave
     }
 
-    var components: [Component] = [ .weather, .map, .members, .joinOrLeave]
+    var components: [Component] = [ .weather, .map, .members, .comment, .joinOrLeave]
 
     var currentUserUid = ""
     var game: BasketballGame?
     var weather: Weather?
     var members: [User] = []
+    var comments: [GameComment] = []
+    var commentOwnersPhoto: [String: UIImage] = [:]
 
     var isUserInMembers = false
     var isTotallyUpdated = false
 
     let loadingIndicator = LoadingIndicator()
     let fullScreenSize = UIScreen.main.bounds.size
+
+    var selectedWeatherIndex: IndexPath = IndexPath()
+    var isWeatherExpanded = false
+
+    var selectedMapIndex: IndexPath = IndexPath()
+    var isMapExpanded = false
+
+    var selectedMemberIndex: IndexPath = IndexPath()
+    var isMemberExpanded = true
+
+    var selectedCommentIndex: IndexPath = IndexPath()
+    var isCommentExpanded = true
+
+    var isFinishLoadMembers = false
+    var isFinishLoadComments = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +60,7 @@ class BasketballGameDetailViewController: BaseViewController {
         setView()
         getWeather()
         getMembersInfo()
+        getGameComments()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -63,9 +81,6 @@ class BasketballGameDetailViewController: BaseViewController {
                                           width: self.tableView.frame.width,
                                           height: self.tableView.frame.height)
         }
-
-        self.tableView.rowHeight = UITableViewAutomaticDimension
-        self.tableView.estimatedRowHeight = 200
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -76,7 +91,7 @@ class BasketballGameDetailViewController: BaseViewController {
 
     func setView() {
         // NavigationItem
-        self.navigationItem.title = "球賽資訊"
+        self.navigationItem.title = game?.name
 
         // Background
         setBackground(imageName: Constant.BackgroundName.basketball)
@@ -93,8 +108,35 @@ class BasketballGameDetailViewController: BaseViewController {
         let membersNib = UINib(nibName: MembersTableViewCell.identifier, bundle: nil)
         tableView.register(membersNib, forCellReuseIdentifier: MembersTableViewCell.identifier)
 
+        let commentNib = UINib(nibName: GameCommentTableViewCell.identifier, bundle: nil)
+        tableView.register(commentNib, forCellReuseIdentifier: GameCommentTableViewCell.identifier)
+
         let joinOrLeaveNib = UINib(nibName: JoinOrLeaveTableViewCell.identifier, bundle: nil)
         tableView.register(joinOrLeaveNib, forCellReuseIdentifier: JoinOrLeaveTableViewCell.identifier)
+    }
+
+    func didExpandWeatherCell() {
+
+        self.isWeatherExpanded = !isWeatherExpanded
+        self.tableView.reloadRows(at: [selectedWeatherIndex], with: .automatic)
+    }
+
+    func didExpandMapCell() {
+
+        self.isMapExpanded = !isMapExpanded
+        self.tableView.reloadRows(at: [selectedMapIndex], with: .automatic)
+    }
+
+    func didExpandMemberCell() {
+
+        self.isMemberExpanded = !isMemberExpanded
+        self.tableView.reloadRows(at: [selectedMemberIndex], with: .automatic)
+    }
+
+    func didExpandCommentCell() {
+
+        self.isCommentExpanded = !isCommentExpanded
+        self.tableView.reloadRows(at: [selectedCommentIndex], with: .automatic)
     }
 
     func getWeather() {
@@ -128,35 +170,125 @@ class BasketballGameDetailViewController: BaseViewController {
         MemebersProvider.sharded.getMembers(gameID: (game?.gameID)!) { (members) in
 
             for member in members {
-                let ref = FIRDatabase.database().reference().child(Constant.FirebaseUser.nodeName).child(member)
 
-                ref.observeSingleEvent(of: .value, with: { (snapshot) in
+                UserManager.shared.getUserInfo(currentUserUID: member, completion: { (user, error) in
 
-                    if snapshot.exists() {
+                    if user != nil {
+                        self.members.append(user!)
+                    }
 
-                        guard
-                            let userInfo = snapshot.value as? [String: String],
-                            let email = userInfo[Constant.FirebaseUser.email],
-                            let name = userInfo[Constant.FirebaseUser.name],
-                            let gender = userInfo[Constant.FirebaseUser.gender],
-                            let photoURL = userInfo[Constant.FirebaseUser.photoURL]
-                            else {
-                                return
-                        }
+                    if member == members[members.count-1] {
+                        self.isFinishLoadMembers = true
 
-                        let user = User(email: email, name: name, gender: gender, photoURL: photoURL)
-                        self.members.append(user)
-
-                        if member == members[members.count-1] {
+                        if self.isFinishLoadMembers && self.isFinishLoadComments {
                             self.tableView.reloadData()
                             self.loadingIndicator.stop()
                         }
-                    } else {
-                        print("=== Error: Can't find the user - \(member)")
+                    }
+
+                    if error != nil {
+                        print("=== Error: \(String(describing: error))")
                         self.loadingIndicator.stop()
                     }
                 })
             }
+        }
+    }
+
+    // todo: 可以把function裡頭的東西拉開, 剛加入game的人無法顯示大頭照在第一次留言時
+    func getGameComments() {
+
+        guard
+            game != nil
+            else { return }
+
+        var commentOwners = Set<String>()
+        var totalCommentOwners = 0
+
+        GameCommentProvider.sharded.getComments(gameID: (game?.gameID)!) { (gameComments) in
+
+            if gameComments.count == 0 {
+
+                UserManager.shared.getUserInfo(currentUserUID: self.currentUserUid, completion: { (user, error) in
+                    DispatchQueue.global().async {
+                        if let imageUrl = URL(string: (user?.photoURL)!) {
+                            do {
+                                let imageData = try Data(contentsOf: imageUrl)
+                                if let image = UIImage(data: imageData) {
+                                    self.commentOwnersPhoto.updateValue(image, forKey: self.currentUserUid)
+
+                                    if totalCommentOwners == commentOwners.count {
+
+                                        self.isFinishLoadComments = true
+
+                                        if self.isFinishLoadMembers && self.isFinishLoadComments {
+
+                                            DispatchQueue.main.async {
+
+                                                self.tableView.reloadData()
+                                                self.loadingIndicator.stop()
+                                            }
+                                        }
+                                    }
+                                }
+                            } catch {
+                                print("=== Error: \(error)")
+                                self.loadingIndicator.stop()
+                            }
+                        }
+                    }
+                })
+            } else {
+
+                self.comments = gameComments
+
+                for comment in self.comments {
+                    commentOwners.insert(comment.commentOwner)
+                }
+
+                for commentOwner in commentOwners {
+                    UserManager.shared.getUserInfo(currentUserUID: commentOwner, completion: { (user, error) in
+
+                        if user != nil {
+                            DispatchQueue.global().async {
+                                if let imageUrl = URL(string: (user?.photoURL)!) {
+                                    do {
+                                        let imageData = try Data(contentsOf: imageUrl)
+                                        if let image = UIImage(data: imageData) {
+                                            totalCommentOwners += 1
+                                            self.commentOwnersPhoto.updateValue(image, forKey: commentOwner)
+
+                                            if totalCommentOwners == commentOwners.count {
+
+                                                self.isFinishLoadComments = true
+
+                                                if self.isFinishLoadMembers && self.isFinishLoadComments {
+
+                                                    DispatchQueue.main.async {
+
+                                                        self.tableView.reloadData()
+                                                        self.loadingIndicator.stop()
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    } catch {
+                                        print("=== Error: \(error)")
+                                        self.loadingIndicator.stop()
+                                    }
+                                }
+                            }
+                        }
+
+                        if error != nil {
+                            print("=== Error: \(String(describing: error))")
+                            self.loadingIndicator.stop()
+                        }
+                    })
+                }
+
+            }
+
         }
     }
 }
@@ -171,33 +303,9 @@ extension BasketballGameDetailViewController: UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
         switch components[section] {
-        case .weather, .map, .members, .joinOrLeave:
+        case .weather, .map, .members, .comment, .joinOrLeave:
 
             return 1
-        }
-    }
-
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-
-        switch components[indexPath.section] {
-        case .weather:
-
-            return WeatherTableViewCell.height
-
-        case .map:
-
-            let width = view.bounds.size.width
-            let height = width / MapTableViewCell.aspectRatio
-
-            return height
-
-        case .members:
-
-            return MembersTableViewCell.height
-
-        case .joinOrLeave:
-
-            return JoinOrLeaveTableViewCell.height
         }
     }
 
@@ -211,7 +319,6 @@ extension BasketballGameDetailViewController: UITableViewDelegate, UITableViewDa
         case .weather:
 
             let identifier = WeatherTableViewCell.identifier
-
             let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! WeatherTableViewCell
 
             return setWeatherCell(cell)
@@ -219,7 +326,6 @@ extension BasketballGameDetailViewController: UITableViewDelegate, UITableViewDa
         case .map:
 
             let identifier = MapTableViewCell.identifier
-
             let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! MapTableViewCell
 
             return setMapCell(cell)
@@ -229,18 +335,18 @@ extension BasketballGameDetailViewController: UITableViewDelegate, UITableViewDa
             let identifier = MembersTableViewCell.identifier
             let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! MembersTableViewCell
 
-            setCellBasicStyle(cell)
+            return setMemberCell(cell)
 
-            cell.game = game
-            cell.members = members
-            cell.collectionView.reloadData()
+        case .comment:
 
-            return cell
+            let identifier = GameCommentTableViewCell.identifier
+            let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! GameCommentTableViewCell
+
+            return setCommentCell(cell)
 
         case .joinOrLeave:
 
             let identifier = JoinOrLeaveTableViewCell.identifier
-
             let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! JoinOrLeaveTableViewCell
 
             return setJoinOrLeaveTableViewCell(cell)
@@ -249,105 +355,123 @@ extension BasketballGameDetailViewController: UITableViewDelegate, UITableViewDa
         // swiftlint:enable force_cast
     }
 
-    func setJoinOrLeaveTableViewCell(_ cell: JoinOrLeaveTableViewCell) -> JoinOrLeaveTableViewCell {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 
-        if currentUserUid != "" && game != nil {
-            for member in (game?.members)! {
+        switch components[indexPath.section] {
+        case .weather:
 
-                if member == currentUserUid {
-                    isUserInMembers = true
-                }
+            return isWeatherExpanded ?
+                WeatherTableViewCell.gameCellHeight :
+                WeatherTableViewCell.gameDefaultHeight
 
-                if isUserInMembers {
-                    // show leave button
-                    cell.joinButton.isHidden = true
-                    cell.leaveButton.isHidden = false
+        case .map:
 
-                    cell.leaveButton.addTarget(self, action: #selector(leaveFromGame), for: .touchUpInside)
+            let cellWidth = view.bounds.size.width
+            let height = cellWidth / MapTableViewCell.aspectRatio
 
-                } else {
-                    // show join button
-                    cell.leaveButton.isHidden = true
-                    cell.joinButton.isHidden = false
+            return isMapExpanded ? height+30 : MapTableViewCell.gameDefaultHeight
 
-                    cell.joinButton.addTarget(self, action: #selector(joinToGame), for: .touchUpInside)
-                }
-            }
-        } else {
-            print("=== Error: Someing is wrong in BasketballGameDetailViewController")
-        }
+        case .members:
 
-        setCellBasicStyle(cell)
+            return isMemberExpanded ?
+                MembersTableViewCell.height :
+                MembersTableViewCell.defaultHeight
 
-        return cell
-    }
+        case .comment:
 
-    func joinToGame() {
+            return isCommentExpanded ?
+                GameCommentTableViewCell.height :
+                GameCommentTableViewCell.defaultHeight
 
-        guard
-            game != nil
-            else { return }
+        case .joinOrLeave:
 
-        if isUserInMembers {
-            return
-        }
-
-        var newMemberList: [String] = []
-        newMemberList = (game?.members)!
-        newMemberList.append(currentUserUid)
-
-        let value = [Constant.FirebaseGame.members: newMemberList]
-        getGameDBRef().updateChildValues(value) { (error, _) in
-
-            if error == nil {
-                self.getMembersInfo()
-                self.navigationController?.popViewController(animated: true)
-            } else {
-                print("=== Error in BasketballGameDetailViewController joinToGame()")
-            }
+            return JoinOrLeaveTableViewCell.height
         }
     }
 
-    func leaveFromGame() {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        // todo: 如果是owner離開 -> 刪掉球局
+        let component = components[indexPath.section]
 
-        guard
-            game != nil
-            else { return }
+        switch component {
+            case .weather:
+                self.selectedWeatherIndex = indexPath
+                self.didExpandWeatherCell()
 
-        if !isUserInMembers {
-            return
-        }
+            case .map:
+                self.selectedMapIndex = indexPath
+                self.didExpandMapCell()
 
-        var newMemberList: [String] = []
+            case .members:
+                self.selectedMemberIndex = indexPath
+                self.didExpandMemberCell()
 
-        for member in (game?.members)! {
-            if member != currentUserUid {
-                newMemberList.append(member)
-            }
-        }
-        let value = [Constant.FirebaseGame.members: newMemberList]
-        getGameDBRef().updateChildValues(value) { (error, _) in
+            case .comment:
+                self.selectedCommentIndex = indexPath
+                self.didExpandCommentCell()
 
-            if error == nil {
-                self.getMembersInfo()
-                self.navigationController?.popViewController(animated: true)
-            } else {
-                print("=== Error in BasketballGameDetailViewController joinToGame()")
-            }
+            case .joinOrLeave: break
         }
     }
+}
+
+// MARK: - Set cell
+extension BasketballGameDetailViewController {
 
     func getGameDBRef() -> FIRDatabaseReference {
 
-        let ref = FIRDatabase.database().reference().child(Constant.FirebaseGame.nodeName).child((game?.gameID)!)
+        let ref = FIRDatabase.database().reference()
+                    .child(Constant.FirebaseGame.nodeName)
+                    .child((game?.gameID)!)
+
         return ref
+    }
+
+    func setUserGameList(isJoined: Bool) {
+
+        let ref = FIRDatabase.database().reference()
+            .child(Constant.FirebaseUserGameList.nodeName)
+            .child(currentUserUid)
+
+        if isJoined {
+
+            let value: [String: Int] = [(game?.gameID)!: 1]
+            ref.updateChildValues(value) { (error, _) in
+
+                if error != nil {
+                    print("=== Error in BasketballGameDetailViewController setUserGameList() - join")
+                }
+            }
+        } else {
+
+            ref.child((game?.gameID)!).removeValue(completionBlock: { (error, _) in
+
+                if error != nil {
+                    print("=== Error in BasketballGameDetailViewController setUserGameList() - delete")
+                }
+            })
+        }
     }
 
     func setWeatherCell(_ cell: WeatherTableViewCell) -> WeatherTableViewCell {
 
         setCellBasicStyle(cell)
+
+        if !isWeatherExpanded {
+            cell.weatherImage.isHidden = true
+            cell.weatherLabel.isHidden = true
+            cell.temperatureLabel.isHidden = true
+            cell.updateTimeLabel.isHidden = true
+            cell.weatherCellTitle.text = "▶︎ 天氣資訊"
+
+        } else {
+
+            cell.weatherImage.isHidden = false
+            cell.weatherLabel.isHidden = false
+            cell.temperatureLabel.isHidden = false
+            cell.updateTimeLabel.isHidden = false
+            cell.weatherCellTitle.text = "▼ 天氣資訊"
+        }
 
         if let desc = weather?.desc,
             let weatherPicName = weather?.weatherPicName,
@@ -355,13 +479,13 @@ extension BasketballGameDetailViewController: UITableViewDelegate, UITableViewDa
             let time = weather?.time {
 
             cell.weatherImage.image = UIImage(named: weatherPicName)
-            cell.weatherLabel.text = "天氣 : \(desc)"
+            cell.weatherLabel.text = "\(desc)"
             cell.temperatureLabel.text = "氣溫 : \(temperature) 度"
-            cell.updateTimeLabel.text = "更新時間 : \n \(time)"
+            cell.updateTimeLabel.text = "更新時間 : \n\(time)"
 
         } else {
 
-            //            cell.weatherImage.image = UIImage(named: Constant.ImageName.fixing)
+            //cell.weatherImage.image = UIImage(named: Constant.ImageName.fixing)
             cell.weatherLabel.text = ""
             cell.temperatureLabel.text = "天氣即時資訊更新維護中..."
             cell.updateTimeLabel.text = ""
@@ -373,6 +497,14 @@ extension BasketballGameDetailViewController: UITableViewDelegate, UITableViewDa
     func setMapCell(_ cell: MapTableViewCell) -> MapTableViewCell {
 
         setCellBasicStyle(cell)
+
+        if !isMapExpanded {
+            cell.mapView.isHidden = true
+            cell.mapCellTitle.text = "▶︎ 球場位置"
+        } else {
+            cell.mapView.isHidden = false
+            cell.mapCellTitle.text = "▼ 球場位置"
+        }
 
         if let latitudeString = game?.court.latitude,
             let longitudeString = game?.court.longitude {
@@ -397,9 +529,169 @@ extension BasketballGameDetailViewController: UITableViewDelegate, UITableViewDa
         return cell
     }
 
+    func setMemberCell(_ cell: MembersTableViewCell) -> MembersTableViewCell {
+
+        setCellBasicStyle(cell)
+
+        if !isMemberExpanded {
+            cell.collectionView.isHidden = true
+            cell.memberCellTitle.text = "▶︎ 球賽成員"
+        } else {
+            cell.collectionView.isHidden = false
+            cell.memberCellTitle.text = "▼ 球賽成員"
+        }
+
+        cell.game = game
+        cell.members = members
+        cell.collectionView.reloadData()
+
+        return cell
+    }
+
+    func setCommentCell(_ cell: GameCommentTableViewCell) -> GameCommentTableViewCell {
+
+        setCellBasicStyle(cell)
+
+        if !isCommentExpanded {
+            cell.commentTableView.isHidden = true
+            cell.commentTextField.isHidden = true
+            cell.commentButton.isHidden = true
+            cell.commentTitleLabel.text = "▶︎ 球賽留言板"
+        } else {
+
+            cell.commentTableView.isHidden = false
+            cell.commentTextField.isHidden = false
+            cell.commentButton.isHidden = false
+            cell.commentTitleLabel.text = "▼ 球賽留言板"
+        }
+
+        cell.game = game
+        cell.members = members
+        cell.comments = comments
+        cell.commentOwnersPhoto = commentOwnersPhoto
+        cell.commentDelegate = self
+        cell.commentTableView.reloadData()
+
+        return cell
+    }
+
+    func setJoinOrLeaveTableViewCell(_ cell: JoinOrLeaveTableViewCell) -> JoinOrLeaveTableViewCell {
+
+        setCellBasicStyle(cell)
+
+        if currentUserUid != "" && game != nil {
+            for member in (game?.members)! {
+
+                var isGameOwner = false
+
+                if game?.owner == currentUserUid {
+                    isGameOwner = true
+                }
+
+                if member == currentUserUid {
+                    isUserInMembers = true
+                }
+
+                if isUserInMembers && isGameOwner {
+                    // show cancel button
+                    cell.joinButton.isHidden = true
+                    cell.leaveButton.isHidden = true
+
+                    cell.cancelGameButton.isHidden = false
+                    cell.cancelGameButton.addTarget(self, action: #selector(leaveFromGame), for: .touchUpInside)
+
+                } else if isUserInMembers && !isGameOwner {
+                    // show leave button
+                    cell.joinButton.isHidden = true
+                    cell.cancelGameButton.isHidden = true
+
+                    cell.leaveButton.isHidden = false
+                    cell.leaveButton.addTarget(self, action: #selector(leaveFromGame), for: .touchUpInside)
+
+                } else {
+                    // show join button
+                    cell.leaveButton.isHidden = true
+                    cell.cancelGameButton.isHidden = true
+
+                    cell.joinButton.isHidden = false
+                    cell.joinButton.addTarget(self, action: #selector(joinToGame), for: .touchUpInside)
+                }
+            }
+        } else {
+            print("=== Error: Someing is wrong in BasketballGameDetailViewController")
+        }
+
+        return cell
+    }
+
+    func joinToGame() {
+
+        guard game != nil else { return }
+
+        if isUserInMembers { return }
+
+        var newMemberList: [String] = []
+        newMemberList = (game?.members)!
+        newMemberList.append(currentUserUid)
+
+        let value = [Constant.FirebaseGame.members: newMemberList]
+        getGameDBRef().updateChildValues(value) { (error, _) in
+
+            if error == nil {
+                self.getMembersInfo()
+                self.setUserGameList(isJoined: true)
+                self.navigationController?.popViewController(animated: true)
+            } else {
+                print("=== Error in BasketballGameDetailViewController joinToGame()")
+            }
+        }
+    }
+
+    func leaveFromGame() {
+
+        guard game != nil else { return }
+
+        if !isUserInMembers { return }
+
+        var newMemberList: [String] = []
+
+        for member in (game?.members)! {
+            if member != currentUserUid {
+                newMemberList.append(member)
+            }
+        }
+
+        let value = [Constant.FirebaseGame.members: newMemberList]
+        getGameDBRef().updateChildValues(value) { (error, _) in
+
+            if error == nil {
+                self.getMembersInfo()
+                self.setUserGameList(isJoined: false)
+                self.navigationController?.popViewController(animated: true)
+            } else {
+                print("=== Error in BasketballGameDetailViewController joinToGame()")
+            }
+        }
+    }
+
     func setCellBasicStyle(_ cell: UITableViewCell) {
 
         cell.selectionStyle = .none
         cell.backgroundColor = .clear
+    }
+}
+
+// MARK: - Show Alert
+extension BasketballGameDetailViewController: CommentCallDelegate {
+
+    func showAlert(title: String, message: String) {
+        let alertController = UIAlertController(title: title,
+                                      message: message,
+                                      preferredStyle: .alert)
+
+        let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        alertController.addAction(defaultAction)
+
+        self.present(alertController, animated: true, completion: nil)
     }
 }

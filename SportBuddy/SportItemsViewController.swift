@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import NVActivityIndicatorView
+import UserNotifications
 
 class SportItemsViewController: BaseViewController {
 
@@ -17,11 +18,14 @@ class SportItemsViewController: BaseViewController {
     @IBOutlet weak var jogButton: UIButton!
     @IBOutlet weak var baseballButton: UIButton!
 
+    let loadingIndicator = LoadingIndicator()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         checkIfUserIsLoggedIn()
         setView()
+        prepareNotification()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -44,11 +48,12 @@ class SportItemsViewController: BaseViewController {
 
         // todo: 滑動選單
 
-        let jobImageBW = convertImageToBW(image: #imageLiteral(resourceName: "Item_Jog"))
+        let converter = ConverImageToBW()
+        let jobImageBW = converter.convertImageToBW(image: #imageLiteral(resourceName: "Item_Jog"))
         jogButton.setImage(jobImageBW, for: .normal)
         jogButton.isEnabled = false
 
-        let baseballImageBW = convertImageToBW(image: #imageLiteral(resourceName: "Item_Baseball"))
+        let baseballImageBW = converter.convertImageToBW(image: #imageLiteral(resourceName: "Item_Baseball"))
         baseballButton.setImage(baseballImageBW, for: .normal)
         baseballButton.isEnabled = false
     }
@@ -64,8 +69,7 @@ class SportItemsViewController: BaseViewController {
         do {
             try FIRAuth.auth()?.signOut()
         } catch let logoutError {
-            print("=== LogoutError: ")
-            print(logoutError)
+            errorHandle(errString: nil, error: logoutError)
         }
 
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
@@ -77,34 +81,39 @@ class SportItemsViewController: BaseViewController {
         }
     }
 
+    func prepareNotification() {
+
+        let content = UNMutableNotificationContent()
+        content.title = Constant.UserNotifacationContent.title
+        content.body = Constant.UserNotifacationContent.body
+        content.sound = UNNotificationSound.default()
+
+        let secendsOfDay: Double = 60 * 60 * 24
+        let days: Double = 10 * secendsOfDay
+
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: days, repeats: false)
+        let request = UNNotificationRequest(identifier: Constant.UserNotifacationIdentifier.comeBackToPlayGame, content: content, trigger: trigger)
+
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+    }
+
     func setUserInfo() {
 
         guard let uid = FIRAuth.auth()?.currentUser?.uid else { return }
 
-        let ref = FIRDatabase.database().reference()
-                        .child(Constant.FirebaseUser.nodeName)
-                        .child(uid)
+        loadingIndicator.start()
 
-        // MARK: Loading indicator
-        let activityData = ActivityData()
-        NVActivityIndicatorPresenter.sharedInstance.startAnimating(activityData)
+        UserManager.shared.getUserInfo(currentUserUID: uid) { (user, error) in
 
-        ref.observeSingleEvent(of: .value, with: { (snapshot) in
-            if snapshot.exists() {
+            if user != nil {
+                self.userName.text = user!.name
+                self.loadImage(imageUrlString: user!.photoURL, imageView: self.userImage)
+            }
 
-                guard
-                    let data = snapshot.value as? [String: String],
-                    let userName = data[Constant.FirebaseUser.name],
-                    let imageUrlString = data[Constant.FirebaseUser.photoURL]
-                    else { return }
-
-                self.userName.text = userName
-                self.loadImage(imageUrlString: imageUrlString, imageView: self.userImage)
-
-            } else {
+            if error != nil {
                 self.errorHandle(errString: "Can't find the data", error: nil)
             }
-        })
+        }
     }
 
     @IBAction func toEditProfile(_ sender: Any) {
@@ -119,60 +128,61 @@ class SportItemsViewController: BaseViewController {
     @IBAction func toBasketballGameList(_ sender: Any) {
 
         guard let uid = FIRAuth.auth()?.currentUser?.uid else { return }
-        let rootRef = FIRDatabase.database().reference()
 
-        rootRef.child(Constant.FirebaseLevel.nodeName).child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+        LevelManager.shared.getUserLevel(currentUserUID: uid) { (level, newUser, error) in
 
-            if snapshot.exists() {
+            if level != nil {
+                self.toBasketballTabbarViewController()
+            }
 
-                if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+            if newUser != nil {
+                let values = [Constant.FirebaseLevel.basketball: "",
+                              Constant.FirebaseLevel.baseball: "",
+                              Constant.FirebaseLevel.jogging: ""]
 
-                    let basketballStorybard = UIStoryboard(name: Constant.Storyboard.basketball, bundle: nil)
-                    let basketballTabbarViewController = basketballStorybard.instantiateViewController(withIdentifier: Constant.Controller.basketballTabbar) as? BasketballTabbarViewController
+                LevelManager.shared.updateUserLevel(currentUserUID: uid, values: values, completion: { (error) in
 
-                    appDelegate.window?.rootViewController = basketballTabbarViewController
-                }
-
-            } else {
-
-                let dbUrl = Constant.Firebase.dbUrl
-                let ref = FIRDatabase.database().reference(fromURL: dbUrl)
-
-                let levelsReference = ref.child(Constant.FirebaseLevel.nodeName).child(uid)
-
-                let value = [Constant.FirebaseLevel.basketball: "",
-                             Constant.FirebaseLevel.baseball: "",
-                             Constant.FirebaseLevel.jogging: ""]
-
-                levelsReference.updateChildValues(value, withCompletionBlock: { (err, _) in
-
-                    if err != nil {
-                        self.showErrorAlert(error: err, myErrorMsg: nil)
+                    if error != nil {
+                        self.errorHandle(errString: nil, error: error)
                         return
                     }
-
-                    if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
-
-                        let chooseLevelStorybard = UIStoryboard(name: Constant.Storyboard.chooseLevel, bundle: nil)
-                        let chooseLevelViewController = chooseLevelStorybard.instantiateViewController(withIdentifier: Constant.Controller.chooseLevel) as? ChooseLevelViewController
-
-                        appDelegate.window?.rootViewController = chooseLevelViewController
-                    }
                 })
+
+                self.toChooseLevelViewController()
             }
-        })
+
+            if error != nil {
+                self.errorHandle(errString: nil, error: error)
+            }
+        }
     }
 
-    /*
-     *  For testing
-     */
+    func toBasketballTabbarViewController() {
+        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+
+            let basketballStorybard = UIStoryboard(name: Constant.Storyboard.basketball, bundle: nil)
+            let basketballTabbarViewController = basketballStorybard.instantiateViewController(withIdentifier: Constant.Controller.basketballTabbar) as? BasketballTabbarViewController
+
+            appDelegate.window?.rootViewController = basketballTabbarViewController
+        }
+    }
+
+    func toChooseLevelViewController() {
+        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+
+            let chooseLevelStorybard = UIStoryboard(name: Constant.Storyboard.chooseLevel, bundle: nil)
+            let chooseLevelViewController = chooseLevelStorybard.instantiateViewController(withIdentifier: Constant.Controller.chooseLevel) as? ChooseLevelViewController
+
+            appDelegate.window?.rootViewController = chooseLevelViewController
+        }
+    }
+
     @IBAction func logout(_ sender: Any) {
 
         if FIRAuth.auth()?.currentUser?.uid != nil {
             handleLogout()
         }
     }
-
 }
 
 // MARK: - Load Image and Set to ImageView
@@ -207,32 +217,9 @@ extension SportItemsViewController {
                 imageView.image = image
             }
 
-            NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
+            self.loadingIndicator.stop()
         }
     }
-}
-
-// MARK: - Convert Image to grayscale
-extension SportItemsViewController {
-
-    func convertImageToBW(image: UIImage) -> UIImage {
-
-        let filter = CIFilter(name: "CIPhotoEffectMono")
-
-        // convert UIImage to CIImage and set as input
-
-        let ciInput = CIImage(image: image)
-        filter?.setValue(ciInput, forKey: "inputImage")
-
-        // get output CIImage, render as CGImage first to retain proper UIImage scale
-
-        let ciOutput = filter?.outputImage
-        let ciContext = CIContext()
-        let cgImage = ciContext.createCGImage(ciOutput!, from: (ciOutput?.extent)!)
-
-        return UIImage(cgImage: cgImage!)
-    }
-
 }
 
 // MARK: - Error handle
@@ -248,6 +235,6 @@ extension SportItemsViewController {
             print("=== Error: \(String(describing: error))")
         }
 
-        NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
+        loadingIndicator.stop()
     }
 }

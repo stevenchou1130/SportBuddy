@@ -17,6 +17,8 @@ class NewBasketballGameViewController: BaseViewController {
     @IBOutlet weak var levelTextField: UITextField!
     @IBOutlet weak var timeTextField: UITextField!
 
+    let loadingIndicator = LoadingIndicator()
+
     let levelArray = ["A", "B", "C", "D", "E"]
     var basketballCourts: [BasketballCourt] = []
     var selectedCourt: BasketballCourt?
@@ -50,6 +52,8 @@ class NewBasketballGameViewController: BaseViewController {
     func setView() {
 
         setBackground(imageName: Constant.BackgroundName.basketball)
+
+        nameTextField.autocorrectionType = .no
 
         setCourtPicker()
 
@@ -119,8 +123,7 @@ class NewBasketballGameViewController: BaseViewController {
     func getCourts() {
 
         // MARK: Loading indicator
-        let activityData = ActivityData()
-        NVActivityIndicatorPresenter.sharedInstance.startAnimating(activityData)
+        loadingIndicator.start()
 
         BasketballCourtsProvider.shared.getApiData(city: Constant.CurrentCity.cityName, gymType: Constant.GymType.basketball) { (basketballCourts, error) in
 
@@ -134,7 +137,7 @@ class NewBasketballGameViewController: BaseViewController {
 
             }
 
-            NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
+            self.loadingIndicator.stop()
         }
     }
 
@@ -178,6 +181,7 @@ class NewBasketballGameViewController: BaseViewController {
                 ]
 
                 ref.child(gameID).setValue(game)
+                self.setUserGameList(uid, gameID)
 
                 self.navigationController?.popViewController(animated: true)
 
@@ -189,7 +193,25 @@ class NewBasketballGameViewController: BaseViewController {
         } else {
 
             self.showErrorAlert(error: nil,
-                                myErrorMsg: "Please fill out all information about you.")
+                                myErrorMsg: "請確認您已填完所有欄位")
+        }
+    }
+
+    func setUserGameList(_ uid: String, _ gameID: String) {
+
+        guard let uid = FIRAuth.auth()?.currentUser?.uid else { return }
+
+        let ref = FIRDatabase.database().reference()
+            .child(Constant.FirebaseUserGameList.nodeName)
+            .child(uid)
+
+        let value: [String: Int] = [gameID: 1]
+
+        ref.updateChildValues(value) { (error, _) in
+
+            if error != nil {
+                print("=== Error in NewBasketballGameViewController setUserGameList()")
+            }
         }
     }
 }

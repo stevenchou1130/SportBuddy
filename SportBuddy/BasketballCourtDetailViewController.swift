@@ -15,15 +15,17 @@ class BasketballCourtDetailViewController: BaseViewController, UITableViewDelega
 
     @IBOutlet weak var tableView: UITableView!
 
+    let loadingIndicator = LoadingIndicator()
+
     enum Component {
 
-        case weather, map, comment
+        case weather, map, info, empty
 
     }
 
     // MARK: Property
 
-    var components: [Component] = [ .weather, .map, .comment ]
+    var components: [Component] = [ .weather, .map, .info, .empty]
 
     var basketballCourt: BasketballCourt?
     var weather: Weather?
@@ -67,8 +69,7 @@ class BasketballCourtDetailViewController: BaseViewController, UITableViewDelega
             let town = courtAddress.substring(to: index)
 
             // MARK: Loading indicator
-            let activityData = ActivityData()
-            NVActivityIndicatorPresenter.sharedInstance.startAnimating(activityData)
+            loadingIndicator.start()
 
             WeatherProvider.shared.getWeather(town: town, completion: { (weather, error) in
 
@@ -79,9 +80,10 @@ class BasketballCourtDetailViewController: BaseViewController, UITableViewDelega
                     print("=== Error in BasketballCourtDetailViewController - Get weather")
                 }
 
-                NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
+                self.loadingIndicator.stop()
             })
         } else {
+            self.loadingIndicator.stop()
             print("=== Error in BasketballCourtDetailViewController getWeather()")
         }
     }
@@ -103,9 +105,8 @@ class BasketballCourtDetailViewController: BaseViewController, UITableViewDelega
         let mapNib = UINib(nibName: MapTableViewCell.identifier, bundle: nil)
         tableView.register(mapNib, forCellReuseIdentifier: MapTableViewCell.identifier)
 
-        let commentNib = UINib(nibName: CommentTableViewCell.identifier, bundle: nil)
-        tableView.register(commentNib, forCellReuseIdentifier: CommentTableViewCell.identifier)
-
+        let courtInfoNib = UINib(nibName: CourtInfoTableViewCell.identifier, bundle: nil)
+        tableView.register(courtInfoNib, forCellReuseIdentifier: CourtInfoTableViewCell.identifier)
     }
 
     // MARK: - Table view data source
@@ -117,7 +118,7 @@ class BasketballCourtDetailViewController: BaseViewController, UITableViewDelega
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
         switch components[section] {
-        case .weather, .map, .comment:
+        case .weather, .map, .info, .empty:
 
             return 1
         }
@@ -128,7 +129,7 @@ class BasketballCourtDetailViewController: BaseViewController, UITableViewDelega
         switch components[indexPath.section] {
         case .weather:
 
-            return WeatherTableViewCell.height
+            return WeatherTableViewCell.courtCellHeight
 
         case .map:
 
@@ -138,10 +139,15 @@ class BasketballCourtDetailViewController: BaseViewController, UITableViewDelega
 
             return height
 
-        case .comment:
+        case .info:
 
-            return CommentTableViewCell.height
+            return CourtInfoTableViewCell.height
+
+        case .empty:
+
+            return 66
         }
+
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -166,14 +172,21 @@ class BasketballCourtDetailViewController: BaseViewController, UITableViewDelega
 
             return setMapCell(cell: cell)
 
-        case .comment:
+        case .info:
 
-            let identifier = CommentTableViewCell.identifier
+            let identifier = CourtInfoTableViewCell.identifier
 
-            let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! CommentTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! CourtInfoTableViewCell
 
-            return setCommentCell(cell: cell)
+            return setCourtInfoCell(cell: cell)
+
+        case .empty:
+
+            let cell = UITableViewCell()
+            cell.backgroundColor = .clear
+            return cell
         }
+
         // swiftlint:enable force_cast
     }
 
@@ -190,15 +203,19 @@ class BasketballCourtDetailViewController: BaseViewController, UITableViewDelega
             cell.weatherImage.image = UIImage(named: weatherPicName)
             cell.weatherLabel.text = "天氣 : \(desc)"
             cell.temperatureLabel.text = "氣溫 : \(temperature) 度"
-            cell.updateTimeLabel.text = "更新時間 : \n \(time)"
+            cell.updateTimeLabel.text = "更新時間 : \n\(time)"
 
         } else {
 
-//            cell.weatherImage.image = UIImage(named: Constant.ImageName.fixing)
+            cell.weatherImage.image = UIImage(named: Constant.ImageName.fixing)
             cell.weatherLabel.text = ""
             cell.temperatureLabel.text = "天氣即時資訊更新維護中..."
             cell.updateTimeLabel.text = ""
         }
+
+        cell.weatherCellTitle.isHidden = true
+        cell.weatherImage.topAnchor.constraint(equalTo: cell.topAnchor, constant: 10).isActive = true
+        cell.weatherImage.bottomAnchor.constraint(equalTo: cell.bottomAnchor, constant: -45).isActive = true
 
         return cell
     }
@@ -228,10 +245,13 @@ class BasketballCourtDetailViewController: BaseViewController, UITableViewDelega
             cell.mapView.mapType = .standard
         }
 
+        cell.mapCellTitle.isHidden = true
+        cell.mapView.topAnchor.constraint(equalTo: cell.topAnchor, constant: 10).isActive = true
+
         return cell
     }
 
-    func setCommentCell(cell: CommentTableViewCell) -> CommentTableViewCell {
+    func setCourtInfoCell(cell: CourtInfoTableViewCell) -> CourtInfoTableViewCell {
 
         cell.selectionStyle = .none
         cell.backgroundColor = .clear
