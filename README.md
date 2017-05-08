@@ -13,9 +13,9 @@ Let's use SportBuddy and find some friends to do exercises together!
  * 問題回報
  * 等級提升
 
-![GITHUB](https://github.com/stevenchou1130/SportBuddy/blob/master/DemoGif/Login.gif?raw=true "Login")
+<img src="https://github.com/stevenchou1130/SportBuddy/blob/master/DemoGif/Login.gif?raw=true" width="35%" height="35%"></img>
 
-![GITHUB](https://github.com/stevenchou1130/SportBuddy/blob/master/DemoGif/ChangeName.gif?raw=true "Change Name")
+<img src="https://github.com/stevenchou1130/SportBuddy/blob/master/DemoGif/ChangeName.gif?raw=true" width="35%" height="35%"></img>
 
 ### 球賽
  * 新增球賽
@@ -25,9 +25,9 @@ Let's use SportBuddy and find some friends to do exercises together!
  * 球場位置資訊 (地圖)
  * 留言
 
-![GITHUB](https://github.com/stevenchou1130/SportBuddy/blob/master/DemoGif/Game.gif?raw=true "Game")
+<img src="https://github.com/stevenchou1130/SportBuddy/blob/master/DemoGif/Game.gif?raw=true" width="35%" height="35%"></img>
 
-![GITHUB](https://github.com/stevenchou1130/SportBuddy/blob/master/DemoGif/Court.gif?raw=true "Court")
+<img src="https://github.com/stevenchou1130/SportBuddy/blob/master/DemoGif/Court.gif?raw=true" width="35%" height="35%"></img>
 
 ## Libraries
 * Alamofire
