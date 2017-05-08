@@ -33,6 +33,8 @@ Let's use SportBuddy and find some friends to do exercises together!
   * Crashlytics
 
 ## ScreenShot
+![GITHUB](https://github.com/stevenchou1130/SportBuddy/blob/master/DemoGif/Login.gif?raw=true "git圖示")
+
 
 ## Requirement
 * iOS 10.2+
