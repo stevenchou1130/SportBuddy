@@ -12,7 +12,11 @@ Let's use SportBuddy and find some friends to do exercises together!
  * 照相、從相簿中選取照片作為大頭照
  * 問題回報
  * 等級提升
- 
+
+![GITHUB](https://github.com/stevenchou1130/SportBuddy/blob/master/DemoGif/Login.gif?raw=true "Login")
+
+![GITHUB](https://github.com/stevenchou1130/SportBuddy/blob/master/DemoGif/ChangeName.gif?raw=true "Change Name")
+
 ### 球賽
  * 新增球賽
  * 加入/離開球賽
@@ -20,6 +24,10 @@ Let's use SportBuddy and find some friends to do exercises together!
  * 球場目前天氣資訊
  * 球場位置資訊 (地圖)
  * 留言
+
+![GITHUB](https://github.com/stevenchou1130/SportBuddy/blob/master/DemoGif/Game.gif?raw=true "Game")
+
+![GITHUB](https://github.com/stevenchou1130/SportBuddy/blob/master/DemoGif/Court.gif?raw=true "Court")
 
 ## Libraries
 * Alamofire
@@ -31,10 +39,6 @@ Let's use SportBuddy and find some friends to do exercises together!
 * Tracking Tool
   * Fabric
   * Crashlytics
-
-## ScreenShot
-![GITHUB](https://github.com/stevenchou1130/SportBuddy/blob/master/DemoGif/Login.gif?raw=true "git圖示")
-
 
 ## Requirement
 * iOS 10.2+
