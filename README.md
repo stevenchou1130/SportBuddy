@@ -6,7 +6,20 @@ You can improve your level when you've done some games.
 Let's use SportBuddy and find some friends to do exercises together!
 
 ## Feature
-
+### 使用者
+ * 註冊、登入
+ * 忘記密碼，寄發一封修改密碼的信件給使用者
+ * 照相、從相簿中選取照片作為大頭照
+ * 問題回報
+ * 等級提升
+ 
+### 球賽
+ * 新增球賽
+ * 加入/離開球賽
+ * 可以依照所選取的城市，顯示出球場
+ * 球場目前天氣資訊
+ * 球場位置資訊 (地圖)
+ * 留言
 
 ## Libraries
 * Alamofire
