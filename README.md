@@ -7,6 +7,7 @@ Let's use SportBuddy and find some friends to do exercises together!
 
 ## Feature
 
+
 ## Libraries
 * Alamofire
 * Firebase
